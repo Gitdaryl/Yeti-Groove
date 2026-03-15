@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yeti Groove Media · Devils Lake, Michigan</title>
+  <meta name="description" content="Yeti Groove Media is a digital media and community engagement agency based in Devils Lake, Michigan. We build local platforms, event promotion, and community-focused digital experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #080807;
+      --dark:    #0F0E0C;
+      --dark2:   #161410;
+      --gold:    #C9A55A;
+      --goldDim: rgba(201,165,90,0.12);
+      --cream:   #F0EDE6;
+      --muted:   #B0A390;
+      --line:    rgba(201,165,90,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--dark);
+      color: var(--cream);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,8,7,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-contact {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-contact:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: radial-gradient(ellipse at 50% 60%, rgba(201,165,90,0.07) 0%, transparent 65%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto;
+      opacity: 0.5;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    p { color: var(--muted); margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      color: var(--muted);
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .contact-block {
+      background: var(--goldDim);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-block p { margin-bottom: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.8rem;
+      color: rgba(176,163,144,0.5);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      section { padding: 3.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">Yeti Groove Media</a>
+    <a class="nav-contact" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">Devils Lake · Michigan</p>
+    <h1>Local stories,<br /><em>amplified</em>.</h1>
+    <p>Yeti Groove Media builds digital platforms for communities, local businesses, and live events across the Irish Hills Lakes region.</p>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2>Who We Are</h2>
+    <p>Yeti Groove Media is a digital media and community engagement studio based in Devils Lake, Michigan. We design and operate web platforms that connect local businesses, event organizers, and residents — helping communities thrive online and in person.</p>
+    <p>Our flagship project is <strong style="color: var(--cream);">Manitou Beach</strong>, a community platform serving the Devils Lake / Irish Hills Lakes region of Michigan. The platform handles event listings, business directories, food truck scheduling, and neighborhood news for the area.</p>
+    <p>We also produce event coverage, branded digital media, and booking services for performing artists and live events.</p>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">Services</p>
+    <h2>What We Do</h2>
+    <ul>
+      <li>Community web platforms — events, business directories, local news</li>
+      <li>Food truck scheduling and vendor management tools</li>
+      <li>Event promotion and digital marketing</li>
+      <li>Branded content, photography, and video production</li>
+      <li>Artist and performer booking</li>
+      <li>SMS and email communication for local businesses and event vendors</li>
+    </ul>
+  </section>
+
+  <!-- SMS POLICY -->
+  <section id="sms-policy">
+    <p class="section-label">SMS Policy</p>
+    <h2>Text Message Communications</h2>
+    <p>Yeti Groove Media uses SMS messaging to help local vendors and business operators manage their presence on our platforms. Text messages are sent only to individuals who have expressly provided their phone number and requested communication from us.</p>
+    <p>We do not send unsolicited text messages. All SMS communications are transactional or informational in nature — for example, sending a vendor their check-in link at their request.</p>
+    <p><strong style="color: var(--cream);">Message types we send:</strong></p>
+    <ul>
+      <li>Check-in link delivery for food truck vendors (requested via our website)</li>
+      <li>Event-related reminders for opted-in organizers</li>
+      <li>Account or operational notifications for registered platform users</li>
+    </ul>
+    <p><strong style="color: var(--cream);">Opt-out:</strong> Reply STOP at any time to unsubscribe from messages. Reply HELP for assistance. Message and data rates may apply. Message frequency varies.</p>
+    <p><strong style="color: var(--cream);">Carrier disclosure:</strong> Mobile carriers are not liable for delayed or undelivered messages.</p>
+  </section>
+
+  <!-- PRIVACY POLICY -->
+  <section id="privacy">
+    <p class="section-label">Privacy</p>
+    <h2>Privacy Policy</h2>
+    <p><em style="color: rgba(176,163,144,0.6); font-size: 0.85rem;">Last updated: March 2026</em></p>
+    <p>Yeti Groove Media ("we", "us", "our") operates yetigroove.com and associated community platforms including manitoubeach.com. This policy describes how we handle personal information.</p>
+
+    <p><strong style="color: var(--cream);">Information we collect:</strong></p>
+    <ul>
+      <li>Contact information (name, email, phone number) provided voluntarily through our platforms</li>
+      <li>Business information submitted for directory or scheduling purposes</li>
+      <li>Usage data collected via standard web analytics (page views, device type)</li>
+    </ul>
+
+    <p><strong style="color: var(--cream);">How we use your information:</strong></p>
+    <ul>
+      <li>To provide requested services (e.g., sending a check-in link via SMS)</li>
+      <li>To operate and improve our community platforms</li>
+      <li>To communicate operational updates to registered vendors and partners</li>
+    </ul>
+
+    <p><strong style="color: var(--cream);">We do not:</strong></p>
+    <ul>
+      <li>Sell or share your personal information with third parties for marketing purposes</li>
+      <li>Send unsolicited commercial text messages or emails</li>
+      <li>Store payment card data (all payments are processed by Stripe)</li>
+    </ul>
+
+    <p><strong style="color: var(--cream);">Data retention:</strong> We retain contact information only as long as needed to provide services. You may request deletion of your data by emailing <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>.</p>
+
+    <p><strong style="color: var(--cream);">Third-party services:</strong> Our platforms use Notion (data storage), Twilio (SMS delivery), Stripe (payments), and Vercel (hosting). Each operates under their own privacy policy.</p>
+
+    <p>Questions about this policy? Contact us at <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2>Get in Touch</h2>
+    <p>We're a small, local studio. Reach out directly — we respond to every message.</p>
+    <div class="contact-block">
+      <p><strong style="color: var(--cream);">Yeti Groove Media</strong></p>
+      <p>Devils Lake, Michigan 49220</p>
+      <p><a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
+      <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(176,163,144,0.6);">Owner: Daryl Young</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="#privacy" style="color: rgba(176,163,144,0.5);">Privacy Policy</a> &middot; <a href="#sms-policy" style="color: rgba(176,163,144,0.5);">SMS Policy</a></p>
+  </footer>
+
+</body>
+</html>
