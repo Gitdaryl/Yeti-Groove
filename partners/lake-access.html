@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Private Proposal for Lake Access Magazine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0A1628;
+      --navy-mid:   #0F2040;
+      --amber:      #F5A623;
+      --amber-light:#FDB94A;
+      --cream:      #FDF8F0;
+      --cream-dark: #F0E8D5;
+      --sage:       #6B8F6E;
+      --sage-light: #8BAE8E;
+      --copper:     #C17B2F;
+      --blue-lake:  #1A4A6B;
+      --blue-light: #2A6A9A;
+      --text-dark:  #1A2B3C;
+      --text-body:  #3D5166;
+      --text-muted: #7A8FA0;
+      --white:      #FFFFFF;
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --radius-xl:  36px;
+      --shadow-sm:  0 2px 8px rgba(10,22,40,0.08);
+      --shadow-md:  0 8px 32px rgba(10,22,40,0.12);
+      --shadow-amber: 0 8px 32px rgba(245,166,35,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── PASSCODE GATE ── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    #gate.hidden { display: none; }
+
+    .gate-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gate-logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--amber), var(--copper));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .gate-logo-text {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .gate-logo-text span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--amber);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .gate-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 3rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .gate-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.75rem;
+    }
+
+    .gate-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .gate-sub {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .gate-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1.25rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .gate-input:focus { border-color: rgba(245,166,35,0.5); }
+    .gate-input.error { border-color: rgba(220,60,60,0.6); animation: shake 0.3s; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    .gate-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--copper), var(--amber));
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 0.875rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-amber);
+      transition: transform 0.2s;
+    }
+
+    .gate-btn:hover { transform: translateY(-2px); }
+
+    .gate-error {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: rgba(220,100,100,0.9);
+      display: none;
+    }
+
+    .gate-error.visible { display: block; }
+
+    /* ── CONTENT (hidden until gate passes) ── */
+    #content { display: none; }
+    #content.visible { display: block; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--amber), var(--copper));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .topbar-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .topbar-badge {
+      background: rgba(245,166,35,0.15);
+      border: 1px solid rgba(245,166,35,0.3);
+      color: var(--amber);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.875rem;
+      border-radius: 50px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #0A1628 0%, #0F2040 40%, #1A3A5C 70%, #0A1628 100%);
+      padding: 5rem 2rem 8rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 65%);
+      top: -100px;
+      right: -100px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(26,74,107,0.4) 0%, transparent 65%);
+      bottom: 0;
+      left: 5%;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-to {
+      display: inline-block;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.25);
+      color: var(--amber);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.25rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--amber), var(--copper));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 0.75rem;
+    }
+
+    .hero-stat-val {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-stat-lbl {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      line-height: 0;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 5rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-p {
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 640px;
+    }
+
+    /* ── CALCULATOR SECTION ── */
+    #calculator { background: var(--cream); }
+
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    /* Left: inputs */
+    .calc-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .input-group {
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .input-group-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--copper);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .slider-row {
+      margin-bottom: 1.25rem;
+    }
+
+    .slider-row:last-child { margin-bottom: 0; }
+
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+    }
+
+    .slider-label {
+      font-size: 0.82rem;
+      color: var(--text-body);
+      font-weight: 500;
+    }
+
+    .slider-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .slider-val-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .slider-count {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--copper);
+    }
+
+    .slider-revenue {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      background: var(--cream-dark);
+      border-radius: 3px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--copper), var(--amber));
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(193,123,47,0.35);
+    }
+
+    .conversion-group {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .conversion-group .input-group-title {
+      color: var(--white);
+    }
+
+    .conversion-group .input-group-title::before {
+      background: var(--amber);
+    }
+
+    .conversion-group .slider-label {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .conversion-group .slider-meta {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .conversion-group .slider-count {
+      color: var(--amber);
+    }
+
+    .conversion-group .slider-revenue {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .conversion-group input[type="range"] {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .conversion-group input[type="range"]::-webkit-slider-thumb {
+      background: linear-gradient(135deg, var(--amber), var(--amber-light));
+    }
+
+    /* Right: results */
+    .calc-results {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .result-card {
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-card.highlight {
+      background: var(--navy);
+      border-color: rgba(245,166,35,0.2);
+    }
+
+    .result-card.reveal-moment {
+      background: linear-gradient(135deg, rgba(107,143,110,0.12), rgba(107,143,110,0.06));
+      border: 2px solid rgba(107,143,110,0.4);
+    }
+
+    .result-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .result-card.highlight .result-label {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .result-card.reveal-moment .result-label {
+      color: var(--sage);
+    }
+
+    .result-value {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--text-dark);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .result-card.highlight .result-value {
+      background: linear-gradient(135deg, var(--amber), var(--copper));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.4rem;
+    }
+
+    .result-card.reveal-moment .result-value {
+      color: var(--sage);
+    }
+
+    .result-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .result-card.highlight .result-sub {
+      color: rgba(255,255,255,0.45);
+    }
+
+    .result-card.reveal-moment .result-sub {
+      color: var(--sage);
+      font-weight: 600;
+    }
+
+    .result-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(10,22,40,0.06);
+    }
+
+    .result-card.highlight .result-breakdown {
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .breakdown-item-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .result-card.highlight .breakdown-item-label {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .breakdown-item-val {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .result-card.highlight .breakdown-item-val {
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Tier badge */
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-badge.base     { background: rgba(122,143,160,0.15); color: var(--text-muted); }
+    .tier-badge.silver   { background: rgba(180,180,200,0.15); color: #8899BB; }
+    .tier-badge.gold     { background: rgba(245,166,35,0.15);  color: var(--amber); }
+    .tier-badge.platinum { background: rgba(193,123,47,0.15);  color: var(--copper); }
+
+    /* Production cost comparison */
+    .cost-comparison {
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cost-bar-wrap {
+      margin-top: 1rem;
+    }
+
+    .cost-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .cost-bar-track {
+      height: 10px;
+      background: var(--cream-dark);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .cost-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.5s ease;
+    }
+
+    .cost-bar-fill.print { background: rgba(122,143,160,0.4); }
+    .cost-bar-fill.digital { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+
+    .cost-coverage {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--sage);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .cost-coverage span { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--navy); padding: 5rem 2rem; }
+    #how .section-tag { color: var(--sage-light); }
+    #how .section-h2 { color: var(--white); }
+    #how .section-p { color: rgba(255,255,255,0.6); }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .how-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+
+    .how-card:hover { background: rgba(255,255,255,0.07); }
+
+    .how-num {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: rgba(245,166,35,0.2);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .how-card h3 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .how-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+
+    /* ── WHAT ADVERTISERS GET ── */
+    #value { background: var(--cream); }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .value-item {
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,0.06);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .value-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--cream-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .value-item h4 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .value-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── RATE CARD REFERENCE ── */
+    #ratecard { background: var(--navy); padding: 4rem 2rem; }
+    #ratecard .section-tag { color: var(--amber); }
+    #ratecard .section-h2 { color: var(--white); }
+    #ratecard .section-p { color: rgba(255,255,255,0.55); }
+
+    .rate-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.875rem;
+    }
+
+    .rate-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .rate-table td {
+      padding: 0.875rem 1rem;
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+
+    .rate-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .rate-table .print-price { color: var(--text-muted); font-size: 0.8rem; }
+    .rate-table .digital-add { color: var(--amber); font-weight: 700; }
+    .rate-table .your-cut { color: var(--sage-light); font-weight: 700; }
+    .rate-table .ad-name { color: var(--white); font-weight: 600; }
+
+    .upgrade-pill {
+      display: inline-block;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.2);
+      color: var(--amber);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+      margin-left: 6px;
+    }
+
+    /* ── NEXT STEPS ── */
+    #next { background: var(--cream); padding: 5rem 2rem; }
+
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .next-card {
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .next-card.dark {
+      background: var(--navy);
+      border-color: rgba(245,166,35,0.15);
+    }
+
+    .next-card h3 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .next-card.dark h3 { color: var(--white); }
+
+    .next-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .next-list li {
+      font-size: 0.875rem;
+      color: var(--text-body);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .next-card.dark .next-list li { color: rgba(255,255,255,0.6); }
+
+    .next-list li::before {
+      content: '→';
+      color: var(--copper);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .next-card.dark .next-list li::before { color: var(--amber); }
+
+    .next-cta {
+      margin-top: 1.5rem;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--copper), var(--amber));
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: var(--shadow-amber);
+      transition: transform 0.2s;
+    }
+
+    .next-cta:hover { transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060E1A;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    footer span { color: var(--amber); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .calc-layout { grid-template-columns: 1fr; }
+      .calc-results { position: static; }
+      .how-grid { grid-template-columns: 1fr; }
+      .value-grid { grid-template-columns: 1fr; }
+      .next-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSCODE GATE -->
+  <div id="gate">
+    <div class="gate-logo">
+      <div class="gate-logo-icon">🏔️</div>
+      <div class="gate-logo-text">
+        Yeti Groove
+        <span>Partner Network</span>
+      </div>
+    </div>
+    <div class="gate-box">
+      <div class="gate-label">Private Proposal</div>
+      <div class="gate-title">This document is for<br>Lake Access Magazine</div>
+      <p class="gate-sub">Enter the access code provided to continue.</p>
+      <input type="text" id="gate-input" class="gate-input" placeholder="· · · · · · · ·" maxlength="20" autocomplete="off" spellcheck="false">
+      <button class="gate-btn" onclick="checkGate()">View Proposal →</button>
+      <p class="gate-error" id="gate-error">That code doesn't match. Try again.</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-icon">🏔️</div>
+        <div class="topbar-name">Yeti Groove Partner Network</div>
+      </div>
+      <div class="topbar-badge">Private Proposal — Lake Access Magazine</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-to">Prepared exclusively for Lake Access Magazine</div>
+        <h1>
+          What if your print magazine<br>
+          <em>paid for itself</em> — every month?
+        </h1>
+        <p class="hero-sub">
+          You've built a regional audience across 9 counties and two states. You've got 80+ advertisers who trust you. The only thing missing is a digital layer that makes all of it measurable, recurring, and worth more to every business that advertises with you.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-val">20k</div>
+            <div class="hero-stat-lbl">Copies distributed annually</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">9</div>
+            <div class="hero-stat-lbl">Counties across MI + IN</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">$137k</div>
+            <div class="hero-stat-lbl">Avg. household income in your area</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">80+</div>
+            <div class="hero-stat-lbl">Existing advertiser relationships</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-wave">
+        <svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="width:100%;height:70px;">
+          <path d="M0,35 C360,65 1080,5 1440,40 L1440,70 L0,70 Z" fill="#FDF8F0"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CALCULATOR -->
+    <section id="calculator" class="section">
+      <div class="container">
+        <div class="section-tag">Your Income Projection</div>
+        <h2 class="section-h2" style="color:var(--text-dark)">Build your numbers.<br>See what digital adds.</h2>
+        <p class="section-p" style="color:var(--text-body)">
+          Use your actual advertiser mix below. Adjust the sliders to match what you sell, then set conversion assumptions. The calculator shows what digital income could look like — including whether it covers your print production costs.
+        </p>
+
+        <div class="calc-layout">
+
+          <!-- LEFT: Sliders -->
+          <div class="calc-inputs">
+
+            <!-- Ad Mix -->
+            <div class="input-group">
+              <div class="input-group-title">Your Current Advertiser Mix</div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">Laker Listings</span>
+                  <span class="slider-meta">Print: $250/yr each</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-laker">20</span>
+                  <span class="slider-revenue" id="r-laker">$5,000/yr print</span>
+                </div>
+                <input type="range" min="0" max="60" value="20" id="s-laker" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">1/8 Page Ads</span>
+                  <span class="slider-meta">Print: $445/yr each</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-eighth">15</span>
+                  <span class="slider-revenue" id="r-eighth">$6,675/yr print</span>
+                </div>
+                <input type="range" min="0" max="40" value="15" id="s-eighth" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">1/4 Page Ads</span>
+                  <span class="slider-meta">Print: $625/yr each</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-quarter">10</span>
+                  <span class="slider-revenue" id="r-quarter">$6,250/yr print</span>
+                </div>
+                <input type="range" min="0" max="30" value="10" id="s-quarter" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">1/2 Page Ads</span>
+                  <span class="slider-meta">Print: $995/yr each</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-half">5</span>
+                  <span class="slider-revenue" id="r-half">$4,975/yr print</span>
+                </div>
+                <input type="range" min="0" max="20" value="5" id="s-half" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">Full Page Ads</span>
+                  <span class="slider-meta">Print: $1,495/yr each</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-full">3</span>
+                  <span class="slider-revenue" id="r-full">$4,485/yr print</span>
+                </div>
+                <input type="range" min="0" max="15" value="3" id="s-full" oninput="recalc()">
+              </div>
+            </div>
+
+            <!-- Conversion Assumptions -->
+            <div class="conversion-group">
+              <div class="input-group-title">Digital Conversion Assumptions</div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">% who accept free digital listing</span>
+                  <span class="slider-meta">Bundled with print — easy yes</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-free">75%</span>
+                  <span class="slider-revenue" id="r-free-count">40 advertisers on platform</span>
+                </div>
+                <input type="range" min="10" max="100" value="75" id="s-free" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">% of those who upgrade to paid tier</span>
+                  <span class="slider-meta">After seeing scan data</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-upgrade">30%</span>
+                  <span class="slider-revenue" id="r-upgrade-count">12 paying listings</span>
+                </div>
+                <input type="range" min="0" max="80" value="30" id="s-upgrade" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">Average paid listing price</span>
+                  <span class="slider-meta">$9 / $25 / $49 / $97 per month</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-tier">$25/mo</span>
+                  <span class="slider-revenue" id="r-tier-note">Mid-tier — most common</span>
+                </div>
+                <input type="range" min="0" max="3" value="1" id="s-tier" oninput="recalc()">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-top">
+                  <span class="slider-label">Est. monthly print production cost</span>
+                  <span class="slider-meta">Printing + distribution + design</span>
+                </div>
+                <div class="slider-val-row">
+                  <span class="slider-count" id="v-cost">$1,500</span>
+                  <span class="slider-revenue">Approx. $18,000/yr overhead</span>
+                </div>
+                <input type="range" min="500" max="5000" step="100" value="1500" id="s-cost" oninput="recalc()">
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Results -->
+          <div class="calc-results">
+
+            <div class="result-card">
+              <div class="result-label">Your Current Annual Print Revenue</div>
+              <div class="result-value" id="res-print">$27,385</div>
+              <div class="result-sub" id="res-print-sub">Based on your advertiser mix above</div>
+              <div class="result-breakdown">
+                <div>
+                  <div class="breakdown-item-label">Total advertisers</div>
+                  <div class="breakdown-item-val" id="res-total-ads">53</div>
+                </div>
+                <div>
+                  <div class="breakdown-item-label">Avg. per advertiser</div>
+                  <div class="breakdown-item-val" id="res-avg-per">$517</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-card highlight">
+              <div class="tier-badge base" id="tier-badge">Base Tier</div>
+              <div class="result-label">Your New Monthly Digital Income</div>
+              <div class="result-value" id="res-monthly">$90</div>
+              <div class="result-sub" id="res-monthly-sub">Pure income — no fees deducted on your side</div>
+              <div class="result-breakdown">
+                <div>
+                  <div class="breakdown-item-label">On platform</div>
+                  <div class="breakdown-item-val" id="res-on-platform">40</div>
+                </div>
+                <div>
+                  <div class="breakdown-item-label">Paying listings</div>
+                  <div class="breakdown-item-val" id="res-paying">12</div>
+                </div>
+                <div>
+                  <div class="breakdown-item-label">Your cut</div>
+                  <div class="breakdown-item-val" id="res-cut-pct">50%</div>
+                </div>
+                <div>
+                  <div class="breakdown-item-label">Annual digital</div>
+                  <div class="breakdown-item-val" id="res-annual-digital">$1,080</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-card reveal-moment" id="reveal-card">
+              <div class="result-label">Digital vs. Print Production Cost</div>
+              <div class="result-value" id="res-coverage">6%</div>
+              <div class="result-sub" id="res-coverage-sub">of your monthly production cost covered by digital</div>
+              <div class="cost-bar-wrap">
+                <div class="cost-bar-label">
+                  <span>Production cost</span>
+                  <span id="cost-label">$1,500/mo</span>
+                </div>
+                <div class="cost-bar-track">
+                  <div class="cost-bar-fill print" style="width:100%"></div>
+                </div>
+                <div class="cost-bar-label">
+                  <span>Digital income</span>
+                  <span id="digital-label">$90/mo</span>
+                </div>
+                <div class="cost-bar-track">
+                  <div class="cost-bar-fill digital" id="digital-bar" style="width:6%"></div>
+                </div>
+              </div>
+              <div class="cost-coverage" id="coverage-msg">Keep growing — the break-even is closer than you think.</div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-label">Combined Annual Revenue (Year 1 Projection)</div>
+              <div class="result-value" id="res-combined">$28,465</div>
+              <div class="result-sub">Print revenue + digital income. As advertisers upgrade over time, digital grows while print stays stable.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS FOR LAKE ACCESS -->
+    <section id="how" class="section" style="padding:5rem 2rem;">
+      <div class="container">
+        <div class="section-tag">How This Works For You</div>
+        <h2 class="section-h2">You keep selling the way<br>you already sell.</h2>
+        <p class="section-p">
+          Nothing changes about your print operation. You just add a line to the conversation you already have with your advertisers.
+        </p>
+
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="how-num">01</div>
+            <h3>Bundle the free listing with every print ad</h3>
+            <p>"Your ad also comes with a digital listing page and a QR code for the magazine." That's it. No extra pitch. It's included. Most will say yes because it costs them nothing.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-num">02</div>
+            <h3>Let the scan data do the upsell for you</h3>
+            <p>Three months in, Billy's Bait Shop got 47 scans. You show him that number at renewal time. He asks what it would cost to get featured placement and SMS alerts. You tell him $25/mo. He says yes.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-num">03</div>
+            <h3>Stripe pays your cut automatically every month</h3>
+            <p>No invoices. No manual transfers. Your share of every active paid listing lands in your bank account on the same day each month. It compounds as more advertisers upgrade.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-num">04</div>
+            <h3>Your 9 counties are locked — permanently</h3>
+            <p>Nobody else can be a partner in your territory. Branch, Calhoun, Hillsdale, Irish Hills, Jackson, Lenawee, Steuben, LaGrange, St. Joseph — yours. As a founding partner, there's no annual fee. Ever.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-num">05</div>
+            <h3>Your revenue share grows as you grow</h3>
+            <p>You start at 50%. Hit 20 active listings → 55%. Hit 40 → 60%. Hit 60 → 65%. The more you build the territory, the bigger your cut. At 40+ advertisers you're already at Gold tier.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-num">06</div>
+            <h3>Your territory is a real asset you own</h3>
+            <p>You can grow it, sell it, or pass it on with Yeti Groove approval. It has a real dollar value — roughly 2x the annual digital income it generates. Build it for 3 years and see what it's worth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOUR ADVERTISERS GET -->
+    <section id="value" class="section">
+      <div class="container">
+        <div class="section-tag" style="color:var(--copper)">Advertiser Value</div>
+        <h2 class="section-h2" style="color:var(--text-dark)">What every Lake Access advertiser gets<br>when you add digital.</h2>
+
+        <div class="value-grid">
+          <div class="value-item">
+            <div class="value-icon">📱</div>
+            <div>
+              <h4>Their own landing page</h4>
+              <p>Photos, hours, tap-to-call, directions. Looks professional on any phone. Works instantly when their QR code is scanned from your magazine.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">⬛</div>
+            <div>
+              <h4>QR code in their print ad</h4>
+              <p>Drops right into their existing ad layout. Any smartphone camera scans it — no app needed. Takes readers to their page in under a second.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">📊</div>
+            <div>
+              <h4>Quarterly scan reports</h4>
+              <p>First time ever, they can see how many people their Lake Access ad actually reached. That number is your renewal argument — every year.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">📅</div>
+            <div>
+              <h4>Year-round presence</h4>
+              <p>Their page is live 365 days — not just when the magazine drops. A marina can update their seasonal hours without waiting for next year's edition.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🎟️</div>
+            <div>
+              <h4>Event ticketing — no Eventbrite</h4>
+              <p>Wineries, bars, and marinas can sell tickets for events directly through their listing page. No setup fees, no corporate middleman, no app required.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">📲</div>
+            <div>
+              <h4>Optional SMS alerts</h4>
+              <p>Premium advertisers can push deals and events to local subscribers who opt in. Straight to the phone — not lost in a social media algorithm.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RATE CARD REFERENCE -->
+    <section id="ratecard" class="section" style="padding:4rem 2rem;">
+      <div class="container">
+        <div class="section-tag">Rate Card Reference</div>
+        <h2 class="section-h2">Your existing rates + what digital adds.</h2>
+        <p class="section-p">
+          Your print rates stay exactly as they are. The digital add-on is a new conversation — not a replacement for what you already charge.
+        </p>
+
+        <table class="rate-table">
+          <thead>
+            <tr>
+              <th>Ad Type</th>
+              <th>Your Print Rate</th>
+              <th>Suggested Digital Add-On</th>
+              <th>Your Monthly Cut</th>
+              <th>Your Annual Digital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ad-name">Laker Listing</td>
+              <td class="print-price">$250/yr</td>
+              <td class="digital-add">$9/mo <span class="upgrade-pill">free to start</span></td>
+              <td class="your-cut">$4.50/mo</td>
+              <td class="your-cut">$54/yr per listing</td>
+            </tr>
+            <tr>
+              <td class="ad-name">1/8 Page</td>
+              <td class="print-price">$445/yr</td>
+              <td class="digital-add">$9–$25/mo <span class="upgrade-pill">free to start</span></td>
+              <td class="your-cut">$4.50–$12.50/mo</td>
+              <td class="your-cut">$54–$150/yr per listing</td>
+            </tr>
+            <tr>
+              <td class="ad-name">1/4 Page</td>
+              <td class="print-price">$625/yr</td>
+              <td class="digital-add">$25/mo</td>
+              <td class="your-cut">$12.50/mo</td>
+              <td class="your-cut">$150/yr per listing</td>
+            </tr>
+            <tr>
+              <td class="ad-name">1/2 Page</td>
+              <td class="print-price">$995/yr</td>
+              <td class="digital-add">$25–$49/mo</td>
+              <td class="your-cut">$12.50–$24.50/mo</td>
+              <td class="your-cut">$150–$294/yr per listing</td>
+            </tr>
+            <tr>
+              <td class="ad-name">Full Page</td>
+              <td class="print-price">$1,495/yr</td>
+              <td class="digital-add">$49–$97/mo</td>
+              <td class="your-cut">$24.50–$48.50/mo</td>
+              <td class="your-cut">$294–$582/yr per listing</td>
+            </tr>
+            <tr>
+              <td class="ad-name">Distribution Sponsor</td>
+              <td class="print-price">$1,200/yr</td>
+              <td class="digital-add">$49–$97/mo featured</td>
+              <td class="your-cut">$24.50–$48.50/mo</td>
+              <td class="your-cut">$294–$582/yr per listing</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.3);margin-top:1.25rem;">
+          Partner cut shown at 50% base (starting tier). Increases to 55% at 20 active listings, 60% at 40, 65% at 60+. All Stripe fees and platform operating costs covered by Yeti Groove — figures above are your take-home. You may set your own advertiser rates above the platform floor.
+        </p>
+      </div>
+    </section>
+
+    <!-- NEXT STEPS -->
+    <section id="next" class="section">
+      <div class="container">
+        <div class="section-tag" style="color:var(--copper)">Next Steps</div>
+        <h2 class="section-h2" style="color:var(--text-dark)">How we'd get started.</h2>
+
+        <div class="next-grid">
+          <div class="next-card">
+            <h3>What we'd need from you</h3>
+            <ul class="next-list">
+              <li>A list of your current advertisers — names, category, phone or email</li>
+              <li>Your ad deadline so we can have QR codes ready in time</li>
+              <li>A sense of which advertisers you'd start the conversation with first</li>
+              <li>Your business entity name for the Stripe connected account</li>
+              <li>That's it — we handle everything else</li>
+            </ul>
+          </div>
+          <div class="next-card dark">
+            <h3>What happens after you say yes</h3>
+            <ul class="next-list">
+              <li>Your 9 counties are locked within 48 hours — founding partner status confirmed</li>
+              <li>We build the first 5 advertiser listing pages as a pilot — at no cost</li>
+              <li>QR codes generated and ready before your next print deadline</li>
+              <li>Your Stripe account connected — you'll see your first payout within 30 days of first paid listing</li>
+              <li>You approach your advertisers with the free listing offer — we support the pitch</li>
+            </ul>
+            <a href="mailto:hello@yetigroove.com" class="next-cta">Let's talk →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Prepared by <span>Yeti Groove Partner Network</span> — Private proposal for Lake Access Magazine. Do not distribute. &copy; 2026</p>
+    </footer>
+
+  </div><!-- end #content -->
+
+  <script>
+    // ── GATE ──
+    const PASS = 'LAKEACCESS';
+
+    function checkGate() {
+      const val = document.getElementById('gate-input').value.trim().toUpperCase();
+      if (val === PASS) {
+        document.getElementById('gate').classList.add('hidden');
+        document.getElementById('content').classList.add('visible');
+      } else {
+        const input = document.getElementById('gate-input');
+        input.classList.add('error');
+        document.getElementById('gate-error').classList.add('visible');
+        setTimeout(() => input.classList.remove('error'), 400);
+      }
+    }
+
+    document.getElementById('gate-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkGate();
+    });
+
+    // ── CALCULATOR ──
+    const tierRates = [
+      { price: 9,  label: '$9/mo',  note: 'Entry tier' },
+      { price: 25, label: '$25/mo', note: 'Mid-tier — most common' },
+      { price: 49, label: '$49/mo', note: 'Business tier' },
+      { price: 97, label: '$97/mo', note: 'Premium tier' },
+    ];
+
+    const tiers = [
+      { min: 0,  max: 19, rate: 0.50, label: 'Base Tier',     badge: 'base' },
+      { min: 20, max: 39, rate: 0.55, label: 'Silver Tier',   badge: 'silver' },
+      { min: 40, max: 59, rate: 0.60, label: 'Gold Tier',     badge: 'gold' },
+      { min: 60, max: 999,rate: 0.65, label: 'Platinum Tier', badge: 'platinum' },
+    ];
+
+    const adPrices = { laker: 250, eighth: 445, quarter: 625, half: 995, full: 1495 };
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+    function recalc() {
+      const laker   = parseInt(document.getElementById('s-laker').value);
+      const eighth  = parseInt(document.getElementById('s-eighth').value);
+      const quarter = parseInt(document.getElementById('s-quarter').value);
+      const half    = parseInt(document.getElementById('s-half').value);
+      const full    = parseInt(document.getElementById('s-full').value);
+      const freePct = parseInt(document.getElementById('s-free').value) / 100;
+      const upgPct  = parseInt(document.getElementById('s-upgrade').value) / 100;
+      const tierIdx = parseInt(document.getElementById('s-tier').value);
+      const prodCost= parseInt(document.getElementById('s-cost').value);
+
+      const tierData = tierRates[tierIdx];
+
+      // Update slider displays
+      document.getElementById('v-laker').textContent   = laker;
+      document.getElementById('v-eighth').textContent  = eighth;
+      document.getElementById('v-quarter').textContent = quarter;
+      document.getElementById('v-half').textContent    = half;
+      document.getElementById('v-full').textContent    = full;
+      document.getElementById('r-laker').textContent   = fmt(laker   * adPrices.laker)   + '/yr print';
+      document.getElementById('r-eighth').textContent  = fmt(eighth  * adPrices.eighth)  + '/yr print';
+      document.getElementById('r-quarter').textContent = fmt(quarter * adPrices.quarter) + '/yr print';
+      document.getElementById('r-half').textContent    = fmt(half    * adPrices.half)    + '/yr print';
+      document.getElementById('r-full').textContent    = fmt(full    * adPrices.full)    + '/yr print';
+      document.getElementById('v-tier').textContent    = tierData.label;
+      document.getElementById('r-tier-note').textContent = tierData.note;
+      document.getElementById('v-cost').textContent    = fmt(prodCost);
+
+      const freePctVal = parseInt(document.getElementById('s-free').value);
+      const upgPctVal  = parseInt(document.getElementById('s-upgrade').value);
+      document.getElementById('v-free').textContent    = freePctVal + '%';
+      document.getElementById('v-upgrade').textContent = upgPctVal + '%';
+
+      // Core calcs
+      const totalAds   = laker + eighth + quarter + half + full;
+      const printRev   = (laker * adPrices.laker) + (eighth * adPrices.eighth) +
+                         (quarter * adPrices.quarter) + (half * adPrices.half) +
+                         (full * adPrices.full);
+      const onPlatform = Math.round(totalAds * freePct);
+      const paying     = Math.round(onPlatform * upgPct);
+      document.getElementById('r-free-count').textContent   = onPlatform + ' advertisers on platform';
+      document.getElementById('r-upgrade-count').textContent = paying + ' paying listings';
+
+      // Partner tier based on paying count
+      const partnerTier = tiers.find(t => paying >= t.min && paying <= t.max);
+      const cutRate    = partnerTier.rate;
+      const monthlyIncome = paying * tierData.price * cutRate;
+      const annualDigital = monthlyIncome * 12;
+
+      // Coverage
+      const coveragePct = prodCost > 0 ? Math.min((monthlyIncome / prodCost) * 100, 100) : 0;
+
+      // Update results
+      document.getElementById('res-print').textContent     = fmt(printRev);
+      document.getElementById('res-print-sub').textContent = totalAds + ' advertisers × average ' + fmt(totalAds > 0 ? printRev / totalAds : 0) + '/yr';
+      document.getElementById('res-total-ads').textContent = totalAds;
+      document.getElementById('res-avg-per').textContent   = fmt(totalAds > 0 ? printRev / totalAds : 0);
+      document.getElementById('res-monthly').textContent   = fmt(monthlyIncome);
+      document.getElementById('res-monthly-sub').textContent = paying + ' paid listings × ' + tierData.label + ' × ' + Math.round(cutRate * 100) + '%';
+      document.getElementById('res-on-platform').textContent = onPlatform;
+      document.getElementById('res-paying').textContent    = paying;
+      document.getElementById('res-cut-pct').textContent   = Math.round(cutRate * 100) + '%';
+      document.getElementById('res-annual-digital').textContent = fmt(annualDigital);
+      document.getElementById('res-combined').textContent  = fmt(printRev + annualDigital);
+      document.getElementById('res-coverage').textContent  = Math.round(coveragePct) + '%';
+      document.getElementById('res-coverage-sub').textContent = 'of your ' + fmt(prodCost) + '/mo production cost covered by digital income';
+      document.getElementById('cost-label').textContent    = fmt(prodCost) + '/mo';
+      document.getElementById('digital-label').textContent = fmt(monthlyIncome) + '/mo';
+      document.getElementById('digital-bar').style.width   = Math.max(2, coveragePct) + '%';
+
+      // Tier badge
+      const badge = document.getElementById('tier-badge');
+      badge.textContent = partnerTier.label;
+      badge.className   = 'tier-badge ' + partnerTier.badge;
+
+      // Coverage message
+      let msg = '';
+      if (coveragePct >= 100) {
+        msg = '🎉 Digital income fully covers your print production cost. Print revenue is pure profit.';
+        document.getElementById('reveal-card').style.borderColor = 'rgba(107,143,110,0.6)';
+      } else if (coveragePct >= 75) {
+        msg = 'Almost there — digital is covering most of your production overhead.';
+        document.getElementById('reveal-card').style.borderColor = 'rgba(107,143,110,0.5)';
+      } else if (coveragePct >= 40) {
+        msg = 'Growing fast. Keep upgrading advertisers to reach the break-even point.';
+        document.getElementById('reveal-card').style.borderColor = 'rgba(107,143,110,0.4)';
+      } else {
+        msg = 'Early stage — every upgrade moves this bar. The math compounds fast.';
+        document.getElementById('reveal-card').style.borderColor = 'rgba(107,143,110,0.3)';
+      }
+      document.getElementById('coverage-msg').textContent = msg;
+    }
+
+    recalc();
+  </script>
+
+</body>
+</html>

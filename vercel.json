@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/partners/lake-access", "destination": "/partners/lake-access.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
