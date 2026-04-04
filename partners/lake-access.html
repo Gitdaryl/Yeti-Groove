@@ -930,38 +930,44 @@
         <!-- Laker Listing -->
         <div class="calc-row">
           <label>Laker Listing · <span id="ll-name">$250/yr</span></label>
-          <span class="count" id="ll-count">5</span>
-          <input type="range" id="ll-slider" min="0" max="30" value="5">
+          <span class="count" id="ll-count">140</span>
+          <input type="range" id="ll-slider" min="0" max="250" value="140">
         </div>
         <!-- 1/8 Page -->
         <div class="calc-row">
           <label>1/8 Page · <span id="ei-name">$445/yr</span></label>
-          <span class="count" id="ei-count">3</span>
-          <input type="range" id="ei-slider" min="0" max="20" value="3">
+          <span class="count" id="ei-count">60</span>
+          <input type="range" id="ei-slider" min="0" max="120" value="60">
         </div>
         <!-- 1/4 Page -->
         <div class="calc-row">
           <label>1/4 Page · <span id="qi-name">$625/yr</span></label>
-          <span class="count" id="qi-count">2</span>
-          <input type="range" id="qi-slider" min="0" max="15" value="2">
+          <span class="count" id="qi-count">71</span>
+          <input type="range" id="qi-slider" min="0" max="120" value="71">
         </div>
         <!-- 1/2 Page -->
         <div class="calc-row">
           <label>1/2 Page · <span id="hi-name">$995/yr</span></label>
-          <span class="count" id="hi-count">1</span>
-          <input type="range" id="hi-slider" min="0" max="10" value="1">
+          <span class="count" id="hi-count">51</span>
+          <input type="range" id="hi-slider" min="0" max="100" value="51">
         </div>
         <!-- Full Page -->
         <div class="calc-row">
           <label>Full Page · <span id="fp-name">$1,495/yr</span></label>
-          <span class="count" id="fp-count">0</span>
-          <input type="range" id="fp-slider" min="0" max="10" value="0">
+          <span class="count" id="fp-count">51</span>
+          <input type="range" id="fp-slider" min="0" max="100" value="51">
+        </div>
+        <!-- 2-Page Spread -->
+        <div class="calc-row">
+          <label>2-Page Spread · <span id="tp-name">$2,500/yr</span></label>
+          <span class="count" id="tp-count">7</span>
+          <input type="range" id="tp-slider" min="0" max="30" value="7">
         </div>
         <!-- Platform-only digital -->
         <div class="calc-row">
           <label>Digital Only (Platform Listing)</label>
           <span class="count" id="do-count">0</span>
-          <input type="range" id="do-slider" min="0" max="50" value="0">
+          <input type="range" id="do-slider" min="0" max="200" value="0">
         </div>
       </div>
 
@@ -1026,6 +1032,12 @@
             <td class="money">$1,495 / yr</td>
             <td>$300 / yr ($25/mo)</td>
             <td class="earn">$897 / yr</td>
+          </tr>
+          <tr>
+            <td>2-Page Spread + Digital</td>
+            <td class="money">$2,500 / yr</td>
+            <td>$300 / yr ($25/mo)</td>
+            <td class="earn">$1,500 / yr</td>
           </tr>
           <tr>
             <td>Digital Only (no print)</td>
@@ -1121,6 +1133,7 @@
     { slider: 'qi-slider', count: 'qi-count', annualPrice: 625 },
     { slider: 'hi-slider', count: 'hi-count', annualPrice: 995 },
     { slider: 'fp-slider', count: 'fp-count', annualPrice: 1495 },
+    { slider: 'tp-slider', count: 'tp-count', annualPrice: 2500 },
     { slider: 'do-slider', count: 'do-count', annualPrice: 108 },
   ];
   const SHARE = 0.60;
