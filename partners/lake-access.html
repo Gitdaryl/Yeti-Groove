@@ -979,7 +979,7 @@
           <span class="rval" id="res-platform">$0</span>
         </div>
         <div class="result-row">
-          <span class="rlabel">Your 60% share of platform fees</span>
+          <span class="rlabel">Your 50% share of platform fees</span>
           <span class="rval" id="res-share">$0 / mo</span>
         </div>
         <hr class="result-divider">
@@ -999,7 +999,7 @@
             <th>Your print product</th>
             <th>Platform tier bundled with it</th>
             <th>Platform fee / mo</th>
-            <th>Your 60% / advertiser / mo</th>
+            <th>Your 50% / advertiser / mo</th>
           </tr>
         </thead>
         <tbody>
@@ -1013,37 +1013,37 @@
             <td>1/8 Page</td>
             <td>Basic listing</td>
             <td class="money">$9 / mo</td>
-            <td class="earn">$5.40 / mo</td>
+            <td class="earn">$4.50 / mo</td>
           </tr>
           <tr>
             <td>1/4 Page</td>
             <td>Featured listing</td>
             <td class="money">$25 / mo</td>
-            <td class="earn">$15.00 / mo</td>
+            <td class="earn">$12.50 / mo</td>
           </tr>
           <tr>
             <td>1/2 Page</td>
             <td>Featured listing</td>
             <td class="money">$25 / mo</td>
-            <td class="earn">$15.00 / mo</td>
+            <td class="earn">$12.50 / mo</td>
           </tr>
           <tr>
             <td>Full Page</td>
             <td>Featured listing</td>
             <td class="money">$25 / mo</td>
-            <td class="earn">$15.00 / mo</td>
+            <td class="earn">$12.50 / mo</td>
           </tr>
           <tr>
             <td>2-Page Spread</td>
             <td>Premium listing</td>
             <td class="money">$49 / mo</td>
-            <td class="earn">$29.40 / mo</td>
+            <td class="earn">$24.50 / mo</td>
           </tr>
           <tr>
             <td>Digital Only</td>
             <td>Basic listing</td>
             <td class="money">$9 / mo</td>
-            <td class="earn">$5.40 / mo</td>
+            <td class="earn">$4.50 / mo</td>
           </tr>
         </tbody>
       </table>
@@ -1128,7 +1128,7 @@
 
   // ── INCOME CALCULATOR ──
   // platformMonthly = what the platform charges the advertiser per month
-  // Dennis earns 60% of that — his print revenue is completely separate
+  // Dennis earns 50% of that — his print revenue is completely separate
   const products = [
     { slider: 'll-slider', count: 'll-count', platformMonthly: 0 },
     { slider: 'ei-slider', count: 'ei-count', platformMonthly: 9 },
@@ -1138,7 +1138,7 @@
     { slider: 'tp-slider', count: 'tp-count', platformMonthly: 49 },
     { slider: 'do-slider', count: 'do-count', platformMonthly: 9 },
   ];
-  const SHARE = 0.60;
+  const SHARE = 0.50;
 
   function fmt(n) {
     return '$' + Math.round(n).toLocaleString('en-US');
