@@ -918,54 +918,54 @@
   <div class="section-inner">
     <div class="section-label">The Money</div>
     <h2 class="section-title">Real numbers. <em>Real income.</em></h2>
-    <p class="section-lead">Drag the sliders to reflect how many advertisers you sign at each tier. Your Stripe payout updates automatically. These are conservative — they don't include newsletter ads, event promotions, or the upgrades your advertisers will make on their own.</p>
+    <p class="section-lead">Set the sliders to match your current advertiser counts. The calculator shows what you'd earn from the <strong>digital platform</strong> on top of your existing print revenue — not instead of it. Your print business stays yours.</p>
 
     <div class="calc-wrap">
       <div class="calc-header">
-        <h3>Your Monthly Income Estimator</h3>
-        <p>Based on Lake Access Magazine's rate card × your 60% revenue share</p>
+        <h3>Your New Digital Income Estimator</h3>
+        <p>Your print revenue stays 100% yours. These numbers are what the platform adds — automatically, every month.</p>
       </div>
 
       <div class="calc-products">
         <!-- Laker Listing -->
         <div class="calc-row">
-          <label>Laker Listing · <span id="ll-name">$250/yr</span></label>
+          <label>Laker Listing <span style="color:var(--sage);font-weight:700;">→ $9/mo platform</span></label>
           <span class="count" id="ll-count">140</span>
           <input type="range" id="ll-slider" min="0" max="250" value="140">
         </div>
         <!-- 1/8 Page -->
         <div class="calc-row">
-          <label>1/8 Page · <span id="ei-name">$445/yr</span></label>
+          <label>1/8 Page <span style="color:var(--sage);font-weight:700;">→ $9/mo platform</span></label>
           <span class="count" id="ei-count">60</span>
           <input type="range" id="ei-slider" min="0" max="120" value="60">
         </div>
         <!-- 1/4 Page -->
         <div class="calc-row">
-          <label>1/4 Page · <span id="qi-name">$625/yr</span></label>
+          <label>1/4 Page <span style="color:var(--amber);font-weight:700;">→ $25/mo platform</span></label>
           <span class="count" id="qi-count">71</span>
           <input type="range" id="qi-slider" min="0" max="120" value="71">
         </div>
         <!-- 1/2 Page -->
         <div class="calc-row">
-          <label>1/2 Page · <span id="hi-name">$995/yr</span></label>
+          <label>1/2 Page <span style="color:var(--amber);font-weight:700;">→ $25/mo platform</span></label>
           <span class="count" id="hi-count">51</span>
           <input type="range" id="hi-slider" min="0" max="100" value="51">
         </div>
         <!-- Full Page -->
         <div class="calc-row">
-          <label>Full Page · <span id="fp-name">$1,495/yr</span></label>
+          <label>Full Page <span style="color:var(--amber);font-weight:700;">→ $25/mo platform</span></label>
           <span class="count" id="fp-count">51</span>
           <input type="range" id="fp-slider" min="0" max="100" value="51">
         </div>
         <!-- 2-Page Spread -->
         <div class="calc-row">
-          <label>2-Page Spread · <span id="tp-name">$2,500/yr</span></label>
+          <label>2-Page Spread <span style="color:var(--copper);font-weight:700;">→ $49/mo platform</span></label>
           <span class="count" id="tp-count">7</span>
           <input type="range" id="tp-slider" min="0" max="30" value="7">
         </div>
         <!-- Platform-only digital -->
         <div class="calc-row">
-          <label>Digital Only (Platform Listing)</label>
+          <label>Digital Only (no print) <span style="color:var(--sage);font-weight:700;">→ $9/mo platform</span></label>
           <span class="count" id="do-count">0</span>
           <input type="range" id="do-slider" min="0" max="200" value="0">
         </div>
@@ -975,80 +975,80 @@
 
       <div class="calc-result">
         <div class="result-row">
-          <span class="rlabel">Annual advertiser revenue</span>
-          <span class="rval" id="res-annual">$0</span>
+          <span class="rlabel">Total platform subscription revenue (monthly)</span>
+          <span class="rval" id="res-platform">$0</span>
         </div>
         <div class="result-row">
-          <span class="rlabel">Your 60% share (annual)</span>
-          <span class="rval" id="res-share">$0</span>
+          <span class="rlabel">Your 60% share of platform fees</span>
+          <span class="rval" id="res-share">$0 / mo</span>
         </div>
         <hr class="result-divider">
         <div class="result-row big">
-          <span class="rlabel">Your monthly Stripe deposit</span>
+          <span class="rlabel">New monthly income — on top of print</span>
           <span class="rval" id="res-monthly">$0 / mo</span>
         </div>
-        <p class="result-note">Stripe pays you automatically every month. No invoices. No chasing. Just a deposit.</p>
+        <p class="result-note">Your print revenue doesn't change. This is extra — deposited to your bank automatically by Stripe every month.</p>
       </div>
 
       <h3 style="font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800; color:var(--text-dark); margin:32px 0 16px;">
-        Rate Card Reference
+        How the tiers map
       </h3>
       <table class="rate-card-table">
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Your Price to Advertiser</th>
-            <th>Yeti Platform Floor</th>
-            <th>Your Annual Earn (60%)</th>
+            <th>Your print product</th>
+            <th>Platform tier bundled with it</th>
+            <th>Platform fee / mo</th>
+            <th>Your 60% / advertiser / mo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Laker Listing (Free + Digital)</td>
-            <td class="money">$250 / yr</td>
-            <td>$108 / yr ($9/mo)</td>
-            <td class="earn">$150 / yr</td>
+            <td>Laker Listing</td>
+            <td>Basic listing</td>
+            <td class="money">$9 / mo</td>
+            <td class="earn">$5.40 / mo</td>
           </tr>
           <tr>
-            <td>1/8 Page + Digital</td>
-            <td class="money">$445 / yr</td>
-            <td>$108 / yr ($9/mo)</td>
-            <td class="earn">$267 / yr</td>
+            <td>1/8 Page</td>
+            <td>Basic listing</td>
+            <td class="money">$9 / mo</td>
+            <td class="earn">$5.40 / mo</td>
           </tr>
           <tr>
-            <td>1/4 Page + Digital</td>
-            <td class="money">$625 / yr</td>
-            <td>$108 / yr ($9/mo)</td>
-            <td class="earn">$375 / yr</td>
+            <td>1/4 Page</td>
+            <td>Featured listing</td>
+            <td class="money">$25 / mo</td>
+            <td class="earn">$15.00 / mo</td>
           </tr>
           <tr>
-            <td>1/2 Page + Digital</td>
-            <td class="money">$995 / yr</td>
-            <td>$108 / yr ($9/mo)</td>
-            <td class="earn">$597 / yr</td>
+            <td>1/2 Page</td>
+            <td>Featured listing</td>
+            <td class="money">$25 / mo</td>
+            <td class="earn">$15.00 / mo</td>
           </tr>
           <tr>
-            <td>Full Page + Digital</td>
-            <td class="money">$1,495 / yr</td>
-            <td>$300 / yr ($25/mo)</td>
-            <td class="earn">$897 / yr</td>
+            <td>Full Page</td>
+            <td>Featured listing</td>
+            <td class="money">$25 / mo</td>
+            <td class="earn">$15.00 / mo</td>
           </tr>
           <tr>
-            <td>2-Page Spread + Digital</td>
-            <td class="money">$2,500 / yr</td>
-            <td>$300 / yr ($25/mo)</td>
-            <td class="earn">$1,500 / yr</td>
+            <td>2-Page Spread</td>
+            <td>Premium listing</td>
+            <td class="money">$49 / mo</td>
+            <td class="earn">$29.40 / mo</td>
           </tr>
           <tr>
-            <td>Digital Only (no print)</td>
-            <td class="money">$108–$300 / yr</td>
-            <td>$108 / yr ($9/mo)</td>
-            <td class="earn">$65–$180 / yr</td>
+            <td>Digital Only</td>
+            <td>Basic listing</td>
+            <td class="money">$9 / mo</td>
+            <td class="earn">$5.40 / mo</td>
           </tr>
         </tbody>
       </table>
       <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px;">
-        You keep the margin between your advertiser rate and the platform floor. At $250 Laker Listing with a $108/yr platform floor, you earn $150 AND the advertiser gets a digital page. Win-win.
+        Platform pricing is set by Yeti Groove. Your print rates stay completely yours — charge whatever you charge today. The digital is a new revenue layer, not a replacement.
       </p>
     </div>
   </div>
@@ -1127,14 +1127,16 @@
   }
 
   // ── INCOME CALCULATOR ──
+  // platformMonthly = what the platform charges the advertiser per month
+  // Dennis earns 60% of that — his print revenue is completely separate
   const products = [
-    { slider: 'll-slider', count: 'll-count', annualPrice: 250 },
-    { slider: 'ei-slider', count: 'ei-count', annualPrice: 445 },
-    { slider: 'qi-slider', count: 'qi-count', annualPrice: 625 },
-    { slider: 'hi-slider', count: 'hi-count', annualPrice: 995 },
-    { slider: 'fp-slider', count: 'fp-count', annualPrice: 1495 },
-    { slider: 'tp-slider', count: 'tp-count', annualPrice: 2500 },
-    { slider: 'do-slider', count: 'do-count', annualPrice: 108 },
+    { slider: 'll-slider', count: 'll-count', platformMonthly: 9 },
+    { slider: 'ei-slider', count: 'ei-count', platformMonthly: 9 },
+    { slider: 'qi-slider', count: 'qi-count', platformMonthly: 25 },
+    { slider: 'hi-slider', count: 'hi-count', platformMonthly: 25 },
+    { slider: 'fp-slider', count: 'fp-count', platformMonthly: 25 },
+    { slider: 'tp-slider', count: 'tp-count', platformMonthly: 49 },
+    { slider: 'do-slider', count: 'do-count', platformMonthly: 9 },
   ];
   const SHARE = 0.60;
 
@@ -1143,17 +1145,16 @@
   }
 
   function updateCalc() {
-    let annual = 0;
+    let platformMonthlyTotal = 0;
     products.forEach(p => {
       const qty = parseInt(document.getElementById(p.slider).value, 10);
       document.getElementById(p.count).textContent = qty;
-      annual += qty * p.annualPrice;
+      platformMonthlyTotal += qty * p.platformMonthly;
     });
-    const share = annual * SHARE;
-    const monthly = share / 12;
-    document.getElementById('res-annual').textContent = fmt(annual);
-    document.getElementById('res-share').textContent = fmt(share);
-    document.getElementById('res-monthly').textContent = fmt(monthly) + ' / mo';
+    const dennisMonthly = platformMonthlyTotal * SHARE;
+    document.getElementById('res-platform').textContent = fmt(platformMonthlyTotal) + ' / mo';
+    document.getElementById('res-share').textContent = fmt(dennisMonthly) + ' / mo';
+    document.getElementById('res-monthly').textContent = fmt(dennisMonthly) + ' / mo';
   }
 
   products.forEach(p => {
