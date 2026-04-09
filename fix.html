@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Yeti Fix">
+  <meta name="theme-color" content="#080807">
+  <title>Yeti Fix - Emergency Deploy</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080807;
+      --surface:  #161410;
+      --border:   rgba(201,165,90,0.18);
+      --gold:     #C9A55A;
+      --gold-dim: rgba(201,165,90,0.1);
+      --cream:    #F0EDE6;
+      --muted:    #8a7d6b;
+      --input-bg: #111009;
+      --red:      #e05252;
+      --green:    #52c279;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .screen {
+      min-height: 100vh;
+      padding: 28px 20px 60px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Header */
+    .hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .step-lbl {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .sub {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Form */
+    .field { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    select, input[type=text], input[type=password], textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--cream);
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+
+    select:focus, input:focus, textarea:focus { border-color: var(--gold); }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A55A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 7px;
+      line-height: 1.6;
+    }
+
+    .recent-path {
+      color: var(--gold);
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    .recent-path:hover { text-decoration: underline; }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: 0.01em;
+    }
+
+    .btn:active:not(:disabled) { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-primary { background: var(--gold); color: #080807; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      margin-top: 12px;
+    }
+
+    /* Error */
+    .err-box {
+      background: rgba(224,82,82,0.08);
+      border: 1px solid rgba(224,82,82,0.25);
+      border-radius: 10px;
+      padding: 13px 15px;
+      color: var(--red);
+      font-size: 0.875rem;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    /* Spinner */
+    .spin {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(8,8,7,0.3);
+      border-top-color: #080807;
+      border-radius: 50%;
+      animation: rot .65s linear infinite;
+      vertical-align: middle;
+      margin-right: 7px;
+    }
+    @keyframes rot { to { transform: rotate(360deg); } }
+
+    /* Badges */
+    .badges { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
+
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .badge-simple  { background: rgba(82,194,121,0.13); color: var(--green); }
+    .badge-complex { background: rgba(224,82,82,0.13);  color: var(--red); }
+    .badge-model   { background: var(--gold-dim); color: var(--gold); }
+    .badge-file    {
+      background: rgba(176,163,144,0.08);
+      color: var(--muted);
+      font-size: 0.65rem;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Explanation callout */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--gold);
+      padding: 12px 15px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.875rem;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    /* Diff */
+    .diff-wrap {
+      background: #0a0908;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 44vh;
+      font-family: 'SF Mono', 'Fira Code', 'Menlo', 'Courier New', monospace;
+      font-size: 0.72rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dl { display: block; padding: 0 14px; white-space: pre; }
+    .dl.add    { background: rgba(82,194,121,0.07); color: #7fd99c; }
+    .dl.remove { background: rgba(224,82,82,0.07);  color: #e88989; }
+    .dl.hunk   { color: var(--gold); opacity: 0.7; }
+    .dl.fhdr   { color: #5a5040; }
+    .dl.ctx    { color: #3e3627; }
+
+    /* Success */
+    .check-circle {
+      width: 64px; height: 64px;
+      background: rgba(82,194,121,0.1);
+      border: 2px solid var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin: 24px auto 20px;
+    }
+
+    .pr-card {
+      display: block;
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      color: var(--gold);
+      font-size: 0.825rem;
+      word-break: break-all;
+      text-decoration: none;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .pr-card:hover { text-decoration: underline; }
+
+    .note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* Token screen */
+    .lock-icon { font-size: 2.5rem; text-align: center; margin: 16px 0 20px; }
+
+    .lock-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 4px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lock-btn:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ====== SCREEN 1: Token Setup ====== -->
+<div id="s-token" class="screen hidden">
+  <div class="hdr">
+    <span class="logo">Yeti Fix</span>
+    <span class="step-lbl">First-time setup</span>
+  </div>
+  <div class="lock-icon">&#128274;</div>
+  <h1>Auth Token</h1>
+  <p class="sub">Paste your Yeti Fix token. Saved on this device - you only do this once per browser.</p>
+  <div id="token-err" class="err-box hidden"></div>
+  <div class="field">
+    <label for="inp-token">Auth Token</label>
+    <input type="password" id="inp-token"
+      placeholder="Paste token here"
+      autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false">
+  </div>
+  <button class="btn btn-primary" id="token-btn" onclick="saveToken()">Save &amp; Continue</button>
+</div>
+
+<!-- ====== SCREEN 2: Fix Form ====== -->
+<div id="s-form" class="screen hidden">
+  <div class="hdr">
+    <span class="logo">Yeti Fix</span>
+    <button class="lock-btn" onclick="clearToken()">&#128274; Reset token</button>
+  </div>
+  <h1>Emergency Fix</h1>
+  <p class="sub">Describe the fix in plain English. Claude pulls the file, applies the change, and shows you the diff before anything commits.</p>
+
+  <div id="form-err" class="err-box hidden"></div>
+
+  <div class="field">
+    <label for="inp-repo">Repository</label>
+    <select id="inp-repo">
+      <option value="Manitou-Beach">Manitou-Beach</option>
+      <option value="Holly">Holly</option>
+      <option value="Joe-Profit">Joe-Profit</option>
+      <option value="Yeti-Signature-Films">Yeti-Signature-Films</option>
+      <option value="Devils-Lake-View-Living">Devils-Lake-View-Living</option>
+      <option value="Yeti-Groove">Yeti-Groove</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="inp-file">File Path</label>
+    <input type="text" id="inp-file"
+      placeholder="e.g. src/App.jsx or api/events.js"
+      autocorrect="off" autocapitalize="off"
+      autocomplete="off" spellcheck="false">
+    <div class="hint" id="recent-hint"></div>
+  </div>
+
+  <div class="field">
+    <label for="inp-branch">Branch</label>
+    <input type="text" id="inp-branch" value="main"
+      autocorrect="off" autocapitalize="off">
+  </div>
+
+  <div class="field">
+    <label for="inp-instr">Fix Instruction</label>
+    <textarea id="inp-instr" rows="5"
+      placeholder="Describe what needs to change. E.g.: The map API key env var was renamed from VITE_MAPS_KEY to VITE_MAP_KEY - update all references in this file."></textarea>
+    <div class="hint">Tip: Cmd+Enter or Ctrl+Enter to submit.</div>
+  </div>
+
+  <button class="btn btn-primary" id="analyze-btn" onclick="analyzeFix()">Analyze Fix</button>
+</div>
+
+<!-- ====== SCREEN 3: Diff Review ====== -->
+<div id="s-diff" class="screen hidden">
+  <div class="hdr">
+    <span class="logo">Yeti Fix</span>
+    <span class="step-lbl">Review diff</span>
+  </div>
+  <h1>Review Changes</h1>
+
+  <div class="badges" id="badges"></div>
+  <div class="callout" id="explanation"></div>
+
+  <div id="complex-warn" class="err-box hidden">
+    Haiku flagged this as complex and escalated to Sonnet. The fix may affect other files. Review carefully before merging the PR.
+  </div>
+
+  <div class="diff-wrap" id="diff-display"></div>
+
+  <button class="btn btn-primary" id="commit-btn" onclick="commitFix()">Create PR</button>
+  <button class="btn btn-ghost" onclick="goBack()">Back - Edit Instruction</button>
+</div>
+
+<!-- ====== SCREEN 4: Success ====== -->
+<div id="s-done" class="screen hidden">
+  <div class="hdr">
+    <span class="logo">Yeti Fix</span>
+    <span class="step-lbl">Done</span>
+  </div>
+  <div class="check-circle">&#10003;</div>
+  <h1>PR Created</h1>
+  <p class="sub">Vercel auto-deploys on merge to main. Review the diff one more time in GitHub before merging.</p>
+  <a id="pr-url" class="pr-card" href="#" target="_blank" rel="noopener noreferrer"></a>
+  <p class="note">Branch: <code id="pr-branch" style="color:var(--gold)"></code></p>
+  <p class="note" style="margin-top:6px">Merge the PR to trigger deploy.</p>
+  <button class="btn btn-primary" style="margin-top:36px" onclick="resetAll()">Fix Another Issue</button>
+</div>
+
+<script>
+'use strict';
+
+var FIX = {};
+
+/* ---- Init ---- */
+(function init() {
+  var token = ls('yeti_fix_token');
+  show(token ? 's-form' : 's-token');
+  if (token) renderRecent();
+
+  id('inp-token').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') saveToken();
+  });
+  id('inp-instr').addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') analyzeFix();
+  });
+})();
+
+/* ---- Screen management ---- */
+function show(sid) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.add('hidden');
+  });
+  id(sid).classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+/* ---- Token ---- */
+function saveToken() {
+  var t = id('inp-token').value.trim();
+  if (!t) { showErr('token-err', 'Token cannot be empty'); return; }
+  localStorage.setItem('yeti_fix_token', t);
+  hideErr('token-err');
+  show('s-form');
+  renderRecent();
+}
+
+function clearToken() {
+  if (!confirm('Clear stored auth token?')) return;
+  localStorage.removeItem('yeti_fix_token');
+  id('inp-token').value = '';
+  show('s-token');
+}
+
+/* ---- Recent paths ---- */
+function getRecent() {
+  try { return JSON.parse(ls('yeti_fix_recent') || '[]'); }
+  catch (e) { return []; }
+}
+
+function addRecent(path) {
+  var r = [path].concat(getRecent().filter(function(p) { return p !== path; })).slice(0, 6);
+  localStorage.setItem('yeti_fix_recent', JSON.stringify(r));
+}
+
+function renderRecent() {
+  var r  = getRecent();
+  var el = id('recent-hint');
+  if (!r.length) { el.innerHTML = ''; return; }
+  el.innerHTML = 'Recent: ' + r.map(function(p) {
+    return '<span class="recent-path" onclick="setPath(\'' + escAttr(p) + '\')">' + escHtml(p) + '</span>';
+  }).join('');
+}
+
+function setPath(p) { id('inp-file').value = p; }
+
+/* ---- Analyze ---- */
+async function analyzeFix() {
+  var repo   = id('inp-repo').value;
+  var file   = id('inp-file').value.trim();
+  var branch = id('inp-branch').value.trim() || 'main';
+  var instr  = id('inp-instr').value.trim();
+  var token  = ls('yeti_fix_token');
+
+  hideErr('form-err');
+  if (!file)  { showErr('form-err', 'File path is required'); return; }
+  if (!instr) { showErr('form-err', 'Fix instruction is required'); return; }
+
+  var btn = id('analyze-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Analyzing with Claude...';
+
+  try {
+    var res  = await fetch('/api/fix-analyze', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ repo: repo, filePath: file, branch: branch, instruction: instr, token: token })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+
+    FIX = Object.assign({ repo: repo, filePath: file, branch: branch, instruction: instr }, data);
+    addRecent(file);
+    renderDiff(data);
+    show('s-diff');
+
+  } catch (err) {
+    showErr('form-err', err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Analyze Fix';
+  }
+}
+
+/* ---- Render diff ---- */
+function renderDiff(data) {
+  var cplx = data.complexity || 'simple';
+
+  id('badges').innerHTML =
+    '<span class="badge badge-' + cplx + '">' + cplx + '</span>' +
+    '<span class="badge badge-model">' + escHtml(data.modelUsed || 'haiku') + '</span>' +
+    '<span class="badge badge-file">' + escHtml(data.filePath || '') + '</span>';
+
+  id('explanation').textContent = data.explanation || 'No explanation returned.';
+
+  if (cplx === 'complex') {
+    id('complex-warn').classList.remove('hidden');
+  } else {
+    id('complex-warn').classList.add('hidden');
+  }
+
+  var lines = (data.diff || '(no diff)').split('\n');
+  id('diff-display').innerHTML = lines.map(function(line) {
+    var cls = 'ctx';
+    if      (line.startsWith('+') && !line.startsWith('+++')) cls = 'add';
+    else if (line.startsWith('-') && !line.startsWith('---')) cls = 'remove';
+    else if (line.startsWith('@@'))                           cls = 'hunk';
+    else if (line.startsWith('---') || line.startsWith('+++')) cls = 'fhdr';
+    return '<span class="dl ' + cls + '">' + escHtml(line) + '</span>';
+  }).join('\n');
+}
+
+/* ---- Commit ---- */
+async function commitFix() {
+  var btn = id('commit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Creating PR...';
+
+  try {
+    var res = await fetch('/api/fix-commit', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        repo:         FIX.repo,
+        filePath:     FIX.filePath,
+        branch:       FIX.branch,
+        fixedContent: FIX.fixedContent,
+        instruction:  FIX.instruction,
+        diff:         FIX.diff,
+        complexity:   FIX.complexity,
+        modelUsed:    FIX.modelUsed,
+        token:        ls('yeti_fix_token')
+      })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+
+    id('pr-url').href = data.prUrl;
+    id('pr-url').textContent = data.prUrl;
+    id('pr-branch').textContent = data.branch;
+    show('s-done');
+
+  } catch (err) {
+    alert('PR creation failed: ' + err.message);
+    btn.disabled = false;
+    btn.innerHTML = 'Create PR';
+  }
+}
+
+/* ---- Navigation ---- */
+function goBack() { show('s-form'); }
+
+function resetAll() {
+  FIX = {};
+  id('inp-instr').value = '';
+  hideErr('form-err');
+  renderRecent();
+  show('s-form');
+}
+
+/* ---- Helpers ---- */
+function id(x)  { return document.getElementById(x); }
+function ls(k)  { return localStorage.getItem(k); }
+
+function showErr(eid, msg) {
+  var el = id(eid);
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+function hideErr(eid) { id(eid).classList.add('hidden'); }
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+function escAttr(s) {
+  return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>

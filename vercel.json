@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/partners/lake-access", "destination": "/partners/lake-access.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/fix",                  "destination": "/fix.html" },
+    { "source": "/(.*)",                 "destination": "/index.html" }
   ]
 }
