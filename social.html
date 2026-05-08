@@ -390,25 +390,28 @@
     }
     .info-btn:hover { background: rgba(26,191,224,0.22); }
 
-    /* info tooltip */
+    /* info tooltip - inside the card (overflow:hidden clips anything outside) */
     .info-tooltip {
       position: absolute;
-      bottom: calc(100% + 6px);
-      left: 0; right: 0;
-      background: rgba(6,24,40,0.97);
+      top: 2.4rem;
+      left: 0.4rem;
+      right: 0.4rem;
+      bottom: 3.6rem;
+      background: rgba(6,24,40,0.96);
       border: 1px solid rgba(26,191,224,0.28);
       border-radius: 8px;
       padding: 0.75rem 0.9rem;
       font-size: 0.75rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
       display: none;
       z-index: 20;
       backdrop-filter: blur(10px);
+      overflow-y: auto;
       pointer-events: none;
     }
     .info-tooltip.visible { display: block; }
-    .info-tooltip strong { color: var(--cream); display: block; margin-bottom: 0.3rem; font-size: 0.78rem; }
+    .info-tooltip strong { color: var(--cream); display: block; margin-bottom: 0.35rem; font-size: 0.78rem; }
 
     /* dynamic form sections */
     .no-media-notice {
