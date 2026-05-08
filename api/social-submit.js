@@ -13,6 +13,8 @@ export default async function handler(req, res) {
     deliveryWeek,
     mediaNotes,
     notes,
+    couponCode,
+    finalPrice,
   } = req.body;
 
   if (!businessName || !contactName || !email || !message) {
@@ -21,48 +23,62 @@ export default async function handler(req, res) {
 
   const row = (label, value) =>
     value
-      ? `<tr><td style="padding:6px 12px 6px 0;color:#B0A390;font-size:14px;vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;color:#F0EDE6;font-size:14px;">${value}</td></tr>`
+      ? `<tr><td style="padding:6px 12px 6px 0;color:#7AB8D0;font-size:14px;vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;color:#E6F4FB;font-size:14px;">${value}</td></tr>`
       : '';
+
+  const priceRow = couponCode
+    ? `<tr>
+        <td style="padding:6px 12px 6px 0;color:#7AB8D0;font-size:14px;vertical-align:top;white-space:nowrap;">Price</td>
+        <td style="padding:6px 0;font-size:14px;">
+          <span style="color:#A5D6A7;font-weight:700;">${finalPrice}</span>
+          <span style="color:#7AB8D0;font-size:12px;margin-left:8px;">(code: ${couponCode})</span>
+        </td>
+      </tr>`
+    : `<tr>
+        <td style="padding:6px 12px 6px 0;color:#7AB8D0;font-size:14px;vertical-align:top;white-space:nowrap;">Price</td>
+        <td style="padding:6px 0;color:#E6F4FB;font-size:14px;font-weight:700;">${finalPrice || '$150'}</td>
+      </tr>`;
 
   const html = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8" /></head>
-<body style="background:#0F0E0C;font-family:'Helvetica Neue',Arial,sans-serif;margin:0;padding:24px;">
-  <div style="max-width:540px;margin:0 auto;background:#161410;border:1px solid rgba(201,165,90,0.18);border-radius:12px;overflow:hidden;">
-    <div style="background:#080807;padding:20px 28px;border-bottom:1px solid rgba(201,165,90,0.15);">
-      <p style="margin:0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C9A55A;opacity:0.8;">Yeti Groove Media</p>
-      <h1 style="margin:6px 0 0;font-size:20px;color:#F0EDE6;">New Social Post Request</h1>
+<body style="background:#061828;font-family:'Helvetica Neue',Arial,sans-serif;margin:0;padding:24px;">
+  <div style="max-width:540px;margin:0 auto;background:#0A2038;border:1px solid rgba(26,191,224,0.22);border-radius:12px;overflow:hidden;">
+    <div style="background:#061828;padding:20px 28px;border-bottom:1px solid rgba(26,191,224,0.15);">
+      <p style="margin:0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#1ABFE0;opacity:0.8;">Yeti Groove Media</p>
+      <h1 style="margin:6px 0 0;font-size:20px;color:#E6F4FB;">New Social Post Request</h1>
     </div>
     <div style="padding:24px 28px;">
       <table style="width:100%;border-collapse:collapse;">
         ${row('Business', businessName)}
         ${row('Contact', contactName)}
-        ${row('Email', `<a href="mailto:${email}" style="color:#C9A55A;">${email}</a>`)}
+        ${row('Email', `<a href="mailto:${email}" style="color:#1ABFE0;">${email}</a>`)}
         ${row('Phone', phone)}
         ${row('Post Type', postType)}
         ${row('Delivery Week', deliveryWeek)}
+        ${priceRow}
       </table>
 
-      <div style="margin-top:20px;padding:16px;background:#0F0E0C;border-radius:8px;border:1px solid rgba(201,165,90,0.12);">
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#C9A55A;opacity:0.7;">Key Message</p>
-        <p style="margin:0;font-size:14px;color:#F0EDE6;line-height:1.6;">${message.replace(/\n/g, '<br />')}</p>
+      <div style="margin-top:20px;padding:16px;background:#061828;border-radius:8px;border:1px solid rgba(26,191,224,0.12);">
+        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1ABFE0;opacity:0.7;">Key Message</p>
+        <p style="margin:0;font-size:14px;color:#E6F4FB;line-height:1.6;">${message.replace(/\n/g, '<br />')}</p>
       </div>
 
       ${mediaNotes ? `
-      <div style="margin-top:14px;padding:16px;background:#0F0E0C;border-radius:8px;border:1px solid rgba(201,165,90,0.12);">
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#C9A55A;opacity:0.7;">Media Notes</p>
-        <p style="margin:0;font-size:14px;color:#F0EDE6;line-height:1.6;">${mediaNotes.replace(/\n/g, '<br />')}</p>
+      <div style="margin-top:14px;padding:16px;background:#061828;border-radius:8px;border:1px solid rgba(26,191,224,0.12);">
+        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1ABFE0;opacity:0.7;">Media Notes</p>
+        <p style="margin:0;font-size:14px;color:#E6F4FB;line-height:1.6;">${mediaNotes.replace(/\n/g, '<br />')}</p>
       </div>` : ''}
 
       ${notes ? `
-      <div style="margin-top:14px;padding:16px;background:#0F0E0C;border-radius:8px;border:1px solid rgba(201,165,90,0.12);">
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#C9A55A;opacity:0.7;">Additional Notes</p>
-        <p style="margin:0;font-size:14px;color:#F0EDE6;line-height:1.6;">${notes.replace(/\n/g, '<br />')}</p>
+      <div style="margin-top:14px;padding:16px;background:#061828;border-radius:8px;border:1px solid rgba(26,191,224,0.12);">
+        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1ABFE0;opacity:0.7;">Additional Notes</p>
+        <p style="margin:0;font-size:14px;color:#E6F4FB;line-height:1.6;">${notes.replace(/\n/g, '<br />')}</p>
       </div>` : ''}
 
     </div>
-    <div style="padding:16px 28px;border-top:1px solid rgba(201,165,90,0.12);font-size:12px;color:rgba(176,163,144,0.5);">
+    <div style="padding:16px 28px;border-top:1px solid rgba(26,191,224,0.12);font-size:12px;color:rgba(122,184,208,0.5);">
       Submitted via social.yetigroove.com
     </div>
   </div>

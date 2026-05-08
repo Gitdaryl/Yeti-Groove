@@ -542,6 +542,28 @@
     footer a { color: var(--mutedDim); }
     footer a:hover { color: var(--gold); }
 
+    /* ── COUPON ── */
+    .coupon-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .coupon-row input {
+      max-width: 200px;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+    }
+
+    .coupon-msg {
+      font-size: 0.82rem;
+      min-height: 1.2em;
+      margin-bottom: 1rem;
+    }
+    .coupon-msg.applied { color: #A5D6A7; }
+    .coupon-msg.invalid { color: #EF9A9A; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       nav { padding: 1rem 1.25rem; }
@@ -567,7 +589,7 @@
     <span class="badge">Exclusive for Lake Access Media Advertisers</span>
     <h1>Your business.<br /><em>In motion.</em></h1>
     <p class="hero-sub">Send us your photos or video and we'll turn it into a polished 30-second social post, ready to run on Facebook, Instagram, or wherever your customers are.</p>
-    <p class="hero-price">$100 per post &nbsp;&middot;&nbsp; 3-5 business day turnaround</p>
+    <p class="hero-price">$150 per post &nbsp;&middot;&nbsp; 3-5 business day turnaround</p>
     <a class="btn" href="#order">Submit Your Request</a>
   </div>
 
@@ -766,9 +788,16 @@
 
         <hr class="form-divider" />
 
+        <div class="coupon-row">
+          <input type="text" id="couponCode" placeholder="Coupon code" maxlength="20" autocomplete="off" style="text-transform:uppercase;letter-spacing:0.06em;" />
+          <button type="button" class="btn-outline" id="applyBtn">Apply</button>
+        </div>
+        <div class="coupon-msg" id="couponMsg"></div>
+
         <div class="form-footer">
           <div class="price-tag">
-            <strong>$100</strong> per post &nbsp;&middot;&nbsp; Invoice sent on delivery
+            <span id="priceDisplay"><strong>$150</strong> per post</span>
+            &nbsp;&middot;&nbsp; Invoice sent on delivery
           </div>
           <button type="submit" class="submit-btn" id="submitBtn">Submit Request</button>
         </div>
@@ -794,6 +823,44 @@
     const submitBtn = document.getElementById('submitBtn');
     const msgSuccess = document.getElementById('msgSuccess');
     const msgError = document.getElementById('msgError');
+
+    // Coupon logic
+    const VALID_CODES = { 'LAKEACCESS': 50 };
+    const BASE_PRICE = 150;
+    let appliedCode = '';
+    let appliedDiscount = 0;
+
+    function applyCode() {
+      const raw = document.getElementById('couponCode').value.trim().toUpperCase();
+      const msg = document.getElementById('couponMsg');
+      const display = document.getElementById('priceDisplay');
+
+      if (!raw) {
+        msg.textContent = 'Enter a coupon code first.';
+        msg.className = 'coupon-msg invalid';
+        return;
+      }
+
+      if (VALID_CODES[raw] !== undefined) {
+        appliedCode = raw;
+        appliedDiscount = VALID_CODES[raw];
+        const final = BASE_PRICE - appliedDiscount;
+        msg.textContent = `Code applied - $${appliedDiscount} off!`;
+        msg.className = 'coupon-msg applied';
+        display.innerHTML = `<s style="opacity:0.4;font-size:1rem;font-weight:400;">$${BASE_PRICE}</s>&nbsp;<strong>$${final}</strong> per post`;
+      } else {
+        appliedCode = '';
+        appliedDiscount = 0;
+        msg.textContent = "That code doesn't look right.";
+        msg.className = 'coupon-msg invalid';
+        display.innerHTML = `<strong>$${BASE_PRICE}</strong> per post`;
+      }
+    }
+
+    document.getElementById('applyBtn').addEventListener('click', applyCode);
+    document.getElementById('couponCode').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); applyCode(); }
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -830,6 +897,8 @@
       msgSuccess.classList.remove('show');
       msgError.classList.remove('show');
 
+      const finalPrice = BASE_PRICE - appliedDiscount;
+
       const data = {
         businessName:  document.getElementById('businessName').value.trim(),
         contactName:   document.getElementById('contactName').value.trim(),
@@ -840,6 +909,8 @@
         deliveryWeek:  document.getElementById('deliveryWeek').value.trim(),
         mediaNotes:    document.getElementById('mediaNotes').value.trim(),
         notes:         document.getElementById('notes').value.trim(),
+        couponCode:    appliedCode,
+        finalPrice:    `$${finalPrice}`,
       };
 
       try {
