@@ -366,6 +366,81 @@
       flex-shrink: 0;
     }
 
+    /* info button */
+    .info-btn {
+      position: absolute;
+      top: 0.55rem; left: 0.55rem;
+      width: 22px; height: 22px;
+      background: rgba(3,12,24,0.7);
+      border: 1px solid rgba(26,191,224,0.35);
+      border-radius: 50%;
+      color: #1ABFE0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-style: italic;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      z-index: 3;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+    .info-btn:hover { background: rgba(26,191,224,0.22); }
+
+    /* info tooltip */
+    .info-tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0; right: 0;
+      background: rgba(6,24,40,0.97);
+      border: 1px solid rgba(26,191,224,0.28);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.55;
+      display: none;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+    }
+    .info-tooltip.visible { display: block; }
+    .info-tooltip strong { color: var(--cream); display: block; margin-bottom: 0.3rem; font-size: 0.78rem; }
+
+    /* dynamic form sections */
+    .no-media-notice {
+      display: none;
+      background: rgba(26,191,224,0.07);
+      border: 1px solid rgba(26,191,224,0.2);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .no-media-notice strong { color: var(--cream); }
+
+    .script-field-wrap { display: none; }
+
+    /* revision notice */
+    .revision-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.75rem 1rem;
+      background: var(--dark3);
+      border: 1px solid var(--goldBd);
+      border-radius: 7px;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+    .revision-notice svg { flex-shrink: 0; margin-top: 1px; }
+    .revision-notice strong { color: var(--cream); }
+
     @media (max-width: 640px) {
       .video-grid { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
       .select-btn { font-size: 0.62rem; padding: 0.32rem 0.7rem; bottom: 44px; }
@@ -710,112 +785,85 @@
 
     <div class="video-grid">
 
-      <div class="video-card" data-style="AI Slideshow" data-price="150">
+      <div class="video-card" data-style="AI Slideshow" data-price="150" data-needs-media="false" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-minimal-150-OisX4ZZffTHRoJJOCGDKRY6w1je9Bp.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>AI Slideshow</strong>Animated slides built from AI-generated imagery, text overlays, and music. No footage needed - just your message and key details and we handle the rest.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">AI Slideshow</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">AI Slideshow</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI Slideshow" data-price="150">
+      <div class="video-card" data-style="AI Slideshow" data-price="150" data-needs-media="false" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-slideshow-150-XvEaakOuZLhuyCxNxrrutPphYsc0X1.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>AI Slideshow</strong>Animated slides built from AI-generated imagery, text overlays, and music. No footage needed - just your message and key details and we handle the rest.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">AI Slideshow</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">AI Slideshow</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI Story" data-price="150">
+      <div class="video-card" data-style="AI Story" data-price="150" data-needs-media="false" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-story-150-YgM0QY4TBb3z171R4sc8cOByD1Yvfc.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>AI Story</strong>Short-form story format built for Instagram and Facebook Stories. AI visuals, motion graphics, and music. No footage needed - your message drives everything.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">AI Story</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">AI Story</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Selfie + Subtitles" data-price="150">
+      <div class="video-card" data-style="Selfie + Subtitles" data-price="150" data-needs-media="true" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/selfie-subtitles-150-sgmCmsVl2yJXZneNYhGUHCAOFqbgX1.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>Selfie + Subtitles</strong>You film a quick selfie-style clip talking about your business or promotion. We clean up the audio, add B-roll, overlay subtitles, and polish it for social. You supply the video, we make it shine.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">Selfie + Subtitles</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">Selfie + Subtitles</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Promo Mix" data-price="150">
-        <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/promo-mix-150-ZKlofcxYcmYM492l9wszjvvbN5axCu.mp4" muted playsinline loop preload="none"></video>
+      <div class="video-card" data-style="AI Logo Character" data-price="150" data-needs-media="false" data-needs-script="true">
+        <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-logo-character-150-jJ8Aheq5jjOPb4gSU7IVksdvVVi3gt.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>AI Voice + Animated Logo Character</strong>An AI voice delivers your message while your logo or a branded character animates on screen. 100% AI - no spokesperson or filming needed. You give us the info and we write the script.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">Promo Mix</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">AI Logo Character</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI + Real Voiceover" data-price="150">
+      <div class="video-card" data-style="AI + Real Voiceover" data-price="150" data-needs-media="false" data-needs-script="true">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/mix-ai-voiceover-150-BSKvqruWiJI6vQ30VbK8TWRzQsoGK4.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>AI + Real Voiceover</strong>AI-generated visuals with a real human voiceover track. We write the script, you approve it, then we produce it. Sounds more personal than pure AI - great for businesses that want a human touch without filming.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">AI + Real Voiceover</span>
-          <span class="video-label-price">$150</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">AI + Real Voiceover</span><span class="video-label-price">$150</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Virtual UGC" data-price="180">
+      <div class="video-card" data-style="Virtual UGC" data-price="180" data-needs-media="false" data-needs-script="true">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ugc-virtual-180-gBtFF7KkTARS40sE2xzmTkwXkdS32G.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>Virtual UGC - AI Spokesperson</strong>UGC stands for User Generated Content. This is 100% AI - a realistic AI-generated person delivers your message straight to camera, like a real customer or staff member filmed themselves. You give us the info, we write the script and produce everything. No filming, no awkward on-camera moments.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">Virtual UGC</span>
-          <span class="video-label-price">$180</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">Virtual UGC</span><span class="video-label-price">$180</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Company Promo" data-price="250">
+      <div class="video-card" data-style="Company Promo" data-price="250" data-needs-media="true" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/company-promo-200-yXVjh88hPGwTrcXYCLbjjXiUsHZmP1.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>Company Promo Video</strong>A polished overview of your business. We mix your footage, photos, and AI-enhanced visuals into a professional-grade video - suitable for your website homepage, Google Business Profile, or LinkedIn. Supply what you have and we'll build around it.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">Company Promo</span>
-          <span class="video-label-price">$250</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">Company Promo</span><span class="video-label-price">$250</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Promo + Custom Music" data-price="250">
+      <div class="video-card" data-style="Promo + Custom Music" data-price="250" data-needs-media="true" data-needs-script="false">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/promo-custom-music-200-gAvhs6gcKL5XrD0l8odjDL5zgVIRqM.mp4" muted playsinline loop preload="none"></video>
+        <button class="info-btn" aria-label="About this style">i</button>
+        <div class="info-tooltip"><strong>Promo + Custom Music</strong>Everything in a standard promo, plus a custom music bed created specifically for your brand. Licensed, original, and unique to your business - your customers won't hear it anywhere else.</div>
         <button class="select-btn">Select This Style</button>
-        <div class="video-label">
-          <span class="video-label-type">Promo + Custom Music</span>
-          <span class="video-label-price">$250</span>
-        </div>
-        <button class="unmute-btn" aria-label="Unmute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
-        </button>
+        <div class="video-label"><span class="video-label-type">Promo + Custom Music</span><span class="video-label-price">$250</span></div>
+        <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
     </div>
@@ -911,23 +959,28 @@
             <input type="text" id="deliveryWeek" name="deliveryWeek" placeholder="e.g. Week of May 26" />
           </div>
 
-          <div class="form-field full">
-            <label>Upload your media <span class="hint">- photos, video, or both</span></label>
-            <div class="drive-box">
-              <p class="drive-title">Upload to our shared Google Drive folder</p>
-              <p>Drop in your photos and any video clips. No need to organize, just upload what you have and we'll sort through it.</p>
-              <!--
-                GOOGLE DRIVE LINK: Replace the href below with your actual shared folder URL.
-                Create a shared folder at drive.google.com, set sharing to "Anyone with the link can upload"
-                (or "Anyone with the link can view" + ask them to email files).
-              -->
-              <a class="btn-outline" href="https://drive.google.com/drive/folders/1wApVLL50JpWHpRT7N-4jX7YEzydFk4Zc?usp=sharing" target="_blank" rel="noopener">Open Upload Folder</a>
+          <div id="mediaSectionWrap">
+            <div class="form-field full">
+              <label>Upload your media <span class="hint">- photos, video, or both</span></label>
+              <div class="drive-box">
+                <p class="drive-title">Upload to our shared Google Drive folder</p>
+                <p>Drop in your photos and any video clips. No need to organize, just upload what you have and we'll sort through it.</p>
+                <a class="btn-outline" href="https://drive.google.com/drive/folders/1wApVLL50JpWHpRT7N-4jX7YEzydFk4Zc?usp=sharing" target="_blank" rel="noopener">Open Upload Folder</a>
+              </div>
+            </div>
+            <div class="form-field full">
+              <label for="mediaNotes">Tell us about your media <span class="hint">- paste a Drive link or describe what you're uploading</span></label>
+              <textarea id="mediaNotes" name="mediaNotes" placeholder="e.g. Uploaded 12 photos from last summer. The ones with the dock are the best. Also have a 45-sec selfie video of me talking about the tasting." style="min-height:80px;"></textarea>
             </div>
           </div>
 
-          <div class="form-field full">
-            <label for="mediaNotes">Tell us about your media <span class="hint">- paste a Drive link or describe what you're uploading</span></label>
-            <textarea id="mediaNotes" name="mediaNotes" placeholder="e.g. Uploaded 12 photos from last summer. The ones with the dock are the best. Also have a 45-sec selfie video of me talking about the tasting." style="min-height:80px;"></textarea>
+          <div class="no-media-notice" id="noMediaNotice">
+            <strong>No footage needed for this style.</strong> We build everything from scratch using AI - visuals, motion, and music. Just fill in your key message below and we handle the rest.
+          </div>
+
+          <div class="form-field full script-field-wrap" id="scriptFieldWrap">
+            <label for="scriptNotes">Key points for your script <span class="req">*</span> <span class="hint">- we write the script, just give us the details to work from</span></label>
+            <textarea id="scriptNotes" name="scriptNotes" placeholder="e.g. We offer free consultations in June. 20 years in business. Main call to action: call us at (517) 555-0100. Keep it upbeat and casual." style="min-height:90px;"></textarea>
           </div>
 
           <div class="form-field full">
@@ -938,6 +991,11 @@
         </div>
 
         <hr class="form-divider" />
+
+        <div class="revision-notice">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1ABFE0" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="7"/><path d="M8 7v4M8 5v.01"/></svg>
+          <span><strong>One round of revisions included.</strong> Additional rounds are billed at $50 per round. Script-based styles include one script approval step before production begins.</span>
+        </div>
 
         <div class="coupon-row">
           <input type="text" id="couponCode" placeholder="Coupon code" maxlength="20" autocomplete="off" style="text-transform:uppercase;letter-spacing:0.06em;" />
@@ -983,6 +1041,28 @@
       });
     }, { threshold: 0.4 });
 
+    // ── INFO TOOLTIPS ──
+    document.querySelectorAll('.info-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tooltip = btn.closest('.video-card').querySelector('.info-tooltip');
+        const isVisible = tooltip.classList.contains('visible');
+        document.querySelectorAll('.info-tooltip').forEach(t => t.classList.remove('visible'));
+        if (!isVisible) tooltip.classList.add('visible');
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.info-tooltip').forEach(t => t.classList.remove('visible'));
+    });
+
+    // ── DYNAMIC FORM HELPERS ──
+    function updateFormSections(needsMedia, needsScript) {
+      document.getElementById('mediaSectionWrap').style.display = needsMedia ? '' : 'none';
+      document.getElementById('noMediaNotice').style.display    = needsMedia ? 'none' : 'block';
+      document.getElementById('scriptFieldWrap').style.display  = needsScript ? '' : 'none';
+    }
+
     videoCards.forEach(card => {
       observer.observe(card);
 
@@ -1025,6 +1105,9 @@
         selectedStyle = card.dataset.style;
         selectedPrice = parseInt(card.dataset.price, 10);
 
+        // update dynamic form sections
+        updateFormSections(card.dataset.needsMedia === 'true', card.dataset.needsScript === 'true');
+
         // update style bar
         const bar = document.getElementById('styleBarText');
         bar.innerHTML = `Style selected: <strong>${selectedStyle}</strong><span class="style-price">$${selectedPrice}</span> &nbsp;&middot;&nbsp; <button class="style-bar-link" id="clearStyle">Change</button>`;
@@ -1052,6 +1135,7 @@
       document.getElementById('couponMsg').textContent = '';
       document.getElementById('couponMsg').className = 'coupon-msg';
       document.getElementById('priceDisplay').innerHTML = `<strong>$150</strong> per post`;
+      updateFormSections(true, false);
     }
 
     function updatePriceDisplay() {
@@ -1159,6 +1243,7 @@
         message:       document.getElementById('message').value.trim(),
         deliveryWeek:  document.getElementById('deliveryWeek').value.trim(),
         mediaNotes:    document.getElementById('mediaNotes').value.trim(),
+        scriptNotes:   document.getElementById('scriptNotes').value.trim(),
         notes:         document.getElementById('notes').value.trim(),
         couponCode:    appliedCode,
         finalPrice:    `$${finalPrice}`,

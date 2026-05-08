@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     message,
     deliveryWeek,
     mediaNotes,
+    scriptNotes,
     notes,
     couponCode,
     finalPrice,
@@ -75,6 +76,12 @@ export default async function handler(req, res) {
       <div style="margin-top:14px;padding:16px;background:#061828;border-radius:8px;border:1px solid rgba(26,191,224,0.12);">
         <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1ABFE0;opacity:0.7;">Media Notes</p>
         <p style="margin:0;font-size:14px;color:#E6F4FB;line-height:1.6;">${mediaNotes.replace(/\n/g, '<br />')}</p>
+      </div>` : ''}
+
+      ${scriptNotes ? `
+      <div style="margin-top:14px;padding:16px;background:#061828;border-radius:8px;border:1px solid rgba(26,191,224,0.12);">
+        <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1ABFE0;opacity:0.7;">Script Key Points</p>
+        <p style="margin:0;font-size:14px;color:#E6F4FB;line-height:1.6;">${scriptNotes.replace(/\n/g, '<br />')}</p>
       </div>` : ''}
 
       ${notes ? `
