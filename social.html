@@ -308,8 +308,67 @@
     .video-card .unmute-btn:hover { background: rgba(26,191,224,0.2); }
     .video-card .unmute-btn svg { width: 14px; height: 14px; }
 
+    /* select button */
+    .select-btn {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(3,12,24,0.72);
+      border: 1px solid rgba(26,191,224,0.45);
+      color: #1ABFE0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.38rem 0.9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+      transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.15s;
+      z-index: 2;
+    }
+    .select-btn:hover { background: rgba(26,191,224,0.18); transform: translateX(-50%) translateY(-1px); }
+
+    .video-card.selected { box-shadow: 0 0 0 2.5px #1ABFE0, 0 0 20px rgba(26,191,224,0.25); }
+    .video-card.selected .select-btn {
+      background: #1ABFE0;
+      border-color: #1ABFE0;
+      color: #030C18;
+    }
+
+    /* style bar above form */
+    .style-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--goldBd);
+      background: var(--dark3);
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .style-bar-left { font-size: 0.88rem; color: var(--muted); }
+    .style-bar-left strong { color: var(--cream); }
+    .style-bar-left .style-price { color: var(--gold); font-weight: 700; margin-left: 0.5rem; }
+    .style-bar-link {
+      font-size: 0.78rem;
+      color: var(--gold);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
     @media (max-width: 640px) {
       .video-grid { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
+      .select-btn { font-size: 0.62rem; padding: 0.32rem 0.7rem; bottom: 44px; }
     }
     @media (max-width: 380px) {
       .video-grid { grid-template-columns: 1fr; }
@@ -651,8 +710,9 @@
 
     <div class="video-grid">
 
-      <div class="video-card">
+      <div class="video-card" data-style="AI Slideshow" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-minimal-150-OisX4ZZffTHRoJJOCGDKRY6w1je9Bp.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">AI Slideshow</span>
           <span class="video-label-price">$150</span>
@@ -662,8 +722,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="AI Slideshow" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-slideshow-150-XvEaakOuZLhuyCxNxrrutPphYsc0X1.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">AI Slideshow</span>
           <span class="video-label-price">$150</span>
@@ -673,8 +734,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="AI Story" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-story-150-YgM0QY4TBb3z171R4sc8cOByD1Yvfc.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">AI Story</span>
           <span class="video-label-price">$150</span>
@@ -684,8 +746,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="Selfie + Subtitles" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/selfie-subtitles-150-sgmCmsVl2yJXZneNYhGUHCAOFqbgX1.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">Selfie + Subtitles</span>
           <span class="video-label-price">$150</span>
@@ -695,8 +758,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="Promo Mix" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/promo-mix-150-ZKlofcxYcmYM492l9wszjvvbN5axCu.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">Promo Mix</span>
           <span class="video-label-price">$150</span>
@@ -706,8 +770,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="AI + Real Voiceover" data-price="150">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/mix-ai-voiceover-150-BSKvqruWiJI6vQ30VbK8TWRzQsoGK4.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">AI + Real Voiceover</span>
           <span class="video-label-price">$150</span>
@@ -717,8 +782,9 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="Virtual UGC" data-price="180">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ugc-virtual-180-gBtFF7KkTARS40sE2xzmTkwXkdS32G.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">Virtual UGC</span>
           <span class="video-label-price">$180</span>
@@ -728,22 +794,24 @@
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="Company Promo" data-price="250">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/company-promo-200-yXVjh88hPGwTrcXYCLbjjXiUsHZmP1.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">Company Promo</span>
-          <span class="video-label-price">$200</span>
+          <span class="video-label-price">$250</span>
         </div>
         <button class="unmute-btn" aria-label="Unmute">
           <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
         </button>
       </div>
 
-      <div class="video-card">
+      <div class="video-card" data-style="Promo + Custom Music" data-price="250">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/promo-custom-music-200-gAvhs6gcKL5XrD0l8odjDL5zgVIRqM.mp4" muted playsinline loop preload="none"></video>
+        <button class="select-btn">Select This Style</button>
         <div class="video-label">
           <span class="video-label-type">Promo + Custom Music</span>
-          <span class="video-label-price">$200</span>
+          <span class="video-label-price">$250</span>
         </div>
         <button class="unmute-btn" aria-label="Unmute">
           <svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg>
@@ -789,6 +857,10 @@
     <h2>Let's build your post</h2>
     <p class="section-sub">Takes about 3 minutes. We'll follow up if we have questions.</p>
 
+    <div class="style-bar" id="styleBar">
+      <span class="style-bar-left" id="styleBarText">Browse the examples above and tap <strong>Select This Style</strong> on the one you want.</span>
+    </div>
+
     <div class="form-wrap">
       <form id="orderForm" novalidate>
 
@@ -812,28 +884,6 @@
           <div class="form-field">
             <label for="phone">Phone <span class="hint">(optional)</span></label>
             <input type="tel" id="phone" name="phone" placeholder="(517) 555-0100" />
-          </div>
-
-          <div class="form-field full">
-            <label>What type of post? <span class="req">*</span></label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="postType" value="Event Promo" required />
-                <span>Event Promo</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="postType" value="Sale or Special" />
-                <span>Sale or Special</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="postType" value="General Awareness" />
-                <span>General Awareness</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="postType" value="Seasonal Highlight" />
-                <span>Seasonal Highlight</span>
-              </label>
-            </div>
           </div>
 
           <div class="form-field full">
@@ -905,32 +955,31 @@
   </footer>
 
   <script>
-    // ── VIDEO GRID: autoplay on scroll + unmute toggle ──
+    // ── VIDEO GRID: autoplay on scroll + unmute + style selection ──
     const videoCards = document.querySelectorAll('.video-card');
+    let selectedStyle = '';
+    let selectedPrice = 0;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const vid = entry.target.querySelector('video');
-        if (entry.isIntersecting) {
-          vid.play().catch(() => {});
-        } else {
-          vid.pause();
-        }
+        if (entry.isIntersecting) { vid.play().catch(() => {}); }
+        else { vid.pause(); }
       });
     }, { threshold: 0.4 });
 
     videoCards.forEach(card => {
       observer.observe(card);
 
-      const btn = card.querySelector('.unmute-btn');
+      // unmute
+      const unmuteBtn = card.querySelector('.unmute-btn');
       const vid = card.querySelector('video');
-      const xs  = btn.querySelectorAll('.mute-x');
+      const xs  = unmuteBtn.querySelectorAll('.mute-x');
 
-      btn.addEventListener('click', (e) => {
+      unmuteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         vid.muted = !vid.muted;
         if (!vid.muted) {
-          // mute all others
           videoCards.forEach(c => {
             if (c !== card) {
               c.querySelector('video').muted = true;
@@ -942,7 +991,68 @@
           xs.forEach(x => x.style.display = '');
         }
       });
+
+      // select style
+      const selectBtn = card.querySelector('.select-btn');
+      selectBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // deselect all
+        videoCards.forEach(c => {
+          c.classList.remove('selected');
+          c.querySelector('.select-btn').textContent = 'Select This Style';
+        });
+
+        // select this one
+        card.classList.add('selected');
+        selectBtn.textContent = '✓ Selected';
+
+        selectedStyle = card.dataset.style;
+        selectedPrice = parseInt(card.dataset.price, 10);
+
+        // update style bar
+        const bar = document.getElementById('styleBarText');
+        bar.innerHTML = `Style selected: <strong>${selectedStyle}</strong><span class="style-price">$${selectedPrice}</span> &nbsp;&middot;&nbsp; <button class="style-bar-link" id="clearStyle">Change</button>`;
+        document.getElementById('clearStyle').addEventListener('click', clearSelection);
+
+        // re-apply coupon against new price
+        updatePriceDisplay();
+
+        // scroll to form
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
+
+    function clearSelection() {
+      videoCards.forEach(c => {
+        c.classList.remove('selected');
+        c.querySelector('.select-btn').textContent = 'Select This Style';
+      });
+      selectedStyle = '';
+      selectedPrice = 0;
+      appliedCode = '';
+      appliedDiscount = 0;
+      document.getElementById('styleBarText').innerHTML = 'Browse the examples above and tap <strong>Select This Style</strong> on the one you want.';
+      document.getElementById('couponCode').value = '';
+      document.getElementById('couponMsg').textContent = '';
+      document.getElementById('couponMsg').className = 'coupon-msg';
+      document.getElementById('priceDisplay').innerHTML = `<strong>$150</strong> per post`;
+    }
+
+    function updatePriceDisplay() {
+      const base = selectedPrice || 150;
+      const msg  = document.getElementById('couponMsg');
+      const disp = document.getElementById('priceDisplay');
+
+      if (appliedCode && appliedDiscount > 0) {
+        const final = base - appliedDiscount;
+        msg.textContent = `Code applied - $${appliedDiscount} off!`;
+        msg.className = 'coupon-msg applied';
+        disp.innerHTML = `<s style="opacity:0.4;font-size:1rem;font-weight:400;">$${base}</s>&nbsp;<strong>$${final}</strong> per post`;
+      } else {
+        disp.innerHTML = `<strong>$${base}</strong> per post`;
+      }
+    }
 
     // ── FORM ──
     const form = document.getElementById('orderForm');
@@ -952,14 +1062,12 @@
 
     // Coupon logic
     const VALID_CODES = { 'LAKEACCESS': 50 };
-    const BASE_PRICE = 150;
     let appliedCode = '';
     let appliedDiscount = 0;
 
     function applyCode() {
       const raw = document.getElementById('couponCode').value.trim().toUpperCase();
       const msg = document.getElementById('couponMsg');
-      const display = document.getElementById('priceDisplay');
 
       if (!raw) {
         msg.textContent = 'Enter a coupon code first.';
@@ -970,17 +1078,15 @@
       if (VALID_CODES[raw] !== undefined) {
         appliedCode = raw;
         appliedDiscount = VALID_CODES[raw];
-        const final = BASE_PRICE - appliedDiscount;
         msg.textContent = `Code applied - $${appliedDiscount} off!`;
         msg.className = 'coupon-msg applied';
-        display.innerHTML = `<s style="opacity:0.4;font-size:1rem;font-weight:400;">$${BASE_PRICE}</s>&nbsp;<strong>$${final}</strong> per post`;
       } else {
         appliedCode = '';
         appliedDiscount = 0;
         msg.textContent = "That code doesn't look right.";
         msg.className = 'coupon-msg invalid';
-        display.innerHTML = `<strong>$${BASE_PRICE}</strong> per post`;
       }
+      updatePriceDisplay();
     }
 
     document.getElementById('applyBtn').addEventListener('click', applyCode);
@@ -1007,13 +1113,13 @@
         }
       }
 
-      const postTypeChecked = form.querySelector('input[name="postType"]:checked');
-      if (!postTypeChecked) {
+      if (!selectedStyle) {
         valid = false;
-        const radioGroup = form.querySelector('.radio-group');
-        radioGroup.style.outline = '1px solid #E53935';
-        radioGroup.style.borderRadius = '7px';
-        setTimeout(() => { radioGroup.style.outline = ''; }, 3000);
+        const bar = document.getElementById('styleBar');
+        bar.style.borderColor = '#E53935';
+        bar.style.boxShadow = '0 0 0 1px #E53935';
+        bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => { bar.style.borderColor = ''; bar.style.boxShadow = ''; }, 3000);
       }
 
       if (!valid) return;
@@ -1023,14 +1129,15 @@
       msgSuccess.classList.remove('show');
       msgError.classList.remove('show');
 
-      const finalPrice = BASE_PRICE - appliedDiscount;
+      const base = selectedPrice || 150;
+      const finalPrice = base - appliedDiscount;
 
       const data = {
         businessName:  document.getElementById('businessName').value.trim(),
         contactName:   document.getElementById('contactName').value.trim(),
         email:         document.getElementById('email').value.trim(),
         phone:         document.getElementById('phone').value.trim(),
-        postType:      postTypeChecked ? postTypeChecked.value : '',
+        postType:      selectedStyle,
         message:       document.getElementById('message').value.trim(),
         deliveryWeek:  document.getElementById('deliveryWeek').value.trim(),
         mediaNotes:    document.getElementById('mediaNotes').value.trim(),
@@ -1048,6 +1155,7 @@
 
         if (res.ok) {
           form.reset();
+          clearSelection();
           msgSuccess.classList.add('show');
           msgSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
