@@ -8,6 +8,9 @@ export default async function handler(req, res) {
     contactName,
     email,
     phone,
+    website,
+    instagram,
+    facebook,
     postType,
     message,
     deliveryWeek,
@@ -55,6 +58,9 @@ export default async function handler(req, res) {
         ${row('Contact', contactName)}
         ${row('Email', `<a href="mailto:${email}" style="color:#1ABFE0;">${email}</a>`)}
         ${row('Phone', phone)}
+        ${row('Website', website ? `<a href="${website}" style="color:#1ABFE0;">${website}</a>` : '')}
+        ${row('Instagram', instagram ? `<a href="https://instagram.com/${instagram.replace('@','')}" style="color:#1ABFE0;">${instagram}</a>` : '')}
+        ${row('Facebook', facebook ? `<a href="https://${facebook.startsWith('http') ? '' : ''}${facebook}" style="color:#1ABFE0;">${facebook}</a>` : '')}
         ${row('Post Type', postType)}
         ${row('Delivery Week', deliveryWeek)}
         ${priceRow}
