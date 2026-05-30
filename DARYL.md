@@ -1,149 +1,264 @@
-# Daryl Young - Context Cheat Sheet
+### Phase 2: Session Declaration
+- **Quick Decision:** <5 min, no implementation, confirm direction
+- **Coding:** Deep work, stay focused, defer non-essentials
+- **Planning:** Strategy, architecture, multi-project evaluation
+- **Evaluation:** Research tool/approach, pros/cons, recommendation
 
-This file exists so Claude has full context when working remotely (mobile / new session / no local memory).
-Load this at the start of any session: "Read DARYL.md before we start."
-
+### Phase 3: Decision Codification (at end of session)
+If you make a decision:
+### Phase 4: Cross-Session Handoff (when switching environments)
 ---
 
-## Who You Are
+## Update Cadence (CRITICAL)
 
-**Daryl Young** (GitHub: Gitdaryl) - Manitou Beach / Devils Lake, Michigan area.
-Runs **Yeti Groove Media LLC**. Relative newcomer to coding but actively building and deploying real projects with Claude as primary collaborator.
-
-**Financial context (critical):** Near senior age, no retirement savings. Every decision carries real financial weight. Revenue potential and time-to-money are always relevant filters. Don't build things that don't convert.
-
-**Claude's role:** Senior operator across engineering, UI/UX, marketing, copywriting, business strategy. Daryl is the decision-maker and visionary.
+- **Weekly:** Review DARYL.md every Sunday
+- **Per Session:** Flag what changed before closing session
+- **Per Decision:** Major decisions added immediately
+- **Trigger:** If you notice memory conflict, sync immediately
 
 ---
 
 ## All Active Projects
 
-| Project | Repo | Live URL | Stack | Notes |
-|---------|------|----------|-------|-------|
-| **Manitou Beach** | Gitdaryl/Manitou-Beach | manitou-beach.vercel.app | React+Vite, Notion CMS, Vercel | Most active. Future domain: manitoubeachmichigan.com (not live yet) |
-| **Yetickets** | (within Manitou Beach) | - | Same stack | Ticketing/sponsorship brand, Stripe Express Connect, 1.25% fee |
-| **Holly Griewahn** | Gitdaryl/Holly | hollygriewahn.vercel.app | React+Vite, CSS-in-JS | Irish Hills real estate authority site |
-| **Joe Profit** | Gitdaryl/joe-profit (confirm) | joeprofitneverbroken.com | React | Legends Commission proof of concept. Audio race condition bug deferred. |
-| **Legends Commission** | Gitdaryl/Yeti-Signature-Films (confirm) | yeti-signature-films.vercel.app | React | $50k+ legacy preservation commissions |
-| **Devils Lake View Living** | (confirm) | DLVL on Vercel | React+Vite+Tailwind | Darlene's boutique site, $49/mo, customer zero for Yeti Web Services |
-| **yetigroove.com** | (confirm) | yetigroove.com | - | Hub/placeholder. Current A2P campaign sender domain. |
+### 🚀 Revenue/Live (Tier 1 - Priority)
+
+| Project | Repo | Live URL | Status | Key Notes |
+|---------|------|----------|--------|-----------|
+| **Manitou Beach** | Gitdaryl/Manitou-Beach | manitou-beach.vercel.app | ACTIVE | Community engine. Domain pending: manitoubeachmichigan.com |
+| **Yetickets** | (within Manitou Beach) | - | ACTIVE | Food truck ticketing. A2P LIVE (Apr 2026). Stripe Express (1.25% fee). |
+| **Holly Griewahn** | Gitdaryl/Holly | hollygriewahn.vercel.app | ACTIVE | Irish Hills real estate. 20+ lakes. MLS integration pending. |
+| **Joe Profit** | Gitdaryl/joe-profit | joeprofitneverbroken.com | ACTIVE | Legends Commission PoC. Audio bug deferred. |
+| **Legends Commission** | Gitdaryl/Yeti-Signature-Films | yeti-signature-films.vercel.app | ACTIVE | $50k+ legacy preservation commissions. Full pipeline. |
+| **Devils Lake View Living** | (confirm path) | DLVL on Vercel | ACTIVE | Darlene's site, $49/mo. Customer zero for Yeti Web Services. |
+
+### 🎬 Long-Term Creative (Tier 2 - Strategic, High ROI)
+
+| Project | Type | Status | Notes |
+|---------|------|--------|-------|
+| **Erehmi** | Limited series script + faceless YouTube | IN PROGRESS | AI emergence themes. Scaffold Protocol Module 0 complete. Daryl = "Vox". **Large script document needs recovery.** |
+| **Joe Profit Legend Series** | Documentary + social spinoffs | RESEARCH/PLANNING | Biopic + atomization. Milanote board exists; **next: Resume at Podcast board.** "Never Broken" manuscript is canonical. |
+| **Wonder Whys** | Children's educational video brand | CONCEPT | Kids' learning + storytelling. Aligned with education passion. |
+| **Roxadoc App** | Medical-travel MVP | DESIGN PHASE | Figma with Dr. Robert Coronado + Dave Werner. Scalable Service Button + Roxa Score badge. |
+| **Notitia** | Nonprofit decentralized truth platform | CONCEPT | Micro-subscription funded, AI-curated. Long-horizon vision. |
+| **Legacy Media** | Memoir-to-video automation pipeline | RESEARCH | Pilot: Joe Profit's "Never Broken." Full automation arc. |
+| **Phobia Concept Album** | Halloween-themed music project | CONCEPT | 20+ phobia titles. Music + storytelling. |
+| **Yeti Corp Strategic Plans** | Business model design | FOUNDATIONAL | Self-funded universal healthcare, equitable wages, "Climb the Mountain" compensation (tied to valuation milestones). **Daryl held accountable to this vision.** |
+| **Star Shoutout** | Co-founded 2016 | PASSIVE | Crypto investment pivot. 3M preferred shares held. |
+
+### 🔬 Active Explorations (Tier 3 - R&D, High Potential)
+
+| Project | Type | Status | Next Step | Notes |
+|---------|------|--------|-----------|-------|
+| **iMessage-to-CRM SaaS** | SaaS Product | EXPLORATION | Validate funnel first | Mac Mini as always-on gateway. Targets SMB (real estate, hospitality, local services). **Decision: Build custom vs. Airtable + n8n backbone.** |
+| **MB User Acquisition** | Go-to-Market | ACTIVE | Test outreach this week | **Zero paid users currently** (except Ladies Club $1k/year). Videos just shot, not yet edited. Erin/Amy/Chelsea can help acquisition. **REAL blocker: product-market fit validation, not infrastructure.** |
+| **Rapid Demo Site Workflow** | Dev Workflow | EXPLORATION | Test with next client | Claude Code + Vercel + Unsplash/Pexels API. Polished PoC in <1 hour. Potential Yeti Groove brand product. |
+| **n8n Emergency Deploy Agent** | Automation | PLANNING | Build after primary work | Natural language → Haiku fix → GitHub commit → Vercel redeploy. Closes mobile workflow gap. |
 
 ---
 
-## Critical URL Rules
+## 🛠️ Development Environment
 
-- Manitou Beach live URL = `https://manitou-beach.vercel.app` (until domain swap)
-- `manitoubeach.com` = DOES NOT EXIST, never use as a site URL (email `hello@manitoubeach.com` is fine)
-- `manitoubeachmichigan.com` = future domain, not live yet
-- Never hardcode domain names - use `SITE_URL` env var
+### Antigravity IDE (Primary)
+- **Access:** Direct terminal, no copy/paste friction
+- **Claude Integration:** Claude Code via `claude` terminal command
+- **MCPs:** GitHub MCP, Vercel MCP, Notion MCP configured
+- **Workflow:** Edit → git commit → auto-deploy to Vercel
+
+### Browser Claude (claude.ai)
+- **Access:** Better UI, Higgsfield MCP, CLI tools
+- **MCPs:** All of the above + Higgsfield connector
+- **Use Case:** Design work, video generation, quick decisions
+
+### Model Delegation
+- **Opus:** Strategy, architecture, multi-file planning, rebuild scenarios
+- **Sonnet:** Mechanical fixes, UI builds, single-file changes
+- **Haiku:** QA agent, SMS, automated tasks on cron
 
 ---
 
-## Writing & Copy Rules
+## Critical Rules & Standards
 
-1. **No em dash** (--) - dead giveaway of AI writing. Use `-`, `...`, comma, or rewrite instead.
-2. **Yeti brand voice** - warm, upbeat, conversational, light humor. "Would my 70-year-old neighbor smile?" test. Never corporate/clinical/robotic.
-3. **No sycophancy** - honest evaluations, active pushback on bad ideas, compliments only when earned.
-4. **10px hard floor** on all text - no tiny print anywhere.
-5. **Images always large** - Daryl always finds AI-placed images too small, go bigger by default.
+### Copy/Writing Rules
+1. **No em dash (--)** - Dead giveaway of AI. Use `-`, `...`, comma, or rewrite.
+2. **Yeti brand voice** - Warm, upbeat, conversational, light humor. "70-year-old neighbor smile test." Never corporate/clinical.
+3. **No sycophancy** - Honest evaluations, active pushback on bad ideas.
+4. **10px hard floor** on all text - No tiny print.
+5. **Images always large** - You always find AI images too small; go bigger by default.
 
----
+### UI/Component Rules
+1. **Manitou Beach:** `src/App.jsx` intentionally monolithic. **DO NOT refactor into multiple files.**
+2. **Pages in `src/pages/`:** FoodTrucksPage, HappeningPage, VendorPortalPage, etc.
+3. **API endpoints in `/api/`:** 13+ Vercel serverless functions.
+4. **Scroll/Keyboard SOP (CRITICAL):**
+   - Background/video/overlay = `position: fixed`
+   - Page content = NEVER fixed or custom-scroll-trapped
+   - Body must scroll naturally
+5. **Holly Colors:** Navy `#1a2332`, Pink `#e84393`, BG `#faf9f7`. Fonts: Playfair Display + DM Sans.
 
-## Architecture Rules
-
-**3-Layer System** (defined in AGENTS.md/CLAUDE.md):
-- Layer 1 Directives (`directives/`) - SOPs in Markdown, living documents
+### Architecture Rules
+**3-Layer System:**
+- Layer 1 Directives (`directives/`) - SOPs in Markdown
 - Layer 2 Orchestration - AI's job, intelligent routing
-- Layer 3 Execution (`execution/`) - deterministic Python scripts, reliable + testable
-
-**Scroll/Keyboard SOP (CRITICAL):**
-- Background/video/overlay = `position: fixed`
-- Page content = NEVER fixed or trapped in custom scroll container
-- Body must scroll naturally. Never trap native scroll.
+- Layer 3 Execution (`execution/`) - Deterministic Python scripts
 
 ---
 
-## Tooling Available (MCP + Direct Access)
+## 🎥 Video, Campaign & Content Rules
 
-- **Notion MCP** - full read/write access to all Notion databases. Use proactively, never ask Daryl to do Notion setup steps.
-- **Vercel MCP** - deploy, manage env vars, check builds. Use proactively.
-- **GitHub MCP** - read/write files in any Gitdaryl repo. This is how remote edits work.
+### Kallaway's Hook Formula Framework (STANDING RULE)
+Apply to **ALL video, campaign, reel projects:**
 
----
+**Fix 4 Common Mistakes:**
+1. Delay - Hook within first 1 sec
+2. Confusion - Crystal clear what's happening
+3. Irrelevance - Why should *they* care?
+4. Disinterest - Emotional resonance from frame 1
 
-## Manitou Beach - Key Details
+**Use 6 Hook Archetypes:**
+- Fortune Teller (predict outcome)
+- Experimenter (test/try something)
+- Teacher (learn something)
+- Magician (reveal/transform)
+- Investigator (uncover mystery)
+- Contrarian (subvert expectation)
 
-- `src/App.jsx` is intentionally monolithic. **DO NOT refactor into multiple files.**
-- Pages in `src/pages/` - FoodTrucksPage, HappeningPage, VendorPortalPage, etc.
-- API endpoints in `/api/` - 13+ Vercel serverless functions
-- Notion is the CMS - content lives there, not in code
-- Food truck system fully built: QA agent (Haiku), check-in flow, Stripe checkout
-- Pricing: Free / $9/mo Founding (food trucks), $25/mo Business, $49/mo Premium (listings)
-- Pricing is LOCKED - flat rates, no dynamic escalator
-- Email sender: `events@yetigroove.com` until manitoubeachmichigan.com domain resolves
-
-## Manitou Beach - Stripe / Payments
-
-- Stripe Express Connect architecture: destination charges, 1.25% Yetickets fee
-- Org onboarding via `/partner-intake`
-- Vendor registration built (2026-03-19) - organizer-branded, PDF receipt, blast comms
-
-## Manitou Beach - SMS / A2P
-
-- A2P APPROVED + LIVE (as of early April 2026) - no longer a blocker
-- Twilio under yetigroove.com campaign
-- Yetickets will need its own separate A2P campaign (different brand registration)
+**Align 4 Elements:**
+- Visual (what they see)
+- Text (what they read)
+- Spoken (what they hear)
+- Audio (music/SFX/silence)
 
 ---
 
-## Holly Griewahn - Key Details
+## Project-Specific Details
 
-- `src/App.jsx` full SPA (~750 lines). All views in one file.
-- `src/data/regions.js` - 9 geographic regions
-- `src/data/lakes.js` - 20+ lakes with DNR stats
-- Colors: navy `#1a2332`, pink `#e84393`, bg `#faf9f7`
-- Fonts: Playfair Display + DM Sans
-- Next: MLS integration (Holly to provide direction), AI receptionist 5-phase plan
+### Manitou Beach - Current State
+- **Food Truck System:** QA agent (Haiku), check-in flow, Stripe checkout fully built
+- **Pricing (LOCKED):** Free / $9/mo Founding (food trucks), $25/mo Business, $49/mo Premium (listings)
+- **Stripe:** Express Connect (destination charges, 1.25% Yetickets fee)
+- **A2P Status:** APPROVED + LIVE (Apr 2026). Twilio under yetigroove.com. Yetickets needs separate campaign.
+- **Email Sender:** `events@yetigroove.com` (until manitoubeachmichigan.com resolves)
+- **Known Bug:** Audio race condition on Joe Profit (deferred)
 
----
+### MB Acquisition Strategy (THIS WEEK)
+- **Paid User Status:** 1 (Ladies Club, $1k/year). Video content shot yesterday, not yet edited/posted.
+- **Team for Acquisition:**
+  - **Erin:** Reach out to event organizers (free listings angle)
+  - **Amy:** Contact food truck vendors (free listings angle)
+  - **Chelsea:** Irish Hills Chamber of Commerce (highest leverage, has relationships)
+- **Success Metric:** Get 5+ organizers to try free listing, measure conversion to paid
+- **Do NOT hire yet.** Test the funnel yourself first. Track: Who says yes? Why? Convert to paid?
+- **Playbook:** Test week 1 solo. If >30% conversion, brief Chelsea. If successful, add Erin + Amy.
+- **Tracking:** Google Sheet: Name | Type | Date Contacted | Response | Status | Email
+- **Pricing validation needed:** What should organizers pay? Vendors? (Currently $1k/yr for Ladies Club, but that's high-touch.)
 
-## Pending / Active Work (as of 2026-04-08)
+### Holly Griewahn
+- **SPA Stack:** React+Vite, ~750 lines in `src/App.jsx`
+- **Data:** 9 regions, 20+ lakes with DNR stats
+- **Next:** MLS integration (Holly to provide direction), AI receptionist 5-phase plan
+- **Note:** No paid work yet. First external client, prototype for SaaS template. Don't over-invest until commitment.
 
-- **Organizer dashboard** - theme-aware component, build in MB, lift into Yetickets later
-- **Social media auto-poster** - FB Page + IG Business via Meta Graph API + Haiku, design session needed
-- **Food truck/event connection** - needs Opus planning (multi-entity schema design)
-- **Email confirmation system** - blocked on Resend domain decision ($20/mo for second domain)
-- **Joe Profit email domain** - swap from yetigroove.com to joeprofitneverbroken.com when Resend verifies
-- **Roofing client** - meeting was 2026-04-02, media ask + platform upsell opportunity
-- **Wine Trail Awards Ceremony** - Nov 2026, Chateau Aeronautique target venue, sponsor tiers
-- **MB per-page color theming** - spec at specs/mb-page-theming-spec.md, 7 themes, CSS token architecture
-
----
-
-## Business Strategy Notes
-
-- All projects connect under Yeti Groove Media LLC. Not isolated - one ecosystem.
-- Manitou Beach = community engine + proving ground for all tech
-- yetigroove.com = future service/AI tools layer
-- Legends Commission = premium tier ($50k+ commissions)
-- Holly = first external client, prototype for SaaS template
-- **Automation is survival** - Daryl is one person. Automate everything possible.
-- **Expansion strategy** - Yeti-direct tourist destinations (South Haven, Traverse City, etc.) vs partner territories. Never share the reserve territory list publicly.
+### Joe Profit
+- **Manuscript:** "Never Broken" is canonical for all quotes/reference
+- **Bug:** Audio race condition (deferred, known issue)
 
 ---
 
-## Model Delegation
+## 📋 Pending Work (as of 2026-05-30)
 
-- **Opus** - strategy, architecture, multi-file planning, wrong decisions = rebuild scenarios
-- **Sonnet** - mechanical fixes, UI builds, single-file changes, routine tasks
-- **Haiku** - QA agent, SMS, automated tasks running on cron
+- **MB videos edited + posted** - Leverage the Ladies Club promo (just shot)
+- **MB acquisition test** - You contact 5 organizers solo, measure conversion
+- **Chelsea conversation** - Brief on Chamber angle, gauge interest in $20/hr role
+- **Organizer dashboard** - Theme-aware, build in MB, lift to Yetickets
+- **Social media auto-poster** - FB Page + IG Business via Meta Graph API + Haiku
+- **Email confirmation system** - Blocked on Resend domain ($20/mo for second domain)
+- **Joe Profit domain swap** - yetigroove.com → joeprofitneverbroken.com (awaiting Resend)
+- **Roofing client** - Meeting 2026-04-02, media ask + platform upsell opportunity
+- **Wine Trail Awards Ceremony** - Nov 2026, Chateau Aeronautique target, sponsor tiers
+- **MB per-page color theming** - Spec at `specs/mb-page-theming-spec.md`, 7 themes, CSS tokens
+- **Erehmi script recovery** - Large document needs to be recovered into this context
 
 ---
 
-## Session Startup Checklist (Remote/Mobile)
+## 🚀 Business Strategy & Vision
 
-1. Read this file
-2. Check which project you're working on above
-3. Use GitHub MCP to browse current files before editing
-4. Edits via GitHub MCP auto-deploy to Vercel
-5. Notion MCP available for CMS changes
+### Core Ecosystem
+- **Yeti Groove Media LLC** - All projects connect here. Not silos.
+- **Manitou Beach** - Community engine + proving ground for tech/features
+- **yetigroove.com** - Future service/AI tools layer (Yeti Loop Automation, etc.)
+- **Legends Commission** - Premium tier ($50k+ commissions)
+- **Holly** - First external client, prototype for SaaS template
+- **Automation is Survival** - You're one person. Automate everything possible.
+
+### Financial Accountability
+- Proactively flag grant/funding opportunities (tourism, small business, community development, innovation, sustainability)
+- Always measure time-to-money and conversion potential
+- Revenue projects take priority over passion projects, unless strategic
+
+### Expansion Strategy
+- Yeti-direct tourist destinations (South Haven, Traverse City, etc.) vs. partner territories
+- **Never share reserve territory list publicly**
+
+---
+
+## 🎯 URLs & Domain Rules
+
+### Live Domains
+- `manitou-beach.vercel.app` - Current MB live URL
+- `hollygriewahn.vercel.app` - Holly site
+- `joeprofitneverbroken.com` - Joe Profit (domain pending swap from yetigroove.com)
+- `yetigroove.com` - Hub/placeholder, A2P sender domain
+
+### Pending Domains
+- `manitoubeachmichigan.com` - Future MB domain, not live yet
+- **NEVER** use `manitoubeach.com` - Does not exist. Email `hello@manitoubeach.com` is fine.
+
+### Best Practices
+- Never hardcode domain names - use `SITE_URL` env var
+- Always use `https://` in full URLs
+
+---
+
+## 📝 How to Update DARYL.md
+
+1. **Edit locally in Antigravity:**
+```bash
+   cd ~/Yeti-Groove
+   nano DARYL.md  # or your editor
+   git add DARYL.md
+   git commit -m "docs: update DARYL.md - [what changed]"
+   git push origin main
+```
+
+2. **Or from Browser Claude**
+   - You can request changes, I'll write them
+
+3. **Weekly review:** Every Sunday, scan for stale sections
+
+4. **Trigger updates:** If memory and MD conflict, resolve immediately
+
+---
+
+## 💡 Decision Log (This Session - 2026-05-30)
+
+**Airtable Evaluation:**
+- Researched Airtable + n8n integration
+- Real gaps identified: iMessage-to-CRM backbone, rapid client PoCs, content ops
+- Cost: $20-45/mo
+- **Decision: SKIP for now. Focus on MB user acquisition and validating funnel first.**
+- Why: Infrastructure doesn't matter if you don't have users. Fix product-market fit first, then optimize backend.
+- Real bottleneck: Users, not tools.
+
+**MB Acquisition Strategy:**
+- **Action:** Validate funnel yourself this week (contact 5 organizers, track conversion)
+- **Team ready:** Erin, Amy, Chelsea waiting for playbook
+- **Timeline:** Test week 1, brief Chelsea if >30% conversion, add Erin + Amy if successful
+- **Tracking:** Simple Google Sheet (no Airtable needed yet)
+- **Critical:** Get analytics on video performance first (did Ladies Club videos drive traffic?)
+
+**Session Routine & Sync:**
+- Established unified SESSION STARTUP ROUTINE (Phase 1-4)
+- Single source of truth: DARYL.md in GitHub
+- All Claude instances (Antigravity, Browser, Mobile) read from same file
+- Decisions logged in memory_user_edits for persistence
+- Update cadence: Weekly MD review + per-session flagging
