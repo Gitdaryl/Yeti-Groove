@@ -3,6 +3,7 @@
     { "source": "/partners/lake-access", "destination": "/partners/lake-access.html" },
     { "source": "/fix",                  "destination": "/fix.html" },
     { "source": "/social",               "destination": "/social.html" },
+    { "source": "/lakeaccess",           "destination": "/lakeaccess.html" },
     { "source": "/(.*)",                 "destination": "/index.html" }
   ]
 }
