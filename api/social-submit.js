@@ -120,6 +120,23 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Email delivery failed' });
     }
 
+    // SMS alert
+    const sid   = process.env.TWILIO_ACCOUNT_SID;
+    const token = process.env.TWILIO_AUTH_TOKEN;
+    const from  = process.env.TWILIO_PHONE;
+    if (sid && token && from) {
+      const source = req.body.source === 'Lake Access Media' ? 'Lake Access page' : 'social page';
+      const smsBody = `You got an order for a social production from the ${source} - visit your email.`;
+      await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString('base64')}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ From: from, To: '+15172605907', Body: smsBody }),
+      });
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Submit error:', err);
