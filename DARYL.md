@@ -164,7 +164,7 @@ Self-service AI video portal. Clients submit scripts, HeyGen generates avatar vi
 
 **Pricing (locked):** Starter $249/mo (1 avatar, 8 videos), Growth $449/mo (1 avatar, 20 videos), Agency $749/mo (3 avatars, 40 videos). Annual commit = 2 months free. Shoot day $500-750 one-time.
 
-**Client zero:** Sam Quisenberry (State Farm). 2 months in, manual at ~$80/video + $20/subtitle. URGENT: no invoices sent for 2 months - uncollected revenue (fix with manual Novo invoice). Office account: owner + 3 agents; month 3 = team expansion. Portal needs org -> users layer. Target upgrade: Growth annual ($4,490) + shoot day ($500).
+**Client zero:** Sam Quisenberry (State Farm). 10 videos delivered across 2 months. URGENT: $640 outstanding (invoices YC-1001/YC-1002 not yet sent). Fix with manual Novo invoice. Office account: owner + 3 agents; month 3 = team expansion now. Portal needs org -> users layer. Target upgrade: Growth annual ($4,490) + shoot day ($500).
 
 **Built (2026-06-11):** Portal scaffold (look picker, script submit, video status, QA queue, video library), `api/generate.js` v3 Avatar V, shared Vercel Blob JSON DB (replaces localStorage), hybrid QA model (gate new clients N videos then auto-trust), delivery email, admin QA ping, regen loop.
 
@@ -183,6 +183,16 @@ Self-service AI video portal. Clients submit scripts, HeyGen generates avatar vi
 - **A2P Status:** APPROVED + LIVE (Apr 2026). Twilio under yetigroove.com. Yetickets needs separate campaign.
 - **Email Sender:** `events@yetigroove.com` (until manitoubeachmichigan.com resolves)
 - **Known Bug:** Audio race condition on Joe Profit (deferred)
+- **Referral/affiliate attribution system:** LIVE in production
+- **Social media auto-poster:** LIVE in Yeti Admin (Meta Graph API, FB + IG, 2026-05-06)
+- **Visitor Wall (`/visitor-wall`):** LIVE with Instagram gallery integration
+- **Raffle wheel:** LIVE for LLLC Summerfest carnival event
+
+**Stays Marketplace (beta):** Full feature set built - verification, iCal sync, guest calendar, inquiry flow. **Critical architecture decision: NO money flows through the platform** (accommodation tax liability + fair housing risk). Discovery + request-to-book only. This is permanent, not a phase 1 compromise.
+
+**Event Lifecycle:** cancel/postpone/pause with attendee ribbons built. Awaiting 3 Notion schema fields: Lifecycle, Outdoors, Change Note. Pending: add PLATFORM_ADMIN_PHONE to Vercel for iCal failure alerts.
+
+**Competitive moat:** Hyperlocal network density + merchant relationships. Not software cloning - the moat is the relationships.
 
 ### MB Acquisition Strategy (THIS WEEK)
 - **Paid User Status:** 1 (Ladies Club, $1k/year). Video content shot yesterday, not yet edited/posted.
@@ -208,19 +218,60 @@ Self-service AI video portal. Clients submit scripts, HeyGen generates avatar vi
 
 ---
 
-## 📋 Pending Work (as of 2026-05-30)
+### Sunny Skies Dispatcher
 
-- **MB videos edited + posted** - Leverage the Ladies Club promo (just shot)
-- **MB acquisition test** - You contact 5 organizers solo, measure conversion
-- **Chelsea conversation** - Brief on Chamber angle, gauge interest in $20/hr role
-- **Organizer dashboard** - Theme-aware, build in MB, lift to Yetickets
-- **Social media auto-poster** - FB Page + IG Business via Meta Graph API + Haiku
-- **Email confirmation system** - Blocked on Resend domain ($20/mo for second domain)
-- **Joe Profit domain swap** - yetigroove.com → joeprofitneverbroken.com (awaiting Resend)
-- **Roofing client** - Meeting 2026-04-02, media ask + platform upsell opportunity
-- **Wine Trail Awards Ceremony** - Nov 2026, Chateau Aeronautique target, sponsor tiers
-- **MB per-page color theming** - Spec at `specs/mb-page-theming-spec.md`, 7 themes, CSS tokens
-- **Erehmi script recovery** - Large document needs to be recovered into this context
+Content rotation system for Sunny Skies Roofing (Isaac reports to Daryl). Runs on VPS (DigitalOcean 143.198.171.9) via Node.js cron at 9am/12pm/6pm ET. **NOT Claude routines** - migrated to VPS for reliability.
+
+- **Admin UI:** dispatcher-admin-six.vercel.app - drag-and-drop, global pause/resume, per-content-type toggles
+- **Remote config server:** VPS port 3847
+- **7 content types:** Quotes, Midday, Evening, CTA, Dev Education, Fuel Gauge, + more
+- **Reviews batch:** 80+ Google reviews scraped, Hyperframes batch-render ready (skip Joshua Wirick)
+- **Clip library:** 46 video bg clips locally, clip-index.json, mood/category mapped, needs Google Drive upload
+
+---
+
+### Weekly Tech Radar Agent
+
+Frontier AI + dev tooling monitoring, runs Mondays 8am ET via GitHub Actions. Haiku ranks new releases/tools against portfolio relevance, emails digest, creates Notion Command Center tasks automatically. Pending: `NOTION_COMMAND_CENTER_TOKEN` secret needed to fully activate auto-task creation.
+
+---
+
+### Lake Access Partnership (social.yetigroove.com/lakeaccess)
+
+Co-branded partner page with Dennis Babjack (Lake Access Magazine). Discounted video pricing for Dennis's audience. Dennis offered 25% equity + 64-video client production deal. Page is live at social.yetigroove.com/lakeaccess.
+
+---
+
+## 📋 Pending Work (as of 2026-06-11)
+
+**YetiClone (urgent):**
+- Create Vercel Blob store + set env vars (HEYGEN_API_KEY, RESEND_API_KEY, BLOB_READ_WRITE_TOKEN, etc.) to go live
+- Send $640 catch-up invoices to Sam Q (YC-1001/YC-1002, May/June, use Novo manual invoice)
+- Build org -> users layer for Sam's office (owner + 3 agents, consolidated invoice to owner)
+
+**Yetickets:**
+- Yetickets A2P 10DLC campaign — Daryl still needs to apply (separate from MB campaign)
+- Create Stripe webhook endpoint + BLOB_READ_WRITE_TOKEN
+
+**Manitou Beach:**
+- Add 3 Notion schema fields: Lifecycle, Outdoors, Change Note (Event Lifecycle feature waiting on this)
+- Add PLATFORM_ADMIN_PHONE to Vercel (iCal failure alerts)
+- Organizer dashboard - Theme-aware, build in MB, lift to Yetickets
+- MB per-page color theming - Spec at `specs/mb-page-theming-spec.md`, 7 themes, CSS tokens
+
+**Tech Radar:**
+- Add NOTION_COMMAND_CENTER_TOKEN secret to activate auto-task creation
+
+**Sunny Skies:**
+- Upload 46 video bg clips to Google Drive (local only currently)
+
+**Other:**
+- Wine Trail Awards Ceremony - Nov 2026, Chateau Aeronautique target, sponsor tiers
+- Erehmi script recovery - Large document needs to be recovered into this context
+
+**DONE (remove next review):**
+- ~~Joe Profit domain swap~~ - COMPLETE 2026-04-25 (joeprofitneverbroken.com live)
+- ~~Social media auto-poster~~ - LIVE 2026-05-06 (Meta Graph API, FB + IG)
 
 ---
 
