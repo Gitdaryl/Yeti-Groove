@@ -15,6 +15,7 @@ If you make a decision:
 - **Per Session:** Flag what changed before closing session
 - **Per Decision:** Major decisions added immediately
 - **Trigger:** If you notice memory conflict, sync immediately
+- **Session start:** Check Notion Yeti Command Center for open tasks before diving in. Project decisions live there.
 
 ---
 
@@ -25,7 +26,8 @@ If you make a decision:
 | Project | Repo | Live URL | Status | Key Notes |
 |---------|------|----------|--------|-----------|
 | **Manitou Beach** | Gitdaryl/Manitou-Beach | manitou-beach.vercel.app | ACTIVE | Community engine. Domain pending: manitoubeachmichigan.com |
-| **Yetickets** | (within Manitou Beach) | - | ACTIVE | Food truck ticketing. A2P LIVE (Apr 2026). Stripe Express (1.25% fee). |
+| **Yetickets** | Gitdaryl/Yetickets | yetickets.app | ACTIVE | Standalone ticketing platform. A2P LIVE (Apr 2026). Stripe Express Connect (1.25% fee). MVP deployed 2026-04-09. |
+| **YetiClone** | Gitdaryl/YetiClone | yeticlone.vercel.app | UNBLOCKED | AI avatar video portal. HeyGen Avatar V. Backend built 2026-06-11. Env wiring needed before live. Sam Q (State Farm) is client zero. |
 | **Holly Griewahn** | Gitdaryl/Holly | hollygriewahn.vercel.app | ACTIVE | Irish Hills real estate. 20+ lakes. MLS integration pending. |
 | **Joe Profit** | Gitdaryl/joe-profit | joeprofitneverbroken.com | ACTIVE | Legends Commission PoC. Audio bug deferred. |
 | **Legends Commission** | Gitdaryl/Yeti-Signature-Films | yeti-signature-films.vercel.app | ACTIVE | $50k+ legacy preservation commissions. Full pipeline. |
@@ -131,6 +133,48 @@ Apply to **ALL video, campaign, reel projects:**
 ---
 
 ## Project-Specific Details
+
+### Yetickets - Current State
+
+**Folder:** `/Users/darylyoung/Documents/Claude Code/Yetickets` | **Stack:** React + Vite + Tailwind + Vercel serverless + Notion + Stripe Express Connect
+
+Standalone ticketing + sponsorship platform. NOT part of Manitou Beach repo. Embedded infrastructure layer - every Yeti Groove community deployment gets it. NOT competing with Eventbrite (1.25% only works at volume; value is as a bundled feature).
+
+**Notion DBs (parent: 33d8c729-eb59-81cf-a475-cc21bceb05e6):**
+- Organizations: 33d8c729eb5981c2925ec4471ca838b6 | Events: 33d8c729eb5981af8b0bc926bef1ebfe
+- Tickets: 33d8c729eb5981cb9717fbc510ebfd4b | Sponsorships: 33d8c729eb598137aacac6e3648fb062
+
+**Target customers:** Community nonprofits, festivals, sporting events, youth sports, church fundraisers, individual athletes raising sponsorships. Any person or group collecting money from people/businesses for an event/cause.
+
+**Built (MVP 2026-04-09):** Org onboarding via Stripe Express, event listings, ticket purchase, sponsor wall, athlete fundraiser profiles, organizer dashboard (token-gated), QR check-in (manual ID entry), platform admin.
+
+**NOT built yet:** Stripe webhook secret + BLOB_READ_WRITE_TOKEN (env wiring), PDF ticket generation, sponsor receipt PDFs, email notifications (Resend), SMS notifications (separate A2P campaign - Yetickets brand), QR camera scanning, event creation UI in dashboard, Yetickets A2P 10DLC (Daryl still needs to apply).
+
+**Brand notes:** Yetickets SMS/A2P is its own separate Twilio campaign - not under MB. PDF tickets currently say "MANITOU BEACH" - needs white-labeling. Future: yetickets.com domain + standalone marketing site.
+
+---
+
+### YetiClone - Current State
+
+**Folder:** `/Users/darylyoung/Documents/Claude Code/YetiClone` | **Stack:** React + Vite + Tailwind + Vercel serverless + HeyGen API + Vercel Blob + Stripe + Resend
+
+Self-service AI video portal. Clients submit scripts, HeyGen generates avatar video from their Digital Twin, Daryl QAs (or trusted clients self-serve), client gets finished video. White-label - clients never see HeyGen.
+
+**UNBLOCKED 2026-06-11:** Was shelved April 2026 (HeyGen Avatar V API had face-glitch bug). Bug fixed. Re-tested live: 10/10 generations clean. Backend built + committed same day.
+
+**Pricing (locked):** Starter $249/mo (1 avatar, 8 videos), Growth $449/mo (1 avatar, 20 videos), Agency $749/mo (3 avatars, 40 videos). Annual commit = 2 months free. Shoot day $500-750 one-time.
+
+**Client zero:** Sam Quisenberry (State Farm). 2 months in, manual at ~$80/video + $20/subtitle. URGENT: no invoices sent for 2 months - uncollected revenue (fix with manual Novo invoice). Office account: owner + 3 agents; month 3 = team expansion. Portal needs org -> users layer. Target upgrade: Growth annual ($4,490) + shoot day ($500).
+
+**Built (2026-06-11):** Portal scaffold (look picker, script submit, video status, QA queue, video library), `api/generate.js` v3 Avatar V, shared Vercel Blob JSON DB (replaces localStorage), hybrid QA model (gate new clients N videos then auto-trust), delivery email, admin QA ping, regen loop.
+
+**INERT until Vercel env set:** `HEYGEN_API_KEY`, `HEYGEN_DEFAULT_VOICE_ID`, `HEYGEN_DEFAULT_AVATAR_ID`, `RESEND_API_KEY`, `BLOB_READ_WRITE_TOKEN` (create new Blob store). Optional: `HEYGEN_CALLBACK_URL`, `YETICLONE_DEFAULT_GATES`.
+
+**NOT built yet:** Vercel env wiring (code-complete, not live), UI wizard consolidation (merge /script + /create), org -> users layer, per-account billable-items ledger, Stripe tiers wired.
+
+**QA model (Daryl's decision):** HYBRID. Gate new clients (Daryl QAs first N videos), then flip to self-serve with request-changes/regen. HeyGen account: API key `yeti-clone-api`, 5994 credits, 3 custom avatars + cloned voice built. Fish voice engine wins every test - always default Fish. All outputs: vertical 9:16 social only.
+
+---
 
 ### Manitou Beach - Current State
 - **Food Truck System:** QA agent (Haiku), check-in flow, Stripe checkout fully built
