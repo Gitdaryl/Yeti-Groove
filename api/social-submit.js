@@ -25,6 +25,19 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  // ── PERSIST BEFORE NOTIFY ──
+  // Log the full order as structured JSON the moment it arrives, before any
+  // email/SMS attempt. This guarantees the order is recoverable from Vercel
+  // logs even if every integration below is unconfigured or fails. An order
+  // must never vanish silently again. Search Vercel runtime logs for "[ORDER]".
+  console.log('[ORDER]', JSON.stringify({
+    at: new Date().toISOString(),
+    source: req.body.source || 'Social',
+    businessName, contactName, email, phone, website, instagram, facebook,
+    postType, deliveryWeek, finalPrice, couponCode,
+    message, mediaNotes, scriptNotes, notes,
+  }));
+
   const row = (label, value) =>
     value
       ? `<tr><td style="padding:6px 12px 6px 0;color:#7AB8D0;font-size:14px;vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;color:#E6F4FB;font-size:14px;">${value}</td></tr>`
@@ -160,8 +173,8 @@ export default async function handler(req, res) {
     const token = process.env.TWILIO_AUTH_TOKEN;
     const from  = process.env.TWILIO_PHONE;
     if (sid && token && from) {
-      const source = req.body.source === 'Lake Access Media' ? 'Lake Access page' : 'social page';
-      const smsBody = `You got an order for a social production from the ${source} - visit your email.`;
+      const source = req.body.source === 'Lake Access Media' ? 'Lake Access' : 'Social';
+      const smsBody = `New Yeti Groove order (${source}): ${businessName} - ${postType || 'social post'}, ${finalPrice || '$150'}. Details in your email.`;
       await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
         method: 'POST',
         headers: {
