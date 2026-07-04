@@ -793,20 +793,20 @@
   <div class="section">
     <p class="section-label">What You Get</p>
     <h2>Three ways to tell your story</h2>
-    <p class="section-sub">Tell us what you want to promote, share your logo, brand colors, and any photos or clips you have. We handle the creative. Note: on-location filming and photography are not part of this service - if you need that, ask us about a production package.</p>
+    <p class="section-sub">Tell us what you want to promote, share your logo, brand colors, and any photos or clips you have. We handle the creative. Note: on-location filming and photography are not part of this service - if you need that, ask us about a production package. <strong style="color:#1ABFE0;">Tap a card to see matching examples.</strong></p>
 
     <div class="cards">
-      <div class="card">
+      <div class="card" data-filter="photos">
         <span class="card-icon">&#128247;</span>
         <h3>Photos Only</h3>
         <p>We take your best photos and build a scroll-stopping post with animated motion, text overlays, and your brand feel.</p>
       </div>
-      <div class="card">
+      <div class="card" data-filter="mix">
         <span class="card-icon">&#127916;</span>
         <h3>Photo + Video Mix</h3>
         <p>Got video? Even a quick selfie-style clip works great. We'll edit it, clean up the audio, add B-roll, and drop in subtitles.</p>
       </div>
-      <div class="card">
+      <div class="card" data-filter="promo">
         <span class="card-icon">&#127881;</span>
         <h3>Event or Sale Promo</h3>
         <p>Got something coming up? A sale, a tasting, a special? We'll build a promo post designed to get people through the door.</p>
@@ -820,14 +820,15 @@
   </div>
 
   <!-- EXAMPLES -->
-  <div class="section" style="max-width:980px;">
+  <div class="section" id="examples" style="max-width:980px;">
     <p class="section-label">Examples</p>
     <h2>See what's possible</h2>
-    <p class="section-sub">Nine sample posts - different styles and budgets. Videos play automatically. Tap the speaker icon to unmute.</p>
+    <p class="section-sub" id="examplesSub">Nine sample posts - different styles and budgets. Videos play automatically. Tap the speaker icon to unmute.</p>
+    <p style="text-align:center;margin-top:-0.5rem;"><a href="#" id="showAllStyles" class="style-bar-link" style="font-size:0.85rem;">Show all styles</a></p>
 
     <div class="video-grid">
 
-      <div class="video-card" data-style="AI Slideshow" data-price="100" data-needs-media="false" data-needs-script="false">
+      <div class="video-card" data-style="AI Slideshow" data-price="100" data-needs-media="false" data-needs-script="false" data-group="photos">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-minimal-150-OisX4ZZffTHRoJJOCGDKRY6w1je9Bp.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>AI Slideshow</strong>Animated slides built from AI-generated imagery, text overlays, and music. No footage needed - just your message and key details and we handle the rest.</div>
@@ -836,7 +837,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI Slideshow" data-price="100" data-needs-media="false" data-needs-script="false">
+      <div class="video-card" data-style="AI Slideshow" data-price="100" data-needs-media="false" data-needs-script="false" data-group="photos">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-slideshow-150-XvEaakOuZLhuyCxNxrrutPphYsc0X1.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>AI Slideshow</strong>Animated slides built from AI-generated imagery, text overlays, and music. No footage needed - just your message and key details and we handle the rest.</div>
@@ -845,7 +846,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI Story" data-price="100" data-needs-media="false" data-needs-script="false">
+      <div class="video-card" data-style="AI Story" data-price="100" data-needs-media="false" data-needs-script="false" data-group="photos">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-story-150-YgM0QY4TBb3z171R4sc8cOByD1Yvfc.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>AI Story</strong>Short-form story format built for Instagram and Facebook Stories. AI visuals, motion graphics, and music. No footage needed - your message drives everything.</div>
@@ -854,7 +855,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Selfie + Subtitles" data-price="100" data-needs-media="true" data-needs-script="false">
+      <div class="video-card" data-style="Selfie + Subtitles" data-price="100" data-needs-media="true" data-needs-script="false" data-group="mix">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/selfie-subtitles-150-sgmCmsVl2yJXZneNYhGUHCAOFqbgX1.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>Selfie + Subtitles</strong>You film a quick selfie-style clip talking about your business or promotion. We clean up the audio, add B-roll, overlay subtitles, and polish it for social. You supply the video, we make it shine.</div>
@@ -863,7 +864,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI Logo Character" data-price="100" data-needs-media="false" data-needs-script="true">
+      <div class="video-card" data-style="AI Logo Character" data-price="100" data-needs-media="false" data-needs-script="true" data-group="mix">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ai-logo-character-150-jJ8Aheq5jjOPb4gSU7IVksdvVVi3gt.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>AI Voice + Animated Logo Character</strong>An AI voice delivers your message while your logo or a branded character animates on screen. 100% AI - no spokesperson or filming needed. You give us the info and we write the script.</div>
@@ -872,7 +873,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="AI + Real Voiceover" data-price="100" data-needs-media="false" data-needs-script="true">
+      <div class="video-card" data-style="AI + Real Voiceover" data-price="100" data-needs-media="false" data-needs-script="true" data-group="mix">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/mix-ai-voiceover-150-BSKvqruWiJI6vQ30VbK8TWRzQsoGK4.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>AI + Real Voiceover</strong>AI-generated visuals with a real human voiceover track. We write the script, you approve it, then we produce it. Sounds more personal than pure AI - great for businesses that want a human touch without filming.</div>
@@ -881,7 +882,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Virtual UGC" data-price="130" data-needs-media="false" data-needs-script="true">
+      <div class="video-card" data-style="Virtual UGC" data-price="130" data-needs-media="false" data-needs-script="true" data-group="mix">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/ugc-virtual-180-gBtFF7KkTARS40sE2xzmTkwXkdS32G.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>Virtual UGC - AI Spokesperson</strong>UGC stands for User Generated Content. This is 100% AI - a realistic AI-generated person delivers your message straight to camera, like a real customer or staff member filmed themselves. You give us the info, we write the script and produce everything. No filming, no awkward on-camera moments.</div>
@@ -890,7 +891,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Company Promo" data-price="200" data-needs-media="true" data-needs-script="false">
+      <div class="video-card" data-style="Company Promo" data-price="200" data-needs-media="true" data-needs-script="false" data-group="promo">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/company-promo-200-yXVjh88hPGwTrcXYCLbjjXiUsHZmP1.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>Company Promo Video</strong>A polished overview of your business. We mix your footage, photos, and AI-enhanced visuals into a professional-grade video - suitable for your website homepage, Google Business Profile, or LinkedIn. Supply what you have and we'll build around it.</div>
@@ -899,7 +900,7 @@
         <button class="unmute-btn" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="#1ABFE0" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" class="mute-x"/><line x1="17" y1="9" x2="23" y2="15" class="mute-x"/></svg></button>
       </div>
 
-      <div class="video-card" data-style="Promo + Custom Music" data-price="200" data-needs-media="true" data-needs-script="false">
+      <div class="video-card" data-style="Promo + Custom Music" data-price="200" data-needs-media="true" data-needs-script="false" data-group="promo">
         <video src="https://dmg0joh3jdjfmu8k.public.blob.vercel-storage.com/lake-access/promo-custom-music-200-gAvhs6gcKL5XrD0l8odjDL5zgVIRqM.mp4" muted playsinline loop preload="none"></video>
         <button class="info-btn" aria-label="About this style">i</button>
         <div class="info-tooltip"><strong>Promo + Custom Music</strong>Everything in a standard promo, plus a custom music bed created specifically for your brand. Licensed, original, and unique to your business - your customers won't hear it anywhere else.</div>
@@ -1005,8 +1006,8 @@
             <div class="form-field full">
               <label>Upload your media <span class="hint">- photos, video, or both</span></label>
               <div class="drive-box">
-                <p class="drive-title">Upload to our shared Google Drive folder</p>
-                <p>Drop in your photos and any video clips. No need to organize, just upload what you have and we'll sort through it.</p>
+                <p class="drive-title">Share your photos &amp; video</p>
+                <p>Easiest way: paste a link to your photos or clips in the box below - Google Drive, Dropbox, iCloud, or WeTransfer all work. Prefer to upload directly? Drop them in our shared folder.</p>
                 <a class="btn-outline" href="https://drive.google.com/drive/folders/1wApVLL50JpWHpRT7N-4jX7YEzydFk4Zc?usp=sharing" target="_blank" rel="noopener">Open Upload Folder</a>
               </div>
             </div>
@@ -1153,6 +1154,46 @@
         document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    // ── STORY-TYPE FILTER: the three "ways to tell your story" cards ──
+    const storyCards = document.querySelectorAll('.card[data-filter]');
+    const examplesSub = document.getElementById('examplesSub');
+    const examplesSubDefault = examplesSub ? examplesSub.textContent : '';
+    const showAllStyles = document.getElementById('showAllStyles');
+    const storyFilterCopy = {
+      photos: 'Photo-based styles - we turn your photos into an animated, scroll-stopping post.',
+      mix:    'Video styles - your own clip or an AI presenter, edited with subtitles and B-roll.',
+      promo:  'Promo styles - built to drive people to an event, sale, or special.',
+    };
+
+    function applyStoryFilter(group) {
+      videoCards.forEach(c => {
+        c.style.display = (group === 'all' || c.dataset.group === group) ? '' : 'none';
+      });
+      storyCards.forEach(c => {
+        const on = c.dataset.filter === group;
+        c.style.borderColor = on ? '#1ABFE0' : '';
+        c.style.boxShadow  = on ? '0 0 0 1px rgba(26,191,224,0.55)' : '';
+      });
+      if (examplesSub) examplesSub.textContent = group === 'all' ? examplesSubDefault : storyFilterCopy[group];
+      if (showAllStyles) showAllStyles.style.display = group === 'all' ? 'none' : '';
+      const ex = document.getElementById('examples');
+      if (ex) ex.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    storyCards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('click', () => applyStoryFilter(card.dataset.filter));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); applyStoryFilter(card.dataset.filter); }
+      });
+    });
+    if (showAllStyles) {
+      showAllStyles.style.display = 'none';
+      showAllStyles.addEventListener('click', (e) => { e.preventDefault(); applyStoryFilter('all'); });
+    }
 
     function clearSelection() {
       videoCards.forEach(c => {

@@ -160,8 +160,8 @@ export default async function handler(req, res) {
     const token = process.env.TWILIO_AUTH_TOKEN;
     const from  = process.env.TWILIO_PHONE;
     if (sid && token && from) {
-      const source = req.body.source === 'Lake Access Media' ? 'Lake Access page' : 'social page';
-      const smsBody = `You got an order for a social production from the ${source} - visit your email.`;
+      const source = req.body.source === 'Lake Access Media' ? 'Lake Access' : 'Social';
+      const smsBody = `New Yeti Groove order (${source}): ${businessName} - ${postType || 'social post'}, ${finalPrice || '$150'}. Details in your email.`;
       await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
         method: 'POST',
         headers: {
