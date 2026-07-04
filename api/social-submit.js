@@ -25,6 +25,19 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  // ── PERSIST BEFORE NOTIFY ──
+  // Log the full order as structured JSON the moment it arrives, before any
+  // email/SMS attempt. This guarantees the order is recoverable from Vercel
+  // logs even if every integration below is unconfigured or fails. An order
+  // must never vanish silently again. Search Vercel runtime logs for "[ORDER]".
+  console.log('[ORDER]', JSON.stringify({
+    at: new Date().toISOString(),
+    source: req.body.source || 'Social',
+    businessName, contactName, email, phone, website, instagram, facebook,
+    postType, deliveryWeek, finalPrice, couponCode,
+    message, mediaNotes, scriptNotes, notes,
+  }));
+
   const row = (label, value) =>
     value
       ? `<tr><td style="padding:6px 12px 6px 0;color:#7AB8D0;font-size:14px;vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;color:#E6F4FB;font-size:14px;">${value}</td></tr>`
