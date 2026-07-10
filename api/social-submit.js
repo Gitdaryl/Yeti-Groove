@@ -3,6 +3,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Persist before notify: the order must be recoverable from logs even if
+  // every delivery integration below fails.
+  console.log('[ORDER]', JSON.stringify({ receivedAt: new Date().toISOString(), ...req.body }));
+
   const {
     businessName,
     contactName,
@@ -117,9 +121,10 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('Resend error:', err);
+      console.error('[ORDER-DELIVERY-FAILED]', businessName, 'Resend error:', err);
       return res.status(500).json({ error: 'Email delivery failed' });
     }
+    console.log('[ORDER-DELIVERED]', businessName, 'order email sent to daryl@yetigroove.com');
 
     // Customer confirmation email
     const confirmHtml = `<!DOCTYPE html>
@@ -160,6 +165,8 @@ export default async function handler(req, res) {
     const token = process.env.TWILIO_AUTH_TOKEN;
     const from  = process.env.TWILIO_PHONE;
     if (sid && token && from) {
+      // SMS is best-effort; the order email already delivered, so never let
+      // a Twilio failure turn this submission into an error.
       const source = req.body.source === 'Lake Access Media' ? 'Lake Access page' : 'social page';
       const smsBody = `You got an order for a social production from the ${source} - visit your email.`;
       await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
@@ -169,7 +176,9 @@ export default async function handler(req, res) {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({ From: from, To: '+15172605907', Body: smsBody }),
-      });
+      }).then(r => {
+        if (!r.ok) return r.text().then(t => console.error('SMS alert failed:', t));
+      }).catch(e => console.error('SMS alert failed:', e));
     }
 
     return res.status(200).json({ success: true });
