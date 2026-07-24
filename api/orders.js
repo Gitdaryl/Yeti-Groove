@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       await Promise.all(o.events.map(async (ev) => {
         try { ev.data = await (await fetch(ev.url, { cache: 'no-store' })).json(); } catch {}
       }));
-      const last = [...o.events].reverse().find(ev => ev.data?.type && ev.data.type !== 'created');
+      const last = [...o.events].reverse().find(ev => ['question', 'delivered'].includes(ev.data?.type));
       o.status = last?.data?.type === 'delivered' ? 'delivered'
         : last?.data?.type === 'question' ? 'waiting-on-customer'
         : 'new';
