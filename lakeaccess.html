@@ -945,7 +945,7 @@
         <div class="step-num">2</div>
         <div class="step-body">
           <h4>Upload your media right here</h4>
-          <p>Attach your photos and video clips directly in the order form below. No Drive links, no email attachments — it all lands with your order.</p>
+          <p>Attach your photos and video clips directly in the order form below. No Drive links, no email attachments - it all lands with your order.</p>
         </div>
       </div>
       <div class="step">
@@ -1024,7 +1024,7 @@
               <div class="upload-zone" id="uploadZone">
                 <input type="file" id="mediaFiles" multiple accept="image/*,video/*" style="display:none;" />
                 <p class="upload-title">Tap to add photos &amp; videos</p>
-                <p class="upload-sub">or drag and drop them here. No need to organize — upload what you have and we'll pick the best stuff.</p>
+                <p class="upload-sub">or drag and drop them here. No need to organize - upload what you have and we'll pick the best stuff.</p>
               </div>
               <ul class="upload-list" id="uploadList"></ul>
             </div>
@@ -1339,7 +1339,7 @@
         const successText = document.getElementById('successText');
         let text = `Order ${orderId} confirmed! A confirmation email is on its way (check spam if you don't see it).`;
         if (up.uploaded > 0) text += ` ${up.uploaded} file${up.uploaded === 1 ? '' : 's'} uploaded with your order.`;
-        if (up.failed > 0) text += ` ${up.failed} file${up.failed === 1 ? '' : 's'} didn't upload — just email them to daryl@yetigroove.com with subject "${orderId}".`;
+        if (up.failed > 0) text += ` ${up.failed} file${up.failed === 1 ? '' : 's'} didn't upload - just email them to daryl@yetigroove.com with subject "${orderId}".`;
         text += ' We’ll follow up within one business day.';
         successText.textContent = text;
 
