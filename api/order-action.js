@@ -41,7 +41,9 @@ export default async function handler(req, res) {
         replyTo: ADMIN_EMAIL,
       });
       await logEvent(orderId, 'question-notify', { emailResult });
-      return res.status(emailResult.ok ? 200 : 502).json({ success: emailResult.ok, emailResult });
+      // Always 200: Cloudflare fronts this domain and replaces 5xx bodies
+      // with its own error page, hiding the JSON. success carries the outcome.
+      return res.status(200).json({ success: emailResult.ok, emailResult });
     }
 
     if (action === 'deliver') {
@@ -79,7 +81,7 @@ export default async function handler(req, res) {
       const sms = await sendSMS(confirmSms);
 
       await logEvent(orderId, 'deliver-notify', { emailResult, sms });
-      return res.status(emailResult.ok ? 200 : 502).json({ success: emailResult.ok, emailResult, sms });
+      return res.status(200).json({ success: emailResult.ok, emailResult, sms });
     }
 
     return res.status(400).json({ error: 'Unknown action' });
