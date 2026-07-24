@@ -4,6 +4,10 @@
     { "source": "/fix",                  "destination": "/fix.html" },
     { "source": "/social",               "destination": "/social.html" },
     { "source": "/lakeaccess",           "destination": "/lakeaccess.html" },
+    { "source": "/admin",                "destination": "/admin.html" },
     { "source": "/(.*)",                 "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/health-alert", "schedule": "0 13 * * *" }
   ]
 }

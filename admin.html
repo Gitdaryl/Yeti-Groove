@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Orders · Yeti Groove Admin</title>
+<style>
+  :root { --bg:#061828; --card:#0A2038; --line:rgba(26,191,224,0.18); --cyan:#1ABFE0; --txt:#E6F4FB; --sub:#7AB8D0; --green:#A5D6A7; --red:#EF9A9A; --amber:#FFD54F; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font-family:'Helvetica Neue',Arial,sans-serif; padding:20px; max-width:860px; margin:0 auto; }
+  h1 { font-size:1.3rem; margin:8px 0 2px; }
+  .sub { color:var(--sub); font-size:0.85rem; margin-bottom:18px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:16px; }
+  .row { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .oid { font-weight:700; color:var(--cyan); font-size:1rem; }
+  .biz { font-size:1.05rem; font-weight:700; }
+  .badge { font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:999px; border:1px solid var(--line); }
+  .badge.new { color:var(--amber); border-color:rgba(255,213,79,0.4); }
+  .badge.waiting-on-customer { color:var(--cyan); }
+  .badge.delivered { color:var(--green); border-color:rgba(165,214,167,0.4); }
+  .meta { color:var(--sub); font-size:0.85rem; line-height:1.7; margin-top:8px; }
+  .meta a { color:var(--cyan); }
+  .block { background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px; margin-top:10px; font-size:0.88rem; line-height:1.6; }
+  .block .lbl { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cyan); opacity:0.75; margin-bottom:4px; }
+  .files a { display:inline-block; margin:4px 8px 0 0; color:var(--cyan); font-size:0.85rem; }
+  .actions { margin-top:14px; display:flex; flex-direction:column; gap:10px; }
+  textarea, input[type=text], input[type=password], input[type=url] { width:100%; background:var(--bg); border:1px solid var(--line); border-radius:8px; color:var(--txt); padding:10px; font-size:0.9rem; font-family:inherit; }
+  textarea { min-height:64px; resize:vertical; }
+  button { background:var(--cyan); color:#04121f; border:none; border-radius:8px; padding:10px 16px; font-weight:700; font-size:0.9rem; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--cyan); border:1px solid var(--line); }
+  button:disabled { opacity:0.5; cursor:default; }
+  .note { font-size:0.8rem; color:var(--sub); }
+  .ok { color:var(--green); } .err { color:var(--red); }
+  .evt { font-size:0.78rem; color:var(--sub); margin-top:2px; }
+  #login { max-width:400px; margin:80px auto; }
+  .hidden { display:none; }
+  .inline { display:flex; gap:8px; align-items:center; }
+  .inline > * { flex:1; }
+  .inline button { flex:0 0 auto; }
+</style>
+</head>
+<body>
+
+<div id="login" class="card">
+  <h1>Yeti Groove · Orders</h1>
+  <p class="sub">Enter admin key</p>
+  <div class="inline">
+    <input type="password" id="keyInput" placeholder="Admin key" />
+    <button id="keyBtn">Open</button>
+  </div>
+  <p class="note" id="loginMsg" style="margin-top:8px;"></p>
+</div>
+
+<div id="app" class="hidden">
+  <div class="row">
+    <div>
+      <h1>Orders</h1>
+      <p class="sub" id="countLine">Loading…</p>
+    </div>
+    <div>
+      <button class="ghost" id="refreshBtn">Refresh</button>
+      <button class="ghost" id="logoutBtn">Lock</button>
+    </div>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script type="module">
+import { upload } from 'https://esm.sh/@vercel/blob@2.6.1/client';
+
+const $ = (s, el=document) => el.querySelector(s);
+let KEY = localStorage.getItem('yg_admin_key') || '';
+
+function esc(s){ return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtBytes(n){ if(!n) return ''; const u=['B','KB','MB','GB']; let i=0; while(n>=1024&&i<3){n/=1024;i++;} return n.toFixed(i?1:0)+u[i]; }
+function fmtDate(s){ if(!s) return '?'; return new Date(s).toLocaleString('en-US',{timeZone:'America/Detroit',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
+
+async function api(path, opts={}) {
+  const r = await fetch(path, { ...opts, headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+KEY, ...(opts.headers||{}) } });
+  if (r.status === 401) { lock('Wrong key.'); throw new Error('unauthorized'); }
+  return r;
+}
+
+function lock(msg){ localStorage.removeItem('yg_admin_key'); KEY=''; $('#app').classList.add('hidden'); $('#login').classList.remove('hidden'); $('#loginMsg').textContent = msg||''; }
+
+async function load() {
+  $('#countLine').textContent = 'Loading…';
+  const r = await api('/api/orders');
+  const { orders } = await r.json();
+  $('#countLine').textContent = orders.length + ' order' + (orders.length===1?'':'s') + ' · newest first';
+  const list = $('#list'); list.innerHTML = '';
+  for (const o of orders) list.appendChild(renderOrder(o));
+  if (!orders.length) list.innerHTML = '<div class="card sub">No orders yet.</div>';
+}
+
+function renderOrder(o) {
+  const d = o.order || {};
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="row">
+      <div><span class="biz">${esc(d.businessName)||'?'}</span> &nbsp;<span class="oid">${esc(o.orderId)}</span></div>
+      <span class="badge ${esc(o.status)}">${esc(o.status).replace(/-/g,' ')}</span>
+    </div>
+    <div class="meta">
+      ${esc(d.contactName)} · <a href="mailto:${esc(d.email)}">${esc(d.email)}</a>${d.phone?` · <a href="tel:${esc(d.phone)}">${esc(d.phone)}</a>`:''}<br/>
+      ${esc(d.postType)||'style TBD'} · ${esc(d.finalPrice)||'$150'}${d.couponCode?` (${esc(d.couponCode)})`:''} · ${fmtDate(d.receivedAt)}${d.deliveryWeek?` · wants: ${esc(d.deliveryWeek)}`:''} · via ${esc(d.source)||'Social'}
+    </div>
+    ${d.message?`<div class="block"><div class="lbl">Key message</div>${esc(d.message)}</div>`:''}
+    ${d.scriptNotes?`<div class="block"><div class="lbl">Script points</div>${esc(d.scriptNotes)}</div>`:''}
+    ${d.mediaNotes?`<div class="block"><div class="lbl">Media notes</div>${esc(d.mediaNotes)}</div>`:''}
+    ${d.notes?`<div class="block"><div class="lbl">Other notes</div>${esc(d.notes)}</div>`:''}
+    <div class="block"><div class="lbl">Customer media (${o.media.length})</div>
+      <div class="files">${o.media.map(m=>`<a href="${esc(m.url)}" target="_blank">${esc(m.name)} <span class="note">${fmtBytes(m.size)}</span></a>`).join('') || '<span class="note">None uploaded</span>'}</div>
+    </div>
+    <div class="block"><div class="lbl">Delivery files (${o.delivery.length})</div>
+      <div class="files">${o.delivery.map(m=>`<a href="${esc(m.url)}" target="_blank">${esc(m.name)}</a>`).join('') || '<span class="note">None yet</span>'}</div>
+      <div class="inline" style="margin-top:8px;">
+        <input type="file" multiple class="delivFiles" />
+        <button class="ghost upBtn">Upload</button>
+      </div>
+      <p class="note upMsg"></p>
+    </div>
+    <div class="actions">
+      <div>
+        <textarea class="qText" placeholder="Ask the customer a question… (emails them, reply comes back to daryl@)"></textarea>
+        <div class="inline" style="margin-top:6px;"><span class="note qMsg"></span><button class="ghost qBtn">Send Question</button></div>
+      </div>
+      <div>
+        <input type="url" class="dLink" placeholder="Optional external link (YouTube, final post URL)…" />
+        <textarea class="dNote" placeholder="Optional note to include with delivery…" style="margin-top:6px;min-height:44px;"></textarea>
+        <div class="inline" style="margin-top:6px;"><span class="note dMsg"></span><button class="dBtn">Deliver ➜ email customer</button></div>
+      </div>
+      ${o.events.length?`<details><summary class="note" style="cursor:pointer;">History (${o.events.length})</summary>${o.events.map(ev=>`<div class="evt">${ev.data?`${fmtDate(ev.data.at)} — ${esc(ev.data.type)}${ev.data.text?': '+esc(ev.data.text):''}`:esc(ev.name)}</div>`).join('')}</details>`:''}
+    </div>`;
+
+  $('.qBtn', el).addEventListener('click', async () => {
+    const text = $('.qText', el).value.trim();
+    const msg = $('.qMsg', el);
+    if (!text) { msg.textContent = 'Type a question first.'; msg.className='note err'; return; }
+    $('.qBtn', el).disabled = true; msg.textContent = 'Sending…'; msg.className='note';
+    try {
+      const r = await api('/api/order-action', { method:'POST', body: JSON.stringify({ action:'question', orderId:o.orderId, text }) });
+      const j = await r.json();
+      msg.textContent = j.success ? 'Question emailed ✓' : 'Email failed: '+(j.emailResult?.error||'unknown');
+      msg.className = 'note ' + (j.success?'ok':'err');
+      if (j.success) $('.qText', el).value = '';
+    } catch(e){ msg.textContent = 'Failed.'; msg.className='note err'; }
+    $('.qBtn', el).disabled = false;
+  });
+
+  $('.upBtn', el).addEventListener('click', async () => {
+    const input = $('.delivFiles', el);
+    const msg = $('.upMsg', el);
+    if (!input.files.length) { msg.textContent = 'Pick files first.'; msg.className='note err'; return; }
+    $('.upBtn', el).disabled = true;
+    let done = 0;
+    for (const f of input.files) {
+      msg.textContent = `Uploading ${done+1}/${input.files.length}: ${f.name}…`; msg.className='note';
+      try {
+        await upload(`orders/${o.orderId}/delivery/${f.name}`, f, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+          clientPayload: JSON.stringify({ adminKey: KEY }),
+        });
+        done++;
+      } catch(e) { msg.textContent = `Failed on ${f.name}: ${e.message}`; msg.className='note err'; $('.upBtn', el).disabled=false; return; }
+    }
+    msg.textContent = `Uploaded ${done} file${done===1?'':'s'} ✓ — refresh to see them listed.`; msg.className='note ok';
+    $('.upBtn', el).disabled = false;
+  });
+
+  $('.dBtn', el).addEventListener('click', async () => {
+    const msg = $('.dMsg', el);
+    if (!confirm(`Send delivery email for ${o.orderId} to ${d.email}?`)) return;
+    $('.dBtn', el).disabled = true; msg.textContent = 'Delivering…'; msg.className='note';
+    try {
+      const r = await api('/api/order-action', { method:'POST', body: JSON.stringify({ action:'deliver', orderId:o.orderId, note:$('.dNote',el).value.trim(), link:$('.dLink',el).value.trim() }) });
+      const j = await r.json();
+      msg.textContent = j.success ? 'Delivered ✓ customer emailed, you get a confirmation text.' : 'Failed: '+(j.error||j.emailResult?.error||'unknown');
+      msg.className = 'note ' + (j.success?'ok':'err');
+    } catch(e){ msg.textContent = 'Failed.'; msg.className='note err'; }
+    $('.dBtn', el).disabled = false;
+  });
+
+  return el;
+}
+
+$('#keyBtn').addEventListener('click', async () => {
+  KEY = $('#keyInput').value.trim();
+  if (!KEY) return;
+  localStorage.setItem('yg_admin_key', KEY);
+  $('#login').classList.add('hidden'); $('#app').classList.remove('hidden');
+  try { await load(); } catch {}
+});
+$('#keyInput').addEventListener('keydown', e => { if (e.key==='Enter') $('#keyBtn').click(); });
+$('#refreshBtn').addEventListener('click', () => load().catch(()=>{}));
+$('#logoutBtn').addEventListener('click', () => lock());
+
+if (KEY) { $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); load().catch(()=>{}); }
+</script>
+</body>
+</html>

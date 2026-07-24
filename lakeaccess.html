@@ -645,26 +645,43 @@
       background: var(--goldDim);
     }
 
-    .drive-box {
+    .upload-zone {
       background: var(--dark);
       border: 1px dashed rgba(201,165,90,0.3);
       border-radius: 8px;
       padding: 1.25rem;
       text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
     }
-
-    .drive-box .drive-title {
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold);
+      background: var(--goldDim);
+    }
+    .upload-zone .upload-title {
       font-weight: 600;
       color: var(--cream);
       margin-bottom: 0.3rem;
       font-size: 0.95rem;
     }
-
-    .drive-box p {
+    .upload-zone .upload-sub {
       font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 0.75rem;
       line-height: 1.5;
+      margin: 0;
+    }
+    .upload-list { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+    .upload-list li {
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      font-size: 0.85rem; color: var(--cream);
+      padding: 0.4rem 0.6rem; border: 1px solid rgba(201,165,90,0.15);
+      border-radius: 6px; margin-bottom: 0.35rem; background: var(--dark);
+    }
+    .upload-list .file-size { color: var(--muted); font-size: 0.78rem; white-space: nowrap; }
+    .upload-list .file-state { font-size: 0.78rem; white-space: nowrap; }
+    .upload-list .file-remove {
+      background: none; border: none; color: var(--muted); cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 0 0.2rem;
     }
 
     .btn-outline {
@@ -927,8 +944,8 @@
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <h4>Drop your media in Google Drive</h4>
-          <p>Upload your photos and any video clips to the shared Drive folder. Include as much as you have, we'll pick the best stuff.</p>
+          <h4>Upload your media right here</h4>
+          <p>Attach your photos and video clips directly in the order form below. No Drive links, no email attachments — it all lands with your order.</p>
         </div>
       </div>
       <div class="step">
@@ -1004,15 +1021,16 @@
           <div id="mediaSectionWrap">
             <div class="form-field full">
               <label>Upload your media <span class="hint">- photos, video, or both</span></label>
-              <div class="drive-box">
-                <p class="drive-title">Upload to our shared Google Drive folder</p>
-                <p>Drop in your photos and any video clips. No need to organize, just upload what you have and we'll sort through it.</p>
-                <a class="btn-outline" href="https://drive.google.com/drive/folders/1wApVLL50JpWHpRT7N-4jX7YEzydFk4Zc?usp=sharing" target="_blank" rel="noopener">Open Upload Folder</a>
+              <div class="upload-zone" id="uploadZone">
+                <input type="file" id="mediaFiles" multiple accept="image/*,video/*" style="display:none;" />
+                <p class="upload-title">Tap to add photos &amp; videos</p>
+                <p class="upload-sub">or drag and drop them here. No need to organize — upload what you have and we'll pick the best stuff.</p>
               </div>
+              <ul class="upload-list" id="uploadList"></ul>
             </div>
             <div class="form-field full">
-              <label for="mediaNotes">Tell us about your media <span class="hint">- paste a Drive link or describe what you're uploading</span></label>
-              <textarea id="mediaNotes" name="mediaNotes" placeholder="e.g. Uploaded 12 photos from last summer. The ones with the dock are the best. Also have a 45-sec selfie video of me talking about the tasting." style="min-height:80px;"></textarea>
+              <label for="mediaNotes">Tell us about your media <span class="hint">- which shots matter most?</span></label>
+              <textarea id="mediaNotes" name="mediaNotes" placeholder="e.g. 12 photos from last summer. The ones with the dock are the best. Also a 45-sec selfie video of me talking about the tasting." style="min-height:80px;"></textarea>
             </div>
           </div>
 
@@ -1051,7 +1069,8 @@
         </div>
 
         <div class="msg-success" id="msgSuccess">
-          Your request is in! We'll review your submission and follow up within one business day. Keep an eye on your email. Questions? <a href="mailto:daryl@yetigroove.com" style="color:#A5D6A7;">daryl@yetigroove.com</a>
+          <span id="successText">Your request is in! A confirmation email is on its way (check spam if you don't see it). We'll follow up within one business day.</span>
+          Questions? <a href="mailto:daryl@yetigroove.com" style="color:#A5D6A7;">daryl@yetigroove.com</a>
         </div>
         <div class="msg-error" id="msgError">
           Something went wrong sending your request. Please email <a href="mailto:daryl@yetigroove.com" style="color:#EF9A9A;">daryl@yetigroove.com</a> directly and we'll get it sorted.
@@ -1171,6 +1190,87 @@
     const msgSuccess = document.getElementById('msgSuccess');
     const msgError = document.getElementById('msgError');
 
+    // ── MEDIA UPLOAD PICKER ──
+    const uploadZone = document.getElementById('uploadZone');
+    const mediaInput = document.getElementById('mediaFiles');
+    const uploadList = document.getElementById('uploadList');
+    let pickedFiles = [];
+
+    function fmtSize(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(1) + ' GB';
+      if (n >= 1e6) return (n / 1e6).toFixed(1) + ' MB';
+      return Math.max(1, Math.round(n / 1e3)) + ' KB';
+    }
+
+    function renderFileList() {
+      uploadList.innerHTML = '';
+      pickedFiles.forEach((f, i) => {
+        const li = document.createElement('li');
+        const name = document.createElement('span');
+        name.textContent = f.name;
+        name.style.cssText = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+        const size = document.createElement('span');
+        size.className = 'file-size';
+        size.textContent = fmtSize(f.size);
+        const state = document.createElement('span');
+        state.className = 'file-state';
+        state.dataset.idx = i;
+        const rm = document.createElement('button');
+        rm.type = 'button';
+        rm.className = 'file-remove';
+        rm.textContent = '✕';
+        rm.addEventListener('click', () => { pickedFiles.splice(i, 1); renderFileList(); });
+        li.append(name, size, state, rm);
+        uploadList.appendChild(li);
+      });
+    }
+
+    function addFiles(files) {
+      for (const f of files) {
+        if (!/^(image|video)\//.test(f.type) && !/\.(heic|heif|mov|mp4)$/i.test(f.name)) continue;
+        if (pickedFiles.some(p => p.name === f.name && p.size === f.size)) continue;
+        pickedFiles.push(f);
+      }
+      renderFileList();
+    }
+
+    if (uploadZone) {
+      uploadZone.addEventListener('click', () => mediaInput.click());
+      mediaInput.addEventListener('change', () => { addFiles(mediaInput.files); mediaInput.value = ''; });
+      ['dragenter', 'dragover'].forEach(ev => uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.add('dragover'); }));
+      ['dragleave', 'drop'].forEach(ev => uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.remove('dragover'); }));
+      uploadZone.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+    }
+
+    async function uploadPickedFiles(orderId) {
+      if (!pickedFiles.length) return { uploaded: 0, failed: 0 };
+      let uploadLib;
+      try {
+        uploadLib = await import('https://esm.sh/@vercel/blob@2.6.1/client');
+      } catch {
+        return { uploaded: 0, failed: pickedFiles.length, libFailed: true };
+      }
+      let uploaded = 0, failed = 0;
+      for (let i = 0; i < pickedFiles.length; i++) {
+        const f = pickedFiles[i];
+        const state = uploadList.querySelector(`[data-idx="${i}"]`);
+        submitBtn.textContent = `Uploading media ${i + 1}/${pickedFiles.length}...`;
+        if (state) state.textContent = 'uploading...';
+        try {
+          await uploadLib.upload(`orders/${orderId}/media/${f.name}`, f, {
+            access: 'public',
+            handleUploadUrl: '/api/upload',
+          });
+          uploaded++;
+          if (state) { state.textContent = '✓'; state.style.color = '#A5D6A7'; }
+        } catch {
+          failed++;
+          if (state) { state.textContent = 'failed'; state.style.color = '#EF9A9A'; }
+        }
+      }
+      return { uploaded, failed };
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -1230,15 +1330,27 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
+        if (!res.ok) throw new Error('Server error');
+        const { orderId } = await res.json();
 
-        if (res.ok) {
-          form.reset();
-          clearSelection();
-          msgSuccess.classList.add('show');
-          msgSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else {
-          throw new Error('Server error');
-        }
+        // Order is safely recorded; now attach media to it.
+        const up = await uploadPickedFiles(orderId);
+
+        const successText = document.getElementById('successText');
+        let text = `Order ${orderId} confirmed! A confirmation email is on its way (check spam if you don't see it).`;
+        if (up.uploaded > 0) text += ` ${up.uploaded} file${up.uploaded === 1 ? '' : 's'} uploaded with your order.`;
+        if (up.failed > 0) text += ` ${up.failed} file${up.failed === 1 ? '' : 's'} didn't upload — just email them to daryl@yetigroove.com with subject "${orderId}".`;
+        text += ' We’ll follow up within one business day.';
+        successText.textContent = text;
+
+        form.reset();
+        pickedFiles = [];
+        renderFileList();
+        clearSelection();
+        submitBtn.textContent = 'Submit Request';
+        submitBtn.disabled = false;
+        msgSuccess.classList.add('show');
+        msgSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch {
         msgError.classList.add('show');
         submitBtn.disabled = false;
