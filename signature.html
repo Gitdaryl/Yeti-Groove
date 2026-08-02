@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yeti Groove Signature Films · Cinematic Films for Land, Property & Legacy</title>
+  <meta name="description" content="Commissioned cinematic films for land developments, lakefront property, and legacy businesses in Michigan lake country. One filmmaker, agency-grade output. Commissions from $7,500." />
+  <meta property="og:title" content="Yeti Groove Signature Films" />
+  <meta property="og:description" content="Commissioned cinematic films for land, property, and legacy businesses. See the Devils Lake Cove film." />
+  <meta property="og:image" content="https://devils-lake-cove.vercel.app/assets/film-poster.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yetigroove.com/signature" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0c0f14;
+      --ink2:     #10141a;
+      --gold:     #c9a962;
+      --gold-dim: #9c8350;
+      --gold-soft: rgba(201,169,98,0.12);
+      --paper:    #f5f1e8;
+      --muted:    #a89f8d;
+      --line:     rgba(201,169,98,0.16);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--paper);
+      line-height: 1.7;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12,15,20,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .brand-name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .brand-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--paper);
+      letter-spacing: 0.03em;
+    }
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 0.55rem 1.2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #d8bc7d; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .hero-shade {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(12,15,20,0.72) 0%, rgba(12,15,20,0.55) 45%, rgba(12,15,20,0.9) 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 860px; }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      line-height: 1.12;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p.lede {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: var(--paper);
+      opacity: 0.85;
+      max-width: 620px;
+      margin: 0 auto 2.6rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-gold:hover { background: #d8bc7d; }
+    .btn-ghost {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--paper);
+      border: 1px solid rgba(245,241,232,0.35);
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── PAGE BODY sits above fixed hero ── */
+    main {
+      position: relative;
+      z-index: 2;
+      background: var(--ink);
+      border-top: 1px solid var(--line);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5.5rem 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+      opacity: 0.85;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 1.4rem;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+    p { color: var(--muted); margin-bottom: 1rem; max-width: 640px; }
+    p strong { color: var(--paper); font-weight: 500; }
+
+    /* ── FILM ── */
+    .film-frame {
+      margin-top: 2.4rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      background: #000;
+    }
+    .film-frame video { display: block; width: 100%; height: auto; }
+    .film-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.9rem;
+    }
+    .film-caption a { color: var(--gold); text-decoration: none; }
+    .film-caption a:hover { text-decoration: underline; }
+
+    /* ── INCLUDED ── */
+    .included {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.2rem;
+    }
+    .inc-card {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1.6rem;
+      background: rgba(255,255,255,0.015);
+    }
+    .inc-card h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+    }
+    .inc-card p { font-size: 0.9rem; margin: 0; }
+
+    /* ── COMMISSIONS / PRICING ── */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.4rem;
+    }
+    .tier {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2rem 1.8rem;
+      background: rgba(255,255,255,0.015);
+      display: flex;
+      flex-direction: column;
+    }
+    .tier.featured {
+      border-color: var(--gold-dim);
+      background: var(--gold-soft);
+    }
+    .tier-name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: var(--paper);
+      margin-bottom: 0.3rem;
+    }
+    .tier-price {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+    }
+    .tier ul {
+      list-style: none;
+      margin-bottom: 1.4rem;
+      flex: 1;
+    }
+    .tier li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.45rem;
+    }
+    .tier li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-size: 0.5rem;
+      color: var(--gold);
+    }
+    .tier a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .tier a:hover { text-decoration: underline; }
+    .tiers-note { font-size: 0.85rem; margin-top: 1.6rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      border: 1px solid var(--gold-dim);
+      background: var(--gold-soft);
+      border-radius: 4px;
+      padding: 2.6rem 2.2rem;
+      margin-top: 2.4rem;
+      text-align: center;
+    }
+    .contact-box p { margin: 0 auto 1.6rem; }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      background: var(--ink);
+      text-align: center;
+      padding: 2.4rem 2rem;
+      font-size: 0.78rem;
+      color: rgba(168,159,141,0.55);
+      border-top: 1px solid var(--line);
+    }
+    footer a { color: rgba(168,159,141,0.7); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.9rem 1.1rem; }
+      .brand-name { font-size: 0.85rem; letter-spacing: 0.2em; }
+      .brand-sub { display: none; }
+      section { padding: 3.6rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="/signature">
+      <span class="brand-name">Yeti Groove</span>
+      <span class="brand-sub">Signature Films</span>
+    </a>
+    <a class="nav-cta" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Commission a Film</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <video class="hero-video" autoplay muted loop playsinline
+           src="https://devils-lake-cove.vercel.app/assets/hero.mp4"
+           poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"></video>
+    <div class="hero-shade"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Michigan Lake Country</p>
+      <h1>Your land has a story.<br /><em>We film it like one.</em></h1>
+      <p class="lede">Commissioned cinematic films for land developments, lakefront property, and legacy businesses. One filmmaker. Agency-grade output.</p>
+      <div class="hero-actions">
+        <a class="btn-gold" href="#film">Watch the Devils Lake Cove Film</a>
+        <a class="btn-ghost" href="#commissions">Commissions</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- THE FILM -->
+    <section id="film">
+      <p class="section-label">The Proof</p>
+      <h2>Devils Lake Cove, <em>a feature in miniature</em></h2>
+      <p>A land developer asked for a video about a parcel on Devils Lake. He received a two-minute film with an original score, aerial and ground cinematography, and a cinematic presentation site built around it.</p>
+      <p><strong>He is the one showing it to everyone.</strong> That is what a Signature Film does: it sells while you sleep, in rooms you are not in.</p>
+      <div class="film-frame">
+        <video controls preload="none"
+               poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"
+               src="https://devils-lake-cove.vercel.app/assets/film.mp4"></video>
+      </div>
+      <p class="film-caption">
+        <span>Devils Lake Cove &middot; 2 min 15 sec &middot; original score</span>
+        <a href="https://devils-lake-cove.vercel.app" target="_blank" rel="noopener">View the full presentation site &rarr;</a>
+      </p>
+    </section>
+
+    <!-- WHAT A COMMISSION INCLUDES -->
+    <section id="included">
+      <p class="section-label">The Craft</p>
+      <h2>Everything an agency sends a crew for, <em>delivered by one</em></h2>
+      <div class="included">
+        <div class="inc-card">
+          <h3>Story &amp; Direction</h3>
+          <p>Your property or business framed as a narrative, not a slideshow. Script, structure, and pacing built before a single shot.</p>
+        </div>
+        <div class="inc-card">
+          <h3>Aerial &amp; Ground Cinematography</h3>
+          <p>Drone flyovers, orbit reveals, and ground footage shot for the edit, matched to season and light.</p>
+        </div>
+        <div class="inc-card">
+          <h3>Original Score</h3>
+          <p>Music composed for your film. No stock tracks, no licensing surprises, nothing you have heard on another ad.</p>
+        </div>
+        <div class="inc-card">
+          <h3>Cinematic Presentation Site</h3>
+          <p>The film lives on its own scroll-driven microsite, a private theater with your link on the door. Built to be sent.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMISSIONS -->
+    <section id="commissions">
+      <p class="section-label">Commissions</p>
+      <h2>Three ways to work with the Yeti</h2>
+      <div class="tiers">
+        <div class="tier featured">
+          <div class="tier-name">Signature Film</div>
+          <div class="tier-price">From $7,500</div>
+          <ul>
+            <li>Full production: story, cinematography, edit</li>
+            <li>Original composed score</li>
+            <li>Cinematic presentation microsite included</li>
+            <li>Master files for broadcast, web, and social</li>
+            <li>Delivered in 2 to 3 weeks</li>
+          </ul>
+          <a href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Inquire &rarr;</a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Cinematic Microsite</div>
+          <div class="tier-price">From $1,500</div>
+          <ul>
+            <li>Scroll-driven presentation site for media you already have</li>
+            <li>Listings, developments, venues, events</li>
+            <li>Custom domain optional</li>
+            <li>Live in days, not weeks</li>
+          </ul>
+          <a href="mailto:daryl@yetigroove.com?subject=Cinematic%20Microsite%20Inquiry">Inquire &rarr;</a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Ongoing Social</div>
+          <div class="tier-price">From $100 per post</div>
+          <ul>
+            <li>Short-form video for pages that need a pulse</li>
+            <li>3 to 5 business day turnaround</li>
+            <li>Order online, no meetings required</li>
+          </ul>
+          <a href="/social">See social packages &rarr;</a>
+        </div>
+      </div>
+      <p class="tiers-note">Signature Films are commissioned work. A limited number are taken each season so every film gets the full attention of the person whose name is on it.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-label">Begin</p>
+      <h2>Tell us what deserves a film</h2>
+      <div class="contact-box">
+        <p>Send a few lines about your property, project, or business. You will hear back from the Yeti himself, usually the same day.</p>
+        <a class="btn-gold" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">daryl@yetigroove.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/">yetigroove.com</a></p>
+  </footer>
+
+</body>
+</html>
