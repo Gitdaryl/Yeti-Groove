@@ -266,7 +266,200 @@
       background: var(--gold-soft);
     }
 
+    /* ── BEFORE/AFTER SLIDER ── */
+    .ba {
+      position: relative;
+      margin-top: 1.6rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      touch-action: none;
+      cursor: ew-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      --pos: 50%;
+    }
+    .ba img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .ba .ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+    .ba-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: var(--pos);
+      width: 2px;
+      background: var(--gold);
+      transform: translateX(-1px);
+      pointer-events: none;
+    }
+    .ba-handle::after {
+      content: "◂ ▸";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--gold);
+      color: #0A0A09;
+      font-size: 0.7rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ba-tag {
+      position: absolute;
+      bottom: 0.8rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.32rem 0.65rem;
+      background: rgba(8,8,7,0.7);
+      color: var(--paper);
+      border-radius: 3px;
+      pointer-events: none;
+    }
+    .ba-tag-l { left: 0.8rem; }
+    .ba-tag-r { right: 0.8rem; color: var(--gold); }
+
+    /* ── MEDIA-BACKED CRAFT CARDS ── */
+    .inc-media { position: relative; overflow: hidden; background: #0C0B09; }
+    .inc-media .inc-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.38;
+      transition: opacity 0.4s, transform 0.7s;
+    }
+    .inc-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,0.92) 30%, rgba(8,8,7,0.35));
+    }
+    .inc-media:hover .inc-bg { opacity: 0.55; transform: scale(1.045); }
+    .inc-media h3, .inc-media p { position: relative; z-index: 1; }
+
+    /* ── SCORE / EQUALIZER ── */
+    .eq {
+      display: flex;
+      gap: 4px;
+      align-items: flex-end;
+      height: 34px;
+      margin: 1rem 0 1.1rem;
+    }
+    .eq span {
+      width: 5px;
+      background: var(--gold);
+      border-radius: 2px;
+      opacity: 0.85;
+      height: 22%;
+    }
+    .eq span:nth-child(2) { height: 55%; }
+    .eq span:nth-child(3) { height: 35%; }
+    .eq span:nth-child(4) { height: 75%; }
+    .eq span:nth-child(5) { height: 45%; }
+    .eq span:nth-child(6) { height: 65%; }
+    .eq span:nth-child(7) { height: 30%; }
+    .eq span:nth-child(8) { height: 50%; }
+    #scoreCard.playing .eq span { animation: eqb 0.8s ease-in-out infinite alternate; }
+    #scoreCard.playing .eq span:nth-child(2) { animation-delay: 0.1s; }
+    #scoreCard.playing .eq span:nth-child(3) { animation-delay: 0.25s; }
+    #scoreCard.playing .eq span:nth-child(4) { animation-delay: 0.05s; }
+    #scoreCard.playing .eq span:nth-child(5) { animation-delay: 0.3s; }
+    #scoreCard.playing .eq span:nth-child(6) { animation-delay: 0.18s; }
+    #scoreCard.playing .eq span:nth-child(7) { animation-delay: 0.4s; }
+    #scoreCard.playing .eq span:nth-child(8) { animation-delay: 0.12s; }
+    @keyframes eqb { from { height: 12%; } to { height: 100%; } }
+    .listen-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: none;
+      border: 1px solid var(--gold-dim);
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .listen-btn:hover { background: var(--gold-soft); }
+
+    /* ── FILMSTRIP ── */
+    .filmstrip {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #070706;
+    }
+    .strip-track {
+      display: flex;
+      width: max-content;
+      animation: strip 55s linear infinite;
+    }
+    .filmstrip:hover .strip-track { animation-play-state: paused; }
+    .strip-track img {
+      height: 130px;
+      width: auto;
+      display: block;
+      margin-right: 2px;
+    }
+    @keyframes strip { to { transform: translateX(-50%); } }
+    @media (max-width: 640px) { .strip-track img { height: 88px; } }
+
     /* ── COMMISSIONS / PRICING ── */
+    #commissions {
+      max-width: none;
+      position: relative;
+      padding: 0;
+    }
+    #commissions::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7,7,6,0.87) 0%, rgba(7,7,6,0.94) 100%),
+        url("https://devils-lake-cove.vercel.app/assets/canal-sunset.jpg") center / cover;
+    }
+    .commissions-inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5.5rem 2rem;
+    }
+    @media (max-width: 640px) { .commissions-inner { padding: 3.6rem 1.2rem; } }
+    .tier.featured {
+      border-color: rgba(201,165,90,0.5);
+      box-shadow: 0 0 60px rgba(201,165,90,0.13);
+      position: relative;
+    }
+    .tier-badge {
+      position: absolute;
+      top: -0.72rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #0A0A09;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* ── PRICING (base) ── */
     .tiers {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -334,15 +527,33 @@
     .tiers-note { font-size: 0.85rem; margin-top: 1.6rem; color: var(--muted); }
 
     /* ── CONTACT ── */
-    .contact-box {
-      border: 1px solid var(--gold-dim);
-      background: var(--gold-soft);
-      border-radius: 4px;
-      padding: 2.6rem 2.2rem;
-      margin-top: 2.4rem;
+    #contact {
+      max-width: none;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+    .contact-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .contact-shade {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 55%, rgba(8,8,7,0.45) 0%, rgba(8,8,7,0.9) 100%);
+    }
+    .contact-inner {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 7.5rem 2rem;
       text-align: center;
     }
-    .contact-box p { margin: 0 auto 1.6rem; }
+    .contact-inner p { margin: 0 auto 2rem; }
+    @media (max-width: 640px) { .contact-inner { padding: 5rem 1.2rem; } }
 
     footer {
       position: relative;
@@ -438,29 +649,67 @@
       <div class="included">
         <div class="inc-card inc-wide">
           <h3>Photoreal Visualization</h3>
-          <p>Your architectural plans become finished scenes with life already in them, composited and retouched until they read as real. The core of the off-plan offering, and the reason most of the Cove film looks built.</p>
+          <p>Your architectural plans become finished scenes with life already in them, composited and retouched until they read as real. Both frames below were visualized from the Cove plans before a single foundation was poured. <strong>Drag the handle and finish it yourself.</strong></p>
+          <div class="ba" id="baSlider" tabindex="0" role="slider" aria-label="Before and after visualization comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <img src="https://devils-lake-cove.vercel.app/assets/condos-complete.jpg" alt="Finished marina village, visualized at dusk" />
+            <img class="ba-before" src="https://devils-lake-cove.vercel.app/assets/build-condos.jpg" alt="The same marina village visualized mid-construction" />
+            <div class="ba-handle"></div>
+            <span class="ba-tag ba-tag-l">Mid-build</span>
+            <span class="ba-tag ba-tag-r">The finished vision</span>
+          </div>
         </div>
-        <div class="inc-card">
+        <div class="inc-card inc-media">
+          <img class="inc-bg" src="https://devils-lake-cove.vercel.app/assets/film-poster.jpg" alt="" loading="lazy" />
           <h3>Story &amp; Direction</h3>
           <p>Your property or business framed as a narrative, not a slideshow. Script, structure, and pacing built before a single shot.</p>
         </div>
-        <div class="inc-card">
+        <div class="inc-card inc-media" id="aerialCard">
+          <video class="inc-bg" muted loop playsinline preload="none"
+                 poster="https://devils-lake-cove.vercel.app/assets/summer-north.jpg"
+                 src="https://devils-lake-cove.vercel.app/assets/clearing.mp4"></video>
           <h3>Aerial &amp; Ground Cinematography</h3>
           <p>Drone flyovers, orbit reveals, and ground footage of your land as it is, shot both for the edit and as reference for the visualization work.</p>
         </div>
-        <div class="inc-card">
+        <div class="inc-card" id="scoreCard">
           <h3>Original Score</h3>
           <p>Music composed for your film. No stock tracks, no licensing surprises, nothing you have heard on another ad.</p>
+          <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <button class="listen-btn" id="listenBtn" type="button">&#9654;&nbsp; Listen &middot; 15 sec of the Cove score</button>
+          <audio id="scoreAudio" src="/media/cove-score-15s.mp3" preload="none"></audio>
         </div>
-        <div class="inc-card">
+        <div class="inc-card inc-media">
+          <img class="inc-bg" src="/media/cove-site-shot.jpg" alt="" loading="lazy" />
           <h3>Cinematic Presentation Site</h3>
           <p>The film lives on its own scroll-driven microsite, a private theater with your link on the door. Built to be sent.</p>
         </div>
       </div>
     </section>
 
+    <!-- FILMSTRIP -->
+    <div class="filmstrip" aria-hidden="true">
+      <div class="strip-track">
+        <img src="/media/strip/area-fireworks.jpg" alt="" />
+        <img src="/media/strip/estates-docks.jpg" alt="" />
+        <img src="/media/strip/area-boats-1.jpg" alt="" />
+        <img src="/media/strip/clubhouse-pool.jpg" alt="" />
+        <img src="/media/strip/build-1.jpg" alt="" />
+        <img src="/media/strip/canal-sunset.jpg" alt="" />
+        <img src="/media/strip/estates-boat.jpg" alt="" />
+        <img src="/media/strip/area-boats-2.jpg" alt="" />
+        <img src="/media/strip/area-fireworks.jpg" alt="" />
+        <img src="/media/strip/estates-docks.jpg" alt="" />
+        <img src="/media/strip/area-boats-1.jpg" alt="" />
+        <img src="/media/strip/clubhouse-pool.jpg" alt="" />
+        <img src="/media/strip/build-1.jpg" alt="" />
+        <img src="/media/strip/canal-sunset.jpg" alt="" />
+        <img src="/media/strip/estates-boat.jpg" alt="" />
+        <img src="/media/strip/area-boats-2.jpg" alt="" />
+      </div>
+    </div>
+
     <!-- COMMISSIONS -->
     <section id="commissions">
+      <div class="commissions-inner">
       <p class="section-label">Commissions</p>
       <h2>Three ways to work with the Yeti</h2>
       <div class="tiers">
@@ -479,6 +728,7 @@
           <a href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Inquire &rarr;</a>
         </div>
         <div class="tier featured">
+          <div class="tier-badge">Most Commissioned</div>
           <div class="tier-name">Development Package</div>
           <div class="tier-price">From $15,000</div>
           <ul>
@@ -504,13 +754,17 @@
         </div>
       </div>
       <p class="tiers-note">Signature Films are commissioned work. The studio takes a limited number each season so every film gets its full attention. Every commission can add a quarterly progress package as construction advances. Just need short-form content for your pages? <a href="/social" style="color: var(--gold);">Order social video here</a>.</p>
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <p class="section-label">Begin</p>
-      <h2>Tell us what deserves a film</h2>
-      <div class="contact-box">
+      <video class="contact-video" autoplay muted loop playsinline
+             src="https://devils-lake-cove.vercel.app/assets/marina-loop.mp4"></video>
+      <div class="contact-shade"></div>
+      <div class="contact-inner">
+        <p class="section-label">Begin</p>
+        <h2>Tell us what deserves a film</h2>
         <p>Send a few lines about your property, project, or business. The studio responds to every inquiry, usually the same day.</p>
         <a class="btn-gold" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">daryl@yetigroove.com</a>
       </div>
@@ -521,6 +775,74 @@
   <footer>
     <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/">yetigroove.com</a></p>
   </footer>
+
+  <script>
+    // Before/after slider
+    (function () {
+      var ba = document.getElementById('baSlider');
+      if (!ba) return;
+      function setPos(clientX) {
+        var r = ba.getBoundingClientRect();
+        var p = (clientX - r.left) / r.width;
+        p = Math.max(0.02, Math.min(0.98, p));
+        ba.style.setProperty('--pos', (p * 100) + '%');
+        ba.setAttribute('aria-valuenow', Math.round(p * 100));
+      }
+      ba.addEventListener('pointerdown', function (e) {
+        ba.setPointerCapture(e.pointerId);
+        setPos(e.clientX);
+        var move = function (ev) { setPos(ev.clientX); };
+        ba.addEventListener('pointermove', move);
+        ba.addEventListener('pointerup', function () {
+          ba.removeEventListener('pointermove', move);
+        }, { once: true });
+      });
+      ba.addEventListener('keydown', function (e) {
+        var now = parseFloat(ba.getAttribute('aria-valuenow')) || 50;
+        if (e.key === 'ArrowLeft') now -= 4;
+        else if (e.key === 'ArrowRight') now += 4;
+        else return;
+        e.preventDefault();
+        now = Math.max(2, Math.min(98, now));
+        ba.style.setProperty('--pos', now + '%');
+        ba.setAttribute('aria-valuenow', Math.round(now));
+      });
+    })();
+
+    // Original score listen button
+    (function () {
+      var card = document.getElementById('scoreCard');
+      var btn = document.getElementById('listenBtn');
+      var audio = document.getElementById('scoreAudio');
+      if (!btn || !audio) return;
+      var label = btn.innerHTML;
+      btn.addEventListener('click', function () {
+        if (audio.paused) {
+          audio.currentTime = 0;
+          audio.play();
+          card.classList.add('playing');
+          btn.innerHTML = '&#9632;&nbsp; Playing the Cove score&hellip;';
+        } else {
+          audio.pause();
+          card.classList.remove('playing');
+          btn.innerHTML = label;
+        }
+      });
+      audio.addEventListener('ended', function () {
+        card.classList.remove('playing');
+        btn.innerHTML = label;
+      });
+    })();
+
+    // Aerial card: play drone clip on hover
+    (function () {
+      var card = document.getElementById('aerialCard');
+      if (!card) return;
+      var vid = card.querySelector('video');
+      card.addEventListener('mouseenter', function () { vid.play().catch(function () {}); });
+      card.addEventListener('mouseleave', function () { vid.pause(); });
+    })();
+  </script>
 
 </body>
 </html>
