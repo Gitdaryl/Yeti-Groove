@@ -239,9 +239,12 @@
     /* ── INCLUDED ── */
     .included {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.2rem;
       margin-top: 2.2rem;
+    }
+    @media (max-width: 600px) {
+      .included { grid-template-columns: 1fr; }
     }
     .inc-card {
       border: 1px solid var(--line);
@@ -261,9 +264,12 @@
     /* ── COMMISSIONS / PRICING ── */
     .tiers {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.4rem;
       margin-top: 2.4rem;
+    }
+    @media (max-width: 920px) {
+      .tiers { grid-template-columns: 1fr; max-width: 560px; }
     }
     .tier {
       border: 1px solid var(--line);
