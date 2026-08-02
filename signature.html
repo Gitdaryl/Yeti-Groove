@@ -10,6 +10,8 @@
   <meta property="og:image" content="https://devils-lake-cove.vercel.app/assets/film-poster.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yetigroove.com/signature" />
+  <link rel="icon" type="image/png" href="/brand/yeti-head-256.png" />
+  <link rel="apple-touch-icon" href="/brand/yeti-head-256.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -56,10 +58,11 @@
 
     .brand {
       display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
+      align-items: center;
+      gap: 0.7rem;
       text-decoration: none;
     }
+    .brand-icon { height: 34px; width: auto; display: block; }
     .brand-name {
       font-family: var(--serif);
       font-weight: 600;
@@ -115,6 +118,14 @@
       background: linear-gradient(180deg, rgba(12,15,20,0.72) 0%, rgba(12,15,20,0.55) 45%, rgba(12,15,20,0.9) 100%);
     }
     .hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .hero-lockup {
+      width: clamp(280px, 34vw, 460px);
+      max-width: 90%;
+      height: auto;
+      margin: 0 auto 2rem;
+      display: block;
+      filter: drop-shadow(0 4px 24px rgba(0,0,0,0.55));
+    }
 
     .eyebrow {
       font-size: 0.72rem;
@@ -347,6 +358,7 @@
 
   <nav>
     <a class="brand" href="/signature">
+      <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
       <span class="brand-name">Yeti Groove</span>
       <span class="brand-sub">Signature Films</span>
     </a>
@@ -360,6 +372,7 @@
            poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"></video>
     <div class="hero-shade"></div>
     <div class="hero-inner">
+      <img class="hero-lockup" src="/brand/signature-lockup.png" alt="Yeti Groove Signature Films" />
       <p class="eyebrow">Michigan Lake Country</p>
       <h1>Your land has a story.<br /><em>We film it like one.</em></h1>
       <p class="lede">Commissioned cinematic films for land developments, lakefront property, and legacy businesses. One filmmaker. Agency-grade output.</p>
