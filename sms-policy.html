@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMS Policy · Yeti Groove Media</title>
+  <meta name="description" content="Text message communication policy for Yeti Groove Media platforms. Opt-in only, transactional messages, reply STOP to unsubscribe." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #080807;
+      --dark:    #0F0E0C;
+      --gold:    #C9A55A;
+      --goldDim: rgba(201,165,90,0.12);
+      --cream:   #F0EDE6;
+      --muted:   #B0A390;
+      --line:    rgba(201,165,90,0.12);
+    }
+
+    body {
+      font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--dark);
+      color: var(--cream);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,8,7,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-contact {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-contact:hover { color: var(--gold); }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 8rem 2rem 5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    p { color: var(--muted); margin-bottom: 1rem; }
+
+    ul {
+      color: var(--muted);
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.8rem;
+      color: rgba(176,163,144,0.5);
+      border-top: 1px solid var(--line);
+    }
+    footer a { color: rgba(176,163,144,0.5); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      main { padding: 7rem 1.25rem 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Yeti Groove Media</a>
+    <a class="nav-contact" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </nav>
+
+  <main>
+    <p class="section-label">SMS Policy</p>
+    <h1>Text Message Communications</h1>
+    <p>Yeti Groove Media uses SMS messaging to help local vendors and business operators manage their presence on our platforms. Text messages are sent only to individuals who have expressly provided their phone number and requested communication from us.</p>
+    <p>We do not send unsolicited text messages. All SMS communications are transactional or informational in nature - for example, sending a vendor their check-in link at their request.</p>
+    <p><strong style="color: var(--cream);">Message types we send:</strong></p>
+    <ul>
+      <li>Check-in link delivery for food truck vendors (requested via our website)</li>
+      <li>Event-related reminders for opted-in organizers</li>
+      <li>Account or operational notifications for registered platform users</li>
+    </ul>
+    <p><strong style="color: var(--cream);">Opt-out:</strong> Reply STOP at any time to unsubscribe from messages. Reply HELP for assistance. Message and data rates may apply. Message frequency varies.</p>
+    <p><strong style="color: var(--cream);">Carrier disclosure:</strong> Mobile carriers are not liable for delayed or undelivered messages.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/">Home</a> &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms of Service</a></p>
+  </footer>
+
+</body>
+</html>

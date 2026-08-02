@@ -5,6 +5,8 @@
     { "source": "/social",               "destination": "/social.html" },
     { "source": "/signature",            "destination": "/signature.html" },
     { "source": "/terms",                "destination": "/terms.html" },
+    { "source": "/privacy",              "destination": "/privacy.html" },
+    { "source": "/sms-policy",           "destination": "/sms-policy.html" },
     { "source": "/films",                "destination": "/signature.html" },
     { "source": "/lakeaccess",           "destination": "/lakeaccess.html" },
     { "source": "/admin",                "destination": "/admin.html" },

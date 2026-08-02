@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yeti Groove Media · Devils Lake, Michigan</title>
-  <meta name="description" content="Yeti Groove Media is a digital media and community engagement agency based in Devils Lake, Michigan. We build local platforms, event promotion, and community-focused digital experiences." />
+  <title>Yeti Groove Media · Cinematic Films & Community Platforms · Devils Lake, Michigan</title>
+  <meta name="description" content="Yeti Groove Media is a Michigan studio producing commissioned cinematic films, AI pre-visualization, and community platforms for the Irish Hills lake country and beyond." />
+  <meta property="og:title" content="Yeti Groove Media" />
+  <meta property="og:description" content="Big-screen work. Lake-town roots. Commissioned films, pre-visualization, and community platforms from Devils Lake, Michigan." />
+  <meta property="og:image" content="https://yetigroove.com/og-social.png" />
+  <meta property="og:url" content="https://yetigroove.com/" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/brand/yeti-head-256.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -37,34 +43,55 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.25rem 2rem;
+      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(8,8,7,0.85);
+      background: rgba(8,8,7,0.72);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
     }
 
-    .nav-logo {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+    }
+    .brand-icon { width: 30px; height: 30px; }
+    .brand-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--gold);
-      text-decoration: none;
       letter-spacing: 0.02em;
     }
 
-    .nav-contact {
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link {
       font-size: 0.85rem;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-contact:hover { color: var(--gold); }
+    .nav-link:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
 
     /* ── HERO ── */
     .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -72,9 +99,29 @@
       justify-content: center;
       text-align: center;
       padding: 6rem 2rem 4rem;
-      background: radial-gradient(ellipse at 50% 60%, rgba(201,165,90,0.07) 0%, transparent 65%);
+      overflow: hidden;
       border-bottom: 1px solid var(--line);
     }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(8,8,7,0.25) 0%, rgba(8,8,7,0.72) 100%),
+        linear-gradient(to top, var(--dark) 0%, rgba(8,8,7,0.35) 30%, rgba(8,8,7,0.55) 100%);
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 860px; }
 
     .eyebrow {
       font-size: 0.75rem;
@@ -87,42 +134,66 @@
 
     .hero h1 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-size: clamp(2.6rem, 7vw, 5rem);
       font-weight: 700;
       color: var(--cream);
-      line-height: 1.15;
+      line-height: 1.12;
       margin-bottom: 1.5rem;
-      max-width: 800px;
+      text-shadow: 0 2px 24px rgba(8,8,7,0.6);
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
 
-    .hero p {
+    .hero p.lede {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
+      color: var(--cream);
+      opacity: 0.85;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
     }
 
-    .hero-divider {
-      width: 48px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 auto;
-      opacity: 0.5;
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
+
+    .btn-gold {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.9rem 1.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      border: 1px solid rgba(240,237,230,0.35);
+      padding: 0.9rem 1.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
     /* ── SECTIONS ── */
     section {
-      max-width: 760px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 5.5rem 2rem;
       border-bottom: 1px solid var(--line);
     }
-
     section:last-of-type { border-bottom: none; }
 
     .section-label {
@@ -137,26 +208,123 @@
 
     h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-size: clamp(1.7rem, 3.8vw, 2.4rem);
       font-weight: 700;
       color: var(--cream);
       line-height: 1.25;
       margin-bottom: 1.5rem;
     }
+    h2 em { font-style: italic; color: var(--gold); }
 
     p { color: var(--muted); margin-bottom: 1rem; }
     p:last-child { margin-bottom: 0; }
 
-    ul {
-      color: var(--muted);
-      padding-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    li { margin-bottom: 0.4rem; }
-
     a { color: var(--gold); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    /* ── FILM / PROOF ── */
+    .film-frame {
+      margin: 2.5rem 0 1rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--black);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    }
+    .film-frame video { display: block; width: 100%; height: auto; }
+
+    .film-caption {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: rgba(176,163,144,0.65);
+    }
+
+    .pull-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.5;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin: 2rem 0 0.5rem;
+    }
+    .pull-quote + p { font-size: 0.85rem; color: rgba(176,163,144,0.65); padding-left: 1.6rem; }
+
+    /* ── CLIENTS ── */
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .client-cell {
+      background: var(--dark2);
+      padding: 1.6rem 1.5rem;
+    }
+    .client-cell h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.35rem;
+    }
+    .client-cell p { font-size: 0.85rem; margin: 0; color: var(--muted); }
+
+    /* ── TWO DOORS ── */
+    .doors {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .door {
+      display: block;
+      background: var(--dark2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 2.2rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .door:hover {
+      border-color: rgba(201,165,90,0.45);
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+    .door .door-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .door h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+    }
+    .door p { font-size: 0.92rem; margin-bottom: 1.4rem; }
+    .door .door-cta {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── CONTACT ── */
     .contact-block {
       background: var(--goldDim);
       border: 1px solid var(--line);
@@ -164,7 +332,6 @@
       padding: 2rem;
       margin-top: 2rem;
     }
-
     .contact-block p { margin-bottom: 0.5rem; }
 
     /* ── FOOTER ── */
@@ -175,10 +342,13 @@
       color: rgba(176,163,144,0.5);
       border-top: 1px solid var(--line);
     }
+    footer a { color: rgba(176,163,144,0.5); }
 
-    @media (max-width: 640px) {
-      nav { padding: 1rem 1.25rem; }
+    @media (max-width: 700px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .nav-link.hide-mobile { display: none; }
       section { padding: 3.5rem 1.25rem; }
+      .doors { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -186,113 +356,134 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="/">Yeti Groove Media</a>
-    <span>
-      <a class="nav-contact" href="/signature" style="margin-right: 1.5rem; color: var(--gold);">Signature Films</a>
-      <a class="nav-contact" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+    <a class="brand" href="/">
+      <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
+      <span class="brand-name">Yeti Groove Media</span>
+    </a>
+    <span class="nav-links">
+      <a class="nav-link hide-mobile" href="#work">The Work</a>
+      <a class="nav-link hide-mobile" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+      <a class="nav-cta" href="/signature">Signature Films</a>
     </span>
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
-    <p class="eyebrow">Devils Lake · Michigan</p>
-    <h1>Local stories,<br /><em>amplified</em>.</h1>
-    <p>Yeti Groove Media builds digital platforms for communities, local businesses, and live events across the Irish Hills Lakes region.</p>
-    <div class="hero-divider"></div>
-  </div>
+  <header class="hero">
+    <video class="hero-video" autoplay muted loop playsinline
+           src="https://devils-lake-cove.vercel.app/assets/hero.mp4"
+           poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"></video>
+    <div class="hero-shade"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Devils Lake · Michigan</p>
+      <h1>Big-screen work.<br /><em>Lake-town roots.</em></h1>
+      <p class="lede">Yeti Groove is a Michigan studio producing commissioned cinematic films, photoreal pre-visualization, and the community platforms that run the Irish Hills lake country.</p>
+      <div class="hero-actions">
+        <a class="btn-gold" href="#work">Watch the Work</a>
+        <a class="btn-ghost" href="/signature">Commission a Film</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <p class="section-label">About</p>
-    <h2>Who We Are</h2>
-    <p>Yeti Groove Media is a digital media and community engagement studio based in Devils Lake, Michigan. We design and operate web platforms that connect local businesses, event organizers, and residents - helping communities thrive online and in person.</p>
-    <p>Our flagship project is <strong style="color: var(--cream);">Manitou Beach</strong>, a community platform serving the Devils Lake / Irish Hills Lakes region of Michigan. The platform handles event listings, business directories, food truck scheduling, and neighborhood news for the area.</p>
-    <p>We also produce event coverage, branded digital media, and booking services for performing artists and live events.</p>
+  <!-- PROOF -->
+  <section id="work">
+    <p class="section-label">The Work</p>
+    <h2>Devils Lake Cove, <em>seen before it exists</em></h2>
+    <p>A land developer commissioned a film for a parcel on Devils Lake. The studio delivered two minutes of aerial and ground cinematography, photoreal visualization of the unbuilt marina village, and an original score, wrapped in its own presentation site.</p>
+    <div class="film-frame">
+      <video controls preload="none"
+             poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"
+             src="https://devils-lake-cove.vercel.app/assets/film.mp4"></video>
+    </div>
+    <p class="film-caption">
+      <span>Devils Lake Cove &middot; 2 min 15 sec &middot; original score</span>
+      <a href="https://devils-lake-cove.vercel.app" target="_blank" rel="noopener">View the full presentation site &rarr;</a>
+    </p>
+    <p class="pull-quote">A California production agency quoted $30,000 for this scope of work. The developer commissioned it here, and now he is the one showing it to everyone.</p>
+    <p>Devils Lake Cove, 2026</p>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <p class="section-label">Services</p>
-    <h2>What We Do</h2>
-    <ul>
-      <li>Community web platforms - events, business directories, local news</li>
-      <li>Food truck scheduling and vendor management tools</li>
-      <li>Event promotion and digital marketing</li>
-      <li>Branded content, photography, and video production</li>
-      <li>Artist and performer booking</li>
-      <li>SMS and email communication for local businesses and event vendors</li>
-    </ul>
+  <!-- CLIENTS -->
+  <section id="clients">
+    <p class="section-label">Selected Work &amp; Clients</p>
+    <h2>Made in lake country, <em>built to travel</em></h2>
+    <div class="client-grid">
+      <div class="client-cell">
+        <h3>Devils Lake Cove</h3>
+        <p>Signature film and presentation site for a lakefront development</p>
+      </div>
+      <div class="client-cell">
+        <h3>Manitou Beach</h3>
+        <p>The community platform for the Devils Lake / Irish Hills region</p>
+      </div>
+      <div class="client-cell">
+        <h3>Devils Lake Bar &amp; Grill</h3>
+        <p>Brand film and digital presence for a lakefront institution</p>
+      </div>
+      <div class="client-cell">
+        <h3>Devils Lake &amp; Round Lake Men's Club</h3>
+        <p>Member platform with live event photo sharing</p>
+      </div>
+      <div class="client-cell">
+        <h3>Irish Hills Realty</h3>
+        <p>Cinematic listing pages that turn properties into presentations</p>
+      </div>
+      <div class="client-cell">
+        <h3>Never Broken</h3>
+        <p>Feature film in development on the life of Joe Profit</p>
+      </div>
+    </div>
   </section>
 
-  <!-- SMS POLICY -->
-  <section id="sms-policy">
-    <p class="section-label">SMS Policy</p>
-    <h2>Text Message Communications</h2>
-    <p>Yeti Groove Media uses SMS messaging to help local vendors and business operators manage their presence on our platforms. Text messages are sent only to individuals who have expressly provided their phone number and requested communication from us.</p>
-    <p>We do not send unsolicited text messages. All SMS communications are transactional or informational in nature - for example, sending a vendor their check-in link at their request.</p>
-    <p><strong style="color: var(--cream);">Message types we send:</strong></p>
-    <ul>
-      <li>Check-in link delivery for food truck vendors (requested via our website)</li>
-      <li>Event-related reminders for opted-in organizers</li>
-      <li>Account or operational notifications for registered platform users</li>
-    </ul>
-    <p><strong style="color: var(--cream);">Opt-out:</strong> Reply STOP at any time to unsubscribe from messages. Reply HELP for assistance. Message and data rates may apply. Message frequency varies.</p>
-    <p><strong style="color: var(--cream);">Carrier disclosure:</strong> Mobile carriers are not liable for delayed or undelivered messages.</p>
+  <!-- TWO DOORS -->
+  <section id="doors">
+    <p class="section-label">Two Ways In</p>
+    <h2>What are we making <em>for you?</em></h2>
+    <div class="doors">
+      <a class="door" href="/signature">
+        <p class="door-label">Flagship</p>
+        <h3>Signature Films</h3>
+        <p>Commissioned cinematic films and photoreal pre-visualization for land developments, lakefront property, and legacy businesses. Sell it before it is built.</p>
+        <span class="door-cta">Enter Signature Films &rarr;</span>
+      </a>
+      <a class="door" href="https://manitoubeachmichigan.com" target="_blank" rel="noopener">
+        <p class="door-label">Community</p>
+        <h3>Platforms &amp; Local</h3>
+        <p>Community platforms, event coverage, and digital infrastructure for the businesses and organizations of the Irish Hills lake country.</p>
+        <span class="door-cta">See Manitou Beach &rarr;</span>
+      </a>
+    </div>
   </section>
 
-  <!-- PRIVACY POLICY -->
-  <section id="privacy">
-    <p class="section-label">Privacy</p>
-    <h2>Privacy Policy</h2>
-    <p><em style="color: rgba(176,163,144,0.6); font-size: 0.85rem;">Last updated: March 2026</em></p>
-    <p>Yeti Groove Media ("we", "us", "our") operates yetigroove.com and associated community platforms including manitoubeachmichigan.com. This policy describes how we handle personal information.</p>
-
-    <p><strong style="color: var(--cream);">Information we collect:</strong></p>
-    <ul>
-      <li>Contact information (name, email, phone number) provided voluntarily through our platforms</li>
-      <li>Business information submitted for directory or scheduling purposes</li>
-      <li>Order details and media files (photos, videos, logos) you submit with a video or content order; stored securely and used only to produce your deliverables</li>
-      <li>Usage data collected via standard web analytics (page views, device type)</li>
-    </ul>
-
-    <p><strong style="color: var(--cream);">How we use your information:</strong></p>
-    <ul>
-      <li>To provide requested services (e.g., sending a check-in link via SMS)</li>
-      <li>To operate and improve our community platforms</li>
-      <li>To communicate operational updates to registered vendors and partners</li>
-    </ul>
-
-    <p><strong style="color: var(--cream);">We do not:</strong></p>
-    <ul>
-      <li>Sell or share your personal information with third parties for marketing purposes</li>
-      <li>Send unsolicited commercial text messages or emails</li>
-      <li>Store payment card data (all payments are processed by Stripe)</li>
-    </ul>
-
-    <p><strong style="color: var(--cream);">Data retention:</strong> We retain contact information only as long as needed to provide services. You may request deletion of your data by emailing <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>.</p>
-
-    <p><strong style="color: var(--cream);">Third-party services:</strong> Our platforms use Notion (data storage), Twilio (SMS delivery), Stripe (payments), Resend (transactional email delivery), and Vercel (hosting and file storage, including order media stored in Vercel Blob). Each operates under their own privacy policy.</p>
-
-    <p>Questions about this policy? Contact us at <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>.</p>
+  <!-- ROOTS -->
+  <section id="roots">
+    <p class="section-label">Roots</p>
+    <h2>The studio that runs <em>its own town</em></h2>
+    <p>Yeti Groove is based on Devils Lake, Michigan, and operates Manitou Beach, the digital home of its own community: events, businesses, news, and the photo wall half the lake is on. We build for our neighbors first, and that standard travels with every commission.</p>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <p class="section-label">Contact</p>
-    <h2>Get in Touch</h2>
-    <p>We're a small, local studio. Reach out directly - we respond to every message.</p>
+    <h2>Start the conversation</h2>
+    <p>Tell the studio what you are building, selling, or celebrating. Every message gets a reply.</p>
     <div class="contact-block">
       <p><strong style="color: var(--cream);">Yeti Groove Media</strong></p>
       <p>Devils Lake, Michigan 49220</p>
       <p><a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
-      <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(176,163,144,0.6);">Owner: Daryl Young</p>
+      <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(176,163,144,0.6);">Daryl Young, Founder</p>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="#privacy" style="color: rgba(176,163,144,0.5);">Privacy Policy</a> &middot; <a href="#sms-policy" style="color: rgba(176,163,144,0.5);">SMS Policy</a> &middot; <a href="/terms" style="color: rgba(176,163,144,0.5);">Terms of Service</a></p>
+    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="/sms-policy">SMS Policy</a> &middot; <a href="/terms">Terms of Service</a></p>
   </footer>
+
+  <script>
+    // Legacy anchors: policies used to live on this page at /#privacy and /#sms-policy
+    if (location.hash === '#privacy') location.replace('/privacy');
+    if (location.hash === '#sms-policy') location.replace('/sms-policy');
+  </script>
 
 </body>
 </html>
