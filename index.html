@@ -267,13 +267,33 @@
     }
     .client-cell {
       display: block;
+      position: relative;
+      overflow: hidden;
       background: var(--dark2);
       padding: 1.6rem 1.5rem;
       text-decoration: none;
       transition: background 0.25s;
     }
+    .cell-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0.38;
+      transition: opacity 0.4s, transform 0.7s;
+    }
+    a.client-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,0.92) 30%, rgba(8,8,7,0.38));
+    }
     a.client-cell:hover { background: #1d1a14; text-decoration: none; }
+    a.client-cell:hover .cell-bg { opacity: 0.58; transform: scale(1.05); }
     a.client-cell:hover h3 { color: var(--gold); }
+    .client-cell h3, .client-cell p, .client-cell .client-visit { position: relative; z-index: 1; }
     .client-cell h3 { transition: color 0.25s; }
     .client-visit {
       display: inline-block;
@@ -302,6 +322,8 @@
     }
     .door {
       display: block;
+      position: relative;
+      overflow: hidden;
       background: var(--dark2);
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -309,6 +331,23 @@
       text-decoration: none;
       transition: border-color 0.25s, transform 0.25s;
     }
+    .door-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.34;
+      transition: opacity 0.4s, transform 0.7s;
+    }
+    .door::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,0.94) 35%, rgba(8,8,7,0.5));
+    }
+    .door:hover .door-bg { opacity: 0.52; transform: scale(1.045); }
+    .door .door-label, .door h3, .door p, .door .door-cta { position: relative; z-index: 1; }
     .door:hover {
       border-color: rgba(201,165,90,0.45);
       transform: translateY(-3px);
@@ -340,8 +379,33 @@
     }
 
     /* ── CONTACT ── */
+    #contact {
+      max-width: none;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+    .contact-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .contact-shade {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 55%, rgba(8,8,7,0.55) 0%, rgba(8,8,7,0.94) 100%);
+    }
+    .contact-inner {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 6.5rem 2rem;
+    }
     .contact-block {
-      background: var(--goldDim);
+      background: rgba(8,8,7,0.55);
+      backdrop-filter: blur(6px);
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 2rem;
@@ -362,8 +426,11 @@
     @media (max-width: 700px) {
       nav { padding: 0.85rem 1.25rem; }
       .nav-link.hide-mobile { display: none; }
+      .brand-name { font-size: 0.95rem; }
+      .brand-icon { width: 26px; height: 26px; }
       section { padding: 3.5rem 1.25rem; }
       .doors { grid-template-columns: 1fr; }
+      .contact-inner { padding: 4.5rem 1.25rem; }
     }
   </style>
 </head>
@@ -423,31 +490,37 @@
     <h2>Made in lake country, <em>built to travel</em></h2>
     <div class="client-grid">
       <a class="client-cell" href="https://devils-lake-cove.vercel.app" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/cove.jpg" alt="" loading="lazy" />
         <h3>Devils Lake Cove</h3>
         <p>Signature film and presentation site for a lakefront development</p>
         <span class="client-visit">Visit &rarr;</span>
       </a>
       <a class="client-cell" href="https://manitoubeachmichigan.com" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/manitou.jpg" alt="" loading="lazy" />
         <h3>Manitou Beach</h3>
         <p>The community platform for the Devils Lake / Irish Hills region</p>
         <span class="client-visit">Visit &rarr;</span>
       </a>
       <a class="client-cell" href="https://devils-lake-bar-grill.vercel.app" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/dlbg.jpg" alt="" loading="lazy" />
         <h3>Devils Lake Bar &amp; Grill</h3>
         <p>Brand film and digital presence for a lakefront institution</p>
         <span class="client-visit">Visit &rarr;</span>
       </a>
       <a class="client-cell" href="https://manitoubeachmichigan.com/mens-club" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/mensclub.jpg" alt="" loading="lazy" />
         <h3>Devils Lake &amp; Round Lake Men's Club</h3>
         <p>Member platform with live event photo sharing</p>
         <span class="client-visit">Visit &rarr;</span>
       </a>
       <a class="client-cell" href="https://irish-hills-realty.vercel.app/8580-marr-hwy" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/microsite.jpg" alt="" loading="lazy" />
         <h3>Listing Microsites</h3>
         <p>Focused single-property pages that give one listing its own cinematic presentation</p>
         <span class="client-visit">Visit &rarr;</span>
       </a>
       <a class="client-cell" href="https://joeprofitneverbroken.com" target="_blank" rel="noopener">
+        <img class="cell-bg" src="/media/clients/neverbroken.jpg" alt="" loading="lazy" />
         <h3>Never Broken</h3>
         <p>Legacy media preservation project on the life of Joe Profit</p>
         <span class="client-visit">Visit &rarr;</span>
@@ -461,12 +534,14 @@
     <h2>What are we making <em>for you?</em></h2>
     <div class="doors">
       <a class="door" href="/signature">
+        <img class="door-bg" src="/media/door-signature.jpg" alt="" loading="lazy" />
         <p class="door-label">Flagship</p>
         <h3>Signature Films</h3>
         <p>Commissioned cinematic films and photoreal pre-visualization for land developments, lakefront property, and legacy businesses. Sell it before it is built.</p>
         <span class="door-cta">Enter Signature Films &rarr;</span>
       </a>
       <a class="door" href="https://manitoubeachmichigan.com" target="_blank" rel="noopener">
+        <img class="door-bg" src="/media/door-community.jpg" alt="" loading="lazy" />
         <p class="door-label">Community</p>
         <h3>Platforms &amp; Local</h3>
         <p>Community platforms, event coverage, and digital infrastructure for the businesses and organizations of the Irish Hills lake country.</p>
@@ -484,6 +559,11 @@
 
   <!-- CONTACT -->
   <section id="contact">
+    <video class="contact-video" autoplay muted loop playsinline
+           src="https://devils-lake-cove.vercel.app/assets/hero.mp4"
+           poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"></video>
+    <div class="contact-shade"></div>
+    <div class="contact-inner">
     <p class="section-label">Contact</p>
     <h2>Start the conversation</h2>
     <p>Tell the studio what you are building, selling, or celebrating. Every message gets a reply.</p>
@@ -492,6 +572,7 @@
       <p>Devils Lake, Michigan 49220</p>
       <p><a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
       <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(176,163,144,0.6);">Daryl Young, Founder</p>
+    </div>
     </div>
   </section>
 
