@@ -4,6 +4,7 @@
     { "source": "/fix",                  "destination": "/fix.html" },
     { "source": "/social",               "destination": "/social.html" },
     { "source": "/signature",            "destination": "/signature.html" },
+    { "source": "/terms",                "destination": "/terms.html" },
     { "source": "/films",                "destination": "/signature.html" },
     { "source": "/lakeaccess",           "destination": "/lakeaccess.html" },
     { "source": "/admin",                "destination": "/admin.html" },
