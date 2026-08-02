@@ -266,8 +266,23 @@
       margin-top: 2rem;
     }
     .client-cell {
+      display: block;
       background: var(--dark2);
       padding: 1.6rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+    a.client-cell:hover { background: #1d1a14; text-decoration: none; }
+    a.client-cell:hover h3 { color: var(--gold); }
+    .client-cell h3 { transition: color 0.25s; }
+    .client-visit {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(201,165,90,0.75);
     }
     .client-cell h3 {
       font-family: 'Playfair Display', Georgia, serif;
@@ -407,30 +422,36 @@
     <p class="section-label">Selected Work &amp; Clients</p>
     <h2>Made in lake country, <em>built to travel</em></h2>
     <div class="client-grid">
-      <div class="client-cell">
+      <a class="client-cell" href="https://devils-lake-cove.vercel.app" target="_blank" rel="noopener">
         <h3>Devils Lake Cove</h3>
         <p>Signature film and presentation site for a lakefront development</p>
-      </div>
-      <div class="client-cell">
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
+      <a class="client-cell" href="https://manitoubeachmichigan.com" target="_blank" rel="noopener">
         <h3>Manitou Beach</h3>
         <p>The community platform for the Devils Lake / Irish Hills region</p>
-      </div>
-      <div class="client-cell">
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
+      <a class="client-cell" href="https://devils-lake-bar-grill.vercel.app" target="_blank" rel="noopener">
         <h3>Devils Lake Bar &amp; Grill</h3>
         <p>Brand film and digital presence for a lakefront institution</p>
-      </div>
-      <div class="client-cell">
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
+      <a class="client-cell" href="https://manitoubeachmichigan.com/mens-club" target="_blank" rel="noopener">
         <h3>Devils Lake &amp; Round Lake Men's Club</h3>
         <p>Member platform with live event photo sharing</p>
-      </div>
-      <div class="client-cell">
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
+      <a class="client-cell" href="https://irish-hills-realty.vercel.app" target="_blank" rel="noopener">
         <h3>Irish Hills Realty</h3>
         <p>Cinematic listing pages that turn properties into presentations</p>
-      </div>
-      <div class="client-cell">
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
+      <a class="client-cell" href="https://never-broken-site.vercel.app" target="_blank" rel="noopener">
         <h3>Never Broken</h3>
         <p>Feature film in development on the life of Joe Profit</p>
-      </div>
+        <span class="client-visit">Visit &rarr;</span>
+      </a>
     </div>
   </section>
 
