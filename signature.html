@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/media/signature-scrub/frame_001.webp" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -118,6 +119,64 @@
       background: linear-gradient(180deg, rgba(12,15,20,0.72) 0%, rgba(12,15,20,0.55) 45%, rgba(12,15,20,0.9) 100%);
     }
     .hero-inner { position: relative; z-index: 2; max-width: 860px; }
+
+    /* Scroll-scrub: wrapper stretches, hero pins, canvas replaces fixed video */
+    .hero-scrub.scrub-active { height: 380vh; }
+    .hero-scrub.scrub-active .hero {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: none;
+    }
+    .hero-scrub.scrub-active .hero-canvas { display: block; }
+    .hero-scrub.scrub-active .hero-video { display: none; }
+    .hero-scrub.scrub-active .hero-shade {
+      position: absolute;
+      opacity: 0.4;
+      will-change: opacity;
+    }
+    .hero-scrub.scrub-active .hero-inner {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+    .hero-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.7;
+    }
+    .hero-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 2rem;
+      margin: 0.6rem auto 0;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: hint-drop 1.8s ease-in-out infinite;
+    }
+    @keyframes hint-drop {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      100% { transform: scaleY(1) translateY(0.5rem); opacity: 0; }
+    }
+    .hero-scrub.scrub-active .hero-hint { display: block; }
     .hero-lockup {
       width: clamp(280px, 34vw, 460px);
       max-width: 90%;
@@ -588,11 +647,14 @@
   </nav>
 
   <!-- HERO -->
+  <div class="hero-scrub" id="heroScrub">
   <header class="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <video class="hero-video" autoplay muted loop playsinline
-           src="https://devils-lake-cove.vercel.app/assets/hero.mp4"
-           poster="https://devils-lake-cove.vercel.app/assets/film-poster.jpg"></video>
+           src="/media/signature-scrub/build-loop.mp4"
+           poster="/media/signature-scrub/poster.jpg"></video>
     <div class="hero-shade"></div>
+    <p class="hero-hint">Scroll to build it</p>
     <div class="hero-inner">
       <img class="hero-lockup" src="/brand/signature-lockup.png" alt="Yeti Groove Signature Films" />
       <p class="eyebrow">Michigan Lake Country</p>
@@ -604,6 +666,7 @@
       </div>
     </div>
   </header>
+  </div>
 
   <main>
 
@@ -841,6 +904,99 @@
       var vid = card.querySelector('video');
       card.addEventListener('mouseenter', function () { vid.play().catch(function () {}); });
       card.addEventListener('mouseleave', function () { vid.pause(); });
+    })();
+
+    // Hero scroll-scrub: the Cove assembles from empty land as you scroll.
+    // Falls back to the looping video on mobile, reduced-motion, or save-data.
+    (function () {
+      const FRAME_COUNT = 65;
+      const frameSrc = (i) => '/media/signature-scrub/frame_' + String(i + 1).padStart(3, '0') + '.webp';
+
+      const wrap = document.getElementById('heroScrub');
+      const canvas = document.getElementById('heroCanvas');
+      if (!wrap || !canvas || !canvas.getContext) return;
+
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const smallScreen = matchMedia('(max-width: 768px)').matches;
+      const saveData = navigator.connection && navigator.connection.saveData;
+      if (reduceMotion || smallScreen || saveData) return;
+
+      const hero = wrap.querySelector('.hero');
+      const video = wrap.querySelector('.hero-video');
+      const inner = wrap.querySelector('.hero-inner');
+      const hint = wrap.querySelector('.hero-hint');
+      const shade = wrap.querySelector('.hero-shade');
+      const ctx = canvas.getContext('2d');
+      const images = new Array(FRAME_COUNT);
+      let current = -1;
+
+      function draw(i) {
+        const img = images[i];
+        if (!img || !img.complete || !img.naturalWidth) return;
+        const cw = canvas.width, ch = canvas.height;
+        const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+        const w = img.naturalWidth * s, h = img.naturalHeight * s;
+        ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+        current = i;
+      }
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = hero.clientWidth * dpr;
+        canvas.height = hero.clientHeight * dpr;
+        if (current >= 0) draw(current);
+      }
+
+      function progress() {
+        const total = wrap.offsetHeight - window.innerHeight;
+        if (total <= 0) return 1;
+        return Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / total));
+      }
+
+      function nearestLoaded(i) {
+        for (let j = i; j >= 0; j--) {
+          if (images[j] && images[j].complete && images[j].naturalWidth) return j;
+        }
+        return -1;
+      }
+
+      let ticking = false;
+      function update() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          const p = progress();
+          const idx = nearestLoaded(Math.round(p * (FRAME_COUNT - 1)));
+          if (idx >= 0 && idx !== current) draw(idx);
+          const t = Math.min(1, Math.max(0, (p - 0.6) / 0.28));
+          inner.style.opacity = t;
+          inner.style.transform = 'translateY(' + ((1 - t) * 24) + 'px)';
+          if (shade) shade.style.opacity = 0.4 + t * 0.6;
+          if (hint) hint.style.opacity = Math.max(0, 0.7 - p * 2.5);
+        });
+      }
+
+      const first = new Image();
+      first.src = frameSrc(0);
+      first.onload = function () {
+        images[0] = first;
+        wrap.classList.add('scrub-active');
+        video.pause();
+        video.removeAttribute('autoplay');
+        resize();
+        draw(0);
+        update();
+        for (let i = 1; i < FRAME_COUNT; i++) {
+          const img = new Image();
+          img.src = frameSrc(i);
+          img.onload = update;
+          images[i] = img;
+        }
+      };
+
+      addEventListener('scroll', update, { passive: true });
+      addEventListener('resize', resize);
     })();
   </script>
 
