@@ -238,6 +238,21 @@
     }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
+    /* Short/wide viewports: size hero content by height so it fits the 100vh pin */
+    @media (max-height: 860px) {
+      .hero { padding: 5rem 2rem 3rem; }
+      .hero-lockup { width: clamp(200px, 30vh, 360px); margin-bottom: 1.2rem; }
+      .hero h1 { font-size: clamp(2rem, 6.2vh, 4rem); margin-bottom: 1rem; }
+      .hero p.lede { font-size: clamp(0.95rem, 2vh, 1.1rem); margin-bottom: 1.6rem; }
+    }
+    @media (max-height: 700px) {
+      .hero { padding: 4.5rem 2rem 2rem; }
+      .hero-lockup { width: clamp(140px, 20vh, 220px); margin-bottom: 0.8rem; }
+      .hero h1 { font-size: clamp(1.6rem, 5vh, 2.6rem); margin-bottom: 0.8rem; }
+      .hero p.lede { margin-bottom: 1.2rem; }
+      .hero .btn-gold, .hero .btn-ghost { padding: 0.7rem 1.5rem; }
+    }
+
     /* ── PAGE BODY sits above fixed hero ── */
     main {
       position: relative;
