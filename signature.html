@@ -79,6 +79,18 @@
       color: var(--paper);
       letter-spacing: 0.03em;
     }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; }
+    .nav-home {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.75;
+      text-decoration: none;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-home:hover { opacity: 1; color: var(--gold); }
     .nav-cta {
       font-size: 0.8rem;
       font-weight: 500;
@@ -646,6 +658,7 @@
       nav { padding: 0.9rem 1.1rem; }
       .brand-name { font-size: 0.85rem; letter-spacing: 0.2em; }
       .brand-sub { display: none; }
+      .nav-home { display: none; }
       section { padding: 3.6rem 1.2rem; }
     }
   </style>
@@ -653,12 +666,15 @@
 <body>
 
   <nav>
-    <a class="brand" href="/signature">
+    <a class="brand" href="/">
       <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
       <span class="brand-name">Yeti Groove</span>
       <span class="brand-sub">Signature Films</span>
     </a>
-    <a class="nav-cta" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Commission a Film</a>
+    <span class="nav-right">
+      <a class="nav-home" href="/">Studio Home</a>
+      <a class="nav-cta" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Commission a Film</a>
+    </span>
   </nav>
 
   <!-- HERO -->
