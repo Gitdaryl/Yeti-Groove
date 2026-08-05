@@ -318,12 +318,62 @@
       white-space: nowrap;
     }
 
-    .work-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem 1.75rem;
+    /* ── SOCIAL PROOF ── */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
       margin-top: 2rem;
-      font-size: 0.85rem;
+    }
+    .quote-cell {
+      background: var(--dark2);
+      padding: 1.9rem 1.7rem;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .quote-stars {
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      margin-bottom: 1rem;
+    }
+    .quote-badge {
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .quote-cell p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--cream);
+      margin: 0 0 1.4rem;
+      flex: 1;
+    }
+    .quote-cell footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      text-align: left;
+      padding: 1rem 0 0;
+      font-size: inherit;
+      color: inherit;
+      border-top: 1px solid var(--line);
+    }
+    .quote-name { font-size: 0.85rem; font-weight: 500; color: var(--cream); }
+    .quote-src {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(176,163,144,0.6);
     }
 
     .pull-quote {
@@ -527,7 +577,7 @@
       <span class="brand-name">Yeti Groove Media</span>
     </a>
     <span class="nav-links">
-      <a class="nav-link hide-mobile" href="#work">The Work</a>
+      <a class="nav-link hide-mobile" href="#reel">The Work</a>
       <a class="nav-link hide-mobile" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
       <a class="nav-cta" href="/signature">Signature Films</a>
     </span>
@@ -578,17 +628,44 @@
     </ul>
   </section>
 
-  <!-- PROOF -->
-  <section id="work">
-    <p class="section-label">The Work</p>
-    <h2>Devils Lake Cove, <em>seen before it exists</em></h2>
-    <p>A land developer commissioned a film for a parcel on Devils Lake. The studio delivered two minutes of aerial and ground cinematography, photoreal visualization of the unbuilt marina village, and an original score, wrapped in its own presentation site.</p>
-    <p class="pull-quote">A California production agency quoted $30,000 for this scope of work. The developer commissioned it here, and now he is the one showing it to everyone.</p>
-    <p>Devils Lake Cove, 2026</p>
-    <p class="work-links">
-      <a href="/signature#film">Watch the Cove film &middot; 2 min 15 sec &rarr;</a>
-      <a href="https://devils-lake-cove.vercel.app" target="_blank" rel="noopener">View the presentation site &rarr;</a>
-    </p>
+  <!-- SOCIAL PROOF -->
+  <section id="proof">
+    <p class="section-label">What Clients Say</p>
+    <h2>The work travels <em>by word of mouth</em></h2>
+    <div class="quote-grid">
+      <blockquote class="quote-cell">
+        <p class="quote-badge">&#10084; Recommends</p>
+        <p>From real estate videos to podcasts, short reels, and commercials, his creativity and talent shine through every time. I truly enjoy working with him and showcasing our community businesses and events. Highly recommend Yeti Groove!</p>
+        <footer>
+          <span class="quote-name">Holly Hagar Griewahn</span>
+          <span class="quote-src">Facebook</span>
+        </footer>
+      </blockquote>
+      <blockquote class="quote-cell">
+        <p class="quote-stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p>Yeti is an incredibly talented professional with a gift for creating videos and photos that truly excite, engage, and enrich every experience. If you are looking to capture and preserve special moments, I wholeheartedly recommend Yeti Groove Media.</p>
+        <footer>
+          <span class="quote-name">Michele Henson</span>
+          <span class="quote-src">Google Review</span>
+        </footer>
+      </blockquote>
+      <blockquote class="quote-cell">
+        <p class="quote-stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p>Thank you Daryl for doing an awesome job of filming my property! So much more than I expected for the price.</p>
+        <footer>
+          <span class="quote-name">Sandi Kerentoff</span>
+          <span class="quote-src">Google Review</span>
+        </footer>
+      </blockquote>
+      <blockquote class="quote-cell">
+        <p class="quote-stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p>Daryl made a series of amazing videos for my small business! Great video and music selection, I would recommend and use him again for any more videos I need!</p>
+        <footer>
+          <span class="quote-name">Karen Stipe</span>
+          <span class="quote-src">Google Review</span>
+        </footer>
+      </blockquote>
+    </div>
   </section>
 
   <!-- CLIENTS -->
