@@ -247,6 +247,7 @@
       margin: 0 auto;
       padding: 5.5rem 2rem;
       border-bottom: 1px solid var(--line);
+      scroll-margin-top: 4.5rem;
     }
     section:last-of-type { border-bottom: none; }
 
@@ -294,6 +295,27 @@
       gap: 0.5rem;
       font-size: 0.82rem;
       color: rgba(176,163,144,0.65);
+    }
+
+    /* ── DISCIPLINE STRIP ── */
+    .disciplines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.6rem;
+      margin: 1.5rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .disciplines li {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(176,163,144,0.85);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.4rem 0.85rem;
+      white-space: nowrap;
     }
 
     .pull-quote {
@@ -517,12 +539,36 @@
       <h1>Big-screen work.<br /><em>Lake-town roots.</em></h1>
       <p class="lede">Yeti Groove is a Michigan studio producing commissioned cinematic films, photoreal pre-visualization, and the community platforms that run the Irish Hills lake country.</p>
       <div class="hero-actions">
-        <a class="btn-gold" href="#work">Watch the Work</a>
+        <a class="btn-gold" href="#reel">Watch the Work</a>
         <a class="btn-ghost" href="/signature">Commission a Film</a>
       </div>
     </div>
   </header>
   </div>
+
+  <!-- REEL -->
+  <section id="reel">
+    <p class="section-label">The Reel</p>
+    <h2>Six disciplines, <em>one studio</em></h2>
+    <p>Every frame is commissioned work. Aerial cinematography, stop motion, construction documentation, trade crews, events, and property film, shot across four seasons of Michigan for clients who wanted one studio instead of five vendors.</p>
+    <div class="film-frame">
+      <video controls preload="none"
+             poster="https://cxjvtxyoegr2mjey.public.blob.vercel-storage.com/reel/yetis-in-the-groove-poster-boat.jpg"
+             src="https://cxjvtxyoegr2mjey.public.blob.vercel-storage.com/reel/yetis-in-the-groove.mp4"></video>
+    </div>
+    <p class="film-caption">
+      <span>Yeti Groove &middot; 1 min 18 sec &middot; selected commissions</span>
+      <a href="#contact">Commission the studio &rarr;</a>
+    </p>
+    <ul class="disciplines">
+      <li>Aerial</li>
+      <li>Stop Motion</li>
+      <li>Construction</li>
+      <li>Trades</li>
+      <li>Events</li>
+      <li>Property</li>
+    </ul>
+  </section>
 
   <!-- PROOF -->
   <section id="work">
