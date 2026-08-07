@@ -2,3 +2,5 @@
 node_modules
 .env*
 tools/.egle-seen.json
+tools/.planning-seen.json
+tools/.planning-cache/
