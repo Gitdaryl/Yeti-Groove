@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Personalized prospect pitch links. Same page, one prospect each.
+# Not secret, but not for the index either.
+Disallow: /signature/
+Disallow: /admin

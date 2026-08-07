@@ -38,6 +38,53 @@ export async function listOrderBlobs(orderId) {
   return blobs;
 }
 
+// --- Pitch-link engagement -------------------------------------------------
+// One blob per event, never read-modify-write: content reads are CDN-cached
+// and a stale read would drop history. Everything the report needs is encoded
+// in the KEY, so reporting is a pure list() with zero content fetches.
+//   pitches/<slug>/events/<iso>__<type>__<seconds>.json
+
+export async function logPitchEvent(slug, type, seconds = 0) {
+  const at = new Date().toISOString();
+  const stamp = at.replace(/[:.]/g, '-');
+  const secs = Math.max(0, Math.min(99999, Math.round(Number(seconds) || 0)));
+  const key = `pitches/${slug}/events/${stamp}__${type}__${secs}.json`;
+  await put(key, JSON.stringify({ slug, type, seconds: secs, at }), {
+    access: 'public',
+    addRandomSuffix: false,
+    contentType: 'application/json',
+  });
+  return { at, key };
+}
+
+export function parsePitchKey(pathname) {
+  const m = /^pitches\/([^/]+)\/events\/(.+)__([a-z-]+)__(\d+)\.json$/.exec(pathname);
+  if (!m) return null;
+  const [, slug, stamp, type, secs] = m;
+  // Undo the ISO mangling: 2026-08-06T12-34-56-789Z -> 2026-08-06T12:34:56.789Z
+  const at = stamp.replace(
+    /T(\d{2})-(\d{2})-(\d{2})-(\d{3})Z$/,
+    (_, h, mi, s, ms) => `T${h}:${mi}:${s}.${ms}Z`
+  );
+  return { slug, type, seconds: Number(secs), at };
+}
+
+export async function listPitchEvents(slug) {
+  const prefix = slug ? `pitches/${slug}/events/` : 'pitches/';
+  const out = [];
+  let cursor;
+  do {
+    const page = await list({ prefix, cursor, limit: 1000 });
+    for (const b of page.blobs) {
+      const ev = parsePitchKey(b.pathname);
+      if (ev) out.push(ev);
+    }
+    cursor = page.hasMore ? page.cursor : undefined;
+  } while (cursor);
+  out.sort((a, b) => a.at.localeCompare(b.at));
+  return out;
+}
+
 export async function sendEmail({ to, subject, html, replyTo }) {
   if (!process.env.RESEND_API_KEY) return { ok: false, error: 'RESEND_API_KEY not set' };
   try {

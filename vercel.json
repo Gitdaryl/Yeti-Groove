@@ -4,6 +4,7 @@
     { "source": "/fix",                  "destination": "/fix.html" },
     { "source": "/social",               "destination": "/social.html" },
     { "source": "/signature",            "destination": "/signature.html" },
+    { "source": "/signature/:slug",      "destination": "/signature.html" },
     { "source": "/terms",                "destination": "/terms.html" },
     { "source": "/privacy",              "destination": "/privacy.html" },
     { "source": "/sms-policy",           "destination": "/sms-policy.html" },

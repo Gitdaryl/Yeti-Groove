@@ -671,6 +671,156 @@
       .nav-home { display: none; }
       section { padding: 3.6rem 1.2rem; }
     }
+
+    /* --- Personalized pitch line (only shown on /signature/<slug>) --- */
+    .pitch-line {
+      display: none;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1.1rem;
+      background: rgba(12,15,20,0.5);
+    }
+    .pitch-line.on { display: inline-block; }
+
+    /* --- Inquiry dialog --- */
+    .lead-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 4vh 1rem;
+      overflow-y: auto;
+      background: rgba(6,8,11,0.86);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .lead-modal.on { display: flex; }
+    .lead-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--ink2);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 2.2rem 2rem 2rem;
+      position: relative;
+    }
+    @media (max-width: 640px) { .lead-card { padding: 1.8rem 1.2rem 1.4rem; } }
+    .lead-card h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3.4vw, 2rem);
+      font-weight: 500;
+      color: var(--paper);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .lead-card .lead-sub {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+    .lead-close {
+      position: absolute;
+      top: 0.9rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+    }
+    .lead-close:hover { color: var(--paper); }
+    .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    @media (max-width: 560px) { .lead-grid { grid-template-columns: 1fr; } }
+    .lead-grid .full { grid-column: 1 / -1; }
+    .lead-field label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .lead-field input,
+    .lead-field select,
+    .lead-field textarea {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--paper);
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      padding: 0.7rem 0.8rem;
+      transition: border-color 0.2s;
+    }
+    .lead-field select { appearance: none; cursor: pointer; }
+    .lead-field textarea { resize: vertical; min-height: 92px; line-height: 1.6; }
+    .lead-field input:focus,
+    .lead-field select:focus,
+    .lead-field textarea:focus { outline: none; border-color: var(--gold); }
+    .lead-field input::placeholder,
+    .lead-field textarea::placeholder { color: rgba(168,159,141,0.5); }
+    .lead-submit {
+      margin-top: 1.4rem;
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      border: none;
+      border-radius: 2px;
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lead-submit:hover:not(:disabled) { background: #d8bc7d; }
+    .lead-submit:disabled { opacity: 0.55; cursor: default; }
+    .lead-note {
+      margin-top: 0.9rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+    .lead-note a { color: var(--gold); }
+    .lead-error {
+      margin-top: 0.9rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      color: #e08c7a;
+      text-align: center;
+    }
+    .lead-done { text-align: center; padding: 1.5rem 0 0.5rem; }
+    .lead-done h3 { margin-bottom: 0.8rem; }
+    .lead-done p {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -683,7 +833,7 @@
     </a>
     <span class="nav-right">
       <a class="nav-home" href="/">Studio Home</a>
-      <a class="nav-cta" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Commission a Film</a>
+      <a class="nav-cta" href="#inquire" data-inquire data-tier="Signature Film">Commission a Film</a>
     </span>
   </nav>
 
@@ -698,6 +848,7 @@
     <p class="hero-hint">Scroll to build it</p>
     <div class="hero-inner">
       <img class="hero-lockup" src="/brand/signature-lockup.png" alt="Yeti Groove Signature Films" />
+      <p class="pitch-line" id="pitchLine"></p>
       <p class="eyebrow">Michigan Lake Country</p>
       <h1>Your land has a story.<br /><em>We film it like one.</em></h1>
       <p class="lede">A Michigan studio producing commissioned cinematic films for land developments, lakefront property, and legacy businesses. Built, or not built yet.</p>
@@ -829,7 +980,7 @@
             <li>Master file plus one vertical social cut</li>
             <li>Two revision rounds</li>
           </ul>
-          <a href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">Inquire &rarr;</a>
+          <a href="#inquire" data-inquire data-tier="Signature Film">Inquire &rarr;</a>
         </div>
         <div class="tier featured">
           <div class="tier-badge">Most Commissioned</div>
@@ -842,7 +993,7 @@
             <li>Three vertical social cuts</li>
             <li>Still image pack: 10 print-resolution renders for brochures, MLS, and billboards</li>
           </ul>
-          <a href="mailto:daryl@yetigroove.com?subject=Development%20Package%20Inquiry">Inquire &rarr;</a>
+          <a href="#inquire" data-inquire data-tier="Development Package">Inquire &rarr;</a>
         </div>
         <div class="tier">
           <div class="tier-name">Sales Suite</div>
@@ -854,7 +1005,7 @@
             <li>Custom domain with lead capture</li>
             <li>Quarterly update scenes as construction progresses</li>
           </ul>
-          <a href="mailto:daryl@yetigroove.com?subject=Sales%20Suite%20Inquiry">Inquire &rarr;</a>
+          <a href="#inquire" data-inquire data-tier="Sales Suite">Inquire &rarr;</a>
         </div>
       </div>
       <p class="tiers-note">Signature Films are commissioned work. The studio takes a limited number each season so every film gets its full attention. Every commission can add a quarterly progress package as construction advances. Just need short-form content for your pages? <a href="/social" style="color: var(--gold);">Order social video here</a>.</p>
@@ -870,7 +1021,7 @@
         <p class="section-label">Begin</p>
         <h2>Tell us what deserves a film</h2>
         <p>Send a few lines about your property, project, or business. The studio responds to every inquiry, usually the same day.</p>
-        <a class="btn-gold" href="mailto:daryl@yetigroove.com?subject=Signature%20Film%20Inquiry">daryl@yetigroove.com</a>
+        <a class="btn-gold" href="#inquire" data-inquire data-tier="">Start a conversation</a>
       </div>
     </section>
 
@@ -880,7 +1031,233 @@
     <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/">yetigroove.com</a></p>
   </footer>
 
+  <!-- INQUIRY DIALOG -->
+  <div class="lead-modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <div class="lead-card">
+      <button class="lead-close" type="button" id="leadClose" aria-label="Close">&times;</button>
+
+      <div id="leadFormWrap">
+        <h3 id="leadTitle">Tell us what deserves a film</h3>
+        <p class="lead-sub" id="leadSub">A few lines is enough. The studio reads every inquiry and usually replies the same day.</p>
+
+        <form id="leadForm" novalidate>
+          <div class="lead-grid">
+            <div class="lead-field">
+              <label for="ld-name">Your name</label>
+              <input id="ld-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="lead-field">
+              <label for="ld-company">Company</label>
+              <input id="ld-company" name="company" type="text" autocomplete="organization" />
+            </div>
+            <div class="lead-field">
+              <label for="ld-email">Email</label>
+              <input id="ld-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="lead-field">
+              <label for="ld-phone">Phone</label>
+              <input id="ld-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+            <div class="lead-field">
+              <label for="ld-project">Project name</label>
+              <input id="ld-project" name="project" type="text" required />
+            </div>
+            <div class="lead-field">
+              <label for="ld-location">Location</label>
+              <input id="ld-location" name="location" type="text" placeholder="Township, county, state" />
+            </div>
+            <div class="lead-field">
+              <label for="ld-stage">Stage</label>
+              <select id="ld-stage" name="stage">
+                <option value="">Select</option>
+                <option>Concept, no plans yet</option>
+                <option>Plans drawn, not submitted</option>
+                <option>Submitted for approval</option>
+                <option>Approved, not built</option>
+                <option>Under construction</option>
+                <option>Built</option>
+              </select>
+            </div>
+            <div class="lead-field">
+              <label for="ld-size">Size</label>
+              <input id="ld-size" name="size" type="text" placeholder="Acres, units, or lots" />
+            </div>
+            <div class="lead-field">
+              <label for="ld-timeline">When do you need it</label>
+              <select id="ld-timeline" name="timeline">
+                <option value="">Select</option>
+                <option>Inside 30 days</option>
+                <option>1 to 3 months</option>
+                <option>3 to 6 months</option>
+                <option>Just exploring</option>
+              </select>
+            </div>
+            <div class="lead-field">
+              <label for="ld-tier">Interested in</label>
+              <select id="ld-tier" name="tier">
+                <option value="">Not sure yet</option>
+                <option>Signature Film</option>
+                <option>Development Package</option>
+                <option>Sales Suite</option>
+              </select>
+            </div>
+            <div class="lead-field full">
+              <label for="ld-message">What are you trying to sell, and to whom</label>
+              <textarea id="ld-message" name="message" placeholder="The site, the buyer, and what the film has to do."></textarea>
+            </div>
+          </div>
+
+          <button class="lead-submit" type="submit" id="leadSubmit">Send to the studio</button>
+          <p class="lead-error" id="leadError" hidden></p>
+          <p class="lead-note">Or write directly: <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
+        </form>
+      </div>
+
+      <div class="lead-done" id="leadDone" hidden>
+        <h3>We have it.</h3>
+        <p>A confirmation is on its way to your inbox. Daryl will follow up personally, usually the same day, with a few questions about the site.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Personalized pitch links + inquiry dialog.
+    //
+    // /signature/<slug> serves this same static file (fast, CDN-cached) and
+    // personalizes client-side. The same call that fetches the prospect's
+    // name is the one that tells the studio they opened it.
+    (function () {
+      var m = location.pathname.match(/^\/signature\/([a-z0-9-]+)\/?$/i);
+      var slug = m ? m[1].toLowerCase() : null;
+      var preview = /(?:^|[?&])preview=1(?:&|$)/.test(location.search);
+      var pitch = null;
+
+      function beacon(type, extra) {
+        if (!slug || preview) return;
+        var payload = Object.assign({ slug: slug, type: type }, extra || {});
+        var body = JSON.stringify(payload);
+        // sendBeacon survives the page being closed mid-flight.
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon('/api/pitch', new Blob([body], { type: 'application/json' }));
+        } else {
+          fetch('/api/pitch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true });
+        }
+      }
+
+      if (slug) {
+        fetch('/api/pitch?slug=' + encodeURIComponent(slug) + (preview ? '&preview=1' : ''))
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (!d || !d.found) return;
+            pitch = d;
+            if (d.eyebrow) {
+              var line = document.getElementById('pitchLine');
+              line.textContent = d.eyebrow;
+              line.classList.add('on');
+            }
+            document.title = (d.project ? d.project + ' · ' : '') + document.title;
+          })
+          .catch(function () { /* personalization is a nicety, never a blocker */ });
+
+        // Dwell: cumulative seconds the tab was actually visible.
+        var seconds = 0, hotSent = false;
+        setInterval(function () {
+          if (document.hidden) return;
+          seconds += 15;
+          if (seconds <= 600) beacon('ping', { seconds: seconds });
+          if (seconds >= 120 && !hotSent) { hotSent = true; beacon('hot', { seconds: seconds }); }
+        }, 15000);
+
+        // Watching the Cove film is the strongest signal on the page.
+        document.querySelectorAll('video[controls]').forEach(function (v) {
+          v.addEventListener('play', function once() {
+            beacon('play');
+            v.removeEventListener('play', once);
+          });
+        });
+      }
+
+      // --- Inquiry dialog ---
+      var modal = document.getElementById('leadModal');
+      var form = document.getElementById('leadForm');
+      var errEl = document.getElementById('leadError');
+      var submitBtn = document.getElementById('leadSubmit');
+      var lastFocus = null;
+
+      function openModal(tier) {
+        lastFocus = document.activeElement;
+        if (tier) document.getElementById('ld-tier').value = tier;
+        if (pitch && pitch.project && !document.getElementById('ld-project').value) {
+          document.getElementById('ld-project').value = pitch.project;
+        }
+        if (pitch && pitch.company && !document.getElementById('ld-company').value) {
+          document.getElementById('ld-company').value = pitch.company;
+        }
+        if (pitch && pitch.contact && !document.getElementById('ld-name').value) {
+          document.getElementById('ld-name').value = pitch.contact;
+        }
+        modal.classList.add('on');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function () { document.getElementById('ld-name').focus(); }, 40);
+        beacon('cta', { tier: tier || '' });
+      }
+
+      function closeModal() {
+        modal.classList.remove('on');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('[data-inquire]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal(el.getAttribute('data-tier') || '');
+        });
+      });
+      document.getElementById('leadClose').addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('on')) closeModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errEl.hidden = true;
+
+        var data = {};
+        new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
+        data.slug = slug;
+        data.source = slug ? 'Pitch link /signature/' + slug : 'Signature page';
+
+        if (!data.name || !data.email || !data.project) {
+          errEl.textContent = 'Name, email and project name are needed before we can send this.';
+          errEl.hidden = false;
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('/api/signature-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.j.ok) throw new Error(res.j && res.j.error ? res.j.error : 'Send failed');
+            document.getElementById('leadFormWrap').hidden = true;
+            document.getElementById('leadDone').hidden = false;
+          })
+          .catch(function () {
+            errEl.innerHTML = 'That did not go through. Please email <a href="mailto:daryl@yetigroove.com" style="color:var(--gold);">daryl@yetigroove.com</a> directly.';
+            errEl.hidden = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send to the studio';
+          });
+      });
+    })();
+
     // Before/after slider
     (function () {
       var ba = document.getElementById('baSlider');
