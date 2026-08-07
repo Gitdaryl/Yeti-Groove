@@ -53,16 +53,39 @@ SOURCES = [
      "https://rivestownshipmi.com/planning-commission-minutes/"),
 ]
 
+# Cambridge is Devils Lake and Manitou Beach, so it matters more than anything
+# else on the list. Its archive is real (83 planning documents back to 2021)
+# but hidden behind revize accordions that only render under JS, which is why a
+# plain fetch makes the page look empty. Needs playwright.
+#
+# Half of it is readable: AGENDAS have a text layer, MINUTES are scanned images
+# with none. That is the good half, because an agenda is the leading indicator.
+# It says what is being heard before the meeting; minutes only say what already
+# happened. To recover the minutes later: tesseract is installed, so
+# `pdftoppm -r 300 -png in.pdf p && tesseract p-1.png -` would work.
+#
+# Cambridge PC meets the last Wednesday of the month at 7:00 PM, on Zoom,
+# view-only with no public comment through Zoom. Chairman Rick Streams,
+# streamsrick@gmail.com, township office 517-467-2104.
+#
+# Reality check as of Aug 2026: every readable 2025-2026 Cambridge agenda is
+# ordinance housekeeping (lot coverage in the Lake District Overlay, metal
+# frame structures). Zero development applications. The home township is quiet,
+# which is exactly why the pipeline has to reach into Clark Lake and beyond.
+ACCORDION_SOURCES = [
+    ("Cambridge Twp (Devils Lake / Manitou Beach)",
+     "https://www.cambridgetownshipmi.gov/notices/index.php"),
+]
+
 # Townships whose planning pages post only a single "Latest Agenda" PDF that is
 # overwritten each month, or that publish nothing at all. No archive means no
 # scraping; these are a calendar reminder, not a feed.
 MANUAL = [
-    ("Cambridge Twp (Devils Lake / Manitou Beach)",
-     "https://www.cambridgetownshipmi.gov/minutes/planning_commission.php",
-     "posts almost nothing online"),
     ("Rollin Twp (Devils Lake / Round Lake)",
      "https://www.rollintownship.org/departments/planning_commission.php",
-     "no documents linked"),
+     "publishes only the master plan and zoning maps, no agendas or minutes. "
+     "PC meets 1st Thursday 4:00pm, 730 Manitou Rd. 517-547-7786, "
+     "clerk@rollintownship.gov"),
     ("Woodstock Twp (Sand Lake)",
      "https://www.woodstocktownship.com/planning-minutes.html",
      "single 'Latest Agenda' PDF, overwritten monthly"),
@@ -140,6 +163,53 @@ def index_pdfs(url):
     return out
 
 
+def index_pdfs_js(url):
+    """Same as index_pdfs, but for revize document centers whose folders only
+    exist after JS clicks every h3.docs-toggle open."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("! playwright not installed, skipping Cambridge "
+              "(pip install playwright && playwright install chromium)",
+              file=sys.stderr)
+        return []
+    out = []
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        pg = b.new_page()
+        try:
+            pg.goto(url, wait_until="networkidle", timeout=60000)
+            pg.wait_for_timeout(2000)
+            pg.evaluate("document.querySelectorAll('h3.docs-toggle')"
+                        ".forEach(h => h.click())")
+            pg.wait_for_timeout(2500)
+            links = pg.evaluate(
+                "Array.from(document.querySelectorAll('a'))"
+                ".map(a => [a.innerText.trim().replace(/\\s+/g,' '), a.href])")
+        except Exception as e:
+            print(f"! {url}: {type(e).__name__}", file=sys.stderr)
+            links = []
+        finally:
+            b.close()
+    for text, href in links:
+        if not re.search(r"(?i)\.(pdf)(\?|$)", href):
+            continue
+        blob = urllib.parse.unquote(href) + " " + text
+        # "pc agenda-Sep252024.pdf" and "p.c. minutes-june 26, 2024.pdf" are
+        # planning; "agenda & packet-jan 8, 2025.pdf" is the township board.
+        if not re.search(r"(?i)\bp\.?\s?c\.?\b|planning", blob):
+            continue
+        out.append({"label": text or os.path.basename(href), "url": href,
+                    "year": (re.findall(r"20[12]\d", blob) or [None])[0]})
+    seen, ded = set(), []
+    for d in out:
+        if d["url"] in seen:
+            continue
+        seen.add(d["url"])
+        ded.append(d)
+    return ded
+
+
 def text_of(url):
     os.makedirs(CACHE, exist_ok=True)
     name = re.sub(r"[^A-Za-z0-9]+", "_", url)[-120:] + ".pdf"
@@ -208,9 +278,11 @@ def main():
             pass
 
     todo, scanned = [], 0
-    for name, url in SOURCES:
+    indexes = ([(n, u, index_pdfs) for n, u in SOURCES] +
+               [(n, u, index_pdfs_js) for n, u in ACCORDION_SOURCES])
+    for name, url, reader in indexes:
         try:
-            docs = index_pdfs(url)
+            docs = reader(url)
         except Exception as e:
             print(f"! {name}: index unreachable ({type(e).__name__})",
                   file=sys.stderr)
@@ -261,7 +333,7 @@ def main():
 
     if not results:
         print(f"Nothing new. (Scanned {scanned} documents across "
-              f"{len(SOURCES)} archives.)")
+              f"{len(SOURCES) + len(ACCORDION_SOURCES)} archives.)")
     else:
         print(f"{len(results)} meetings with development items "
               f"(from {len(todo)} new documents)\n")
