@@ -297,6 +297,52 @@
     }
     .film-frame video { display: block; width: 100%; height: auto; }
 
+    /* Custom play affordance — replaces the browser's default control bar.
+       Only applied once JS runs; without it the <video controls> still works. */
+    .film-frame.has-custom-play { position: relative; cursor: pointer; }
+
+    .film-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center,
+                  rgba(8,8,7,0.30) 0%, rgba(8,8,7,0.55) 100%);
+      cursor: pointer;
+      transition: opacity 0.4s ease;
+    }
+    .film-play::after {
+      content: '';
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,165,90,0.55);
+      background: rgba(8,8,7,0.45)
+                  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C9A55A'%3E%3Cpath d='M8 5.5v13l11-6.5z'/%3E%3C/svg%3E")
+                  no-repeat center / 30px 30px;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+      transition: transform 0.35s cubic-bezier(0.2,0.7,0.3,1),
+                  border-color 0.35s ease, background-color 0.35s ease;
+    }
+    .film-frame:hover .film-play::after,
+    .film-play:focus-visible::after {
+      transform: scale(1.08);
+      border-color: var(--gold);
+      background-color: rgba(201,165,90,0.16);
+    }
+    .film-play:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .film-frame.is-playing .film-play { opacity: 0; pointer-events: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .film-play, .film-play::after { transition: none; }
+      .film-frame:hover .film-play::after { transform: none; }
+    }
+
     .film-caption {
       display: flex;
       justify-content: space-between;
@@ -618,8 +664,8 @@
     <p class="section-label">The Reel</p>
     <h2>Six disciplines, <em>one studio</em></h2>
     <p>Every frame is commissioned work. Aerial cinematography, stop motion, construction documentation, trade crews, events, and property film, shot across four seasons of Michigan for clients who wanted one studio instead of five vendors.</p>
-    <div class="film-frame">
-      <video controls preload="none"
+    <div class="film-frame" id="reelFrame">
+      <video id="reelVideo" controls preload="none" playsinline
              poster="https://cxjvtxyoegr2mjey.public.blob.vercel-storage.com/reel/yetis-in-the-groove-poster-boat.jpg"
              src="https://cxjvtxyoegr2mjey.public.blob.vercel-storage.com/reel/yetis-in-the-groove.mp4"></video>
     </div>
@@ -778,6 +824,39 @@
     // Legacy anchors: policies used to live on this page at /#privacy and /#sms-policy
     if (location.hash === '#privacy') location.replace('/privacy');
     if (location.hash === '#sms-policy') location.replace('/sms-policy');
+  </script>
+
+  <script>
+    // Reel player: swap the browser's default control bar for a custom play
+    // affordance. Progressive enhancement — the markup ships with `controls`,
+    // so a no-JS visitor still gets a working player.
+    (function () {
+      const frame = document.getElementById('reelFrame');
+      const video = document.getElementById('reelVideo');
+      if (!frame || !video) return;
+
+      video.removeAttribute('controls');
+      frame.classList.add('has-custom-play');
+
+      const btn = document.createElement('button');
+      btn.className = 'film-play';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Play the Yeti Groove reel, 1 minute 18 seconds');
+      frame.appendChild(btn);
+
+      function start() {
+        video.controls = true;           // hand over to native controls once playing
+        frame.classList.add('is-playing');
+        const p = video.play();
+        if (p && p.catch) p.catch(() => { frame.classList.remove('is-playing'); });
+      }
+
+      btn.addEventListener('click', start);
+      video.addEventListener('ended', () => {
+        video.controls = false;
+        frame.classList.remove('is-playing');
+      });
+    })();
   </script>
 
   <script>
