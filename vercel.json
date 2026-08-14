@@ -11,6 +11,7 @@
     { "source": "/films",                "destination": "/signature.html" },
     { "source": "/lakeaccess",           "destination": "/lakeaccess.html" },
     { "source": "/admin",                "destination": "/admin.html" },
+    { "source": "/platform",             "destination": "/platform.html" },
     { "source": "/(.*)",                 "destination": "/index.html" }
   ],
   "crons": [
