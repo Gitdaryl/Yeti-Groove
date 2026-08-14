@@ -90,6 +90,24 @@
     line-height: 1.75; max-width: 66ch;
   }
 
+  /* ── STUDIO STACK (deliberately separated from the platform board) ── */
+  .studio { margin-top: 2.6rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+  .studio-head {
+    font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: .9rem;
+  }
+  .studio-note { color: var(--muted); font-size: .93rem; max-width: 62ch; margin-bottom: 1.5rem; }
+  .studio-note em { color: var(--paper); font-style: italic; }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: .7rem; }
+  .chips li {
+    border: 1px solid var(--line); border-radius: 2px; padding: .7rem 1rem;
+    font-size: .88rem; color: var(--paper); background: var(--ink2);
+  }
+  .chips span {
+    display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin-top: .25rem;
+  }
+
   /* ── CLOSING ── */
   section { padding: 4.5rem 0; }
   h2 {
@@ -194,11 +212,12 @@
         <text x="730" y="459" font-size="14" fill="#f5f1e8">Resend email</text>
         <text x="730" y="478" font-size="14" fill="#f5f1e8">Beehiiv newsletter</text>
 
-        <!-- REACH (bottom) -->
+        <!-- PUBLISHING (bottom) -->
         <rect x="434" y="519" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
-        <text x="500" y="543" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">REACH</text>
-        <text x="500" y="582" font-size="14" fill="#f5f1e8" text-anchor="middle">Meta Graph, Facebook + Instagram</text>
-        <text x="500" y="601" font-size="14" fill="#f5f1e8" text-anchor="middle">Google Places</text>
+        <text x="500" y="543" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">PUBLISHING</text>
+        <text x="500" y="582" font-size="14" fill="#f5f1e8" text-anchor="middle">Remotion video templates</text>
+        <text x="500" y="601" font-size="14" fill="#f5f1e8" text-anchor="middle">Meta Graph, Facebook + Instagram</text>
+        <text x="500" y="620" font-size="14" fill="#f5f1e8" text-anchor="middle">Google Places</text>
 
         <!-- INTELLIGENCE (lower left) -->
         <rect x="289" y="435" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
@@ -218,9 +237,28 @@
     </div>
     <figcaption>
       One live project. Every service on this board is doing a job that a person would otherwise
-      have to do by hand, on a schedule, forever.
+      have to do by hand, on a schedule, forever. The platform renders its own video from
+      templates and posts it, which is why Publishing sits on the board rather than in the
+      studio column below.
     </figcaption>
   </figure>
+
+  <div class="studio">
+    <div class="studio-head">The studio stack, upstream of the platform</div>
+    <p class="studio-note">
+      Separate on purpose. These are the tools we make content <em>with</em>, not services the
+      platform runs on its own. Scripting and generation stay operator-driven, with a human
+      approving every frame before it reaches a client's audience.
+    </p>
+    <ul class="chips">
+      <li>HeyGen<span>avatar delivery from script</span></li>
+      <li>Higgsfield<span>video and image generation</span></li>
+      <li>Seedance<span>image to motion</span></li>
+      <li>ElevenLabs<span>voice</span></li>
+      <li>Claude<span>script drafting</span></li>
+      <li>Remotion<span>templated render</span></li>
+    </ul>
+  </div>
 </div>
 
 <section>
