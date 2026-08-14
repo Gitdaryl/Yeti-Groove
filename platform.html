@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Pitch asset. Sent to prospects directly, not a public marketing page.
+     Also keeps a client's full architecture out of search results. -->
+<meta name="robots" content="noindex, nofollow" />
+<title>What a platform actually is | YetiGroove Studio</title>
+<meta name="description" content="A website is a page. A platform is fifteen services wired into one thing that runs itself." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #0c0f14;
+    --ink2:     #10141a;
+    --gold:     #c9a962;
+    --gold-dim: #9c8350;
+    --gold-soft: rgba(201,169,98,0.12);
+    --paper:    #f5f1e8;
+    --muted:    #a89f8d;
+    --line:     rgba(201,169,98,0.16);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--ink);
+    color: var(--paper);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── HERO ── */
+  header { padding: 7rem 0 3rem; }
+  .eyebrow {
+    font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.06;
+    letter-spacing: -.01em; max-width: 17ch;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .lede {
+    margin-top: 1.8rem; max-width: 58ch; color: var(--muted);
+    font-size: clamp(1rem, 1.7vw, 1.12rem);
+  }
+  .lede strong { color: var(--paper); font-weight: 400; }
+
+  /* ── STAT BAND ── */
+  .stats {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; background: var(--line);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    margin: 3.4rem 0 0;
+  }
+  .stat { background: var(--ink); padding: 1.6rem 1rem; }
+  .stat b {
+    display: block; font-family: var(--serif); font-weight: 500;
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem); line-height: 1; color: var(--gold);
+  }
+  .stat span {
+    display: block; margin-top: .55rem; font-size: .68rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); line-height: 1.5;
+  }
+  @media (max-width: 800px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:last-child { grid-column: 1 / -1; }
+  }
+
+  /* ── BOARD ── */
+  .board { padding: 4.5rem 0 1rem; }
+  .board-scroll {
+    overflow-x: auto; border: 1px solid var(--line); border-radius: 2px;
+    background: linear-gradient(180deg, var(--ink2), var(--ink));
+    padding: 1.5rem 1rem;
+  }
+  .board-scroll svg { display: block; width: 100%; min-width: 880px; height: auto; }
+  figcaption {
+    margin-top: 1.2rem; color: var(--muted); font-size: .92rem;
+    line-height: 1.75; max-width: 66ch;
+  }
+
+  /* ── CLOSING ── */
+  section { padding: 4.5rem 0; }
+  h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.15; max-width: 22ch;
+  }
+  .body { max-width: 62ch; margin-top: 1.6rem; }
+  .body p { margin-bottom: 1.1rem; color: var(--muted); }
+  .body p strong { color: var(--paper); font-weight: 400; }
+  .rule {
+    border-left: 2px solid var(--gold); padding: 1.2rem 0 1.2rem 1.6rem;
+    margin: 2.2rem 0; background: linear-gradient(90deg, var(--gold-soft), transparent 65%);
+  }
+  .rule p {
+    font-family: var(--serif); font-size: 1.5rem; line-height: 1.35;
+    color: var(--paper); margin: 0;
+  }
+  .cta { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: 2.4rem; }
+  .cta a {
+    font-size: .88rem; letter-spacing: .04em; color: var(--paper);
+    text-decoration: none; border: 1px solid var(--line);
+    padding: .9rem 1.6rem; border-radius: 2px;
+    transition: border-color .3s, color .3s, background .3s;
+  }
+  .cta a:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+  footer {
+    padding: 2.5rem 0 4rem; color: var(--gold-dim);
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">YetiGroove Studio / What we actually build</div>
+    <h1>A website is a page. A platform <em>runs the business</em>.</h1>
+    <p class="lede">
+      When most studios say platform, they mean a bigger website. This is one real project,
+      drawn honestly: <strong>fifteen services wired into a single system that sells, bills,
+      publishes, moderates and follows up on its own.</strong> Everything on this board is live
+      right now.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><b>173</b><span>Production<br>endpoints</span></div>
+    <div class="stat"><b>18</b><span>Agents on<br>a schedule</span></div>
+    <div class="stat"><b>30</b><span>Connected<br>databases</span></div>
+    <div class="stat"><b>15</b><span>Services wired<br>together</span></div>
+    <div class="stat"><b>1</b><span>Operator<br>running it</span></div>
+  </div>
+</div>
+
+<div class="wrap board">
+  <figure>
+    <div class="board-scroll">
+      <svg viewBox="0 110 1000 530" role="img"
+           aria-label="A hub and spoke map of the Manitou Beach platform. At the centre is one platform. Six clusters radiate from it: Records holding Notion with thirty databases; Money holding Stripe and twenty seven billing endpoints; Contact holding Twilio SMS, Resend email and Beehiiv newsletter; Reach holding Meta Graph for Facebook and Instagram and Google Places; Intelligence holding Anthropic Claude and ElevenLabs voice; and Runtime holding Vercel with eighteen crons, Upstash Redis, Vercel Blob, Cloudflare and n8n.">
+        <defs>
+          <radialGradient id="hubglow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c9a962" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#c9a962" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- glow behind hub -->
+        <circle cx="500" cy="370" r="150" fill="url(#hubglow)"/>
+
+        <!-- spokes -->
+        <line x1="500" y1="296" x2="500" y2="226" stroke="#c9a962" stroke-opacity=".45"/>
+        <line x1="564" y1="333" x2="625" y2="298" stroke="#c9a962" stroke-opacity=".45"/>
+        <line x1="564" y1="407" x2="625" y2="442" stroke="#c9a962" stroke-opacity=".45"/>
+        <line x1="500" y1="444" x2="500" y2="514" stroke="#c9a962" stroke-opacity=".45"/>
+        <line x1="436" y1="407" x2="375" y2="442" stroke="#c9a962" stroke-opacity=".45"/>
+        <line x1="436" y1="333" x2="375" y2="298" stroke="#c9a962" stroke-opacity=".45"/>
+
+        <!-- hub -->
+        <circle cx="500" cy="370" r="72" fill="#0c0f14" stroke="#c9a962" stroke-opacity=".8"/>
+        <text x="500" y="365" font-size="17" fill="#f5f1e8" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif">Manitou</text>
+        <text x="500" y="387" font-size="17" fill="#f5f1e8" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif">Beach</text>
+        <text x="500" y="408" font-size="9.5" fill="#c9a962" text-anchor="middle" letter-spacing="1.6">ONE PLATFORM</text>
+
+        <!-- RECORDS (top) -->
+        <rect x="434" y="183" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="500" y="207" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">RECORDS</text>
+        <text x="500" y="147" font-size="14" fill="#f5f1e8" text-anchor="middle">Notion</text>
+        <text x="500" y="166" font-size="13" fill="#a89f8d" text-anchor="middle">30 databases</text>
+
+        <!-- MONEY (upper right) -->
+        <rect x="579" y="267" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="645" y="291" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">MONEY</text>
+        <text x="730" y="277" font-size="14" fill="#f5f1e8">Stripe</text>
+        <text x="730" y="296" font-size="13" fill="#a89f8d">27 billing endpoints</text>
+
+        <!-- CONTACT (lower right) -->
+        <rect x="579" y="435" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="645" y="459" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">CONTACT</text>
+        <text x="730" y="440" font-size="14" fill="#f5f1e8">Twilio SMS</text>
+        <text x="730" y="459" font-size="14" fill="#f5f1e8">Resend email</text>
+        <text x="730" y="478" font-size="14" fill="#f5f1e8">Beehiiv newsletter</text>
+
+        <!-- REACH (bottom) -->
+        <rect x="434" y="519" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="500" y="543" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">REACH</text>
+        <text x="500" y="582" font-size="14" fill="#f5f1e8" text-anchor="middle">Meta Graph, Facebook + Instagram</text>
+        <text x="500" y="601" font-size="14" fill="#f5f1e8" text-anchor="middle">Google Places</text>
+
+        <!-- INTELLIGENCE (lower left) -->
+        <rect x="289" y="435" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="355" y="459" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">INTELLIGENCE</text>
+        <text x="270" y="449" font-size="14" fill="#f5f1e8" text-anchor="end">Anthropic Claude</text>
+        <text x="270" y="468" font-size="14" fill="#f5f1e8" text-anchor="end">ElevenLabs voice</text>
+
+        <!-- RUNTIME (upper left) -->
+        <rect x="289" y="267" width="132" height="38" rx="2" fill="#10141a" stroke="#c9a962" stroke-opacity=".35"/>
+        <text x="355" y="291" font-size="13" fill="#c9a962" text-anchor="middle" letter-spacing="1.4">RUNTIME</text>
+        <text x="270" y="240" font-size="14" fill="#f5f1e8" text-anchor="end">Vercel, 18 crons</text>
+        <text x="270" y="259" font-size="14" fill="#f5f1e8" text-anchor="end">Upstash Redis</text>
+        <text x="270" y="278" font-size="14" fill="#f5f1e8" text-anchor="end">Vercel Blob</text>
+        <text x="270" y="297" font-size="14" fill="#f5f1e8" text-anchor="end">Cloudflare</text>
+        <text x="270" y="316" font-size="14" fill="#f5f1e8" text-anchor="end">n8n</text>
+      </svg>
+    </div>
+    <figcaption>
+      One live project. Every service on this board is doing a job that a person would otherwise
+      have to do by hand, on a schedule, forever.
+    </figcaption>
+  </figure>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>What this means when you hire us</h2>
+    <div class="body">
+      <p>You are not buying pages. You are buying <strong>a system that keeps working on the
+      days nobody logs in.</strong> Renewals get chased. The newsletter gets drafted. Listings
+      get audited. Photos get screened before anyone sees them. None of it waits for someone to
+      remember.</p>
+      <p>That is the difference between a site that needs staffing and one that does not. It is
+      also why the board above is worth showing: every line on it used to be a task on somebody's
+      list.</p>
+      <div class="rule">
+        <p>Three job descriptions, running as one system, watched by one person.</p>
+      </div>
+      <p><strong>A fair warning, because it matters.</strong> A platform is not the right answer
+      for every project. If you need a beautiful site that tells your story, we will build you
+      that and it will cost a fraction of this. The board above is what it looks like when a
+      business needs the software to actually run operations, and we would rather tell you which
+      one you need than sell you the larger of the two.</p>
+    </div>
+    <div class="cta">
+      <a href="/signature">See the Signature work</a>
+      <a href="mailto:admin@yetigroove.com">admin@yetigroove.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">YetiGroove Studio / Michigan / Every figure on this page is live and verifiable</div>
+</footer>
+
+</body>
+</html>
