@@ -1,7 +1,7 @@
 # Yeti Groove Signature Films - Internal Rate Card
 
 Private. For proposals and quotes only. Public site shows tier starting prices, nothing else.
-Last updated: 2026-08-02.
+Last updated: 2026-08-18.
 
 ## Tiers (public starting prices)
 
@@ -29,6 +29,41 @@ Everything in Development Package, plus:
 - Custom domain with lead capture
 - Quarterly update scenes as construction progresses (first year)
 
+## Architect Previz Pack - $2,900
+
+Channel SKU. Sold to architects and design-build firms, not to end clients. It is a
+production asset from plans, NOT a commissioned film, so the $7,500 film floor does
+not apply and must never be quoted against it.
+
+- Client supplies approved plans, elevations, and site plan
+- 6 photoreal visualization scenes
+- One 30 second flythrough, licensed music
+- Master file plus one vertical cut
+- Two revision rounds
+- Delivered in 8 business days from plan handoff
+
+What is deliberately NOT included (this is what upgrades to a Signature Film):
+- No site shoot, no drone, no ground reference
+- No original composed score
+- No presentation microsite
+- No print-resolution still pack
+
+### How the architect uses it
+Priced as a per-project line item the firm bills through to its own client, usually at
+a markup, the same way they already bill renderings. Repeatable on every job they take.
+Volume, not prestige, is the point of this SKU.
+
+### Add-ons that stack
+Standard a la carte pricing applies. The common ones: additional scene $450,
+still image pack $1,500, plan-change update pass $2,000, rush +30%.
+
+### Guards
+- 6 scenes is the cap. Scene 7 is $450, always quoted, never absorbed
+- If they want the site itself on camera, that is a Signature Film, quote the tier
+- Renders always presented as visualizations of approved plans (off-plan protection)
+- Referral partners earn 15% on work they send, paid on collection. Do not discount
+  the tiers for a partner, pay the commission instead
+
 ## A la carte (private, quote on top of tiers)
 
 | Item | Price |
@@ -51,3 +86,5 @@ Everything in Development Package, plus:
 ## Floor check
 - Internal floor: $50/hr effective. Track hours per commission; if a tier lands under floor, tighten the scene cap, do not discount the price.
 - Never quote a commissioned film below $7,500.
+- The Architect Previz Pack is the one sub-floor SKU. It is plans-in, scenes-out, no shoot
+  and no score. If a job needs a camera on site or a composed track, it is a film, quote the tier.
