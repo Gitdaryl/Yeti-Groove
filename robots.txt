@@ -5,3 +5,5 @@ Allow: /
 # Not secret, but not for the index either.
 Disallow: /signature/
 Disallow: /admin
+Disallow: /architects
+Disallow: /architects.html

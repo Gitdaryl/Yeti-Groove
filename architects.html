@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Previsualization for Architects &middot; Yeti Groove Signature Films</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="A previsualization pack produced from your drawings. Six scenes and a thirty second flythrough, back in eight business days." />
+  <link rel="icon" type="image/png" href="/brand/yeti-head-256.png" />
+  <link rel="apple-touch-icon" href="/brand/yeti-head-256.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0c0f14;
+      --ink2:     #10141a;
+      --gold:     #c9a962;
+      --gold-dim: #9c8350;
+      --gold-soft: rgba(201,169,98,0.12);
+      --paper:    #f5f1e8;
+      --muted:    #a89f8d;
+      --line:     rgba(201,169,98,0.16);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--paper);
+      line-height: 1.7;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(12,15,20,0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: baseline; gap: 0.55rem; text-decoration: none; }
+    .brand-icon { width: 26px; height: 26px; align-self: center; }
+    .brand-name { font-family: var(--serif); font-size: 1.28rem; letter-spacing: 0.02em; color: var(--paper); }
+    .brand-sub {
+      font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; }
+    .nav-home { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); opacity: 0.65; text-decoration: none; }
+    .nav-home:hover { opacity: 1; color: var(--gold); }
+    .nav-cta {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: var(--gold);
+      padding: 0.6rem 1.15rem; border-radius: 2px; text-decoration: none; font-weight: 500;
+    }
+    .nav-cta:hover { background: #d8bc7d; }
+    @media (max-width: 720px) {
+      nav { padding: 0.9rem 1.1rem; }
+      .brand-sub, .nav-home { display: none; }
+    }
+
+    /* LAYOUT */
+    main { padding-top: 4.6rem; }
+    section, .hero { padding: 5.5rem 2rem; max-width: 1080px; margin: 0 auto; }
+    @media (max-width: 720px) { section, .hero { padding: 3.6rem 1.2rem; } }
+
+    .section-label {
+      font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2.2rem, 5.4vw, 3.9rem); line-height: 1.12;
+      letter-spacing: -0.01em; margin-bottom: 1.4rem;
+    }
+    h2 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    h1 em, h2 em { color: var(--gold); font-style: italic; }
+    h3 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 1.35rem; margin-bottom: 0.6rem; color: var(--paper);
+    }
+    p { color: var(--muted); }
+    p + p { margin-top: 1rem; }
+    strong { color: var(--paper); font-weight: 500; }
+    .lede { font-size: 1.1rem; max-width: 62ch; }
+
+    /* HERO */
+    .hero { padding-top: 6rem; padding-bottom: 4rem; }
+    @media (max-width: 720px) { .hero { padding-top: 3.4rem; } }
+    .hero .lede { font-size: 1.18rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.2rem; }
+    .btn-gold {
+      display: inline-block; background: var(--gold); color: var(--ink);
+      font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+      padding: 0.95rem 1.9rem; border-radius: 2px; text-decoration: none;
+    }
+    .btn-gold:hover { background: #d8bc7d; }
+    .btn-ghost {
+      display: inline-block; border: 1px solid var(--line); color: var(--paper);
+      font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.95rem 1.9rem; border-radius: 2px; text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .rule { border: 0; border-top: 1px solid var(--line); max-width: 1080px; margin: 0 auto; }
+
+    /* CARD GRID */
+    .grid { display: grid; gap: 1.1rem; margin-top: 2.4rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 860px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid var(--line); border-radius: 4px;
+      padding: 1.7rem; background: var(--ink2);
+    }
+    .card p { font-size: 0.95rem; }
+
+    /* SPEC LIST */
+    ul.spec { list-style: none; margin-top: 0.4rem; }
+    ul.spec li {
+      position: relative; padding-left: 1.4rem; margin-bottom: 0.55rem;
+      color: var(--muted); font-size: 0.95rem;
+    }
+    ul.spec li::before { content: "\2014"; position: absolute; left: 0; color: var(--gold-dim); }
+    ul.spec li strong { color: var(--paper); }
+
+    /* BEFORE / AFTER */
+    .ba {
+      position: relative; margin-top: 2.2rem;
+      border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+      aspect-ratio: 16 / 9; touch-action: none; cursor: ew-resize;
+      user-select: none; -webkit-user-select: none; --pos: 50%;
+    }
+    .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .ba .ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+    .ba-handle {
+      position: absolute; top: 0; bottom: 0; left: var(--pos);
+      width: 2px; background: var(--gold); transform: translateX(-1px); pointer-events: none;
+    }
+    .ba-handle::after {
+      content: "\25C2 \25B8"; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); background: var(--gold); color: #0A0A09;
+      font-size: 0.7rem; padding: 0.45rem 0.6rem; border-radius: 999px; white-space: nowrap;
+    }
+    .ba-tag {
+      position: absolute; bottom: 0.8rem; font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; padding: 0.32rem 0.65rem; background: rgba(8,8,7,0.7);
+      color: var(--paper); border-radius: 3px; pointer-events: none;
+    }
+    .ba-tag-l { left: 0.8rem; }
+    .ba-tag-r { right: 0.8rem; color: var(--gold); }
+    .caption { font-size: 0.82rem; margin-top: 0.9rem; color: var(--muted); }
+
+    /* PRICE PANEL */
+    .price-wrap { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.1rem; margin-top: 2.4rem; }
+    @media (max-width: 860px) { .price-wrap { grid-template-columns: 1fr; } }
+    .price {
+      border: 1px solid var(--gold); border-radius: 4px; padding: 2rem;
+      background: linear-gradient(180deg, var(--gold-soft), transparent 60%);
+    }
+    .price.alt { border-color: var(--line); background: var(--ink2); }
+    .price-name { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+    .price-fig { font-family: var(--serif); font-size: 2.7rem; line-height: 1.1; margin: 0.5rem 0 1rem; }
+    .price.alt .price-fig { font-size: 2.1rem; }
+    .price-note { font-size: 0.82rem; margin-top: 1.2rem; }
+
+    table.addons { width: 100%; border-collapse: collapse; margin-top: 2.2rem; font-size: 0.92rem; }
+    table.addons th, table.addons td { text-align: left; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--line); }
+    table.addons th { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    table.addons td { color: var(--muted); }
+    table.addons td:last-child { text-align: right; color: var(--paper); white-space: nowrap; }
+
+    .fidelity { border-left: 2px solid var(--gold); padding-left: 1.4rem; margin-top: 2rem; }
+
+    /* CONTACT */
+    .contact { text-align: center; border-top: 1px solid var(--line); }
+    .contact h2 { margin-bottom: 1rem; }
+    .contact p { max-width: 56ch; margin-left: auto; margin-right: auto; }
+    .contact .btn-gold { margin-top: 2rem; }
+
+    footer { padding: 2.4rem 2rem; text-align: center; border-top: 1px solid var(--line); }
+    footer p { font-size: 0.78rem; }
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="/">
+      <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
+      <span class="brand-name">Yeti Groove</span>
+      <span class="brand-sub">For Architects</span>
+    </a>
+    <span class="nav-right">
+      <a class="nav-home" href="/signature">Signature Films</a>
+      <a class="nav-cta" href="#send">Send Plans</a>
+    </span>
+  </nav>
+
+  <main>
+
+    <header class="hero">
+      <p class="section-label">Previsualization for Architects</p>
+      <h1>Your drawings, shown the way the client <em>already imagines them</em></h1>
+      <p class="lede">A previsualization pack produced from your plans and elevations. Six photoreal scenes and a thirty second flythrough, back in eight business days, priced as a line item you bill through like any rendering.</p>
+      <div class="hero-actions">
+        <a class="btn-gold" href="#send">Send plans</a>
+        <a class="btn-ghost" href="#pack">What you get</a>
+      </div>
+    </header>
+
+    <hr class="rule" />
+
+    <section>
+      <p class="section-label">Why firms call</p>
+      <h2>The drawing is right. The client still <em>cannot see it</em></h2>
+      <p class="lede">You know the building. You have known it since the first sketch. The person paying for it is looking at a plan set and quietly hoping.</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Winning the commission</h3>
+          <p>The firm that shows the finished thing tends to walk out with the job. Not because the design is better. Because the client could picture living in it.</p>
+        </div>
+        <div class="card">
+          <h3>The hours nobody bills</h3>
+          <p>Visualization quietly eats staff time that never lands on an invoice. It is the most expensive thing in the office that no one has priced.</p>
+        </div>
+        <div class="card">
+          <h3>Changes late in the game</h3>
+          <p>A client who has walked through the space signs off earlier and asks for fewer reversals once the drawings are already stamped.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <section id="pack">
+      <p class="section-label">The Pack</p>
+      <h2>You send drawings. <em>We send a film.</em></h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>What you send</h3>
+          <ul class="spec">
+            <li>Plans and elevations, any usual format</li>
+            <li>Site plan, and a survey if you have one</li>
+            <li>Materials and finishes, or a reference image</li>
+            <li>Anything you already made, including massing studies</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What comes back</h3>
+          <ul class="spec">
+            <li><strong>Six photoreal scenes</strong> of the finished building</li>
+            <li><strong>One thirty second flythrough</strong>, scored</li>
+            <li>Master file plus a vertical cut for phone and social</li>
+            <li>Two revision rounds</li>
+            <li><strong>Eight business days</strong> from handoff</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <section>
+      <p class="section-label">The Craft</p>
+      <h2>Both frames below were visualized <em>before a foundation was poured</em></h2>
+      <p class="lede">Drag the handle and finish the building yourself.</p>
+      <div class="ba" id="baSlider" tabindex="0" role="slider" aria-label="Before and after visualization comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <img src="https://devils-lake-cove.vercel.app/assets/condos-complete.jpg" alt="Finished marina village, visualized at dusk" />
+        <img class="ba-before" src="https://devils-lake-cove.vercel.app/assets/build-condos.jpg" alt="The same marina village visualized mid-construction" />
+        <div class="ba-handle"></div>
+        <span class="ba-tag ba-tag-l">Mid-build</span>
+        <span class="ba-tag ba-tag-r">The finished vision</span>
+      </div>
+      <p class="caption">Devils Lake marina village, visualized from the development plans.</p>
+
+      <div class="fidelity">
+        <h3>On fidelity, since you will ask</h3>
+        <p>Generic image tools do not read a plan set. Ask one for a lake house and it returns a beautiful house that is not yours, with a roof pitch you never drew and windows you never specified. That is the whole problem, and it is the part of this work that takes the real hours.</p>
+        <p>Everything here is built against your drawings and held to them across all six scenes. Output is delivered and labelled as a visualization of approved plans, which protects you and your client both.</p>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <section>
+      <p class="section-label">Plain terms</p>
+      <h2>What this is <em>not</em></h2>
+      <p class="lede">Worth saying up front so nothing is a surprise later.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Not a site shoot</h3>
+          <p>The pack is produced entirely from your drawings. No drone, no crew on the land, no footage of the site as it stands today.</p>
+        </div>
+        <div class="card">
+          <h3>Not a Signature Film</h3>
+          <p>No original composed score, no presentation microsite, no print resolution still library. When a project needs those, it becomes a commissioned film and we quote it as one.</p>
+        </div>
+      </div>
+      <p style="margin-top:1.6rem">If the land itself deserves to be on camera, that is the <a href="/signature" style="color:var(--gold)">Signature Film</a> side of the studio.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section>
+      <p class="section-label">Investment</p>
+      <h2>Priced to sit on an invoice, <em>not to be agonized over</em></h2>
+      <div class="price-wrap">
+        <div class="price">
+          <p class="price-name">Architect Previz Pack</p>
+          <div class="price-fig">$2,900</div>
+          <p>Six scenes, a thirty second flythrough, two revision rounds, eight business days. Most firms bill it straight through to the client as a visualization line item, the same way renderings are already handled.</p>
+          <p class="price-note"><strong>Repeatable.</strong> Same price, same turnaround, every project. Nothing to renegotiate.</p>
+        </div>
+        <div class="price alt">
+          <p class="price-name">Workflow Session</p>
+          <div class="price-fig">$750</div>
+          <p>Ninety minutes, screen shared and recorded, if you would rather build this capability inside your own office. The full sequence and the rules that cost real money to learn.</p>
+          <p class="price-note"><strong>Credited in full</strong> against your first pack, so it costs nothing if you later hand a project over.</p>
+        </div>
+      </div>
+
+      <table class="addons">
+        <thead><tr><th>Add on</th><th>&nbsp;</th></tr></thead>
+        <tbody>
+          <tr><td>Additional visualization scene</td><td>$450</td></tr>
+          <tr><td>Additional vertical or social cut</td><td>$300</td></tr>
+          <tr><td>Still image pack of ten, print resolution</td><td>$1,500</td></tr>
+          <tr><td>Update pass after a plan revision</td><td>$2,000</td></tr>
+          <tr><td>Extra revision round</td><td>$300</td></tr>
+          <tr><td>Rush delivery</td><td>+30%</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="contact" id="send">
+      <p class="section-label">Begin</p>
+      <h2>Send one project and see it</h2>
+      <p>Pick a job you are working on now, send the plans, and we will come back with what the six scenes would be before anything is committed. No charge for that conversation.</p>
+      <a class="btn-gold" href="mailto:daryl@yetigroove.com?subject=Architect%20Previz%20Pack">daryl@yetigroove.com</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Yeti Groove Media &middot; Devils Lake, Michigan &middot; <a href="/">yetigroove.com</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var ba = document.getElementById('baSlider');
+      if (!ba) return;
+      function setPos(clientX) {
+        var r = ba.getBoundingClientRect();
+        var p = (clientX - r.left) / r.width;
+        p = Math.max(0.02, Math.min(0.98, p));
+        ba.style.setProperty('--pos', (p * 100) + '%');
+        ba.setAttribute('aria-valuenow', Math.round(p * 100));
+      }
+      ba.addEventListener('pointerdown', function (e) {
+        ba.setPointerCapture(e.pointerId);
+        setPos(e.clientX);
+        var move = function (ev) { setPos(ev.clientX); };
+        ba.addEventListener('pointermove', move);
+        ba.addEventListener('pointerup', function () {
+          ba.removeEventListener('pointermove', move);
+        }, { once: true });
+      });
+      ba.addEventListener('keydown', function (e) {
+        var now = parseFloat(ba.getAttribute('aria-valuenow')) || 50;
+        if (e.key === 'ArrowLeft') now -= 4;
+        else if (e.key === 'ArrowRight') now += 4;
+        else return;
+        e.preventDefault();
+        now = Math.max(2, Math.min(98, now));
+        ba.style.setProperty('--pos', now + '%');
+        ba.setAttribute('aria-valuenow', Math.round(now));
+      });
+    })();
+  </script>
+
+</body>
+</html>
