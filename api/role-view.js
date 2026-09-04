@@ -34,7 +34,13 @@ const ALERTS = {
 
 // Only pages we actually publish. Stops the endpoint being a general purpose
 // "text Daryl" button for anyone who finds it.
-const KNOWN = new Set(['wongdoody']);
+// 'main' is the bare work.yetigroove.com root. It was added on 2026-08-15
+// because the WongDoody application put the root URL in the Greenhouse form
+// field and the tailored /wongdoody link only in the cover letter body, so the
+// visit most likely to happen was the one nothing was watching. Unlike a role
+// slug, 'main' cannot tell you who is reading: everyone sent the root fires
+// the same alert.
+const KNOWN = new Set(['wongdoody', 'main']);
 
 const ORIGINS = new Set([
   'https://work.yetigroove.com',
