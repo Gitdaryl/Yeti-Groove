@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Operations Audit | YetiGroove Studio</title>
+<meta name="description" content="A fixed-fee look at what your business still does by hand. One day, a plain-language findings document, and one automation built and running before we finish." />
+<meta property="og:title" content="Same nine o'clock. Different morning." />
+<meta property="og:description" content="A fixed-fee operations audit for small businesses that are running on somebody staying late." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.yetigroove.com/streamline" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080807; --dark:#0F0E0C; --dark2:#161410;
+  --gold:#C9A55A; --goldDim:rgba(201,165,90,0.12);
+  --cream:#F0EDE6; --muted:#B0A390; --line:rgba(201,165,90,0.12);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans','Helvetica Neue',Arial,sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--black);color:var(--cream);line-height:1.7;font-size:16px;overflow-x:hidden}
+img,canvas{max-width:100%;display:block}
+a{color:inherit}
+
+/* ── DECOMPRESSION ──────────────────────────────────────────────
+   The page performs the promise. Act 1 is crushed: narrow measure,
+   tight leading, hard contrast, little air. Every act after it gets
+   wider, lighter and airier. The reader feels the relief in their
+   body before they read a word of it. */
+.act{position:relative}
+.wrap{margin:0 auto;padding:0 1.6rem}
+.act-1{--measure:52ch; --air:4.5rem;  --lead:1.5;  --tone:var(--black)}
+.act-2{--measure:60ch; --air:7rem;    --lead:1.65; --tone:var(--dark)}
+.act-3{--measure:68ch; --air:10rem;   --lead:1.8;  --tone:var(--dark2)}
+.act .wrap{max-width:calc(var(--measure) + 8rem)}
+.act .prose{max-width:var(--measure);line-height:var(--lead)}
+.pad{padding:var(--air) 0}
+.act-1{background:var(--black)}
+.act-2{background:var(--dark)}
+.act-3{background:var(--dark2)}
+
+.eyebrow{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:1.4rem}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.04;max-width:18ch}
+h2{font-size:clamp(1.9rem,4.4vw,3.1rem);line-height:1.12;max-width:20ch}
+h3{font-size:1.15rem;line-height:1.35}
+em{font-style:italic;color:var(--gold)}
+p+p{margin-top:1.1rem}
+.lede{margin-top:1.6rem;color:var(--muted);font-size:clamp(1rem,1.7vw,1.13rem)}
+.lede strong{color:var(--cream);font-weight:400}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 1.6rem;background:linear-gradient(180deg,rgba(12,10,8,.86) 0%,rgba(12,10,8,.42) 62%,rgba(12,10,8,0) 100%);backdrop-filter:blur(3px)}
+nav a{text-decoration:none;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+nav .brand{font-family:var(--serif);font-size:1rem;letter-spacing:.02em;color:var(--cream);text-transform:none}
+nav .links{display:flex;gap:1.4rem}
+@media(max-width:640px){nav .links a:not(.cta){display:none}}
+nav .cta{color:var(--gold);border:1px solid var(--line);padding:.45rem .9rem;border-radius:2px}
+nav{transition:background .25s ease}
+nav.on-light{background:linear-gradient(180deg,rgba(240,237,230,.94),rgba(240,237,230,0))}
+nav.on-light .brand{color:#14120E}
+nav.on-light a{color:#5A5344}
+nav.on-light .cta{color:#8A6E32;border-color:rgba(20,18,14,.22)}
+
+/* ── SCRUB STAGE ──────────────────────────────────────────────
+   Same engine as the homepage hero, generalised to N sections.
+   Inert until frame 001 of that act actually loads, so the page is
+   complete and correct with no rendered frames present. */
+.scrub{position:relative}
+.stage{position:relative;height:74vh;min-height:440px;overflow:hidden;display:flex;align-items:flex-end}
+.scrub.on{height:450vh}
+.scrub.on .stage{position:sticky;top:0;height:100vh}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none;object-fit:cover}
+.scrub.on .stage canvas{display:block}
+.stage .shade{position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,
+    rgba(18,16,13,0) 0%, rgba(18,16,13,0) 26%,
+    rgba(18,16,13,.34) 46%, rgba(18,16,13,.72) 68%, rgba(18,16,13,.92) 100%)}
+.stage .copy{position:relative;z-index:3;width:100%;padding:0 1.6rem 4.5rem}
+.stage .copy .inner{margin:0 auto;max-width:calc(var(--measure) + 8rem);display:grid}
+.beat{grid-area:1/1;opacity:0;will-change:opacity,transform}
+.beat:first-child{opacity:1}
+.beat h1,.beat h2{margin:0}
+.beat h1,.beat h2,.beat .eyebrow{
+  text-shadow:0 1px 2px rgba(12,10,8,.55), 0 2px 26px rgba(12,10,8,.75)}
+.stage .hint{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);z-index:4;
+  font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);opacity:.6;display:none}
+.scrub.on .stage .hint{display:block}
+
+/* Placeholder ground: a warm, out-of-focus field so the page reads
+   finished before the frames exist. Replaced by the canvas on load. */
+.stage .ground{position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(120% 90% at 18% 8%, rgba(201,165,90,.16), transparent 55%),
+    radial-gradient(90% 70% at 85% 95%, rgba(201,165,90,.07), transparent 60%),
+    linear-gradient(160deg,#12100c,#080807 70%)}
+.act-3 .stage .ground{
+  background:
+    radial-gradient(120% 95% at 50% 105%, rgba(201,165,90,.26), transparent 62%),
+    radial-gradient(80% 60% at 75% 10%, rgba(201,165,90,.10), transparent 60%),
+    linear-gradient(160deg,#1b1811,#0F0E0C 72%)}
+
+/* ── RECOGNITION LIST (the tightest block on the page) ── */
+.pile{margin-top:2.6rem;border-top:1px solid var(--line)}
+.pile li{list-style:none;border-bottom:1px solid var(--line);padding:1rem 0 1rem 2.1rem;position:relative;
+  font-size:1.02rem;line-height:1.45;color:var(--cream)}
+.pile li::before{content:'';position:absolute;left:.35rem;top:1.42rem;width:6px;height:6px;background:var(--gold);opacity:.5}
+.pile li span{color:var(--muted)}
+
+/* ── OFFER ── */
+.offer{border:1px solid var(--line);background:rgba(201,165,90,.03);padding:clamp(1.8rem,4vw,3rem);border-radius:3px;margin-top:3rem}
+.offer ul{margin:1.6rem 0 0;padding:0}
+.offer li{list-style:none;padding:.7rem 0 .7rem 1.7rem;position:relative;color:var(--cream);line-height:1.55}
+.offer li::before{content:'';position:absolute;left:0;top:1.25rem;width:9px;height:1px;background:var(--gold)}
+.offer li strong{font-weight:500}
+.price{margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:baseline}
+.price .fig{font-family:var(--serif);font-size:2.6rem;color:var(--gold);line-height:1}
+.price .note{color:var(--muted);font-size:.95rem;max-width:34ch}
+
+/* ── PROOF ── */
+.proof{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem}
+@media(min-width:820px){.proof{grid-template-columns:repeat(3,1fr)}}
+.proof .cell{background:var(--dark2);padding:2rem 1.6rem}
+.proof .fig{font-family:var(--serif);font-size:2.5rem;color:var(--gold);line-height:1}
+.proof h3{margin:.9rem 0 .5rem;font-size:1.05rem}
+.proof p{color:var(--muted);font-size:.94rem;line-height:1.6}
+
+/* ── CARE ── */
+.care{margin-top:3rem;border-left:2px solid var(--gold);padding:.3rem 0 .3rem 1.6rem}
+
+/* ── OBJECTIONS ── */
+.qa{margin-top:2.6rem}
+.qa details{border-bottom:1px solid var(--line);padding:1.15rem 0}
+.qa summary{cursor:pointer;list-style:none;font-size:1.04rem;color:var(--cream);display:flex;justify-content:space-between;gap:1rem}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:'+';color:var(--gold);flex:none}
+.qa details[open] summary::after{content:'\2212'}
+.qa p{margin-top:.85rem;color:var(--muted);max-width:60ch}
+
+/* ── MORNING (the payoff panel: the only light ground on the page) ── */
+.morning{background:var(--cream);color:#14120E;padding:clamp(4rem,9vw,8rem) 1.6rem}
+.morning .wrap{max-width:52rem;padding:0}
+.morning .eyebrow{color:#8A6E32}
+.morning h2{color:#14120E}
+.morning .lede{color:#4A4438}
+.morning .lede strong{color:#14120E}
+form{margin-top:2.8rem;display:grid;gap:1.1rem}
+@media(min-width:700px){.two{grid-template-columns:1fr 1fr;display:grid;gap:1.1rem}}
+label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#7A705C;margin-bottom:.45rem}
+input,textarea,select{width:100%;font-family:var(--sans);font-size:1rem;color:#14120E;background:#FBF9F4;
+  border:1px solid rgba(20,18,14,.16);border-radius:2px;padding:.85rem .9rem;line-height:1.5}
+textarea{min-height:5.5rem;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#8A6E32;box-shadow:0 0 0 3px rgba(138,110,50,.12)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button{font-family:var(--sans);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;
+  background:#14120E;color:var(--cream);border:0;border-radius:2px;padding:1.05rem 2rem;cursor:pointer;justify-self:start}
+button:disabled{opacity:.55;cursor:default}
+.formnote{font-size:.86rem;color:#7A705C;max-width:62ch}
+.status{margin-top:1rem;font-size:.95rem;display:none}
+.status.show{display:block}
+.status.ok{color:#2F6B3A}
+.status.err{color:#8C2F26}
+
+footer{background:var(--black);color:var(--muted);font-size:.85rem;padding:3rem 1.6rem;text-align:center;border-top:1px solid var(--line)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.stage .ground{background-size:cover;background-position:center}
+#story .ground{background-image:
+    linear-gradient(180deg,rgba(18,16,13,0) 40%,rgba(18,16,13,.62) 78%,rgba(18,16,13,.88) 100%),
+    url(/media/streamline/story/poster.jpg)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/">YetiGroove</a>
+  <span class="links">
+    <a href="/signature.html">Signature</a>
+    <a href="/architects.html">Architects</a>
+    <a class="cta" href="#start">Book the audit</a>
+  </span>
+</nav>
+
+<!-- ═══ THE STORY ══════════════════════════════
+     One room, one continuous transformation, driven entirely by the reader's
+     scroll. Chaos at the top, order at the bottom. Scrub back up and it comes
+     apart again, which is the whole reason to touch it.
+
+     The frames are a rendered explosion played backwards. Three copy beats
+     ride over the one scene instead of getting three scenes of their own. -->
+<section class="act act-1">
+  <div class="scrub" id="story" data-frames="/media/streamline/story" data-count="110"
+       data-shade-from="1" data-shade-to=".84">
+    <div class="stage">
+      <div class="ground"></div>
+      <canvas></canvas>
+      <div class="shade"></div>
+
+      <div class="copy"><div class="inner">
+        <div class="beat" data-in="0.00" data-out="0.30">
+          <p class="eyebrow">Operations Audit</p>
+          <h1>Nine in the morning, and you're already doing the part <em>a computer should have done.</em></h1>
+        </div>
+        <div class="beat" data-in="0.36" data-out="0.66">
+          <p class="eyebrow">What we actually do</p>
+          <h2>None of it is hard. It was just <em>never routed.</em></h2>
+        </div>
+        <div class="beat" data-in="0.72" data-out="1.01">
+          <p class="eyebrow">The point of all of it</p>
+          <h2>Same nine o'clock. <em>Different morning.</em></h2>
+        </div>
+      </div></div>
+
+      <span class="hint">Scroll</span>
+    </div>
+  </div>
+
+  <div class="wrap pad">
+    <div class="prose">
+      <p class="lede"><strong>Nobody chose these jobs.</strong> They accumulated. A second system that needs the same information typed into it again. A quote that only one person can write, so it goes out after dinner. A customer asking where their order is for the fourth time today.</p>
+      <p class="lede">None of it showed up in the business plan. It arrived one workaround at a time, and now it is the reason somebody stays late.</p>
+    </div>
+
+    <ul class="pile">
+      <li>The quote only <em>you</em> can write <span>so it goes out at 9pm, or it goes out Thursday</span></li>
+      <li>The job that gets entered twice <span>once in the software, once on the calendar, and they disagree by Friday</span></li>
+      <li>The paperwork somebody needs right now <span>certs, permits, warranties, sitting in an inbox from March</span></li>
+      <li>Two hundred photos on a phone <span>that are supposed to be on the job file</span></li>
+      <li>The message that came in after hours <span>and got answered eleven hours later, by which time they called somebody else</span></li>
+      <li>The thing that only works because one person remembers it <span>and that person would like a vacation</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ ACT 2 : THE SORT ══════════════════════════════════════
+     Nothing disappears. It gets routed. That distinction is the
+     whole honest argument and it has to survive into the visuals. -->
+<section class="act act-2">
+    <div class="wrap pad">
+    <h2 style="margin-bottom:1.6rem">What the day <em>actually looks like.</em></h2>
+    <div class="prose">
+      <p class="lede">We spend a day inside how your business really runs, which is never quite how the software says it runs. We follow one job from the first phone call to the final invoice and write down every place a human retypes, re-sends, or remembers something.</p>
+      <p class="lede">Then you get a short document in plain language: <strong>what is costing you hours, what can be automated this month, and what should be left alone.</strong> That last part matters. Plenty of what you do by hand is judgement, and judgement should stay with you.</p>
+    </div>
+
+    <div class="offer">
+      <p class="eyebrow">The audit</p>
+      <h3 style="font-family:var(--serif);font-size:1.6rem;max-width:22ch">One day, one document, and one thing already running.</h3>
+      <ul>
+        <li><strong>A day inside the business.</strong> On site if you are near the lakes, on a call if you are not.</li>
+        <li><strong>A written findings document.</strong> Plain language, no jargon, ranked by hours returned per month.</li>
+        <li><strong>One automation built and switched on before we finish.</strong> Not a recommendation. A working thing, live, that you keep either way.</li>
+        <li><strong>A quote for the rest,</strong> if there is a rest worth doing.</li>
+      </ul>
+      <div class="price">
+        <span class="fig">$750</span>
+        <span class="note">Fixed. Credited in full against the first build, so if we go ahead the audit costs nothing.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACT 3 : THE LIGHTS STAY ON ════════════════════════════
+     Pull back, open up, let the air in. The room is empty and the
+     work is still moving. -->
+<section class="act act-3">
+    <div class="wrap pad">
+    <h2 style="margin-bottom:1.6rem">Systems we <em>already run.</em></h2>
+    <div class="prose">
+      <p class="lede">Same clock on the wall, same light through the blinds. The only thing that changed is what was waiting for you. <strong>Go home at five, and it keeps working.</strong> This is not theoretical: we run systems like this every day for businesses around the lakes, and they run whether anybody is watching or not.</p>
+    </div>
+
+    <div class="proof">
+      <div class="cell">
+        <p class="fig">4&times;</p>
+        <h3>A day, placed automatically</h3>
+        <p>A contractor's social account posts four times daily off a managed queue, with an evergreen fallback so it never goes quiet. Nobody touches it.</p>
+      </div>
+      <div class="cell">
+        <p class="fig">Wed</p>
+        <h3>A video that writes itself</h3>
+        <p>Every Wednesday evening a full video is scripted and rendered on a timer. The only human step left is pressing post.</p>
+      </div>
+      <div class="cell">
+        <p class="fig">24/7</p>
+        <h3>A community calendar</h3>
+        <p>Events, photos and alerts for a whole lake community, updating itself and notifying the right people without an office behind it.</p>
+      </div>
+    </div>
+
+    <div class="care prose">
+      <p class="eyebrow" style="margin-bottom:.7rem">The part most people skip</p>
+      <p class="lede" style="margin-top:0"><strong>Anything we leave running, we watch.</strong> Automations break quietly. A password expires, a service changes a rule, and a thing that has worked for eight months stops without telling anybody. So every system we install comes with a monthly care fee and a health check that shouts when something goes wrong.</p>
+      <p class="lede">We do not hand over unattended machinery and walk away. That is how businesses end up worse off than before they automated anything.</p>
+    </div>
+
+    <div class="qa prose" style="max-width:none">
+      <details>
+        <summary>We are not a tech company. We make things.</summary>
+        <p>Good. The businesses that gain the most from this are the least technical ones, because nobody has ever looked at their back office with fresh eyes. Fabricators, contractors, marinas, restaurants. If you can walk us through a job, we can find the leaks.</p>
+      </details>
+      <details>
+        <summary>Are you going to tell us to replace our software?</summary>
+        <p>Almost certainly not. Ripping out a system your people already know is expensive and it is usually the wrong answer. Most of what we find lives in the gaps between the tools you already pay for.</p>
+      </details>
+      <details>
+        <summary>Is this an AI thing?</summary>
+        <p>Some of it, where it earns its place. Most of it is much more boring than that: connecting two things that should already have been connected. The goal is fewer hours, not more technology.</p>
+      </details>
+      <details>
+        <summary>What if you find nothing?</summary>
+        <p>Then we say so, you keep the automation we built on the day, and we do not send you a quote for work that would not pay for itself.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MORNING : the only light panel on the page ═══ -->
+<section class="morning" id="start">
+  <div class="wrap">
+    <p class="eyebrow">Start here</p>
+    <h2>Three questions. That is the whole application.</h2>
+    <p class="lede"><strong>Answer as roughly as you like.</strong> These three tell us more about a business than an hour on a call, and they are the same three we would ask you standing in your shop.</p>
+
+    <form id="auditForm" novalidate>
+      <div class="two">
+        <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" placeholder="Your name" required /></div>
+        <div><label for="f-company">Business name</label><input id="f-company" name="company" autocomplete="organization" placeholder="Your business name" required /></div>
+      </div>
+      <div class="two">
+        <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required /></div>
+        <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" /></div>
+      </div>
+      <div class="two">
+        <div><label for="f-trade">What does the business do?</label><input id="f-trade" name="trade" placeholder="What the business makes or does" /></div>
+        <div><label for="f-headcount">How many people?</label><input id="f-headcount" name="headcount" placeholder="Including you" /></div>
+      </div>
+      <div><label for="f-twice">1. What gets done twice?</label><textarea id="f-twice" name="twice" placeholder="Anything that gets written down, typed in, or sent more than once"></textarea></div>
+      <div><label for="f-waiting">2. What sits waiting on one person?</label><textarea id="f-waiting" name="waiting" placeholder="The thing that stops moving when that person is busy or away"></textarea></div>
+      <div><label for="f-inhead">3. What only works because somebody remembers it?</label><textarea id="f-inhead" name="inhead" placeholder="The step that is not written down anywhere"></textarea></div>
+      <div><label for="f-software">What software are you already paying for?</label><input id="f-software" name="software" placeholder="Whatever you can remember, rough is fine" /></div>
+      <div class="hp" aria-hidden="true"><label for="f-fax">Fax</label><input id="f-fax" name="fax" tabindex="-1" autocomplete="off" /></div>
+
+      <p class="formnote">We read every one of these ourselves. Nothing here is answered by a bot.</p>
+      <button type="submit" id="submitBtn">Send it over</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>YetiGroove Studio &middot; Made in lake country, Michigan &middot; <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
+</footer>
+
+<script>
+/* ── Multi-act scroll scrub ───────────────────────────────────
+   Generalised from the homepage hero. Each .scrub section pins its
+   stage and steps a webp sequence by scroll position.
+
+   Two rules that keep it honest:
+   1. A section only activates once frame 001 has actually decoded.
+      With no frames rendered yet, nothing activates and the page is
+      still complete, just static. No broken state, ever.
+   2. Frames are only requested when the section is within two
+      viewports. Three acts of 40+ frames must never all load at once. */
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small  = matchMedia('(max-width: 768px)').matches;
+  var save   = navigator.connection && navigator.connection.saveData;
+  if (reduce || small || save) return;
+
+  var acts = [].slice.call(document.querySelectorAll('.scrub'));
+  if (!acts.length) return;
+
+  acts.forEach(function (wrap) {
+    var canvas = wrap.querySelector('canvas');
+    if (!canvas || !canvas.getContext) return;
+
+    var stage  = wrap.querySelector('.stage');
+    var copy   = wrap.querySelector('.copy');
+    var beats  = [].slice.call(wrap.querySelectorAll('.beat'));
+    var shade  = wrap.querySelector('.shade');
+    var hint   = wrap.querySelector('.hint');
+    var ctx    = canvas.getContext('2d');
+    var dir    = wrap.getAttribute('data-frames');
+    var COUNT  = parseInt(wrap.getAttribute('data-count'), 10) || 40;
+    var SH0    = parseFloat(wrap.getAttribute('data-shade-from') || '0.62');
+    var SH1    = parseFloat(wrap.getAttribute('data-shade-to')   || '0.94');
+    var images = new Array(COUNT);
+    var current = -1;
+    var started = false;
+    var live = false;
+
+    function src(i) { return dir + '/frame_' + String(i + 1).padStart(3, '0') + '.webp'; }
+
+    function draw(i) {
+      var img = images[i];
+      if (!img || !img.complete || !img.naturalWidth) return;
+      var cw = canvas.width, ch = canvas.height;
+      var s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      var w = img.naturalWidth * s, h = img.naturalHeight * s;
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      current = i;
+    }
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width  = stage.clientWidth  * dpr;
+      canvas.height = stage.clientHeight * dpr;
+      if (current >= 0) draw(current);
+    }
+
+    function progress() {
+      var total = wrap.offsetHeight - window.innerHeight;
+      if (total <= 0) return 0;
+      return Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / total));
+    }
+
+    function nearest(i) {
+      for (var j = i; j >= 0; j--) {
+        if (images[j] && images[j].complete && images[j].naturalWidth) return j;
+      }
+      return -1;
+    }
+
+    var ticking = false;
+    function update() {
+      if (!live || ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var p = progress();
+        var idx = nearest(Math.round(p * (COUNT - 1)));
+        if (idx >= 0 && idx !== current) draw(idx);
+        // Each beat owns a stretch of the scroll and cross-fades in place over
+        // the one continuous scene. Beat 1 starts at full opacity so the H1 is
+        // legible on first paint, before anyone has scrolled at all.
+        for (var b = 0; b < beats.length; b++) {
+          var el = beats[b];
+          var i0 = parseFloat(el.getAttribute('data-in'));
+          var i1 = parseFloat(el.getAttribute('data-out'));
+          var f  = 0.06, o;
+          if (p < i0 - f || p > i1 + f) o = 0;
+          else if (p < i0) o = (p - (i0 - f)) / f;
+          else if (p > i1) o = 1 - ((p - i1) / f);
+          else o = 1;
+          o = Math.max(0, Math.min(1, o));
+          el.style.opacity = o;
+          el.style.transform = 'translateY(' + ((1 - o) * 12) + 'px)';
+        }
+        // The room lifts out of shadow as it comes back together.
+        if (shade) { shade.style.opacity = SH0 + (SH1 - SH0) * p; }
+        if (hint)  { hint.style.opacity = Math.max(0, 0.6 - p * 3); }
+      });
+    }
+
+    // Load only when the act is close. Three acts must not race each other.
+    function maybeStart() {
+      if (started) return;
+      var r = wrap.getBoundingClientRect();
+      if (r.top > window.innerHeight * 2 || r.bottom < 0) return;
+      started = true;
+
+      var first = new Image();
+      first.src = src(0);
+      first.onload = function () {
+        images[0] = first;
+        wrap.classList.add('on');
+        live = true;
+        resize();
+        draw(0);
+        update();
+        for (var i = 1; i < COUNT; i++) {
+          var img = new Image();
+          img.src = src(i);
+          img.onload = update;
+          images[i] = img;
+        }
+      };
+      // No onerror handler by design: if the frames are not there yet the
+      // section simply stays static and the page reads as finished.
+    }
+
+    addEventListener('scroll', function () { maybeStart(); update(); }, { passive: true });
+    addEventListener('resize', function () { if (live) resize(); });
+    maybeStart();
+  });
+})();
+
+/* Nav flips to dark-on-light over the cream panel. */
+(function () {
+  var nav = document.querySelector('nav');
+  var light = document.querySelector('.morning');
+  if (!nav || !light) return;
+  function sync() {
+    nav.classList.toggle('on-light', light.getBoundingClientRect().top <= 56);
+  }
+  addEventListener('scroll', sync, { passive: true });
+  addEventListener('resize', sync);
+  sync();
+})();
+
+/* ── Intake ─────────────────────────────────────────────────── */
+(function () {
+  var form = document.getElementById('auditForm');
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('status');
+  if (!form) return;
+
+  function say(msg, ok) {
+    status.textContent = msg;
+    status.className = 'status show ' + (ok ? 'ok' : 'err');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var data = Object.fromEntries(new FormData(form).entries());
+    if (data.fax) return;                 // honeypot
+    delete data.fax;
+    data.source = 'Streamline page';
+
+    if (!data.name || !data.email || !data.company) {
+      say('Name, business name and email, then we are set.', false);
+      return;
+    }
+
+    btn.disabled = true;
+    var original = btn.textContent;
+    btn.textContent = 'Sending';
+
+    try {
+      var r = await fetch('/api/streamline-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      var j = await r.json();
+      if (j && j.ok) {
+        form.querySelectorAll('input,textarea').forEach(function (el) { el.value = ''; });
+        say('Got it. Daryl will come back to you personally, usually the same day.', true);
+        btn.textContent = 'Sent';
+        return;
+      }
+      say((j && j.error) || 'That did not send. Email daryl@yetigroove.com and it will get there.', false);
+    } catch (err) {
+      say('That did not send. Email daryl@yetigroove.com and it will get there.', false);
+    }
+    btn.disabled = false;
+    btn.textContent = original;
+  });
+})();
+</script>
+</body>
+</html>

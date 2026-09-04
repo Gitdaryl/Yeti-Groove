@@ -4,3 +4,7 @@ node_modules
 tools/.egle-seen.json
 tools/.planning-seen.json
 tools/.planning-cache/
+
+# Scrub source stills and clips: 100MB+ of renders the site never serves.
+# The published frames live in media/streamline/act*/ and are committed.
+media/streamline/_src/

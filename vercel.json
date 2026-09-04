@@ -57,6 +57,10 @@
       "destination": "/platform.html"
     },
     {
+      "source": "/streamline",
+      "destination": "/streamline.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
