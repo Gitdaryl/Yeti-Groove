@@ -1,0 +1,24 @@
+{
+  "_comment": [
+    "The registry of every conversational agent the studio runs, and who it belongs to.",
+    "This file is the inventory, not a secret store. Agent ids are safe to commit: they are",
+    "already served to every visitor in the site bundle (Vite inlines VITE_* at build time),",
+    "so writing one here adds no exposure. The API key never lives in this file.",
+    "",
+    "configPath is relative to the repo, and the repo is resolved under projectsDir, so this",
+    "registry stays portable to another machine. Override the base with YETI_PROJECTS_DIR."
+  ],
+  "projectsDir": "~/Projects",
+  "agents": [
+    {
+      "slug": "manitou-beach",
+      "name": "Manitou Beach Concierge",
+      "agentId": "agent_4701kmr2kg6afnmvnpdwnk58yjn5",
+      "repo": "Manitou-Beach",
+      "configPath": "agent_configs/Manitou-Beach-Concierge.json",
+      "surface": "Web widget, React, @elevenlabs/react with custom card tools",
+      "owner": "Manitou Beach community platform",
+      "notes": "Live since 2026-03-27. Known issues as of 2026-09-04: running a deprecated LLM (gemini-2.0-flash) and deprecated TTS (eleven_turbo_v2), guardrails off, no tests. Only getWeatherForecast is wired server-side; events is not wired and businesses is broken. The prompt carries the MAN-ih-taw pronunciation rule plus the locked Chateau Aeronautique and Men's Club naming."
+    }
+  ]
+}
