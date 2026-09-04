@@ -42,9 +42,28 @@ for (const [k, v] of Object.entries(local)) {
   else dropped.push(k);
 }
 
+// The API is asymmetric here. GET returns the same tools twice: once as
+// `tool_ids`, and once as `tools` with the full inline definitions. PATCH then
+// refuses the pair outright, with "Cannot specify both tools and tool IDs".
+// tool_ids is the modern form and the one the dashboard edits, so the inline
+// copy is what goes. It stays in the FILE on purpose, because a diff showing a
+// webhook URL is worth reading; it just never gets sent.
+const prompt = body?.conversation_config?.agent?.prompt;
+let strippedTools = 0;
+if (Array.isArray(prompt?.tools) && Array.isArray(prompt?.tool_ids)) {
+  // Clone first: body.conversation_config is the same object as local's, and
+  // deleting in place would quietly edit the file's in-memory copy too.
+  body.conversation_config = structuredClone(body.conversation_config);
+  strippedTools = prompt.tools.length;
+  delete body.conversation_config.agent.prompt.tools;
+}
+
 console.log(`\n  ${a.name}  (${a.agentId})`);
 console.log(`  file  ${a.resolvedPath}`);
 if (dropped.length) console.log(`  not sent (read-only or annotation): ${dropped.join(', ')}`);
+if (strippedTools) {
+  console.log(`  not sent: ${strippedTools} inline tool definitions, keeping ${prompt.tool_ids.length} tool_ids (the API rejects both)`);
+}
 
 const live = await call(`${API}/agents/${a.agentId}`);
 const before = summarise(live);
@@ -86,8 +105,21 @@ await call(`${API}/agents/${a.agentId}`, { method: 'PATCH', body: JSON.stringify
 
 // Read it back. A 200 means the request was accepted, not that the agent now
 // looks the way the file says. Verify on the result, never on the attempt.
-const verify = summarise(await call(`${API}/agents/${a.agentId}`));
+const liveAfter = await call(`${API}/agents/${a.agentId}`);
+const verify = summarise(liveAfter);
 const stillWrong = Object.keys(after).filter((k) => JSON.stringify(verify[k]) !== JSON.stringify(after[k]));
+
+// The summary above covers models, voice and tool counts. It does NOT cover the
+// system prompt, which is usually the whole reason for a push. Checking it
+// separately, because "verified" that skips the field you changed is worse than
+// no check at all: it is a green light nobody earned.
+const wantPrompt = local?.conversation_config?.agent?.prompt?.prompt ?? '';
+const gotPrompt = liveAfter?.conversation_config?.agent?.prompt?.prompt ?? '';
+if (wantPrompt !== gotPrompt) {
+  stillWrong.push(`system prompt (sent ${wantPrompt.length} chars, agent now has ${gotPrompt.length})`);
+} else if (wantPrompt) {
+  console.log(`\n  system prompt matches, ${gotPrompt.length} chars`);
+}
 
 console.log('');
 printSummary('live after push', verify);
