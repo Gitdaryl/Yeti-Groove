@@ -8,3 +8,13 @@ tools/.planning-cache/
 # Scrub source stills and clips: 100MB+ of renders the site never serves.
 # The published frames live in media/streamline/act*/ and are committed.
 media/streamline/_src/
+
+# Commercial and client material. This repo is PUBLIC.
+# These stay on disk and out of the index: internal pricing, discovery scripts,
+# how prospect tracking works, and client drawing data whose consent is pending.
+docs/SIGNATURE-RATE-CARD.md
+docs/DISCOVERY-CALL-SHEET.md
+docs/DISCOVERY-RENOVATION-PREVIZ.md
+docs/ARCHITECT-WORKFLOW-SESSION.md
+docs/DLYC-PREVIZ-SPEC.md
+docs/PITCH-LINKS.md
