@@ -159,47 +159,50 @@ export function emailShell(title, innerHtml) {
 </body></html>`;
 }
 
-export async function runHealthChecks() {
-  const checks = {};
+async function checkResend() {
+  if (!process.env.RESEND_API_KEY) return 'missing';
+  try {
+    const r = await fetch('https://api.resend.com/domains', {
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (r.ok) return 'ok';
+    return /restricted/i.test(await r.text()) ? 'ok' : 'invalid-key';
+  } catch {
+    return 'unreachable';
+  }
+}
 
-  if (process.env.RESEND_API_KEY) {
-    try {
-      const r = await fetch('https://api.resend.com/domains', {
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
-        signal: AbortSignal.timeout(5000),
-      });
-      if (r.ok) checks.resend = 'ok';
-      else checks.resend = /restricted/i.test(await r.text()) ? 'ok' : 'invalid-key';
-    } catch {
-      checks.resend = 'unreachable';
-    }
-  } else checks.resend = 'missing';
-
+async function checkTwilio() {
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const tok = process.env.TWILIO_AUTH_TOKEN;
-  if (sid && tok && process.env.TWILIO_PHONE) {
-    try {
-      const r = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}.json`, {
-        headers: { Authorization: `Basic ${Buffer.from(`${sid}:${tok}`).toString('base64')}` },
-        signal: AbortSignal.timeout(5000),
-      });
-      checks.twilio = r.ok ? 'ok' : 'invalid-creds';
-    } catch {
-      checks.twilio = 'unreachable';
-    }
-  } else checks.twilio = 'missing';
+  if (!sid || !tok || !process.env.TWILIO_PHONE) return 'missing';
+  try {
+    const r = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}.json`, {
+      headers: { Authorization: `Basic ${Buffer.from(`${sid}:${tok}`).toString('base64')}` },
+      signal: AbortSignal.timeout(5000),
+    });
+    return r.ok ? 'ok' : 'invalid-creds';
+  } catch {
+    return 'unreachable';
+  }
+}
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    try {
-      await list({ limit: 1 });
-      checks.blob = 'ok';
-    } catch {
-      checks.blob = 'error';
-    }
-  } else checks.blob = 'missing';
+async function checkBlob() {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return 'missing';
+  try {
+    await list({ limit: 1 });
+    return 'ok';
+  } catch {
+    return 'error';
+  }
+}
 
-  checks.adminKey = process.env.ORDERS_ADMIN_KEY ? 'ok' : 'missing';
-
+// Checks run in parallel: each has its own timeout, so there is no reason to
+// pay for them sequentially and eat into the function's time budget.
+export async function runHealthChecks() {
+  const [resend, twilio, blob] = await Promise.all([checkResend(), checkTwilio(), checkBlob()]);
+  const checks = { resend, twilio, blob, adminKey: process.env.ORDERS_ADMIN_KEY ? 'ok' : 'missing' };
   const ok = checks.resend === 'ok' && checks.twilio === 'ok' && checks.blob === 'ok' && checks.adminKey === 'ok';
   return { ok, checks };
 }
