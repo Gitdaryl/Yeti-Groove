@@ -55,6 +55,7 @@ If you make a decision:
 | **MB User Acquisition** | Go-to-Market | ACTIVE | Test outreach this week | **Zero paid users currently** (except Ladies Club $1k/year). Videos just shot, not yet edited. Erin/Amy/Chelsea can help acquisition. **REAL blocker: product-market fit validation, not infrastructure.** |
 | **Rapid Demo Site Workflow** | Dev Workflow | EXPLORATION | Test with next client | Claude Code + Vercel + Unsplash/Pexels API. Polished PoC in <1 hour. Potential Yeti Groove brand product. |
 | **n8n Emergency Deploy Agent** | Automation | PLANNING | Build after primary work | Natural language → Haiku fix → GitHub commit → Vercel redeploy. Closes mobile workflow gap. |
+| **Recall Radar** | Public Web App | BUILT, NOT DEPLOYED | Import repo at vercel.com/new | US food recalls + safety alerts by state. FDA + USDA ingest, Vercel Blob read path, Notion review surface, n8n alert fan-out. Repo `Gitdaryl/Recall-Radar`. See its `docs/SETUP.md`. |
 
 ---
 
@@ -239,6 +240,42 @@ Frontier AI + dev tooling monitoring, runs Mondays 8am ET via GitHub Actions. Ha
 ### Lake Access Partnership (social.yetigroove.com/lakeaccess)
 
 Co-branded partner page with Dennis Babjack (Lake Access Magazine). Discounted video pricing for Dennis's audience. Dennis offered 25% equity + 64-video client production deal. Page is live at social.yetigroove.com/lakeaccess.
+
+---
+
+### Recall Radar - Current State
+
+**What:** Public, no-login web app surfacing US food recalls and public health alerts filtered by state. Free. Optional email/SMS opt-in.
+
+**Stack:** React + Vite + Tailwind, Vercel serverless functions in `/api/`, Vercel Blob for the public read path, Notion as review surface, n8n for alert delivery.
+
+**Resources:**
+- Repo: `github.com/Gitdaryl/Recall-Radar` (private)
+- n8n workflow: `yCGmgdH3trdXAfCD`, saved, NOT activated
+- n8n webhook path: `recall-alerts-c84735387d76f7bc`
+- Notion DB: `dc4696c2e6004ff9907639cc5a79b099`
+- Runbook: `docs/SETUP.md` in the repo, 8 steps in dependency order
+
+**Blocked on (all manual, all small):**
+1. Vercel project not created. Vercel MCP returns empty teams, so dashboard import only.
+2. n8n Header Auth credential must be made by hand. The n8n API has no credential-creation endpoint.
+3. Webhook node is still bound to the wrong auto-assigned "Resend API" credential.
+4. Notion DB needs connecting to the integration behind `NOTION_TOKEN_RECALLS`.
+
+**Architecture decisions and why:**
+- Notion is NOT on the public read path. ~3 req/s, 100-item pages, no geo or text index. Blob serves reads, Notion mirrors the last 90 days for review only.
+- Ingest is source-isolated. An FSIS failure must never cost the FDA data.
+- Alerts fire only on records the merge marked as new, so a cron re-run never re-alerts.
+- Double opt-in on SMS. A row exists at signup but receives nothing until `/api/confirm` is hit.
+
+**Gotchas already paid for:**
+- `fsis.usda.gov` returns 403 to the whole domain from datacenter IPs. IP reputation, not User-Agent. The DO VPS is blocked. Whether Vercel is blocked is answered by `/api/diag` after deploy.
+- openFDA answers an empty result set with **404**, not an empty array. Treat 404 as "no more pages".
+- openFDA `limit` max 1000, `skip` ceiling exactly 25000.
+- No county data exists upstream at either agency. County resolution needs retailer store lists. Phase 2.
+- No US retailer publishes a machine-readable recall feed. Walmart's `recalls.rss` serves HTML.
+
+**A2P:** Existing yetigroove.com campaign is fine for testing to own numbers. A **separate campaign under the same Brand** is required before public opt-in. Brand is reused, so it is a campaign application not a re-registration. 1-3 weeks, ~$15/mo. Ship email first.
 
 ---
 
