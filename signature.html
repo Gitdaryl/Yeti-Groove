@@ -555,6 +555,45 @@
       white-space: nowrap;
     }
 
+    /* ── LEGACY ── */
+    #legacy {
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+    #legacy .commissions-inner { max-width: 900px; }
+    #legacy .legacy-lede {
+      max-width: 640px;
+      margin-top: 1.1rem;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      opacity: 0.85;
+    }
+    #legacy .legacy-showcase {
+      max-width: 640px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+    #legacy .legacy-showcase a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold-dim); }
+    .tiers.two { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+    @media (max-width: 920px) { .tiers.two { grid-template-columns: 1fr; max-width: 560px; } }
+    .legacy-slots {
+      margin-top: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem 2rem;
+      border: 1px solid var(--gold-dim);
+      background: var(--gold-soft);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+    }
+    .legacy-slots p { font-size: 0.92rem; line-height: 1.7; max-width: 520px; margin: 0; }
+    .legacy-slots .btn-gold { flex-shrink: 0; }
+    .lead-modal.legacy .prop-only { display: none; }
+
     /* ── PRICING (base) ── */
     .tiers {
       display: grid;
@@ -843,11 +882,11 @@
     <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <video class="hero-video" autoplay muted loop playsinline
            src="/media/signature-scrub/build-loop.mp4"
-           poster="/media/signature-scrub/poster.jpg"></video>
+           poster="/media/signature-scrub/poster.webp"></video>
     <div class="hero-shade"></div>
     <p class="hero-hint">Scroll to build it</p>
     <div class="hero-inner">
-      <img class="hero-lockup" src="/brand/signature-lockup.png" alt="Yeti Groove Signature Films" />
+      <img class="hero-lockup" src="/brand/signature-lockup.webp" alt="Yeti Groove Signature Films" />
       <p class="pitch-line" id="pitchLine"></p>
       <p class="eyebrow">Michigan Lake Country</p>
       <h1>Your land has a story.<br /><em>We film it like one.</em></h1>
@@ -855,6 +894,7 @@
       <div class="hero-actions">
         <a class="btn-gold" href="#film">Watch the Devils Lake Cove Film</a>
         <a class="btn-ghost" href="#commissions">Commissions</a>
+        <a class="btn-ghost" href="#legacy">Legacy</a>
       </div>
     </div>
   </header>
@@ -887,7 +927,7 @@
       <p>That is the offering. We film your land as it stands today, gather your architectural drawings and reference photography, then produce photoreal scenes of the finished development with life already in it. Shops with customers. Docks with morning coffee. Streets that feel lived on.</p>
       <div class="film-frame">
         <video autoplay muted loop playsinline preload="metadata"
-               poster="/media/blueprint-loop-poster.jpg"
+               poster="/media/blueprint-loop-poster.webp"
                src="/media/blueprint-loop.mp4"></video>
       </div>
       <p class="film-caption">
@@ -933,7 +973,7 @@
           <audio id="scoreAudio" src="/media/cove-score-15s.mp3" preload="none"></audio>
         </div>
         <div class="inc-card inc-media">
-          <img class="inc-bg" src="/media/cove-site-shot.jpg" alt="" loading="lazy" />
+          <img class="inc-bg" src="/media/cove-site-shot.webp" alt="" loading="lazy" />
           <h3>Cinematic Presentation Site</h3>
           <p>The film lives on its own scroll-driven microsite, a private theater with your link on the door. Built to be sent.</p>
         </div>
@@ -1012,6 +1052,51 @@
       </div>
     </section>
 
+    <!-- LEGACY -->
+    <section id="legacy">
+      <div class="commissions-inner">
+      <p class="section-label">Legacy</p>
+      <h2>Some stories are not for sale. <em>They are for keeping.</em></h2>
+      <p class="legacy-lede">A Legacy commission is a cinematic website built around one life, one family, or one institution. Not a memorial page and not a brochure. A place where the story is told properly, with film, voice, and the documents that prove it, and where it stays.</p>
+      <p class="legacy-showcase">The studio's pilot commission was Dr. Joe Profit's <a href="https://www.joeprofitneverbroken.com/" target="_blank" rel="noopener">Never Broken</a>, built at studio cost as the showcase for the series.</p>
+      <div class="tiers two">
+        <div class="tier">
+          <div class="tier-name">Legacy Site</div>
+          <div class="tier-price">From $15,000</div>
+          <ul>
+            <li>Discovery session and a one-page story treatment, approved before we build</li>
+            <li>Up to 6 chapters from the material you already hold: memoir, photographs, clippings, recordings</li>
+            <li>60 to 90 second trailer</li>
+            <li>Up to 20 minutes of produced narration or audio excerpts</li>
+            <li>Your own domain, with hosting and care for the first year</li>
+            <li>Two revision rounds</li>
+            <li>Delivered 4 to 6 weeks from material handoff</li>
+          </ul>
+          <a href="#inquire" data-inquire data-mode="legacy" data-tier="Legacy Site">Join the waitlist &rarr;</a>
+        </div>
+        <div class="tier featured">
+          <div class="tier-badge">The Full Commission</div>
+          <div class="tier-name">Legacy Commission</div>
+          <div class="tier-price">From $50,000</div>
+          <ul>
+            <li>Everything in Legacy Site</li>
+            <li>Archival research, with every published fact sourced</li>
+            <li>On-camera interviews and a half-day shoot</li>
+            <li>Feature-length treatment, unlimited chapters within it</li>
+            <li>Original composed score</li>
+            <li>Print companion edition</li>
+            <li>Quarterly additions through the first year</li>
+          </ul>
+          <a href="#inquire" data-inquire data-mode="legacy" data-tier="Legacy Commission">Join the waitlist &rarr;</a>
+        </div>
+      </div>
+      <div class="legacy-slots">
+        <p>Every Legacy commission is directed personally by Daryl. The studio takes four Legacy Sites and two Legacy Commissions a year. When the year is full, the waitlist holds your place for the next opening.</p>
+        <a class="btn-gold" href="#inquire" data-inquire data-mode="legacy" data-tier="">Join the waitlist</a>
+      </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <video class="contact-video" autoplay muted loop playsinline
@@ -1047,7 +1132,7 @@
               <input id="ld-name" name="name" type="text" autocomplete="name" required />
             </div>
             <div class="lead-field">
-              <label for="ld-company">Company</label>
+              <label for="ld-company" id="ld-company-label">Company</label>
               <input id="ld-company" name="company" type="text" autocomplete="organization" />
             </div>
             <div class="lead-field">
@@ -1059,14 +1144,14 @@
               <input id="ld-phone" name="phone" type="tel" autocomplete="tel" />
             </div>
             <div class="lead-field">
-              <label for="ld-project">Project name</label>
+              <label for="ld-project" id="ld-project-label">Project name</label>
               <input id="ld-project" name="project" type="text" required />
             </div>
             <div class="lead-field">
               <label for="ld-location">Location</label>
               <input id="ld-location" name="location" type="text" placeholder="Township, county, state" />
             </div>
-            <div class="lead-field">
+            <div class="lead-field prop-only">
               <label for="ld-stage">Stage</label>
               <select id="ld-stage" name="stage">
                 <option value="">Select</option>
@@ -1078,7 +1163,7 @@
                 <option>Built</option>
               </select>
             </div>
-            <div class="lead-field">
+            <div class="lead-field prop-only">
               <label for="ld-size">Size</label>
               <input id="ld-size" name="size" type="text" placeholder="Acres, units, or lots" />
             </div>
@@ -1099,10 +1184,12 @@
                 <option>Signature Film</option>
                 <option>Development Package</option>
                 <option>Sales Suite</option>
+                <option>Legacy Site</option>
+                <option>Legacy Commission</option>
               </select>
             </div>
             <div class="lead-field full">
-              <label for="ld-message">What are you trying to sell, and to whom</label>
+              <label for="ld-message" id="ld-message-label">What are you trying to sell, and to whom</label>
               <textarea id="ld-message" name="message" placeholder="The site, the buyer, and what the film has to do."></textarea>
             </div>
           </div>
@@ -1114,8 +1201,8 @@
       </div>
 
       <div class="lead-done" id="leadDone" hidden>
-        <h3>We have it.</h3>
-        <p>A confirmation is on its way to your inbox. Daryl will follow up personally, usually the same day, with a few questions about the site.</p>
+        <h3 id="leadDoneTitle">We have it.</h3>
+        <p id="leadDoneText">A confirmation is on its way to your inbox. Daryl will follow up personally, usually the same day, with a few questions about the site.</p>
       </div>
     </div>
   </div>
@@ -1184,8 +1271,50 @@
       var submitBtn = document.getElementById('leadSubmit');
       var lastFocus = null;
 
-      function openModal(tier) {
+      var leadMode = 'film';
+      var COPY = {
+        film: {
+          title: 'Tell us what deserves a film',
+          sub: 'A few lines is enough. The studio reads every inquiry and usually replies the same day.',
+          company: 'Company',
+          project: 'Project name', projectPh: '',
+          message: 'What are you trying to sell, and to whom',
+          messagePh: 'The site, the buyer, and what the film has to do.',
+          submit: 'Send to the studio',
+          doneTitle: 'We have it.',
+          doneText: 'A confirmation is on its way to your inbox. Daryl will follow up personally, usually the same day, with a few questions about the site.'
+        },
+        legacy: {
+          title: 'Join the Legacy waitlist',
+          sub: 'Tell us whose story this is. Daryl replies personally with the next opening and a few questions.',
+          company: 'Family or organization',
+          project: 'Whose story', projectPh: 'A name, a family, or an institution',
+          message: 'What should this preserve, and for whom',
+          messagePh: 'The life, the people it is for, and what you already have: writing, photographs, recordings.',
+          submit: 'Join the waitlist',
+          doneTitle: 'You are on the list.',
+          doneText: 'A confirmation is on its way to your inbox. Daryl will reply personally with the next opening and a few questions about the story.'
+        }
+      };
+      function setMode(mode) {
+        leadMode = mode === 'legacy' ? 'legacy' : 'film';
+        var c = COPY[leadMode];
+        modal.classList.toggle('legacy', leadMode === 'legacy');
+        document.getElementById('leadTitle').textContent = c.title;
+        document.getElementById('leadSub').textContent = c.sub;
+        document.getElementById('ld-company-label').textContent = c.company;
+        document.getElementById('ld-project-label').textContent = c.project;
+        document.getElementById('ld-project').placeholder = c.projectPh;
+        document.getElementById('ld-message-label').textContent = c.message;
+        document.getElementById('ld-message').placeholder = c.messagePh;
+        submitBtn.textContent = c.submit;
+        document.getElementById('leadDoneTitle').textContent = c.doneTitle;
+        document.getElementById('leadDoneText').textContent = c.doneText;
+      }
+
+      function openModal(tier, mode) {
         lastFocus = document.activeElement;
+        setMode(mode);
         if (tier) document.getElementById('ld-tier').value = tier;
         if (pitch && pitch.project && !document.getElementById('ld-project').value) {
           document.getElementById('ld-project').value = pitch.project;
@@ -1211,7 +1340,7 @@
       document.querySelectorAll('[data-inquire]').forEach(function (el) {
         el.addEventListener('click', function (e) {
           e.preventDefault();
-          openModal(el.getAttribute('data-tier') || '');
+          openModal(el.getAttribute('data-tier') || '', el.getAttribute('data-mode') || 'film');
         });
       });
       document.getElementById('leadClose').addEventListener('click', closeModal);
@@ -1227,10 +1356,14 @@
         var data = {};
         new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
         data.slug = slug;
-        data.source = slug ? 'Pitch link /signature/' + slug : 'Signature page';
+        data.mode = leadMode;
+        data.source = leadMode === 'legacy' ? 'Legacy waitlist /signature#legacy'
+          : (slug ? 'Pitch link /signature/' + slug : 'Signature page');
 
         if (!data.name || !data.email || !data.project) {
-          errEl.textContent = 'Name, email and project name are needed before we can send this.';
+          errEl.textContent = leadMode === 'legacy'
+            ? 'Your name, email and whose story this is are needed before we can send this.'
+            : 'Name, email and project name are needed before we can send this.';
           errEl.hidden = false;
           return;
         }
@@ -1253,7 +1386,7 @@
             errEl.innerHTML = 'That did not go through. Please email <a href="mailto:daryl@yetigroove.com" style="color:var(--gold);">daryl@yetigroove.com</a> directly.';
             errEl.hidden = false;
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Send to the studio';
+            submitBtn.textContent = COPY[leadMode].submit;
           });
       });
     })();
