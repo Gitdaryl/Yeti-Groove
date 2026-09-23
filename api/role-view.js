@@ -40,7 +40,10 @@ const ALERTS = {
 // visit most likely to happen was the one nothing was watching. Unlike a role
 // slug, 'main' cannot tell you who is reading: everyone sent the root fires
 // the same alert.
-const KNOWN = new Set(['wongdoody', 'main']);
+// 'ford' added 2026-09-23 for the Director, AI Transformation Architect application.
+// It appears in exactly one document, in one company's hands, so unlike 'main' a hit
+// on this slug tells you who is reading.
+const KNOWN = new Set(['wongdoody', 'ford', 'main']);
 
 const ORIGINS = new Set([
   'https://work.yetigroove.com',
