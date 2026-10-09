@@ -61,8 +61,34 @@
       "destination": "/streamline.html"
     },
     {
+      "source": "/card",
+      "destination": "/card.html"
+    },
+    {
+      "source": "/card/:via",
+      "destination": "/api/tap?k=card&v=:via"
+    },
+    {
+      "source": "/review",
+      "destination": "/api/tap?k=review"
+    },
+    {
+      "source": "/review/:via",
+      "destination": "/api/tap?k=review&v=:via"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/yeti.vcf",
+      "headers": [
+        { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Yeti-Groove-Media.vcf\"" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
     }
   ],
   "crons": [

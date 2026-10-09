@@ -63,6 +63,7 @@
       <button class="ghost" id="logoutBtn">Lock</button>
     </div>
   </div>
+  <div class="card" id="taps"><p class="sub">Taps loading…</p></div>
   <div id="list"></div>
 </div>
 
@@ -84,8 +85,20 @@ async function api(path, opts={}) {
 
 function lock(msg){ localStorage.removeItem('yg_admin_key'); KEY=''; $('#app').classList.add('hidden'); $('#login').classList.remove('hidden'); $('#loginMsg').textContent = msg||''; }
 
+// Review sticker and contact card taps (api/tap.js). Counts only, from blob names.
+async function loadTaps() {
+  const el = $('#taps');
+  try {
+    const j = await (await api('/api/tap?report=1')).json();
+    if (!j.success) { el.innerHTML = '<p class="sub">Taps could not load.</p>'; return; }
+    const row = (label, c) => `<div class="meta"><b>${label}</b> · last 30 days: ${c.tap.recent} tap${c.tap.recent===1?'':'s'}, ${c.qr.recent} scan${c.qr.recent===1?'':'s'}, ${c.link.recent} via link · all time ${c.tap.all + c.qr.all + c.link.all}${c.last ? ' · last ' + fmtDate(new Date(c.last).toISOString()) : ''}</div>`;
+    el.innerHTML = '<div class="block" style="margin:0;padding:0;border:0;background:none"><div class="lbl">Taps</div>' + row('Google review', j.counts.review) + row('Contact card', j.counts.card) + '</div>';
+  } catch (e) { if (e.message !== 'unauthorized') el.innerHTML = '<p class="sub">Taps could not load.</p>'; }
+}
+
 async function load() {
   $('#countLine').textContent = 'Loading…';
+  loadTaps();
   const r = await api('/api/orders');
   const { orders } = await r.json();
   $('#countLine').textContent = orders.length + ' order' + (orders.length===1?'':'s') + ' · newest first';

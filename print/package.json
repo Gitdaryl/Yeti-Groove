@@ -1,0 +1,9 @@
+{
+  "name": "yg-print",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "playwright-core": "^1.63.0",
+    "qrcode": "^1.5.4"
+  }
+}
