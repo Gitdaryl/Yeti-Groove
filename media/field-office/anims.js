@@ -244,6 +244,37 @@ export const SCENES = {
     return b;
   } },
 
+  // Two-way team messages: the crew speaks Spanish, the office reads English, and the reply goes back in Spanish.
+  'two-way-chat': { still: 1, render() {
+    let b = phone(10, 6, 130, 168) + phone(180, 6, 130, 168);
+    b += tx(24, 32, 'Miguel', 'tb t11') + tx(126, 32, 'ES', 'tm t10 tb', '', 'end');
+    b += tx(194, 32, 'Office', 'tb t11') + tx(296, 32, 'EN', 'tm t10 tb', '', 'end');
+    // the mic, with a voice wave while he talks
+    b += circ(75, 150, 13, 'gf') + path('M72 144a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0zM68 150a7 7 0 0 0 14 0M75 157v3', 'ks');
+    let wave = '';
+    for (let i = 0; i < 6; i++) {
+      const x = 22 + i * 7;
+      wave += rr(x, 142, 4, 16, 2, 'gf', `transform-box:fill-box;transform-origin:center;transform:scaleY(calc(.25 + .75 * (1 + sin(calc(var(--p) * 90 + ${i * 1.7}))) / 2));`);
+    }
+    b += g(wave, win(0.02, 0.22));
+    // crew sends in Spanish
+    b += g(rr(34, 42, 96, 38, 10, 'gf') + tx(44, 58, 'Necesitamos 4', 'tk tb t11') + tx(44, 73, 'hojas más.', 'tk t11'),
+      fade(0.22) + from(0.22, 0.3, 0, 10));
+    b += circ(130, 61, 4, 'gf', `${win(0.3, 0.4)}transform:translateX(calc(${S(0.3, 0.4)} * 60px));`);
+    // office reads English
+    b += g(rr(190, 42, 96, 38, 10, 'sf2 st') + tx(200, 58, 'We need 4', 'tb t11') + tx(200, 73, 'more sheets.', 't11'),
+      fade(0.4) + from(0.4, 0.48, 0, 10));
+    b += tx(194, 94, 'From Spanish', 'tm t10', fade(0.44));
+    // office answers in English
+    b += g(rr(214, 104, 82, 26, 10, 'gf') + tx(255, 121, 'On the way.', 'tk tb t11', '', 'middle'),
+      fade(0.58) + from(0.58, 0.66, 0, 10));
+    b += circ(214, 117, 4, 'gf', `${win(0.66, 0.76)}transform:translateX(calc(${S(0.66, 0.76)} * -96px));`);
+    // crew reads Spanish
+    b += g(rr(20, 92, 94, 26, 10, 'sf2 st') + tx(67, 109, 'Van en camino.', 'tb t11', '', 'middle'), fade(0.76) + from(0.76, 0.84, 0, 10));
+    b += check(198, 140, 10, draw(0.86, 0.92)) + tx(214, 145, 'Got it', 'tg tb t10', fade(0.88));
+    return b;
+  } },
+
   // A buzzing alert; nobody taps Got it; a text goes out; someone answers.
   'push-alert': { still: 1, render() {
     let inner = phone(96, 6, 128, 168);
