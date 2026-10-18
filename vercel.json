@@ -61,6 +61,10 @@
       "destination": "/streamline.html"
     },
     {
+      "source": "/field-office",
+      "destination": "/field-office.html"
+    },
+    {
       "source": "/card",
       "destination": "/card.html"
     },
