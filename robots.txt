@@ -7,3 +7,5 @@ Disallow: /signature/
 Disallow: /admin
 Disallow: /architects
 Disallow: /architects.html
+
+Sitemap: https://www.yetigroove.com/sitemap.xml

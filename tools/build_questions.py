@@ -2,6 +2,7 @@
 """Builds the answer-first question pages: /questions/<slug>.html and the /questions hub.
 
 Content lives in tools/questions_data.py. Run from the repo root:  python3 tools/build_questions.py
+Also writes /sitemap.xml (SITEMAP_PAGES below plus every question page). Add new public pages to SITEMAP_PAGES.
 Pages use the Lost Customer Check report look (self-hosted fonts in /fonts/fonts.css) and each one
 ends by pointing at the leak it belongs to and at /streamline.
 """
@@ -193,6 +194,16 @@ def hub():
                  'getting leads, after-hours calls, and running the business with less hand work.', body, ld, og_type='website')
 
 
+# Pages worth finding on Google. Internal tools, order forms and per-prospect pitch links stay out.
+SITEMAP_PAGES = ['', 'streamline', 'streamline/sample', 'field-office', 'signature', 'questions']
+
+
+def sitemap(today):
+    urls = SITEMAP_PAGES + [f'questions/{q["slug"]}' for q in QUESTIONS]
+    rows = ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}</urlset>\n'
+
+
 def main():
     qdir = ROOT / 'questions'
     qdir.mkdir(exist_ok=True)
@@ -201,7 +212,9 @@ def main():
     for q in QUESTIONS:
         (qdir / f'{q["slug"]}.html').write_text(question_page(q))
     (ROOT / 'questions.html').write_text(hub())
-    print(f'built {len(QUESTIONS)} question pages + hub')
+    import datetime
+    (ROOT / 'sitemap.xml').write_text(sitemap(datetime.date.today().isoformat()))
+    print(f'built {len(QUESTIONS)} question pages + hub + sitemap.xml')
 
 
 if __name__ == '__main__':
