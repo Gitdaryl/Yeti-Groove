@@ -13,9 +13,9 @@
 <meta property="og:image" content="https://www.yetigroove.com/media/streamline/story/poster.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="/brand/yeti-head-256.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/fonts/fonts.css" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -83,12 +83,12 @@ nav.on-light .cta{color:#7A5F26;border-color:rgba(20,18,14,.28)}
 .stage{position:relative;height:88vh;height:88dvh;min-height:30rem;overflow:hidden;display:flex;align-items:flex-end}
 .scrub.on{height:420vh}
 .scrub.on .stage{position:sticky;top:0;height:100vh;height:100dvh}
-.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
+.stage canvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:none}
 .scrub.on .stage canvas{display:block}
 .stage .ground{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center;
   background-image:linear-gradient(180deg,rgba(18,16,13,0) 40%,rgba(18,16,13,.62) 78%,rgba(18,16,13,.9) 100%),url(/media/streamline/story/poster.webp)}
 .stage .shade{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0) 26%,rgba(18,16,13,.34) 46%,rgba(18,16,13,.74) 68%,rgba(18,16,13,.94) 100%)}
+  background:linear-gradient(90deg,rgba(18,16,13,.5) 0%,rgba(18,16,13,.22) 38%,rgba(18,16,13,0) 60%),linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0) 26%,rgba(18,16,13,.34) 46%,rgba(18,16,13,.74) 68%,rgba(18,16,13,.94) 100%)}
 .stage .copy{position:relative;z-index:3;width:100%;padding:0 var(--gutter) clamp(4rem,8vh,7rem)}
 .stage .inner{margin:0 auto;max-width:var(--max);display:grid}
 .beat{grid-area:1/1;opacity:0;will-change:opacity,transform}
@@ -96,17 +96,6 @@ nav.on-light .cta{color:#7A5F26;border-color:rgba(20,18,14,.28)}
 .beat h1,.beat h2{margin:0;text-shadow:0 1px 2px rgba(12,10,8,.55),0 2px 26px rgba(12,10,8,.75)}
 .beat h2{font-size:clamp(2.1rem,4.2vw,6.4rem);max-width:16ch}
 .beat .eyebrow{text-shadow:0 1px 8px rgba(12,10,8,.9)}
-.hint{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:4;font-size:.66rem;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--muted);display:none;align-items:center;gap:.6rem}
-.hint::after{content:'';width:1px;height:1.6rem;background:linear-gradient(var(--gold),transparent);animation:drip 1.8s ease-in-out infinite}
-@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-.scrub.on .hint{display:flex;flex-direction:column}
-.rail{position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);z-index:4;display:none;flex-direction:column;align-items:center;gap:.7rem;
-  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
-.scrub.on .rail{display:flex}
-.rail .bar{width:2px;height:28vh;background:rgba(240,237,230,.14);position:relative;overflow:hidden;border-radius:2px}
-.rail .fill{position:absolute;inset:0;background:var(--gold);transform-origin:top;transform:scaleY(0)}
-@media(max-width:640px){.rail{display:none!important}}
 
 /* INTRO */
 .intro .grid{display:grid;gap:2.5rem;align-items:end}
@@ -322,7 +311,7 @@ footer a{color:var(--gold);text-decoration:none}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   [data-reveal],.split .w{opacity:1!important;transform:none!important;transition:none}
-  .hint::after,.path:hover::before{animation:none}
+  .path:hover::before{animation:none}
 }
 </style>
 </head>
@@ -361,8 +350,6 @@ footer a{color:var(--gold);text-decoration:none}
         <h2>Same nine o'clock. <em>Different morning.</em></h2>
       </div>
     </div></div>
-    <div class="rail" aria-hidden="true"><span>Before</span><span class="bar"><span class="fill"></span></span><span>After</span></div>
-    <span class="hint">Scroll</span>
   </div>
 </section>
 
@@ -635,8 +622,6 @@ footer a{color:var(--gold);text-decoration:none}
     var stage = wrap.querySelector('.stage');
     var beats = [].slice.call(wrap.querySelectorAll('.beat'));
     var shade = wrap.querySelector('.shade');
-    var hint = wrap.querySelector('.hint');
-    var fill = wrap.querySelector('.rail .fill');
     var ctx = canvas.getContext('2d');
     var mobile = matchMedia('(max-width: 768px)').matches;
     var dir = wrap.getAttribute(mobile ? 'data-frames-m' : 'data-frames');
@@ -678,8 +663,6 @@ footer a{color:var(--gold);text-decoration:none}
         el.style.transform = 'translateY(' + ((1 - o) * 14) + 'px)';
       }
       shade.style.opacity = SH0 + (SH1 - SH0) * p;
-      hint.style.opacity = Math.max(0, 0.7 - p * 4);
-      if (fill) fill.style.transform = 'scaleY(' + p + ')';
     });
     var first = new Image();
     first.onload = function () {
