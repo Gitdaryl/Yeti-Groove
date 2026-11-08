@@ -2,332 +2,573 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Operations Audit | YetiGroove Studio</title>
-<meta name="description" content="A fixed-fee look at what your business still does by hand. One day, a plain-language findings document, and one automation built and running before we finish." />
+<meta name="description" content="A fixed-fee look at what your business still does by hand. One day inside the business, a plain-language findings document, and one automation built and running before we leave." />
+<link rel="canonical" href="https://www.yetigroove.com/streamline" />
 <meta property="og:title" content="Same nine o'clock. Different morning." />
 <meta property="og:description" content="A fixed-fee operations audit for small businesses that are running on somebody staying late." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yetigroove.com/streamline" />
+<meta property="og:image" content="https://www.yetigroove.com/media/streamline/story/poster.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/brand/yeti-head-256.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --black:#080807; --dark:#0F0E0C; --dark2:#161410;
-  --gold:#C9A55A; --goldDim:rgba(201,165,90,0.12);
-  --cream:#F0EDE6; --muted:#B0A390; --line:rgba(201,165,90,0.12);
+  --gold:#C9A55A; --gold2:#E2C78A; --goldDim:rgba(201,165,90,.12);
+  --cream:#F0EDE6; --paper:#F3EEE2; --ink:#14120E; --muted:#B5A894; --line:rgba(201,165,90,.16);
   --serif:'Playfair Display',Georgia,serif;
   --sans:'DM Sans','Helvetica Neue',Arial,sans-serif;
+  --gutter:clamp(16px,4vw,6rem);
+  --max:78rem;
+  --ease:cubic-bezier(.22,.8,.24,1);
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);background:var(--black);color:var(--cream);line-height:1.7;font-size:16px;overflow-x:hidden}
-img,canvas{max-width:100%;display:block}
+/* The whole page scales with the window: 16px on laptops and phones,
+   up to 25px on a 4K screen, so wide monitors get big type, not a thin column. */
+html{font-size:clamp(16px,calc(9px + .55vw),25px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:#0B0A08;color:var(--cream);line-height:1.65;font-size:1.0625rem;overflow-x:hidden}
+img,canvas,svg{max-width:100%;display:block}
 a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+main{position:relative;z-index:1}
+section{position:relative}
 
-/* ── DECOMPRESSION ──────────────────────────────────────────────
-   The page performs the promise. Act 1 is crushed: narrow measure,
-   tight leading, hard contrast, little air. Every act after it gets
-   wider, lighter and airier. The reader feels the relief in their
-   body before they read a word of it. */
-.act{position:relative}
-.wrap{margin:0 auto;padding:0 1.6rem}
-.act-1{--measure:52ch; --air:4.5rem;  --lead:1.5;  --tone:var(--black)}
-.act-2{--measure:60ch; --air:7rem;    --lead:1.65; --tone:var(--dark)}
-.act-3{--measure:68ch; --air:10rem;   --lead:1.8;  --tone:var(--dark2)}
-.act .wrap{max-width:calc(var(--measure) + 8rem)}
-.act .prose{max-width:var(--measure);line-height:var(--lead)}
-.pad{padding:var(--air) 0}
-.act-1{background:var(--black)}
-.act-2{background:var(--dark)}
-.act-3{background:var(--dark2)}
-
-.eyebrow{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:1.4rem}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
 h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
-h1{font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.04;max-width:18ch}
-h2{font-size:clamp(1.9rem,4.4vw,3.1rem);line-height:1.12;max-width:20ch}
-h3{font-size:1.15rem;line-height:1.35}
+h1{font-size:clamp(2.3rem,4.6vw,7rem);line-height:1.04;max-width:16ch}
+h2{font-size:clamp(1.9rem,3.3vw,4.6rem);line-height:1.1;max-width:20ch}
+h3{font-size:1.2rem;line-height:1.3}
 em{font-style:italic;color:var(--gold)}
-p+p{margin-top:1.1rem}
-.lede{margin-top:1.6rem;color:var(--muted);font-size:clamp(1rem,1.7vw,1.13rem)}
-.lede strong{color:var(--cream);font-weight:400}
+p+p{margin-top:1rem}
+.lede{color:var(--muted);font-size:clamp(1.05rem,1.25vw,1.25rem);max-width:44rem}
+.lede strong{color:var(--cream);font-weight:500}
+.pad{padding-block:clamp(5rem,10vw,11rem)}
 
-/* ── NAV ── */
+/* reveal on scroll */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+[data-reveal].in{opacity:1;transform:none}
+.split .w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.split.in .w{opacity:1;transform:none}
+
+/* background paper field */
+#paper{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* cursor light, desktop only */
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s;
+  background:radial-gradient(28rem 28rem at var(--mx,50%) var(--my,50%),rgba(201,165,90,.07),transparent 70%)}
+@media(pointer:fine){.glow.on{opacity:1}}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;
-  padding:1.1rem 1.6rem;background:linear-gradient(180deg,rgba(12,10,8,.86) 0%,rgba(12,10,8,.42) 62%,rgba(12,10,8,0) 100%);backdrop-filter:blur(3px)}
-nav a{text-decoration:none;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-nav .brand{font-family:var(--serif);font-size:1rem;letter-spacing:.02em;color:var(--cream);text-transform:none}
-nav .links{display:flex;gap:1.4rem}
+  padding:max(.6rem,env(safe-area-inset-top)) var(--gutter) .6rem;
+  background:linear-gradient(180deg,rgba(12,10,8,.88) 0%,rgba(12,10,8,.4) 65%,rgba(12,10,8,0) 100%);transition:background .25s}
+nav a{text-decoration:none;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:44px;display:inline-flex;align-items:center}
+nav .brand{font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em;color:var(--cream);text-transform:none}
+nav .links{display:flex;gap:1.6rem;align-items:center}
+nav .cta{color:var(--gold);border:1px solid rgba(201,165,90,.4);padding:0 1rem;border-radius:2px;transition:background .2s,color .2s}
+nav .cta:hover{background:var(--gold);color:var(--ink)}
 @media(max-width:640px){nav .links a:not(.cta){display:none}}
-nav .cta{color:var(--gold);border:1px solid var(--line);padding:.45rem .9rem;border-radius:2px}
-nav{transition:background .25s ease}
-nav.on-light{background:linear-gradient(180deg,rgba(240,237,230,.94),rgba(240,237,230,0))}
-nav.on-light .brand{color:#14120E}
+nav.on-light{background:linear-gradient(180deg,rgba(240,237,230,.95),rgba(240,237,230,0))}
+nav.on-light .brand{color:var(--ink)}
 nav.on-light a{color:#5A5344}
-nav.on-light .cta{color:#8A6E32;border-color:rgba(20,18,14,.22)}
+nav.on-light .cta{color:#7A5F26;border-color:rgba(20,18,14,.28)}
 
-/* ── SCRUB STAGE ──────────────────────────────────────────────
-   Same engine as the homepage hero, generalised to N sections.
-   Inert until frame 001 of that act actually loads, so the page is
-   complete and correct with no rendered frames present. */
-.scrub{position:relative}
-.stage{position:relative;height:74vh;min-height:440px;overflow:hidden;display:flex;align-items:flex-end}
-.scrub.on{height:450vh}
-.scrub.on .stage{position:sticky;top:0;height:100vh}
-.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none;object-fit:cover}
+/* HERO SCRUB */
+.scrub{position:relative;z-index:1;background:var(--black)}
+.stage{position:relative;height:88vh;height:88dvh;min-height:30rem;overflow:hidden;display:flex;align-items:flex-end}
+.scrub.on{height:420vh}
+.scrub.on .stage{position:sticky;top:0;height:100vh;height:100dvh}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
 .scrub.on .stage canvas{display:block}
+.stage .ground{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center;
+  background-image:linear-gradient(180deg,rgba(18,16,13,0) 40%,rgba(18,16,13,.62) 78%,rgba(18,16,13,.9) 100%),url(/media/streamline/story/poster.webp)}
 .stage .shade{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(180deg,
-    rgba(18,16,13,0) 0%, rgba(18,16,13,0) 26%,
-    rgba(18,16,13,.34) 46%, rgba(18,16,13,.72) 68%, rgba(18,16,13,.92) 100%)}
-.stage .copy{position:relative;z-index:3;width:100%;padding:0 1.6rem 4.5rem}
-.stage .copy .inner{margin:0 auto;max-width:calc(var(--measure) + 8rem);display:grid}
+  background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0) 26%,rgba(18,16,13,.34) 46%,rgba(18,16,13,.74) 68%,rgba(18,16,13,.94) 100%)}
+.stage .copy{position:relative;z-index:3;width:100%;padding:0 var(--gutter) clamp(4rem,8vh,7rem)}
+.stage .inner{margin:0 auto;max-width:var(--max);display:grid}
 .beat{grid-area:1/1;opacity:0;will-change:opacity,transform}
 .beat:first-child{opacity:1}
-.beat h1,.beat h2{margin:0}
-.beat h1,.beat h2,.beat .eyebrow{
-  text-shadow:0 1px 2px rgba(12,10,8,.55), 0 2px 26px rgba(12,10,8,.75)}
-.stage .hint{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);z-index:4;
-  font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);opacity:.6;display:none}
-.scrub.on .stage .hint{display:block}
+.beat h1,.beat h2{margin:0;text-shadow:0 1px 2px rgba(12,10,8,.55),0 2px 26px rgba(12,10,8,.75)}
+.beat h2{font-size:clamp(2.1rem,4.2vw,6.4rem);max-width:16ch}
+.beat .eyebrow{text-shadow:0 1px 8px rgba(12,10,8,.9)}
+.hint{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:4;font-size:.66rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--muted);display:none;align-items:center;gap:.6rem}
+.hint::after{content:'';width:1px;height:1.6rem;background:linear-gradient(var(--gold),transparent);animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.scrub.on .hint{display:flex;flex-direction:column}
+.rail{position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);z-index:4;display:none;flex-direction:column;align-items:center;gap:.7rem;
+  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.scrub.on .rail{display:flex}
+.rail .bar{width:2px;height:28vh;background:rgba(240,237,230,.14);position:relative;overflow:hidden;border-radius:2px}
+.rail .fill{position:absolute;inset:0;background:var(--gold);transform-origin:top;transform:scaleY(0)}
+@media(max-width:640px){.rail{display:none!important}}
 
-/* Placeholder ground: a warm, out-of-focus field so the page reads
-   finished before the frames exist. Replaced by the canvas on load. */
-.stage .ground{position:absolute;inset:0;z-index:1;
-  background:
-    radial-gradient(120% 90% at 18% 8%, rgba(201,165,90,.16), transparent 55%),
-    radial-gradient(90% 70% at 85% 95%, rgba(201,165,90,.07), transparent 60%),
-    linear-gradient(160deg,#12100c,#080807 70%)}
-.act-3 .stage .ground{
-  background:
-    radial-gradient(120% 95% at 50% 105%, rgba(201,165,90,.26), transparent 62%),
-    radial-gradient(80% 60% at 75% 10%, rgba(201,165,90,.10), transparent 60%),
-    linear-gradient(160deg,#1b1811,#0F0E0C 72%)}
+/* INTRO */
+.intro .grid{display:grid;gap:2.5rem;align-items:end}
+@media(min-width:900px){.intro .grid{grid-template-columns:1.1fr 1fr;gap:5rem}}
+.intro h2{max-width:14ch}
 
-/* ── RECOGNITION LIST (the tightest block on the page) ── */
-.pile{margin-top:2.6rem;border-top:1px solid var(--line)}
-.pile li{list-style:none;border-bottom:1px solid var(--line);padding:1rem 0 1rem 2.1rem;position:relative;
-  font-size:1.02rem;line-height:1.45;color:var(--cream)}
-.pile li::before{content:'';position:absolute;left:.35rem;top:1.42rem;width:6px;height:6px;background:var(--gold);opacity:.5}
-.pile li span{color:var(--muted)}
+/* THE SORT */
+.sort{padding-block:clamp(4rem,8vw,8rem);overflow-x:clip}
+.sort.pinned{height:330vh;padding:0}
+.sort.pinned .sort-pin{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;overflow:hidden}
+.sort-inner{width:100%}
+.sort-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem 3rem;margin-bottom:clamp(1.5rem,3.5vh,3rem)}
+.sort-title{position:relative;display:grid}
+.sort-title span{grid-area:1/1;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.sort .t1{opacity:0;transform:translateY(12px)}
+.sort.routed .t0{opacity:0;transform:translateY(-12px)}
+.sort.routed .t1{opacity:1;transform:none}
+.sort:not(.pinned) .t0{display:none}
+.sort:not(.pinned) .t1{opacity:1;transform:none}
+.sort-note{color:var(--muted);max-width:26rem;font-size:.95rem}
+.lanes{display:grid;gap:1.2rem;position:relative}
+@media(min-width:860px){.lanes{grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,2.4rem)}}
+.lane{border-top:1px solid var(--line);padding-top:1rem;display:flex;flex-direction:column;gap:.8rem;transition:border-color .5s}
+.lane-h{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.2rem;opacity:.45;transition:opacity .5s}
+.lane-h h3{font-size:clamp(1.05rem,1.4vw,1.5rem)}
+.lane-n{font-family:var(--serif);color:var(--gold);font-size:1.6rem;min-width:1.2ch;font-variant-numeric:tabular-nums}
+.lane-sub{font-size:.82rem;color:var(--muted);margin-top:-.4rem;margin-bottom:.3rem;opacity:.45;transition:opacity .5s}
+.lane.lit{border-color:rgba(201,165,90,.55)}
+.lane.lit .lane-h,.lane.lit .lane-sub{opacity:1}
+.sort:not(.pinned) .lane-h,.sort:not(.pinned) .lane-sub{opacity:1}
+.slip{position:relative;background:var(--paper);color:var(--ink);border-radius:2px;padding:.95rem 1.1rem 1rem;
+  box-shadow:0 1px 0 rgba(0,0,0,.06),0 10px 30px -12px rgba(0,0,0,.6);will-change:transform}
+.slip::before{content:'';position:absolute;inset:0;border-radius:2px;pointer-events:none;
+  background:repeating-linear-gradient(180deg,transparent 0 1.45rem,rgba(20,18,14,.05) 1.45rem calc(1.45rem + 1px))}
+.slip .prob{font-weight:500;font-size:.98rem;line-height:1.35;padding-right:5.6rem}
+.slip .fix{margin-top:.45rem;font-family:var(--serif);font-style:italic;color:#7A5F26;font-size:.95rem;line-height:1.4}
+.sort.pinned .slip .fix{opacity:0}
+.slip .stamp{position:absolute;top:.55rem;right:.7rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#7A5F26;
+  border:1px solid rgba(122,95,38,.45);padding:.1rem .35rem;border-radius:2px;opacity:0;transform:scale(1.6) rotate(-8deg);transition:opacity .25s,transform .35s var(--ease)}
+.slip.landed .stamp{opacity:1;transform:scale(1) rotate(-8deg)}
+.sort:not(.pinned) .slip .stamp{opacity:1;transform:scale(1) rotate(-8deg)}
 
-/* ── OFFER ── */
-.offer{border:1px solid var(--line);background:rgba(201,165,90,.03);padding:clamp(1.8rem,4vw,3rem);border-radius:3px;margin-top:3rem}
-.offer ul{margin:1.6rem 0 0;padding:0}
-.offer li{list-style:none;padding:.7rem 0 .7rem 1.7rem;position:relative;color:var(--cream);line-height:1.55}
-.offer li::before{content:'';position:absolute;left:0;top:1.25rem;width:9px;height:1px;background:var(--gold)}
+/* THE AUDIT */
+.audit h2{max-width:18ch}
+.steps{list-style:none;margin-top:clamp(2.5rem,5vw,4.5rem);display:grid;gap:2rem;position:relative;counter-reset:s}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr);gap:2.4rem}}
+.steps::before{content:'';position:absolute;background:rgba(240,237,230,.1)}
+.steps::after{content:'';position:absolute;background:var(--gold);transform-origin:left top}
+@media(min-width:900px){
+  .steps::before,.steps::after{left:0;right:0;top:.55rem;height:2px}
+  .steps::after{transform:scaleX(var(--p,1))}
+}
+@media(max-width:899px){
+  .steps{padding-left:2rem}
+  .steps::before,.steps::after{left:.5rem;top:0;bottom:0;width:2px}
+  .steps::after{transform:scaleY(var(--p,1))}
+}
+.steps li{position:relative;counter-increment:s;padding-top:2.2rem}
+.steps li::before{content:'';position:absolute;left:0;top:0;width:1.1rem;height:1.1rem;border-radius:50%;background:#0B0A08;border:2px solid rgba(240,237,230,.25);transition:border-color .4s,background .4s,box-shadow .4s}
+@media(max-width:899px){.steps li{padding-top:0}.steps li::before{left:-2rem;top:.2rem}}
+.steps li.lit::before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 6px rgba(201,165,90,.15)}
+.steps .when{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.steps h3{margin:.5rem 0 .4rem}
+.steps p{color:var(--muted);font-size:.95rem}
+
+.offer{margin-top:clamp(3rem,6vw,5rem);display:grid;gap:2rem;border:1px solid var(--line);background:linear-gradient(135deg,rgba(201,165,90,.06),rgba(201,165,90,.01));
+  padding:clamp(1.8rem,4vw,3.5rem);border-radius:3px;align-items:center}
+@media(min-width:900px){.offer{grid-template-columns:1.3fr 1fr;gap:4rem}}
+.offer h3{font-size:clamp(1.5rem,2.2vw,2.4rem);max-width:20ch}
+.offer ul{margin-top:1.4rem;list-style:none;display:grid;gap:.7rem}
+.offer li{padding-left:1.7rem;position:relative;line-height:1.5}
+.offer li::before{content:'';position:absolute;left:.15rem;top:.5em;width:.55rem;height:.55rem;border:1.5px solid var(--gold);transform:rotate(45deg)}
 .offer li strong{font-weight:500}
-.price{margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:baseline}
-.price .fig{font-family:var(--serif);font-size:2.6rem;color:var(--gold);line-height:1}
-.price .note{color:var(--muted);font-size:.95rem;max-width:34ch}
+.price .fig{font-family:var(--serif);font-size:clamp(3.4rem,6vw,6.5rem);color:var(--gold);line-height:1}
+.price .note{color:var(--muted);margin-top:.8rem;max-width:30ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;margin-top:1.6rem;padding:0 1.8rem;font-size:.8rem;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;background:var(--gold);color:var(--ink);border-radius:2px;transition:transform .2s,background .2s}
+.btn:hover{background:var(--gold2)}
+.btn:active{transform:scale(.97)}
 
-/* ── PROOF ── */
-.proof{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem}
-@media(min-width:820px){.proof{grid-template-columns:repeat(3,1fr)}}
-.proof .cell{background:var(--dark2);padding:2rem 1.6rem}
-.proof .fig{font-family:var(--serif);font-size:2.5rem;color:var(--gold);line-height:1}
-.proof h3{margin:.9rem 0 .5rem;font-size:1.05rem}
-.proof p{color:var(--muted);font-size:.94rem;line-height:1.6}
+/* COST CALCULATOR */
+.calc{display:grid;gap:3rem;margin-top:clamp(2.5rem,5vw,4rem);align-items:center}
+@media(min-width:900px){.calc{grid-template-columns:1fr 1fr;gap:5rem}}
+.knob{margin-bottom:1.8rem}
+.knob label{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.98rem;letter-spacing:0;text-transform:none;color:var(--cream);margin-bottom:.2rem}
+.knob output{font-family:var(--serif);color:var(--gold);font-size:1.2rem;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,var(--gold) var(--fill,30%),rgba(240,237,230,.18) var(--fill,30%))}
+input[type=range]::-moz-range-track{height:2px;background:rgba(240,237,230,.18)}
+input[type=range]::-moz-range-progress{height:2px;background:var(--gold)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--cream);border:3px solid var(--gold);margin-top:calc(-.65rem + 1px)}
+input[type=range]::-moz-range-thumb{width:1.1rem;height:1.1rem;border-radius:50%;background:var(--cream);border:3px solid var(--gold)}
+input[type=range]:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.readout{border:1px solid var(--line);padding:clamp(1.8rem,3vw,3rem);border-radius:3px;background:rgba(8,8,7,.55);backdrop-filter:blur(4px)}
+.readout .big{font-family:var(--serif);font-size:clamp(3rem,6vw,6.5rem);line-height:1;color:var(--cream);font-variant-numeric:tabular-nums}
+.readout .big small{font-size:.35em;color:var(--muted);font-family:var(--sans);letter-spacing:.04em;margin-left:.4rem}
+.readout .money{font-family:var(--serif);font-size:clamp(2rem,3.4vw,3.6rem);color:var(--gold);line-height:1.1;margin-top:1.2rem;font-variant-numeric:tabular-nums}
+.readout p{color:var(--muted);margin-top:.6rem;font-size:.95rem}
+.readout .verdict{margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);color:var(--cream)}
 
-/* ── CARE ── */
-.care{margin-top:3rem;border-left:2px solid var(--gold);padding:.3rem 0 .3rem 1.6rem}
+/* AFTER FIVE */
+.night{padding-block:clamp(4rem,8vw,8rem)}
+.night.pinned{height:440vh;padding:0}
+.night.pinned .night-pin{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;overflow:hidden}
+.sky{position:absolute;inset:0;z-index:0;pointer-events:none;transition:background .3s linear;
+  background:radial-gradient(60% 70% at 30% 55%,var(--sky,rgba(201,140,70,.22)),transparent 70%)}
+.night-inner{position:relative;z-index:1;width:100%;display:grid;gap:2rem;align-items:center}
+@media(min-width:900px){.night-inner{grid-template-columns:1fr 1fr;gap:5rem}}
+.night h2{max-width:14ch}
+.clock-wrap{display:flex;align-items:center;gap:1.6rem;margin-top:clamp(1.2rem,3vh,2.6rem)}
+.clock{width:clamp(7.5rem,17vw,19rem);height:auto;flex:none;filter:drop-shadow(0 20px 40px rgba(0,0,0,.5))}
+.clock .face{fill:#F3EEE2}
+.clock .tick{stroke:#14120E}
+.clock .num{font-family:'Playfair Display',Georgia,serif;font-size:15px;fill:#14120E;text-anchor:middle;dominant-baseline:central}
+.clock .hand{stroke:#14120E;stroke-linecap:round}
+.clock .sec{stroke:#B8452E}
+.clock-time{white-space:nowrap;font-family:var(--serif);font-size:clamp(2rem,3.4vw,3.8rem);line-height:1;font-variant-numeric:tabular-nums}
+.clock-time small{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-top:.6rem}
+.feed{position:relative}
+.feed-track{list-style:none}
+.night.pinned .feed{height:min(62vh,38rem);overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 100%)}
+.feed-track{transition:transform .6s var(--ease)}
+.feed li{display:grid;grid-template-columns:5.2rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.night.pinned .feed li{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.night.pinned .feed li.on{opacity:.5;transform:none}
+.night.pinned .feed li.now{opacity:1}
+.feed time{font-family:var(--serif);color:var(--gold);font-size:1.05rem;font-variant-numeric:tabular-nums;padding-top:.05rem}
+.feed strong{display:block;font-weight:500;font-size:1.05rem}
+.feed span{display:block;color:var(--muted);font-size:.93rem;line-height:1.5;margin-top:.2rem}
+.feed li.final strong{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--gold2)}
+@media(max-width:899px){
+  .night.pinned .feed{height:40vh;height:40dvh}
+  .night .lede{display:none}
+  .night.pinned h2{font-size:1.7rem}
+}
 
-/* ── OBJECTIONS ── */
-.qa{margin-top:2.6rem}
-.qa details{border-bottom:1px solid var(--line);padding:1.15rem 0}
-.qa summary{cursor:pointer;list-style:none;font-size:1.04rem;color:var(--cream);display:flex;justify-content:space-between;gap:1rem}
+/* PROOF */
+.proof{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:700px){.proof{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.proof{grid-template-columns:repeat(4,1fr)}}
+.proof .cell{background:#0E0D0A;padding:clamp(1.6rem,2.5vw,2.6rem);transition:background .3s}
+.proof .cell:hover{background:#15130F}
+.proof .fig{font-family:var(--serif);font-size:clamp(2.6rem,4vw,4.4rem);color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+.proof h3{margin:1rem 0 .5rem;font-size:1.08rem}
+.proof p{color:var(--muted);font-size:.93rem;line-height:1.55}
+.proof a{color:var(--gold);text-underline-offset:3px}
+
+/* WHAT COMES NEXT */
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+.paths{display:grid;gap:1.2rem;margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:760px){.paths{grid-template-columns:repeat(2,1fr)}}
+.path{position:relative;padding:clamp(1.6rem,2.6vw,2.6rem);border-radius:4px;background:#100F0C;isolation:isolate;text-decoration:none;display:block}
+.path::before{content:'';position:absolute;inset:0;border-radius:4px;padding:1px;z-index:-1;
+  background:conic-gradient(from var(--a),rgba(201,165,90,.12) 0deg,rgba(201,165,90,.12) 250deg,var(--gold2) 320deg,rgba(201,165,90,.12) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.path:hover::before{animation:trace 2.4s linear infinite}
+@keyframes trace{to{--a:360deg}}
+.path .k{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.path h3{font-size:clamp(1.35rem,1.9vw,2rem);margin:.7rem 0 .6rem}
+.path p{color:var(--muted);font-size:.97rem}
+.path .go{display:inline-block;margin-top:1rem;color:var(--gold);font-size:.85rem;letter-spacing:.08em}
+a.path:hover .go{text-decoration:underline;text-underline-offset:4px}
+
+/* CARE + FAQ */
+.care{margin-top:clamp(3rem,6vw,5rem);border-left:2px solid var(--gold);padding:.3rem 0 .3rem 1.6rem;max-width:48rem}
+.qa{margin-top:clamp(2.5rem,5vw,4rem);max-width:56rem}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{cursor:pointer;list-style:none;font-size:1.06rem;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:44px;padding:1rem 0}
 .qa summary::-webkit-details-marker{display:none}
-.qa summary::after{content:'+';color:var(--gold);flex:none}
-.qa details[open] summary::after{content:'\2212'}
-.qa p{margin-top:.85rem;color:var(--muted);max-width:60ch}
+.qa summary::after{content:'';flex:none;width:.6rem;height:.6rem;border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);transform:rotate(45deg) translateY(-25%);transition:transform .3s var(--ease)}
+.qa details[open] summary::after{transform:rotate(-135deg) translateY(-25%)}
+.qa p{padding-bottom:1.2rem;color:var(--muted);max-width:60ch}
 
-/* ── MORNING (the payoff panel: the only light ground on the page) ── */
-.morning{background:var(--cream);color:#14120E;padding:clamp(4rem,9vw,8rem) 1.6rem}
-.morning .wrap{max-width:52rem;padding:0}
-.morning .eyebrow{color:#8A6E32}
-.morning h2{color:#14120E}
+/* MORNING (form) */
+.morning{background:var(--cream);color:var(--ink);padding:clamp(4.5rem,9vw,9rem) 0;position:relative;z-index:2}
+.morning .grid{display:grid;gap:3rem}
+@media(min-width:1000px){.morning .grid{grid-template-columns:.85fr 1.15fr;gap:5rem;align-items:start}}
+.morning .eyebrow{color:#7A5F26}
+.morning h2{color:var(--ink);max-width:14ch}
 .morning .lede{color:#4A4438}
-.morning .lede strong{color:#14120E}
-form{margin-top:2.8rem;display:grid;gap:1.1rem}
+.morning .lede strong{color:var(--ink)}
+.next{list-style:none;margin-top:2.4rem;display:grid;gap:1.2rem;counter-reset:n}
+.next li{counter-increment:n;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;color:#4A4438;font-size:.97rem}
+.next li::before{content:counter(n);font-family:var(--serif);font-size:1.3rem;color:#7A5F26;width:2.2rem;height:2.2rem;border:1px solid rgba(122,95,38,.35);border-radius:50%;display:grid;place-items:center}
+.next strong{color:var(--ink);font-weight:500;display:block}
+form{display:grid;gap:1.1rem;background:#FBF9F4;border:1px solid rgba(20,18,14,.1);padding:clamp(1.4rem,3vw,2.6rem);border-radius:4px;box-shadow:0 30px 60px -40px rgba(20,18,14,.4)}
 @media(min-width:700px){.two{grid-template-columns:1fr 1fr;display:grid;gap:1.1rem}}
-label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#7A705C;margin-bottom:.45rem}
-input,textarea,select{width:100%;font-family:var(--sans);font-size:1rem;color:#14120E;background:#FBF9F4;
-  border:1px solid rgba(20,18,14,.16);border-radius:2px;padding:.85rem .9rem;line-height:1.5}
-textarea{min-height:5.5rem;resize:vertical}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#8A6E32;box-shadow:0 0 0 3px rgba(138,110,50,.12)}
+label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#6B624F;margin-bottom:.45rem}
+label .opt{text-transform:none;letter-spacing:0;color:#8C8370}
+input,textarea{width:100%;font-family:var(--sans);font-size:max(16px,1rem);color:var(--ink);background:#fff;
+  border:1px solid rgba(20,18,14,.18);border-radius:2px;padding:.8rem .9rem;line-height:1.5;min-height:48px}
+textarea{min-height:5.2rem;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:#7A5F26;box-shadow:0 0 0 3px rgba(122,95,38,.15)}
+.qgroup{border-top:1px solid rgba(20,18,14,.1);padding-top:1.2rem;margin-top:.3rem}
+.qgroup>p{font-family:var(--serif);font-size:1.25rem;margin-bottom:.9rem}
+.qgroup>p span{font-family:var(--sans);font-size:.85rem;color:#8C8370;margin-left:.4rem}
+.qgroup>div+div{margin-top:1rem}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-button{font-family:var(--sans);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;
-  background:#14120E;color:var(--cream);border:0;border-radius:2px;padding:1.05rem 2rem;cursor:pointer;justify-self:start}
+button{font-family:var(--sans);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:var(--cream);
+  border:0;border-radius:2px;min-height:50px;padding:0 2.2rem;cursor:pointer;justify-self:start;transition:transform .15s,background .2s}
+button:hover{background:#2A251C}
+button:active{transform:scale(.97)}
 button:disabled{opacity:.55;cursor:default}
-.formnote{font-size:.86rem;color:#7A705C;max-width:62ch}
-.status{margin-top:1rem;font-size:.95rem;display:none}
+.formnote{font-size:.86rem;color:#6B624F}
+.status{font-size:.95rem;display:none}
 .status.show{display:block}
-.status.ok{color:#2F6B3A}
 .status.err{color:#8C2F26}
 
-footer{background:var(--black);color:var(--muted);font-size:.85rem;padding:3rem 1.6rem;text-align:center;border-top:1px solid var(--line)}
+footer{background:var(--black);color:var(--muted);font-size:.85rem;padding:3rem var(--gutter) calc(3rem + env(safe-area-inset-bottom));text-align:center;border-top:1px solid var(--line);position:relative;z-index:2}
 footer a{color:var(--gold);text-decoration:none}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-.stage .ground{background-size:cover;background-position:center}
-#story .ground{background-image:
-    linear-gradient(180deg,rgba(18,16,13,0) 40%,rgba(18,16,13,.62) 78%,rgba(18,16,13,.88) 100%),
-    url(/media/streamline/story/poster.webp)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  [data-reveal],.split .w{opacity:1!important;transform:none!important;transition:none}
+  .hint::after,.path:hover::before{animation:none}
+}
 </style>
 </head>
 <body>
 
+<canvas id="paper" aria-hidden="true"></canvas>
+<div class="glow" aria-hidden="true"></div>
+
 <nav>
   <a class="brand" href="/">YetiGroove</a>
   <span class="links">
-    <a href="/signature.html">Signature</a>
-    <a href="/architects.html">Architects</a>
+    <a href="/field-office">Field Office</a>
+    <a href="/signature">Signature</a>
     <a class="cta" href="#start">Book the audit</a>
   </span>
 </nav>
 
-<!-- ═══ THE STORY ══════════════════════════════
-     One room, one continuous transformation, driven entirely by the reader's
-     scroll. Chaos at the top, order at the bottom. Scrub back up and it comes
-     apart again, which is the whole reason to touch it.
+<main>
 
-     The frames are a rendered explosion played backwards. Three copy beats
-     ride over the one scene instead of getting three scenes of their own. -->
-<section class="act act-1">
-  <div class="scrub" id="story" data-frames="/media/streamline/story" data-count="110"
-       data-shade-from="1" data-shade-to=".84">
-    <div class="stage">
-      <div class="ground"></div>
-      <canvas></canvas>
-      <div class="shade"></div>
-
-      <div class="copy"><div class="inner">
-        <div class="beat" data-in="0.00" data-out="0.30">
-          <p class="eyebrow">Operations Audit</p>
-          <h1>Nine in the morning, and you're already doing the part <em>a computer should have done.</em></h1>
-        </div>
-        <div class="beat" data-in="0.36" data-out="0.66">
-          <p class="eyebrow">What we actually do</p>
-          <h2>None of it is hard. It was just <em>never routed.</em></h2>
-        </div>
-        <div class="beat" data-in="0.72" data-out="1.01">
-          <p class="eyebrow">The point of all of it</p>
-          <h2>Same nine o'clock. <em>Different morning.</em></h2>
-        </div>
-      </div></div>
-
-      <span class="hint">Scroll</span>
-    </div>
-  </div>
-
-  <div class="wrap pad">
-    <div class="prose">
-      <p class="lede"><strong>Nobody chose these jobs.</strong> They accumulated. A second system that needs the same information typed into it again. A quote that only one person can write, so it goes out after dinner. A customer asking where their order is for the fourth time today.</p>
-      <p class="lede">None of it showed up in the business plan. It arrived one workaround at a time, and now it is the reason somebody stays late.</p>
-    </div>
-
-    <ul class="pile">
-      <li>The quote only <em>you</em> can write <span>so it goes out at 9pm, or it goes out Thursday</span></li>
-      <li>The job that gets entered twice <span>once in the software, once on the calendar, and they disagree by Friday</span></li>
-      <li>The paperwork somebody needs right now <span>certs, permits, warranties, sitting in an inbox from March</span></li>
-      <li>Two hundred photos on a phone <span>that are supposed to be on the job file</span></li>
-      <li>The message that came in after hours <span>and got answered eleven hours later, by which time they called somebody else</span></li>
-      <li>The thing that only works because one person remembers it <span>and that person would like a vacation</span></li>
-    </ul>
+<section class="scrub" id="story" data-frames="/media/streamline/story" data-frames-m="/media/streamline/story-m" data-count="110" data-shade-from="1" data-shade-to=".84">
+  <div class="stage">
+    <div class="ground"></div>
+    <canvas></canvas>
+    <div class="shade"></div>
+    <div class="copy"><div class="inner">
+      <div class="beat" data-in="0.00" data-out="0.30">
+        <p class="eyebrow">Operations Audit</p>
+        <h1>Nine in the morning, and you're already doing the part <em>a computer should have done.</em></h1>
+      </div>
+      <div class="beat" data-in="0.36" data-out="0.66">
+        <p class="eyebrow">What we actually do</p>
+        <h2>None of it is hard. It was just <em>never routed.</em></h2>
+      </div>
+      <div class="beat" data-in="0.72" data-out="1.01">
+        <p class="eyebrow">The point of all of it</p>
+        <h2>Same nine o'clock. <em>Different morning.</em></h2>
+      </div>
+    </div></div>
+    <div class="rail" aria-hidden="true"><span>Before</span><span class="bar"><span class="fill"></span></span><span>After</span></div>
+    <span class="hint">Scroll</span>
   </div>
 </section>
 
-<!-- ═══ ACT 2 : THE SORT ══════════════════════════════════════
-     Nothing disappears. It gets routed. That distinction is the
-     whole honest argument and it has to survive into the visuals. -->
-<section class="act act-2">
-    <div class="wrap pad">
-    <h2 style="margin-bottom:1.6rem">What the day <em>actually looks like.</em></h2>
-    <div class="prose">
-      <p class="lede">We spend a day inside how your business really runs, which is never quite how the software says it runs. We follow one job from the first phone call to the final invoice and write down every place a human retypes, re-sends, or remembers something.</p>
-      <p class="lede">Then you get a short document in plain language: <strong>what is costing you hours, what can be automated this month, and what should be left alone.</strong> That last part matters. Plenty of what you do by hand is judgement, and judgement should stay with you.</p>
+<section class="intro pad">
+  <div class="wrap grid">
+    <h2 class="split" data-split>Nobody chose these jobs. <em>They piled up.</em></h2>
+    <div data-reveal>
+      <p class="lede"><strong>A second system that needs the same details typed in again.</strong> A quote only one person can write, so it goes out after dinner. A customer asking where their job stands for the fourth time today.</p>
+      <p class="lede">None of it was in the business plan. It arrived one workaround at a time, and now it is the reason somebody stays late.</p>
     </div>
+  </div>
+</section>
 
-    <div class="offer">
-      <p class="eyebrow">The audit</p>
-      <h3 style="font-family:var(--serif);font-size:1.6rem;max-width:22ch">One day, one document, and one thing already running.</h3>
-      <ul>
-        <li><strong>A day inside the business.</strong> On site if you are near the lakes, on a call if you are not.</li>
-        <li><strong>A written findings document.</strong> Plain language, no jargon, ranked by hours returned per month.</li>
-        <li><strong>One automation built and switched on before we finish.</strong> Not a recommendation. A working thing, live, that you keep either way.</li>
-        <li><strong>A quote for the rest,</strong> if there is a rest worth doing.</li>
-      </ul>
+<section class="sort" id="sort">
+  <div class="sort-pin">
+    <div class="wrap sort-inner">
+      <header class="sort-head">
+        <div>
+          <p class="eyebrow">The sort</p>
+          <h2 class="sort-title"><span class="t0">Recognize any of these?</span><span class="t1">Nothing disappears. <em>It gets routed.</em></span></h2>
+        </div>
+        <p class="sort-note">The honest version of automation. Some work runs on its own, some goes to the right person, and the judgement calls stay with you, with less in the way.</p>
+      </header>
+      <div class="lanes">
+        <div class="lane" data-lane>
+          <div class="lane-h"><span class="lane-n">3</span><h3>Runs on its own</h3></div>
+          <p class="lane-sub">Typed once, filed once, never chased.</p>
+          <article class="slip" data-order="0" data-rot="-9"><span class="stamp">Automated</span><p class="prob">The job that gets entered twice</p><p class="fix">Typed once. It shows up everywhere it is needed.</p></article>
+          <article class="slip" data-order="2" data-rot="7"><span class="stamp">Automated</span><p class="prob">Two hundred photos stuck on a phone</p><p class="fix">Uploaded from the job site, filed on the right job.</p></article>
+          <article class="slip" data-order="4" data-rot="-4"><span class="stamp">Automated</span><p class="prob">The certificate somebody needs right now</p><p class="fix">Filed to the job, findable from any phone in seconds.</p></article>
+        </div>
+        <div class="lane" data-lane>
+          <div class="lane-h"><span class="lane-n">2</span><h3>Goes to the right person</h3></div>
+          <p class="lane-sub">Nothing waits on whoever happens to be in.</p>
+          <article class="slip" data-order="1" data-rot="11"><span class="stamp">Routed</span><p class="prob">The message that came in after hours</p><p class="fix">Answered in seconds, details sent to whoever is on call.</p></article>
+          <article class="slip" data-order="3" data-rot="-12"><span class="stamp">Routed</span><p class="prob">The step only one person remembers</p><p class="fix">Written into the system, so the next person gets walked through it.</p></article>
+        </div>
+        <div class="lane" data-lane>
+          <div class="lane-h"><span class="lane-n">1</span><h3>Stays with you</h3></div>
+          <p class="lane-sub">Judgement is the part worth keeping.</p>
+          <article class="slip" data-order="5" data-rot="6"><span class="stamp">Yours</span><p class="prob">The quote only you can write</p><p class="fix">Still yours. The numbers are lined up first, so it takes ten minutes instead of an evening.</p></article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audit pad">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>The audit</p>
+    <h2 class="split" data-split>One day, one document, and <em>one thing already running.</em></h2>
+    <p class="lede" data-reveal style="margin-top:1.4rem">We spend a day inside how your business really runs, which is never quite how the software says it runs. We follow one job from the first phone call to the final invoice and write down every place a person retypes, re-sends or remembers something.</p>
+
+    <ol class="steps" data-progress>
+      <li><p class="when">Before</p><h3>Your three answers</h3><p>The short form at the bottom of this page, then a quick call so we arrive knowing where it hurts.</p></li>
+      <li><p class="when">The day</p><h3>We follow one job</h3><p>On site if you are near the lakes, on a call if you are not. First call to final invoice.</p></li>
+      <li><p class="when">Before we leave</p><h3>One automation, switched on</h3><p>Not a recommendation. A working thing, live, that you keep either way.</p></li>
+      <li><p class="when">After</p><h3>The findings, in plain language</h3><p>What is costing you hours, what can be automated this month, and what should be left alone.</p></li>
+    </ol>
+
+    <div class="offer" data-reveal>
+      <div>
+        <h3>Everything the audit includes</h3>
+        <ul>
+          <li><strong>A day inside the business</strong>, watching real work, not a slideshow about it.</li>
+          <li><strong>A written findings document</strong>, ranked by hours returned per month, no jargon.</li>
+          <li><strong>One automation built and running</strong> before we finish the day.</li>
+          <li><strong>A quote for the rest</strong>, only if there is a rest worth doing.</li>
+        </ul>
+      </div>
       <div class="price">
-        <span class="fig">$750</span>
-        <span class="note">Fixed. Credited in full against the first build, so if we go ahead the audit costs nothing.</span>
+        <p class="fig">$750</p>
+        <p class="note">Fixed. Credited in full against the first build, so if we go ahead the audit costs nothing.</p>
+        <a class="btn" href="#start">Book the audit</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ACT 3 : THE LIGHTS STAY ON ════════════════════════════
-     Pull back, open up, let the air in. The room is empty and the
-     work is still moving. -->
-<section class="act act-3">
-    <div class="wrap pad">
-    <h2 style="margin-bottom:1.6rem">Systems we <em>already run.</em></h2>
-    <div class="prose">
-      <p class="lede">Same clock on the wall, same light through the blinds. The only thing that changed is what was waiting for you. <strong>Go home at five, and it keeps working.</strong> This is not theoretical: we run systems like this every day for businesses around the lakes, and they run whether anybody is watching or not.</p>
+<section class="costs pad" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Do the math</p>
+    <h2 class="split" data-split>What the hand work <em>is costing you.</em></h2>
+    <div class="calc">
+      <div data-reveal>
+        <div class="knob"><label for="k-people">People doing it <output id="o-people">3</output></label><input type="range" id="k-people" min="1" max="20" value="3" /></div>
+        <div class="knob"><label for="k-hours">Hours a week each, retyping, chasing and re-sending <output id="o-hours">4</output></label><input type="range" id="k-hours" min="1" max="20" value="4" /></div>
+        <div class="knob"><label for="k-rate">What an hour of their time costs you <output id="o-rate">$30</output></label><input type="range" id="k-rate" min="15" max="120" step="5" value="30" /></div>
+        <p class="lede" style="font-size:.95rem">Your numbers, not ours. Rough guesses are fine. Fifty working weeks a year.</p>
+      </div>
+      <div class="readout" data-reveal aria-live="polite">
+        <p class="big"><span id="r-hours">600</span><small>hours a year</small></p>
+        <p id="r-weeks">That is 15 full work weeks.</p>
+        <p class="money" id="r-money">$18,000</p>
+        <p>a year, spent on work nobody chose.</p>
+        <p class="verdict" id="r-verdict">Win back a quarter of it and that is $4,500 a year. The audit is $750, and it is credited back if we build.</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="proof">
+<section class="night" id="night">
+  <div class="night-pin">
+    <div class="sky" aria-hidden="true"></div>
+    <div class="wrap night-inner">
+      <div>
+        <p class="eyebrow">After five</p>
+        <h2>What happens <em>after you go home.</em></h2>
+        <p class="lede" style="margin-top:1rem">Every line on this clock is a system we run today for a real business.</p>
+        <div class="clock-wrap">
+          <svg class="clock" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="face" cx="100" cy="100" r="96" />
+            <circle cx="100" cy="100" r="96" fill="none" stroke="#C9A55A" stroke-width="3" />
+            <g class="ticks"></g>
+            <text class="num" x="100" y="30">12</text><text class="num" x="170" y="100">3</text>
+            <text class="num" x="100" y="170">6</text><text class="num" x="30" y="100">9</text>
+            <line class="hand hh" x1="100" y1="100" x2="100" y2="56" stroke-width="5" />
+            <line class="hand mh" x1="100" y1="100" x2="100" y2="34" stroke-width="3" />
+            <circle cx="100" cy="100" r="5" fill="#14120E" />
+          </svg>
+          <p class="clock-time"><span id="ctime">5:00 PM</span><small id="cday">Tonight</small></p>
+        </div>
+      </div>
+      <div class="feed"><ol class="feed-track">
+        <li data-t="0"><time>5:00 PM</time><div><strong>You lock up.</strong><span>The office goes home. The work keeps moving.</span></div></li>
+        <li data-t="60"><time>6:00 PM</time><div><strong>Tonight's post goes out.</strong><span>Scheduled weeks ahead and published on time, with nobody at a keyboard.</span></div></li>
+        <li data-t="161"><time>7:41 PM</time><div><strong>A customer calls after hours.</strong><span>A voice assistant answers, takes their name, number and what they need, and emails it over.</span></div></li>
+        <li data-t="195"><time>8:15 PM</time><div><strong>A lead comes in from the website.</strong><span>Saved first, then texted to your phone, so it can never quietly vanish.</span></div></li>
+        <li data-t="270"><time>9:30 PM</time><div><strong>A customer signs from the couch.</strong><span>The contract went out by text. One tap, signed, filed on the job.</span></div></li>
+        <li data-t="540"><time>2:00 AM</time><div><strong>The two o'clock check.</strong><span>Every system gets asked if it is healthy. If one is not, we hear about it before you do.</span></div></li>
+        <li data-t="825"><time>6:45 AM</time><div><strong>The morning summary lands.</strong><span>What came in overnight and who needs a call, waiting before the coffee.</span></div></li>
+        <li data-t="870"><time>7:30 AM</time><div><strong>The office asks about a job.</strong><span>A helper reads the job file and answers in seconds, instead of texting the owner.</span></div></li>
+        <li data-t="960" class="final"><time>9:00 AM</time><div><strong>You walk in.</strong><span>Same nine o'clock. Different morning.</span></div></li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+<section class="running pad">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Running right now</p>
+    <h2 class="split" data-split>Not a pitch deck. <em>Systems already working.</em></h2>
+    <div class="proof" data-reveal>
       <div class="cell">
-        <p class="fig">4&times;</p>
-        <h3>A day, placed automatically</h3>
-        <p>A contractor's social account posts four times daily off a managed queue, with an evergreen fallback so it never goes quiet. Nobody touches it.</p>
+        <p class="fig">47</p>
+        <h3>Event videos, scheduled through December</h3>
+        <p>A lake community's calendar posts its own event reels, one a day, with nobody pressing a button.</p>
       </div>
       <div class="cell">
-        <p class="fig">Wed</p>
-        <h3>A video that writes itself</h3>
-        <p>Every Wednesday evening a full video is scripted and rendered on a timer. The only human step left is pressing post.</p>
+        <p class="fig">1 tap</p>
+        <h3>Contracts signed from a text</h3>
+        <p>A roofing company's crew and office app sends the contract, gets it signed and files it on the job. <a href="/field-office">See the app</a></p>
+      </div>
+      <div class="cell">
+        <p class="fig">4&cent;</p>
+        <h3>Per question to the office helper</h3>
+        <p>Staff ask about any job in plain words and get an answer in seconds, instead of calling the owner on a roof.</p>
       </div>
       <div class="cell">
         <p class="fig">24/7</p>
-        <h3>A community calendar</h3>
-        <p>Events, photos and alerts for a whole lake community, updating itself and notifying the right people without an office behind it.</p>
+        <h3>A voice that answers the phone</h3>
+        <p>Calls get picked up after hours, the caller's details are captured, and a person follows up in the morning.</p>
       </div>
-    </div>
-
-    <div class="care prose">
-      <p class="eyebrow" style="margin-bottom:.7rem">The part most people skip</p>
-      <p class="lede" style="margin-top:0"><strong>Anything we leave running, we watch.</strong> Automations break quietly. A password expires, a service changes a rule, and a thing that has worked for eight months stops without telling anybody. So every system we install comes with a monthly care fee and a health check that shouts when something goes wrong.</p>
-      <p class="lede">We do not hand over unattended machinery and walk away. That is how businesses end up worse off than before they automated anything.</p>
-    </div>
-
-    <div class="qa prose" style="max-width:none">
-      <details>
-        <summary>We are not a tech company. We make things.</summary>
-        <p>Good. The businesses that gain the most from this are the least technical ones, because nobody has ever looked at their back office with fresh eyes. Fabricators, contractors, marinas, restaurants. If you can walk us through a job, we can find the leaks.</p>
-      </details>
-      <details>
-        <summary>Are you going to tell us to replace our software?</summary>
-        <p>Almost certainly not. Ripping out a system your people already know is expensive and it is usually the wrong answer. Most of what we find lives in the gaps between the tools you already pay for.</p>
-      </details>
-      <details>
-        <summary>Is this an AI thing?</summary>
-        <p>Some of it, where it earns its place. Most of it is much more boring than that: connecting two things that should already have been connected. The goal is fewer hours, not more technology.</p>
-      </details>
-      <details>
-        <summary>What if you find nothing?</summary>
-        <p>Then we say so, you keep the automation we built on the day, and we do not send you a quote for work that would not pay for itself.</p>
-      </details>
     </div>
   </div>
 </section>
 
-<!-- ═══ MORNING : the only light panel on the page ═══ -->
-<section class="morning" id="start">
+<section class="after pad" style="padding-top:0">
   <div class="wrap">
-    <p class="eyebrow">Start here</p>
-    <h2>Three questions. That is the whole application.</h2>
-    <p class="lede"><strong>Answer as roughly as you like.</strong> These three tell us more about a business than an hour on a call, and they are the same three we would ask you standing in your shop.</p>
+    <p class="eyebrow" data-reveal>After the audit</p>
+    <h2 class="split" data-split>What usually <em>comes next.</em></h2>
+    <p class="lede" data-reveal style="margin-top:1.2rem">The findings decide this, not us. These are the four builds the audit points to most often.</p>
+    <div class="paths">
+      <a class="path" href="/field-office" data-reveal><p class="k">For trades</p><h3>A crew and office app</h3><p>Leads, jobs, photos, crews, texts and signatures in one place, built around how your trade actually works.</p><span class="go">See Field Office</span></a>
+      <div class="path" data-reveal><p class="k">For anyone with a phone</p><h3>A front desk that never closes</h3><p>Calls and messages answered after hours, and the details sent to the right person instead of a voicemail box.</p></div>
+      <div class="path" data-reveal><p class="k">For the office</p><h3>Paperwork that files itself</h3><p>Quotes, contracts, permits and photos land on the right job without anyone retyping them.</p></div>
+      <div class="path" data-reveal><p class="k">For marketing</p><h3>Posting that keeps going</h3><p>Content scheduled weeks ahead at a pace your team can actually keep up, so the account never goes quiet.</p></div>
+    </div>
+
+    <div class="care" data-reveal>
+      <p class="eyebrow" style="margin-bottom:.7rem">The part most people skip</p>
+      <p class="lede"><strong>Anything we leave running, we watch.</strong> Automations break quietly. A password expires, a service changes a rule, and something that worked for eight months stops without telling anybody. So every system we install comes with a monthly care plan and a nightly health check that tells us first.</p>
+    </div>
+
+    <div class="qa" data-reveal>
+      <details><summary>We are not a tech company. We make things.</summary><p>Good. The businesses that gain the most are the least technical ones, because nobody has ever looked at their back office with fresh eyes. Contractors, fabricators, marinas, restaurants. If you can walk us through a job, we can find the leaks.</p></details>
+      <details><summary>Are you going to tell us to replace our software?</summary><p>Almost certainly not. Ripping out a system your people already know is expensive and usually the wrong answer. Most of what we find lives in the gaps between the tools you already pay for.</p></details>
+      <details><summary>Is this an AI thing?</summary><p>Some of it, where it earns its place. Most of it is more boring than that: connecting two things that should already have been connected. The goal is fewer hours, not more technology.</p></details>
+      <details><summary>Who owns what you build?</summary><p>Your information is yours, always. The automation we build on audit day is yours to keep whether or not we work together again.</p></details>
+      <details><summary>What if you find nothing?</summary><p>Then we say so, you keep the automation we built on the day, and we do not send you a quote for work that would not pay for itself.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="morning" id="start">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Start here</p>
+      <h2>Tell us where <em style="color:#7A5F26">it hurts.</em></h2>
+      <p class="lede" style="margin-top:1.2rem"><strong>The three questions are the useful part.</strong> Answer as roughly as you like. They tell us more about a business than an hour on a call, and they are the same three we would ask standing in your shop.</p>
+      <ol class="next">
+        <li><div><strong>We read it ourselves</strong>Usually the same day. Nothing on our side of this is answered by a bot.</div></li>
+        <li><div><strong>A short call</strong>A few questions about how work moves through your business, and whether the audit fits.</div></li>
+        <li><div><strong>We book the day</strong>One fixed price, credited back if you go ahead with a build.</div></li>
+      </ol>
+    </div>
 
     <form id="auditForm" novalidate>
       <div class="two">
@@ -336,221 +577,399 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
       <div class="two">
         <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required /></div>
-        <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" /></div>
+        <div><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" /></div>
       </div>
       <div class="two">
         <div><label for="f-trade">What does the business do?</label><input id="f-trade" name="trade" placeholder="What the business makes or does" /></div>
-        <div><label for="f-headcount">How many people?</label><input id="f-headcount" name="headcount" placeholder="Including you" /></div>
+        <div><label for="f-headcount">How many people?</label><input id="f-headcount" name="headcount" inputmode="numeric" placeholder="Including you" /></div>
       </div>
-      <div><label for="f-twice">1. What gets done twice?</label><textarea id="f-twice" name="twice" placeholder="Anything that gets written down, typed in, or sent more than once"></textarea></div>
-      <div><label for="f-waiting">2. What sits waiting on one person?</label><textarea id="f-waiting" name="waiting" placeholder="The thing that stops moving when that person is busy or away"></textarea></div>
-      <div><label for="f-inhead">3. What only works because somebody remembers it?</label><textarea id="f-inhead" name="inhead" placeholder="The step that is not written down anywhere"></textarea></div>
-      <div><label for="f-software">What software are you already paying for?</label><input id="f-software" name="software" placeholder="Whatever you can remember, rough is fine" /></div>
+      <div class="qgroup">
+        <p>The three questions <span>rough is fine</span></p>
+        <div><label for="f-twice">1. What gets done twice?</label><textarea id="f-twice" name="twice" placeholder="Anything that gets written down, typed in, or sent more than once"></textarea></div>
+        <div><label for="f-waiting">2. What sits waiting on one person?</label><textarea id="f-waiting" name="waiting" placeholder="The thing that stops moving when that person is busy or away"></textarea></div>
+        <div><label for="f-inhead">3. What only works because somebody remembers it?</label><textarea id="f-inhead" name="inhead" placeholder="The step that is not written down anywhere"></textarea></div>
+      </div>
+      <div><label for="f-software">What software are you already paying for? <span class="opt">(optional)</span></label><input id="f-software" name="software" placeholder="Whatever you can remember" /></div>
       <div class="hp" aria-hidden="true"><label for="f-fax">Fax</label><input id="f-fax" name="fax" tabindex="-1" autocomplete="off" /></div>
-
-      <p class="formnote">We read every one of these ourselves. Nothing here is answered by a bot.</p>
       <button type="submit" id="submitBtn">Send it over</button>
       <p class="status" id="status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
 
+</main>
+
 <footer>
   <p>YetiGroove Studio &middot; Made in lake country, Michigan &middot; <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></p>
 </footer>
 
 <script>
-/* ── Multi-act scroll scrub ───────────────────────────────────
-   Generalised from the homepage hero. Each .scrub section pins its
-   stage and steps a webp sequence by scroll position.
-
-   Two rules that keep it honest:
-   1. A section only activates once frame 001 has actually decoded.
-      With no frames rendered yet, nothing activates and the page is
-      still complete, just static. No broken state, ever.
-   2. Frames are only requested when the section is within two
-      viewports. Three acts of 40+ frames must never all load at once. */
 (function () {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var small  = matchMedia('(max-width: 768px)').matches;
-  var save   = navigator.connection && navigator.connection.saveData;
-  if (reduce || small || save) return;
+  var save = navigator.connection && navigator.connection.saveData;
+  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+  var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+  var vh = function () { return window.innerHeight; };
 
-  var acts = [].slice.call(document.querySelectorAll('.scrub'));
-  if (!acts.length) return;
+  /* Shared scroll loop: every scene registers one function, one rAF per frame. */
+  var scenes = [];
+  var queued = false;
+  function frame() { queued = false; for (var i = 0; i < scenes.length; i++) scenes[i](); }
+  function kick() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', kick, { passive: true });
+  addEventListener('resize', function () { for (var i = 0; i < resizers.length; i++) resizers[i](); kick(); });
+  var resizers = [];
+  function pinProgress(el) {
+    var total = el.offsetHeight - vh();
+    if (total <= 0) return 0;
+    return clamp(-el.getBoundingClientRect().top / total, 0, 1);
+  }
 
-  acts.forEach(function (wrap) {
+  /* HERO SCRUB. Turns on once frame 1 decodes, so the poster always shows first.
+     Phones get a lighter, center-cropped frame set. */
+  (function () {
+    var wrap = document.getElementById('story');
+    if (!wrap || reduce || save) return;
     var canvas = wrap.querySelector('canvas');
-    if (!canvas || !canvas.getContext) return;
-
-    var stage  = wrap.querySelector('.stage');
-    var copy   = wrap.querySelector('.copy');
-    var beats  = [].slice.call(wrap.querySelectorAll('.beat'));
-    var shade  = wrap.querySelector('.shade');
-    var hint   = wrap.querySelector('.hint');
-    var ctx    = canvas.getContext('2d');
-    var dir    = wrap.getAttribute('data-frames');
-    var COUNT  = parseInt(wrap.getAttribute('data-count'), 10) || 40;
-    var SH0    = parseFloat(wrap.getAttribute('data-shade-from') || '0.62');
-    var SH1    = parseFloat(wrap.getAttribute('data-shade-to')   || '0.94');
-    var images = new Array(COUNT);
-    var current = -1;
-    var started = false;
-    var live = false;
-
+    if (!canvas.getContext) return;
+    var stage = wrap.querySelector('.stage');
+    var beats = [].slice.call(wrap.querySelectorAll('.beat'));
+    var shade = wrap.querySelector('.shade');
+    var hint = wrap.querySelector('.hint');
+    var fill = wrap.querySelector('.rail .fill');
+    var ctx = canvas.getContext('2d');
+    var mobile = matchMedia('(max-width: 768px)').matches;
+    var dir = wrap.getAttribute(mobile ? 'data-frames-m' : 'data-frames');
+    var COUNT = parseInt(wrap.getAttribute('data-count'), 10);
+    var SH0 = parseFloat(wrap.getAttribute('data-shade-from'));
+    var SH1 = parseFloat(wrap.getAttribute('data-shade-to'));
+    var images = new Array(COUNT), current = -1, live = false;
     function src(i) { return dir + '/frame_' + String(i + 1).padStart(3, '0') + '.webp'; }
-
+    function ok(img) { return img && img.complete && img.naturalWidth; }
     function draw(i) {
-      var img = images[i];
-      if (!img || !img.complete || !img.naturalWidth) return;
+      var img = images[i]; if (!ok(img)) return;
       var cw = canvas.width, ch = canvas.height;
       var s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
       var w = img.naturalWidth * s, h = img.naturalHeight * s;
       ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
       current = i;
     }
-
     function resize() {
+      if (!live) return;
       var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      canvas.width  = stage.clientWidth  * dpr;
-      canvas.height = stage.clientHeight * dpr;
-      if (current >= 0) draw(current);
+      canvas.width = stage.clientWidth * dpr; canvas.height = stage.clientHeight * dpr;
+      if (current >= 0) { var c = current; current = -1; draw(c); }
     }
-
-    function progress() {
-      var total = wrap.offsetHeight - window.innerHeight;
-      if (total <= 0) return 0;
-      return Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / total));
-    }
-
-    function nearest(i) {
-      for (var j = i; j >= 0; j--) {
-        if (images[j] && images[j].complete && images[j].naturalWidth) return j;
+    resizers.push(resize);
+    scenes.push(function () {
+      if (!live) return;
+      var p = pinProgress(wrap);
+      var idx = Math.round(p * (COUNT - 1));
+      while (idx > 0 && !ok(images[idx])) idx--;
+      if (idx !== current) draw(idx);
+      for (var b = 0; b < beats.length; b++) {
+        var el = beats[b], i0 = +el.dataset.in, i1 = +el.dataset.out, f = 0.06, o;
+        if (p < i0 - f || p > i1 + f) o = 0;
+        else if (p < i0) o = (p - (i0 - f)) / f;
+        else if (p > i1) o = 1 - (p - i1) / f;
+        else o = 1;
+        o = clamp(o, 0, 1);
+        el.style.opacity = o;
+        el.style.transform = 'translateY(' + ((1 - o) * 14) + 'px)';
       }
-      return -1;
-    }
+      shade.style.opacity = SH0 + (SH1 - SH0) * p;
+      hint.style.opacity = Math.max(0, 0.7 - p * 4);
+      if (fill) fill.style.transform = 'scaleY(' + p + ')';
+    });
+    var first = new Image();
+    first.onload = function () {
+      images[0] = first; wrap.classList.add('on'); live = true; resize(); draw(0); kick();
+      for (var i = 1; i < COUNT; i++) { var img = new Image(); img.onload = kick; img.src = src(i); images[i] = img; }
+    };
+    first.src = src(0);
+  })();
 
-    var ticking = false;
-    function update() {
-      if (!live || ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        var p = progress();
-        var idx = nearest(Math.round(p * (COUNT - 1)));
-        if (idx >= 0 && idx !== current) draw(idx);
-        // Each beat owns a stretch of the scroll and cross-fades in place over
-        // the one continuous scene. Beat 1 starts at full opacity so the H1 is
-        // legible on first paint, before anyone has scrolled at all.
-        for (var b = 0; b < beats.length; b++) {
-          var el = beats[b];
-          var i0 = parseFloat(el.getAttribute('data-in'));
-          var i1 = parseFloat(el.getAttribute('data-out'));
-          var f  = 0.06, o;
-          if (p < i0 - f || p > i1 + f) o = 0;
-          else if (p < i0) o = (p - (i0 - f)) / f;
-          else if (p > i1) o = 1 - ((p - i1) / f);
-          else o = 1;
-          o = Math.max(0, Math.min(1, o));
-          el.style.opacity = o;
-          el.style.transform = 'translateY(' + ((1 - o) * 12) + 'px)';
-        }
-        // The room lifts out of shadow as it comes back together.
-        if (shade) { shade.style.opacity = SH0 + (SH1 - SH0) * p; }
-        if (hint)  { hint.style.opacity = Math.max(0, 0.6 - p * 3); }
+  /* Word-by-word headline reveal + fade-up blocks. */
+  (function () {
+    [].forEach.call(document.querySelectorAll('[data-split]'), function (h) {
+      var d = 0;
+      (function walk(node) {
+        [].slice.call(node.childNodes).forEach(function (n) {
+          if (n.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            n.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+              var s = document.createElement('span'); s.className = 'w'; s.textContent = part;
+              s.style.transitionDelay = (d++ * 0.06) + 's'; frag.appendChild(s);
+            });
+            node.replaceChild(frag, n);
+          } else if (n.nodeType === 1) walk(n);
+        });
+      })(h);
+      h.classList.add('split');
+    });
+    var els = document.querySelectorAll('[data-reveal],[data-split]');
+    if (reduce || !('IntersectionObserver' in window)) { [].forEach.call(els, function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    [].forEach.call(els, function (e) { io.observe(e); });
+  })();
+
+  /* THE SORT. The routed layout is the real layout (that is what shows with no
+     script). The script measures each slip's home, then starts it in a heap
+     and flies it home as the reader scrolls. */
+  (function () {
+    var sec = document.getElementById('sort');
+    if (!sec || reduce) return;
+    var lanesEl = sec.querySelector('.lanes');
+    var inner = sec.querySelector('.sort-inner');
+    var slips = [].slice.call(sec.querySelectorAll('.slip')).sort(function (a, b) { return a.dataset.order - b.dataset.order; });
+    var lanes = [].slice.call(sec.querySelectorAll('.lane'));
+    var homes = [], mode = '';
+    function measure() {
+      slips.forEach(function (s) { s.style.transform = 'none'; });
+      sec.classList.remove('pinned');
+      var wide = innerWidth >= 860;
+      sec.classList.add('pinned');
+      var fits = wide && inner.offsetHeight < vh() - 70;
+      if (!fits) sec.classList.remove('pinned');
+      mode = fits ? 'pin' : 'flow';
+      var L = lanesEl.getBoundingClientRect();
+      var cx = L.left + L.width / 2, cy = L.top + L.height * 0.42;
+      homes = slips.map(function (s, i) {
+        var r = s.getBoundingClientRect();
+        var jx = ((i * 97) % 11 - 5) * 16, jy = ((i * 53) % 7 - 3) * 14;
+        return { dx: cx + jx - (r.left + r.width / 2), dy: cy + jy - (r.top + r.height / 2), rot: +s.dataset.rot };
       });
+      slips.forEach(function (s, i) { s.style.zIndex = 10 - i; });
     }
+    resizers.push(measure);
+    scenes.push(function () {
+      if (mode === 'pin') {
+        var p = pinProgress(sec), n = slips.length;
+        var counts = lanes.map(function () { return 0; });
+        sec.classList.toggle('routed', p > 0.45);
+        slips.forEach(function (s, i) {
+          var start = 0.1 + i * (0.62 / (n - 1)), e = ease(clamp((p - start) / 0.16, 0, 1));
+          var h = homes[i];
+          s.style.transform = 'translate(' + (h.dx * (1 - e)).toFixed(1) + 'px,' + (h.dy * (1 - e)).toFixed(1) + 'px) rotate(' + (h.rot * (1 - e)).toFixed(2) + 'deg) scale(' + (1 + 0.04 * (1 - e)) + ')';
+          s.querySelector('.fix').style.opacity = clamp((p - start - 0.12) / 0.08, 0, 1);
+          var landed = e > 0.98; s.classList.toggle('landed', landed);
+          if (landed) counts[lanes.indexOf(s.closest('.lane'))]++;
+        });
+        lanes.forEach(function (l, i) { l.querySelector('.lane-n').textContent = counts[i]; l.classList.toggle('lit', counts[i] > 0); });
+      } else {
+        /* Phones and short screens: each slip is tossed in from the side as it scrolls into view. */
+        slips.forEach(function (s, i) {
+          var r = s.getBoundingClientRect();
+          var e = ease(clamp((vh() - r.top) / (vh() * 0.45), 0, 1));
+          var side = i % 2 ? 1 : -1;
+          s.style.transform = 'translateX(' + (side * 30 * (1 - e)).toFixed(1) + 'vw) rotate(' + (s.dataset.rot * 1.4 * (1 - e)).toFixed(2) + 'deg)';
+        });
+      }
+    });
+    measure();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); kick(); });
+  })();
 
-    // Load only when the act is close. Three acts must not race each other.
-    function maybeStart() {
-      if (started) return;
-      var r = wrap.getBoundingClientRect();
-      if (r.top > window.innerHeight * 2 || r.bottom < 0) return;
-      started = true;
+  /* Generic progress for the audit timeline. */
+  (function () {
+    var els = [].slice.call(document.querySelectorAll('[data-progress]'));
+    scenes.push(function () {
+      els.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var p = reduce ? 1 : clamp((vh() * 0.75 - r.top) / (r.height + vh() * 0.1), 0, 1);
+        el.style.setProperty('--p', p.toFixed(3));
+        var lis = el.children, n = lis.length;
+        for (var i = 0; i < n; i++) lis[i].classList.toggle('lit', p >= (i / n) + 0.02);
+      });
+    });
+  })();
 
-      var first = new Image();
-      first.src = src(0);
-      first.onload = function () {
-        images[0] = first;
-        wrap.classList.add('on');
-        live = true;
-        resize();
-        draw(0);
-        update();
-        for (var i = 1; i < COUNT; i++) {
-          var img = new Image();
-          img.src = src(i);
-          img.onload = update;
-          images[i] = img;
+  /* Cost calculator. */
+  (function () {
+    var P = document.getElementById('k-people'), H = document.getElementById('k-hours'), R = document.getElementById('k-rate');
+    if (!P) return;
+    var fmt = function (n) { return Math.round(n).toLocaleString('en-US'); };
+    function fillOf(el) { el.style.setProperty('--fill', ((el.value - el.min) / (el.max - el.min) * 100) + '%'); }
+    function calc() {
+      var p = +P.value, h = +H.value, r = +R.value;
+      document.getElementById('o-people').textContent = p;
+      document.getElementById('o-hours').textContent = h;
+      document.getElementById('o-rate').textContent = '$' + r;
+      var hours = p * h * 50, money = hours * r, weeks = hours / 40;
+      document.getElementById('r-hours').textContent = fmt(hours);
+      document.getElementById('r-weeks').textContent = 'That is ' + (weeks < 1 ? 'most of a' : fmt(weeks)) + ' full work week' + (weeks < 1.5 ? '' : 's') + '.';
+      document.getElementById('r-money').textContent = '$' + fmt(money);
+      document.getElementById('r-verdict').textContent = 'Win back a quarter of it and that is $' + fmt(money / 4) + ' a year. The audit is $750, and it is credited back if we build.';
+      [P, H, R].forEach(fillOf);
+    }
+    [P, H, R].forEach(function (el) { el.addEventListener('input', calc); });
+    calc();
+  })();
+
+  /* AFTER FIVE. The clock sweeps from 5 PM to 9 AM and each log line lands at its time. */
+  (function () {
+    var sec = document.getElementById('night');
+    if (!sec) return;
+    var ticks = sec.querySelector('.ticks');
+    for (var i = 0; i < 60; i++) {
+      var a = i * 6 * Math.PI / 180, big = i % 5 === 0, r1 = big ? 80 : 85, r2 = 90;
+      var l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', 100 + r1 * Math.sin(a)); l.setAttribute('y1', 100 - r1 * Math.cos(a));
+      l.setAttribute('x2', 100 + r2 * Math.sin(a)); l.setAttribute('y2', 100 - r2 * Math.cos(a));
+      l.setAttribute('class', 'tick'); l.setAttribute('stroke-width', big ? 2.4 : 1); ticks.appendChild(l);
+    }
+    if (reduce) return;
+    var inner = sec.querySelector('.night-inner');
+    var hh = sec.querySelector('.hh'), mh = sec.querySelector('.mh');
+    var ctime = document.getElementById('ctime'), cday = document.getElementById('cday');
+    var sky = sec.querySelector('.sky');
+    var feed = sec.querySelector('.feed'), track = sec.querySelector('.feed-track');
+    var items = [].slice.call(sec.querySelectorAll('.feed li'));
+    var mode = '';
+    var skyStops = [[0, [201, 140, 70, .26]], [240, [70, 70, 140, .26]], [540, [30, 40, 100, .3]], [780, [190, 110, 90, .26]], [960, [226, 199, 138, .34]]];
+    function skyAt(m) {
+      for (var i = 1; i < skyStops.length; i++) {
+        if (m <= skyStops[i][0]) {
+          var a = skyStops[i - 1], b = skyStops[i], t = (m - a[0]) / (b[0] - a[0]);
+          var c = a[1].map(function (v, k) { return v + (b[1][k] - v) * t; });
+          return 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + c[3].toFixed(3) + ')';
         }
-      };
-      // No onerror handler by design: if the frames are not there yet the
-      // section simply stays static and the page reads as finished.
+      }
+      return 'rgba(226,199,138,.34)';
     }
+    function measure() {
+      sec.classList.add('pinned');
+      var fits = inner.offsetHeight < vh() - 60;
+      sec.classList.toggle('pinned', fits);
+      mode = fits ? 'pin' : 'flow';
+      if (!fits) { track.style.transform = 'none'; items.forEach(function (li) { li.classList.add('on'); }); }
+    }
+    resizers.push(measure);
+    var lastNow = -1;
+    scenes.push(function () {
+      if (mode !== 'pin') return;
+      var p = pinProgress(sec);
+      var m = clamp((p - 0.04) / 0.8, 0, 1) * 960;
+      var clockMin = (17 * 60 + m) % (24 * 60);
+      var hr = Math.floor(clockMin / 60), mn = Math.floor(clockMin % 60);
+      hh.setAttribute('transform', 'rotate(' + ((hr % 12) * 30 + mn * 0.5) + ' 100 100)');
+      mh.setAttribute('transform', 'rotate(' + (mn * 6) + ' 100 100)');
+      var h12 = hr % 12 || 12;
+      ctime.textContent = h12 + ':' + String(mn).padStart(2, '0') + (hr < 12 ? ' AM' : ' PM');
+      cday.textContent = m < 420 ? 'Tonight' : (m < 960 ? 'Tomorrow morning' : 'Tomorrow');
+      sky.style.setProperty('--sky', skyAt(m));
+      var now = -1;
+      items.forEach(function (li, i) { var on = m >= +li.dataset.t; li.classList.toggle('on', on); if (on) now = i; });
+      if (now !== lastNow) { items.forEach(function (li, i) { li.classList.toggle('now', i === now); }); lastNow = now; }
+      if (now >= 0) {
+        var cur = items[now];
+        var ty = Math.min(0, feed.clientHeight - (cur.offsetTop + cur.offsetHeight) - 12);
+        track.style.transform = 'translateY(' + ty + 'px)';
+      }
+    });
+    measure();
+  })();
 
-    addEventListener('scroll', function () { maybeStart(); update(); }, { passive: true });
-    addEventListener('resize', function () { if (live) resize(); });
-    maybeStart();
-  });
+  /* Background paper field: sheets tumble near the top of the page and settle
+     into orderly lanes further down. The page gets calmer as you read it. */
+  (function () {
+    var cv = document.getElementById('paper');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var hero = document.getElementById('story'), form = document.getElementById('start');
+    var W, H, dpr, sheets = [], N = innerWidth < 768 ? 14 : 30, t0 = performance.now();
+    function rnd(i, k) { var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); }
+    for (var i = 0; i < N; i++) sheets.push({ i: i, s: 0.7 + rnd(i, 1) * 0.8, cx: rnd(i, 2), cy: rnd(i, 3), a: 0.15 + rnd(i, 4) * 0.35, b: 0.12 + rnd(i, 5) * 0.3, ph: rnd(i, 6) * 6.28, w: (rnd(i, 7) - 0.5) * 0.8 });
+    function size() { dpr = Math.min(devicePixelRatio || 1, 1.5); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size(); resizers.push(size);
+    function order() {
+      var a = hero.offsetTop + hero.offsetHeight, b = form.offsetTop - H;
+      return clamp((scrollY - a + H * 0.3) / Math.max(1, b - a), 0, 1);
+    }
+    function draw(now) {
+      var t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, W, H);
+      var heroGone = hero.getBoundingClientRect().bottom < H * 0.98;
+      var formTop = form.getBoundingClientRect().top;
+      if (!heroGone || formTop < 0) return;
+      var o = ease(order()), cols = Math.max(4, Math.round(W / 220)), unit = remCache;
+      for (var k = 0; k < sheets.length; k++) {
+        var s = sheets[k];
+        var w = 34 * s.s * unit / 16, h = 44 * s.s * unit / 16;
+        var chx = s.cx * W + Math.sin(t * s.a + s.ph) * 60;
+        var chy = ((s.cy * H + t * 14 * s.b * 4) % (H + 120)) - 60 + Math.cos(t * s.b + s.ph) * 40;
+        var chr = t * s.w + s.ph;
+        var col = s.i % cols, row = Math.floor(s.i / cols), rows = Math.ceil(sheets.length / cols);
+        var span = (H + 160) / rows;
+        var orx = (col + 0.5) / cols * W;
+        var ory = H + 80 - (((row * span) + t * 22) % (H + 160));
+        var x = chx + (orx - chx) * o, y = chy + (ory - chy) * o, r = chr * (1 - o);
+        ctx.save(); ctx.translate(x, y); ctx.rotate(r);
+        ctx.globalAlpha = 0.9;
+        ctx.fillStyle = 'rgba(240,237,230,0.025)'; ctx.fillRect(-w / 2, -h / 2, w, h);
+        ctx.strokeStyle = 'rgba(201,165,90,' + (0.14 + 0.06 * o) + ')'; ctx.lineWidth = 1; ctx.strokeRect(-w / 2, -h / 2, w, h);
+        ctx.strokeStyle = 'rgba(201,165,90,0.09)';
+        for (var ln = 1; ln <= 3; ln++) { var ly = -h / 2 + ln * h / 5; ctx.beginPath(); ctx.moveTo(-w / 2 + 5, ly); ctx.lineTo(w / 2 - (ln === 3 ? w * 0.4 : 5), ly); ctx.stroke(); }
+        ctx.restore();
+      }
+    }
+    function rem() { return parseFloat(getComputedStyle(document.documentElement).fontSize) || 16; }
+    var remCache = rem(); resizers.push(function () { remCache = rem(); });
+    if (reduce) { scenes.push(function () { draw(t0); }); return; }
+    (function loop(now) { if (!document.hidden) draw(now); requestAnimationFrame(loop); })(t0);
+  })();
+
+  /* Cursor light. */
+  (function () {
+    if (reduce || !matchMedia('(pointer:fine)').matches) return;
+    var g = document.querySelector('.glow');
+    addEventListener('pointermove', function (e) {
+      g.classList.add('on'); g.style.setProperty('--mx', e.clientX + 'px'); g.style.setProperty('--my', e.clientY + 'px');
+    }, { passive: true });
+  })();
+
+  /* Nav flips to dark-on-light over the cream panel. */
+  (function () {
+    var nav = document.querySelector('nav'), light = document.getElementById('start');
+    scenes.push(function () { nav.classList.toggle('on-light', light.getBoundingClientRect().top <= 56 && light.getBoundingClientRect().bottom > 56); });
+  })();
+
+  kick();
 })();
 
-/* Nav flips to dark-on-light over the cream panel. */
-(function () {
-  var nav = document.querySelector('nav');
-  var light = document.querySelector('.morning');
-  if (!nav || !light) return;
-  function sync() {
-    nav.classList.toggle('on-light', light.getBoundingClientRect().top <= 56);
-  }
-  addEventListener('scroll', sync, { passive: true });
-  addEventListener('resize', sync);
-  sync();
-})();
-
-/* ── Intake ─────────────────────────────────────────────────── */
+/* Intake: on success the visitor lands on the thank-you page with their reference. */
 (function () {
   var form = document.getElementById('auditForm');
   var btn = document.getElementById('submitBtn');
   var status = document.getElementById('status');
   if (!form) return;
-
-  function say(msg, ok) {
-    status.textContent = msg;
-    status.className = 'status show ' + (ok ? 'ok' : 'err');
-  }
-
+  function say(msg) { status.textContent = msg; status.className = 'status show err'; }
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var data = Object.fromEntries(new FormData(form).entries());
-    if (data.fax) return;                 // honeypot
+    if (data.fax) return;
     delete data.fax;
     data.source = 'Streamline page';
-
-    if (!data.name || !data.email || !data.company) {
-      say('Name, business name and email, then we are set.', false);
-      return;
-    }
-
+    if (!data.name || !data.email || !data.company) { say('Your name, business name and email, then we are set.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { say('That email address does not look quite right.'); return; }
     btn.disabled = true;
     var original = btn.textContent;
     btn.textContent = 'Sending';
-
     try {
-      var r = await fetch('/api/streamline-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      var r = await fetch('/api/streamline-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       var j = await r.json();
       if (j && j.ok) {
-        form.querySelectorAll('input,textarea').forEach(function (el) { el.value = ''; });
-        say('Got it. Daryl will come back to you personally, usually the same day.', true);
-        btn.textContent = 'Sent';
+        var first = String(data.name).trim().split(/\s+/)[0];
+        location.href = '/streamline/thanks?ref=' + encodeURIComponent(j.leadId || '') + '&n=' + encodeURIComponent(first);
         return;
       }
-      say((j && j.error) || 'That did not send. Email daryl@yetigroove.com and it will get there.', false);
+      say((j && j.error) || 'That did not send. Email daryl@yetigroove.com and it will get there.');
     } catch (err) {
-      say('That did not send. Email daryl@yetigroove.com and it will get there.', false);
+      say('That did not send. Email daryl@yetigroove.com and it will get there.');
     }
     btn.disabled = false;
     btn.textContent = original;

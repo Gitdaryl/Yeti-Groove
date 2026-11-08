@@ -1,4 +1,5 @@
 import { put } from '@vercel/blob';
+import { randomUUID } from 'node:crypto';
 import {
   sendEmail, sendSMS, emailShell, esc, ADMIN_EMAIL,
 } from './_lib.js';
@@ -36,7 +37,8 @@ export default async function handler(req, res) {
   console.log('[STREAMLINE-LEAD]', JSON.stringify(lead));
   let persisted = false;
   try {
-    await put(`leads/${leadId}/lead.json`, JSON.stringify(lead, null, 2), {
+    // Public store, so the path carries a random token: a dated id alone is guessable.
+    await put(`leads/${leadId}-${randomUUID()}/lead.json`, JSON.stringify(lead, null, 2), {
       access: 'public',
       addRandomSuffix: false,
       contentType: 'application/json',
@@ -79,7 +81,7 @@ export default async function handler(req, res) {
   const clientHtml = emailShell('We have your note', `
     <p style="margin:0 0 14px;font-size:15px;color:#E6F4FB;line-height:1.7;">${esc(String(name).split(' ')[0])},</p>
     <p style="margin:0 0 14px;font-size:15px;color:#E6F4FB;line-height:1.7;">
-      Thank you for the note about ${esc(company)}. Daryl reads every one of these personally and will come back to you, usually the same day, with a couple of questions about how the work actually moves through your shop.
+      Thank you for the note about ${esc(company)}. We read every one of these ourselves and will come back to you, usually the same day, with a couple of questions about how the work actually moves through your shop. Your reference is ${leadId}.
     </p>
     <p style="margin:0 0 14px;font-size:15px;color:#E6F4FB;line-height:1.7;">
       Nothing is automated on our side of this conversation. That part comes later, and only where it earns its place.
@@ -93,6 +95,13 @@ export default async function handler(req, res) {
   ]);
 
   const settled = (r) => (r.status === 'fulfilled' ? Boolean(r.value?.ok) : false);
+
+  // Fail loud: if the lead was neither saved nor emailed to us, the visitor
+  // must not see a thank-you page. The log line above is the only copy.
+  if (!persisted && !settled(adminMail)) {
+    console.error('[STREAMLINE-LEAD-UNDELIVERED]', leadId);
+    return res.status(500).json({ ok: false, leadId, error: 'That did not reach us. Email daryl@yetigroove.com and it will get there.' });
+  }
 
   return res.status(200).json({
     ok: true,

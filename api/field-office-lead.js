@@ -1,4 +1,5 @@
 import { put } from '@vercel/blob';
+import { randomUUID } from 'node:crypto';
 import {
   sendEmail, sendSMS, emailShell, esc, ADMIN_EMAIL,
 } from './_lib.js';
@@ -107,7 +108,7 @@ export default async function handler(req, res) {
 
   let persisted = false;
   try {
-    await put(`leads/${lead.leadId}/lead.json`, JSON.stringify(lead, null, 2), {
+    await put(`leads/${lead.leadId}-${randomUUID()}/lead.json`, JSON.stringify(lead, null, 2), {
       access: 'public',
       addRandomSuffix: true,
       contentType: 'application/json',

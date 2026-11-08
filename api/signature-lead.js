@@ -1,4 +1,5 @@
 import { put } from '@vercel/blob';
+import { randomUUID } from 'node:crypto';
 import {
   sendEmail, sendSMS, emailShell, esc, ADMIN_EMAIL, logPitchEvent,
 } from './_lib.js';
@@ -49,7 +50,7 @@ export default async function handler(req, res) {
   console.log(legacy ? '[LEGACY-WAITLIST]' : '[SIGNATURE-LEAD]', JSON.stringify(lead));
   let persisted = false;
   try {
-    await put(`leads/${leadId}/lead.json`, JSON.stringify(lead, null, 2), {
+    await put(`leads/${leadId}-${randomUUID()}/lead.json`, JSON.stringify(lead, null, 2), {
       access: 'public',
       addRandomSuffix: false,
       contentType: 'application/json',
