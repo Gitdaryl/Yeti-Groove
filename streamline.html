@@ -346,6 +346,14 @@ a.path:hover .go{text-decoration:underline;text-underline-offset:4px}
 .qa details[open] summary::after{transform:rotate(-135deg) translateY(-25%)}
 .qa p{padding-bottom:1.2rem;color:var(--muted);max-width:60ch}
 
+/* QUESTIONS LINKS */
+.asks{margin-top:clamp(3rem,6vw,5rem);max-width:56rem}
+.asks ul{list-style:none;display:grid;gap:0;margin-top:1rem;border-top:1px solid var(--line)}
+@media(min-width:760px){.asks ul{grid-template-columns:1fr 1fr;column-gap:2.4rem}}
+.asks a{display:flex;align-items:center;min-height:52px;padding:.7rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--cream);font-size:1rem}
+.asks a:hover{color:var(--gold2)}
+.asks a::after{content:'';margin-left:auto;flex:none;width:.5rem;height:.5rem;border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);transform:rotate(-45deg)}
+
 /* MORNING (form) */
 .morning{background:var(--cream);color:var(--ink);padding:clamp(4.5rem,9vw,9rem) 0;position:relative;z-index:2}
 .morning .grid{display:grid;gap:3rem}
@@ -720,6 +728,18 @@ footer a{color:var(--gold);text-decoration:none}
       <details><summary>Is this an AI thing?</summary><p>Some of it, where it earns its place. Most of it is more boring than that: connecting two things that should already have been connected. The goal is fewer hours, not more technology.</p></details>
       <details><summary>Who owns what you build?</summary><p>Your information is yours, always. The fix we switch on during the check is yours to keep whether or not we work together again.</p></details>
       <details><summary>What if you find nothing?</summary><p>Then we say so, you keep the fix we switched on during the day, and we do not send you a quote for work that would not pay for itself.</p></details>
+    </div>
+
+    <div class="asks" data-reveal>
+      <p class="eyebrow" style="margin-bottom:.4rem">Questions owners ask us</p>
+      <ul>
+        <li><a href="/questions/why-isnt-my-business-showing-up-on-google-maps">Why isn't my business showing up on Google Maps?</a></li>
+        <li><a href="/questions/how-to-get-my-business-on-chatgpt">How do I get my business to show up on ChatGPT?</a></li>
+        <li><a href="/questions/how-to-get-more-google-reviews">How do I get more Google reviews without being pushy?</a></li>
+        <li><a href="/questions/how-to-get-more-leads-contractor">How do I get more leads for my contracting business?</a></li>
+        <li><a href="/questions/what-happens-when-customers-call-after-hours">What happens when a customer calls after hours?</a></li>
+        <li><a href="/questions/how-to-run-my-small-business-more-efficiently">How do I run my small business more efficiently?</a></li>
+      </ul>
     </div>
   </div>
 </section>

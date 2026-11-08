@@ -57,6 +57,14 @@
       "destination": "/platform.html"
     },
     {
+      "source": "/questions",
+      "destination": "/questions.html"
+    },
+    {
+      "source": "/questions/:slug",
+      "destination": "/questions/:slug.html"
+    },
+    {
       "source": "/streamline/sample",
       "destination": "/streamline-sample.html"
     },
