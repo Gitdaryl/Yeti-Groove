@@ -57,6 +57,10 @@
       "destination": "/platform.html"
     },
     {
+      "source": "/streamline/sample",
+      "destination": "/streamline-sample.html"
+    },
+    {
       "source": "/streamline/thanks",
       "destination": "/streamline-thanks.html"
     },

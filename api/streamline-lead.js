@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
 
   const {
-    name, email, phone, company, trade, headcount,
+    name, email, phone, company, trade, headcount, website,
     twice, waiting, inhead, software, message, source,
   } = req.body || {};
 
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   const lead = {
     leadId,
     receivedAt: new Date().toISOString(),
-    name, email, phone, company, trade, headcount,
+    name, email, phone, company, trade, headcount, website,
     twice, waiting, inhead, software, message,
     source: source || 'Streamline page',
   };
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
         </div>`
       : '';
 
-  const adminHtml = emailShell(`Operations audit inquiry ${leadId}`, `
+  const adminHtml = emailShell(`Lost Customer Check inquiry ${leadId}`, `
     <table style="width:100%;border-collapse:collapse;">
       ${row('Lead', `<strong>${leadId}</strong>`)}
       ${row('Name', esc(name))}
@@ -70,6 +70,7 @@ export default async function handler(req, res) {
       ${row('Headcount', esc(headcount))}
       ${row('Email', `<a href="mailto:${esc(email)}" style="color:#1ABFE0;">${esc(email)}</a>`)}
       ${row('Phone', esc(phone))}
+      ${row('Website', esc(website))}
       ${row('Software', esc(software))}
       ${row('Source', esc(lead.source))}
     </table>
@@ -89,9 +90,9 @@ export default async function handler(req, res) {
     <p style="margin:0;font-size:15px;color:#E6F4FB;line-height:1.7;">Yeti Groove Studio</p>`);
 
   const [adminMail, clientMail, sms] = await Promise.allSettled([
-    sendEmail({ to: ADMIN_EMAIL, subject: `Operations audit: ${company}`, html: adminHtml, replyTo: email }),
+    sendEmail({ to: ADMIN_EMAIL, subject: `Lost Customer Check: ${company}`, html: adminHtml, replyTo: email }),
     sendEmail({ to: email, subject: 'Yeti Groove: we have your note', html: clientHtml, replyTo: ADMIN_EMAIL }),
-    sendSMS(`YG AUDIT LEAD: ${name} (${company})${trade ? ` - ${trade}` : ''}. ${email}`),
+    sendSMS(`YG CHECK LEAD: ${name} (${company})${trade ? ` - ${trade}` : ''}. ${email}`),
   ]);
 
   const settled = (r) => (r.status === 'fulfilled' ? Boolean(r.value?.ok) : false);

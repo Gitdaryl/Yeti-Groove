@@ -3,16 +3,28 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Operations Audit | YetiGroove Studio</title>
-<meta name="description" content="A fixed-fee look at what your business still does by hand. One day inside the business, a plain-language findings document, and one automation built and running before we leave." />
+<title>The Lost Customer Check for Michigan Small Businesses | YetiGroove</title>
+<meta name="description" content="Why aren't customers finding you, and where are your hours going? We check how your business shows up on Google, how fast you answer, and what is still done by hand. $750, counted toward the fix." />
 <link rel="canonical" href="https://www.yetigroove.com/streamline" />
-<meta property="og:title" content="Same nine o'clock. Different morning." />
-<meta property="og:description" content="A fixed-fee operations audit for small businesses that are running on somebody staying late." />
+<meta property="og:title" content="The Lost Customer Check" />
+<meta property="og:description" content="We call you after hours. Will anyone pick up? A one-day check of how your business gets found, answers customers and handles the work." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yetigroove.com/streamline" />
 <meta property="og:image" content="https://www.yetigroove.com/media/streamline/story/poster.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="/brand/yeti-head-256.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Service","@id":"https://www.yetigroove.com/streamline#service","name":"The Lost Customer Check","serviceType":"Small business marketing and operations audit","description":"A one-day check of how a small business gets found online, how fast it answers customers, and what work is still done by hand. Includes an after-hours call and form test, a written report ranked by payoff, and one fix built and running before we leave.","provider":{"@type":"Organization","name":"YetiGroove Studio","url":"https://www.yetigroove.com/","email":"daryl@yetigroove.com","address":{"@type":"PostalAddress","addressRegion":"MI","addressCountry":"US"}},"areaServed":[{"@type":"State","name":"Michigan"},{"@type":"AdministrativeArea","name":"Lenawee County, MI"},{"@type":"AdministrativeArea","name":"Jackson County, MI"},{"@type":"AdministrativeArea","name":"Hillsdale County, MI"},{"@type":"AdministrativeArea","name":"Washtenaw County, MI"},{"@type":"AdministrativeArea","name":"Monroe County, MI"},{"@type":"City","name":"Toledo, OH"}],"offers":{"@type":"Offer","price":"750","priceCurrency":"USD","description":"Fixed fee. Counts toward any build of $1,500 or more that starts within 60 days."}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this an audit, like a tax audit?","acceptedAnswer":{"@type":"Answer","text":"No. Nobody looks at your books or your taxes. We look at how customers find you, how fast they get an answer, and where the hours go once they are customers."}},
+{"@type":"Question","name":"Can't I check this myself?","acceptedAnswer":{"@type":"Answer","text":"Some of it, yes, and every finding in the report says how. The part owners cannot easily do is be their own customer: calling after hours, filling in the form, and waiting to see who answers."}},
+{"@type":"Question","name":"Where do you work?","acceptedAnswer":{"@type":"Answer","text":"The studio is in the Irish Hills lake country of Michigan. We come on site across Lenawee, Jackson, Hillsdale, Washtenaw and Monroe counties and the Toledo area. Anywhere else, the day runs on a video call, and the found and answered checks work from anywhere."}},
+{"@type":"Question","name":"Are you going to tell us to replace our software?","acceptedAnswer":{"@type":"Answer","text":"Almost certainly not. Ripping out a system your people already know is expensive and usually the wrong answer. Most of what we find lives in the gaps between the tools you already pay for."}},
+{"@type":"Question","name":"What if you find nothing?","acceptedAnswer":{"@type":"Answer","text":"Then we say so, you keep the fix we switched on during the day, and we do not send you a quote for work that would not pay for itself."}}
+]}
+]}
+</script>
 <link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/fonts/fonts.css" />
@@ -96,6 +108,8 @@ nav.on-light .cta{color:#7A5F26;border-color:rgba(20,18,14,.28)}
 .beat h1,.beat h2{margin:0;text-shadow:0 1px 2px rgba(12,10,8,.55),0 2px 26px rgba(12,10,8,.75)}
 .beat h2{font-size:clamp(2.1rem,4.2vw,6.4rem);max-width:16ch}
 .beat .eyebrow{text-shadow:0 1px 8px rgba(12,10,8,.9)}
+.beat .sub{margin-top:1.4rem;max-width:40rem;font-size:clamp(1.05rem,1.3vw,1.3rem);line-height:1.5;color:var(--cream);text-shadow:0 1px 2px rgba(12,10,8,.7),0 2px 18px rgba(12,10,8,.85)}
+.beat .sub strong{color:var(--gold2);font-weight:500}
 
 /* INTRO */
 .intro .grid{display:grid;gap:2.5rem;align-items:end}
@@ -260,6 +274,68 @@ input[type=range]:focus-visible{outline:2px solid var(--gold);outline-offset:4px
 .path .go{display:inline-block;margin-top:1rem;color:var(--gold);font-size:.85rem;letter-spacing:.08em}
 a.path:hover .go{text-decoration:underline;text-underline-offset:4px}
 
+/* THREE LEAKS */
+.leaks .head{display:grid;gap:1.4rem;align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
+@media(min-width:900px){.leaks .head{grid-template-columns:1.1fr 1fr;gap:5rem}}
+.leak-grid{display:grid;gap:1.2rem}
+@media(min-width:900px){.leak-grid{grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,2rem)}}
+.leak{position:relative;background:#100F0C;border:1px solid var(--line);border-radius:4px;padding:clamp(1.5rem,2.4vw,2.4rem);display:flex;flex-direction:column;gap:.9rem}
+.leak.hook{border-color:rgba(201,165,90,.55);background:linear-gradient(160deg,rgba(201,165,90,.09),#100F0C 60%)}
+.leak .k{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.leak h3{font-size:clamp(1.4rem,1.9vw,2rem)}
+.leak .q{color:var(--cream);font-size:1.02rem;line-height:1.45}
+.leak ul{list-style:none;display:grid;gap:.55rem;margin-top:.3rem;border-top:1px solid var(--line);padding-top:1rem}
+.leak li{padding-left:1.4rem;position:relative;color:var(--muted);font-size:.95rem;line-height:1.5}
+.leak li::before{content:'';position:absolute;left:.1rem;top:.55em;width:.45rem;height:.45rem;border:1.5px solid var(--gold);transform:rotate(45deg)}
+.leak .flag{position:absolute;top:1.1rem;right:1.1rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:.2rem .5rem;border-radius:2px}
+
+/* MYSTERY SHOP */
+.shop .grid{display:grid;gap:3rem;align-items:center}
+@media(min-width:960px){.shop .grid{grid-template-columns:1fr 1.05fr;gap:5rem}}
+.shop h2{max-width:15ch}
+.tlog{background:#100F0C;border:1px solid var(--line);border-radius:4px;padding:clamp(1.2rem,2vw,2rem)}
+.tlog .cap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-bottom:.9rem;border-bottom:1px solid var(--line)}
+.tlog ol{list-style:none}
+.tlog li{display:grid;grid-template-columns:5.6rem 1fr auto;gap:1rem;align-items:center;padding:.95rem 0;border-bottom:1px solid var(--line)}
+.tlog li:last-child{border-bottom:0}
+.tlog time{font-family:var(--serif);color:var(--gold);font-variant-numeric:tabular-nums;font-size:1rem}
+.tlog span{font-size:.95rem;line-height:1.45}
+@media(max-width:520px){.tlog li{grid-template-columns:1fr auto}.tlog time{grid-column:1/-1;margin-bottom:-.6rem}}
+.chip{font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .6rem;border-radius:999px;white-space:nowrap}
+.chip.good{background:rgba(110,190,140,.14);color:#8FD3A8}
+.chip.warn{background:rgba(201,165,90,.16);color:var(--gold2)}
+.chip.bad{background:rgba(220,110,95,.15);color:#F0A194}
+
+/* REPORT PREVIEW: set in the report's own type, so it reads as the document */
+.rprev{margin-top:clamp(3rem,6vw,5rem);background:#F4F7F7;color:#10303A;border-radius:6px;padding:clamp(1.5rem,3.5vw,3rem);font-family:'Atkinson Hyperlegible','Helvetica Neue',Arial,sans-serif}
+.rprev .top{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem 2rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.rprev .rk{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1C6B7A}
+.rprev h3{font-family:'Bricolage Grotesque','Avenir Next','Segoe UI',sans-serif;font-weight:800;font-size:clamp(1.6rem,2.6vw,2.4rem);letter-spacing:-.01em;line-height:1.1;margin-top:.3rem}
+.rprev .cards{display:grid;gap:1rem}
+@media(min-width:700px){.rprev .cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.rprev .cards{grid-template-columns:repeat(4,1fr)}}
+.rprev .card{background:#fff;border:1.5px solid #D5E0E2;border-radius:14px;padding:1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.rprev .card b{font-family:'Bricolage Grotesque','Avenir Next','Segoe UI',sans-serif;font-weight:600;font-size:1.15rem}
+.rprev .card p{font-size:.95rem;color:#566B72;line-height:1.5}
+.rprev .score{display:grid;gap:.45rem;margin-top:.3rem}
+.rprev .score div{display:flex;justify-content:space-between;align-items:center;font-size:.92rem}
+.rchip{font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:999px}
+.rchip.g{background:#E2F2E8;color:#2E7D4F}.rchip.a{background:#FBEFD5;color:#8A5800}.rchip.r{background:#F8E1DF;color:#B23A35}
+.rprev a.see{display:inline-flex;align-items:center;min-height:48px;padding:0 1.3rem;border-radius:999px;background:#1C6B7A;color:#fff;text-decoration:none;font-weight:700;font-size:.95rem}
+.rprev a.see:hover{background:#155663}
+
+/* THE MENU */
+.menu{display:grid;gap:1.2rem;margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:900px){.menu{grid-template-columns:repeat(3,1fr)}}
+.mcol{border-top:1px solid rgba(201,165,90,.5);padding-top:1.2rem}
+.mcol .k{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.mcol h3{font-size:clamp(1.3rem,1.7vw,1.8rem);margin:.5rem 0 1rem}
+.mcol ul{list-style:none;display:grid}
+.mcol li{padding:.85rem 0;border-bottom:1px solid var(--line);display:grid;gap:.2rem}
+.mcol li strong{font-weight:500;font-size:1rem}
+.mcol li span{color:var(--muted);font-size:.9rem;line-height:1.45}
+.mcol a{color:var(--gold);text-underline-offset:3px}
+
 /* CARE + FAQ */
 .care{margin-top:clamp(3rem,6vw,5rem);border-left:2px solid var(--gold);padding:.3rem 0 .3rem 1.6rem;max-width:48rem}
 .qa{margin-top:clamp(2.5rem,5vw,4rem);max-width:56rem}
@@ -325,7 +401,7 @@ footer a{color:var(--gold);text-decoration:none}
   <span class="links">
     <a href="/field-office">Field Office</a>
     <a href="/signature">Signature</a>
-    <a class="cta" href="#start">Book the audit</a>
+    <a class="cta" href="#start">Book the check</a>
   </span>
 </nav>
 
@@ -338,12 +414,13 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="shade"></div>
     <div class="copy"><div class="inner">
       <div class="beat" data-in="0.00" data-out="0.30">
-        <p class="eyebrow">Operations Audit</p>
+        <p class="eyebrow">The Lost Customer Check</p>
         <h1>Nine in the morning, and you're already doing the part <em>a computer should have done.</em></h1>
+        <p class="sub">A one-day check of how your business gets found, answers customers and handles the work. <strong>$750, counted toward the fix.</strong></p>
       </div>
       <div class="beat" data-in="0.36" data-out="0.66">
-        <p class="eyebrow">What we actually do</p>
-        <h2>None of it is hard. It was just <em>never routed.</em></h2>
+        <p class="eyebrow">Where they go</p>
+        <h2>A missed call. A slow reply. <em>A job typed in twice.</em></h2>
       </div>
       <div class="beat" data-in="0.72" data-out="1.01">
         <p class="eyebrow">The point of all of it</p>
@@ -353,12 +430,71 @@ footer a{color:var(--gold);text-decoration:none}
   </div>
 </section>
 
-<section class="intro pad">
+<section class="leaks pad" id="leaks">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-reveal>Where customers go missing</p>
+        <h2 class="split" data-split>Customers leak out <em>in three places.</em></h2>
+      </div>
+      <p class="lede" data-reveal>We check all three, in the order your customers meet them. Most owners only ever look at one, and it is rarely the one that is costing them.</p>
+    </div>
+    <div class="leak-grid">
+      <article class="leak" data-reveal>
+        <p class="k">Leak one</p>
+        <h3>Getting found</h3>
+        <p class="q">Can a new customer find you, and trust what they see?</p>
+        <ul>
+          <li>Your Google profile, your spot on the map and your reviews</li>
+          <li>Your website on a phone: what, where and how to call, in five seconds</li>
+          <li>Whether ChatGPT and Google's AI answers name you</li>
+          <li>What the top business in your town has that you don't</li>
+        </ul>
+      </article>
+      <article class="leak hook" data-reveal>
+        <span class="flag">The test</span>
+        <p class="k">Leak two</p>
+        <h3>Getting answered</h3>
+        <p class="q">When they reach out, does anyone answer, and how fast?</p>
+        <ul>
+          <li>We call during the day, and again at seven at night</li>
+          <li>We fill in your web form and time the reply</li>
+          <li>We message your Facebook page and your Google profile</li>
+          <li>We ask for a price and count the days until it arrives</li>
+        </ul>
+      </article>
+      <article class="leak" data-reveal>
+        <p class="k">Leak three</p>
+        <h3>Getting it done</h3>
+        <p class="q">Once they're a customer, how much is still done by hand?</p>
+        <ul>
+          <li>We follow one job from the first call to the final invoice</li>
+          <li>Every retype, re-send and chase gets written down</li>
+          <li>The steps that only work because somebody remembers them</li>
+          <li>What your software does, next to what you pay it to do</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="shop pad" style="padding-top:0">
   <div class="wrap grid">
-    <h2 class="split" data-split>Nobody chose these jobs. <em>They piled up.</em></h2>
-    <div data-reveal>
-      <p class="lede"><strong>A second system that needs the same details typed in again.</strong> A quote only one person can write, so it goes out after dinner. A customer asking where their job stands for the fourth time today.</p>
-      <p class="lede">None of it was in the business plan. It arrived one workaround at a time, and now it is the reason somebody stays late.</p>
+    <div>
+      <p class="eyebrow" data-reveal>The test nobody runs on themselves</p>
+      <h2 class="split" data-split>We call you after hours. <em>Will anyone pick up?</em></h2>
+      <p class="lede" data-reveal style="margin-top:1.4rem"><strong>Before we ever meet, we become your customer.</strong> We call, we fill in the form, we send the message. Then we show you what happened, minute by minute, next to the business that ranks above you.</p>
+      <p class="lede" data-reveal>Owners argue with a score. Nobody argues with a full voicemail box at seven at night.</p>
+    </div>
+    <div class="tlog" data-reveal>
+      <p class="cap"><span>From a sample report</span><span>Deck builder, 3 crews</span></p>
+      <ol>
+        <li><time>Tue 10:12</time><span>Called the main line. Answered on the second ring, name and number taken.</span><b class="chip good">Good</b></li>
+        <li><time>Tue 19:05</time><span>Called after hours. Voicemail box full.</span><b class="chip bad">Lost</b></li>
+        <li><time>Tue 19:20</time><span>Sent the website form.</span><b class="chip warn">Waiting</b></li>
+        <li><time>Tue 19:24</time><span>Same form sent to the top-ranked competitor. Texted back in 4 minutes.</span><b class="chip bad">Lost to them</b></li>
+        <li><time>Wed 21:40</time><span>Your form answered by email, 26 hours later.</span><b class="chip bad">Too slow</b></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -399,31 +535,46 @@ footer a{color:var(--gold);text-decoration:none}
 
 <section class="audit pad">
   <div class="wrap">
-    <p class="eyebrow" data-reveal>The audit</p>
-    <h2 class="split" data-split>One day, one document, and <em>one thing already running.</em></h2>
-    <p class="lede" data-reveal style="margin-top:1.4rem">We spend a day inside how your business really runs, which is never quite how the software says it runs. We follow one job from the first phone call to the final invoice and write down every place a person retypes, re-sends or remembers something.</p>
+    <p class="eyebrow" data-reveal>The check</p>
+    <h2 class="split" data-split>One day, one report, and <em>one fix already running.</em></h2>
+    <p class="lede" data-reveal style="margin-top:1.4rem">We check how you get found and answered before we arrive. Then we spend a day inside how your business really runs, which is never quite how the software says it runs, and write down every place a person retypes, re-sends or remembers something.</p>
 
     <ol class="steps" data-progress>
-      <li><p class="when">Before</p><h3>Your three answers</h3><p>The short form at the bottom of this page, then a quick call so we arrive knowing where it hurts.</p></li>
-      <li><p class="when">The day</p><h3>We follow one job</h3><p>On site if you are near the lakes, on a call if you are not. First call to final invoice.</p></li>
-      <li><p class="when">Before we leave</p><h3>One automation, switched on</h3><p>Not a recommendation. A working thing, live, that you keep either way.</p></li>
-      <li><p class="when">After</p><h3>The findings, in plain language</h3><p>What is costing you hours, what can be automated this month, and what should be left alone.</p></li>
+      <li><p class="when">First</p><h3>Your three answers</h3><p>The short form at the bottom of this page, then a quick call so we know where it hurts.</p></li>
+      <li><p class="when">Before we arrive</p><h3>We become your customer</h3><p>We look you up, call, message and fill in your forms the way a stranger would, and keep the receipts.</p></li>
+      <li><p class="when">The day</p><h3>We follow one job</h3><p>On site across south-east Michigan, on a call if you are further out. Before we leave, one fix is switched on and running.</p></li>
+      <li><p class="when">After</p><h3>Your report</h3><p>What is costing you customers and hours, ranked by payoff, with how to fix each one yourself.</p></li>
     </ol>
 
     <div class="offer" data-reveal>
       <div>
-        <h3>Everything the audit includes</h3>
+        <h3>Everything the check includes</h3>
         <ul>
+          <li><strong>All three leaks checked</strong>: getting found, getting answered, getting it done.</li>
+          <li><strong>The after-hours test</strong>, written up minute by minute, next to your top competitor.</li>
           <li><strong>A day inside the business</strong>, watching real work, not a slideshow about it.</li>
-          <li><strong>A written findings document</strong>, ranked by hours returned per month, no jargon.</li>
-          <li><strong>One automation built and running</strong> before we finish the day.</li>
-          <li><strong>A quote for the rest</strong>, only if there is a rest worth doing.</li>
+          <li><strong>One fix built and running</strong> before we finish the day. Yours to keep either way.</li>
+          <li><strong>A plain-language report</strong>, ranked by payoff, with a menu of only the fixes you need.</li>
         </ul>
       </div>
       <div class="price">
         <p class="fig">$750</p>
-        <p class="note">Fixed. Credited in full against the first build, so if we go ahead the audit costs nothing.</p>
-        <a class="btn" href="#start">Book the audit</a>
+        <p class="note">Fixed. It counts toward any build of $1,500 or more that starts within 60 days, so if we go ahead the check costs nothing.</p>
+        <a class="btn" href="#start">Book the check</a>
+      </div>
+    </div>
+
+    <div class="rprev" data-reveal>
+      <div class="top">
+        <div><p class="rk">What lands in your inbox</p><h3>The report reads like this.</h3></div>
+        <a class="see" href="/streamline/sample">See a full sample report</a>
+      </div>
+      <div class="cards">
+        <div class="card"><b>One-page score</b><p>The three leaks at a glance, plus the after-hours timeline.</p>
+          <div class="score"><div>Getting found <span class="rchip a">Amber</span></div><div>Getting answered <span class="rchip r">Red</span></div><div>Getting it done <span class="rchip a">Amber</span></div></div></div>
+        <div class="card"><b>Findings, ranked</b><p>What we saw, what it costs in calls or hours a month, and how to fix it yourself. Biggest payoff first.</p></div>
+        <div class="card"><b>Your menu</b><p>Only the fixes for your red and amber findings, each with a set price and its monthly care.</p></div>
+        <div class="card"><b>Leave it alone</b><p>The things that look broken but are not worth fixing yet. We tell you that too.</p></div>
       </div>
     </div>
   </div>
@@ -445,7 +596,7 @@ footer a{color:var(--gold);text-decoration:none}
         <p id="r-weeks">That is 15 full work weeks.</p>
         <p class="money" id="r-money">$18,000</p>
         <p>a year, spent on work nobody chose.</p>
-        <p class="verdict" id="r-verdict">Win back a quarter of it and that is $4,500 a year. The audit is $750, and it is credited back if we build.</p>
+        <p class="verdict" id="r-verdict">Win back a quarter of it and that is $4,500 a year. The check is $750, and it counts toward the build if we go ahead.</p>
       </div>
     </div>
   </div>
@@ -519,27 +670,56 @@ footer a{color:var(--gold);text-decoration:none}
 
 <section class="after pad" style="padding-top:0">
   <div class="wrap">
-    <p class="eyebrow" data-reveal>After the audit</p>
-    <h2 class="split" data-split>What usually <em>comes next.</em></h2>
-    <p class="lede" data-reveal style="margin-top:1.2rem">The findings decide this, not us. These are the four builds the audit points to most often.</p>
-    <div class="paths">
-      <a class="path" href="/field-office" data-reveal><p class="k">For trades</p><h3>A crew and office app</h3><p>Leads, jobs, photos, crews, texts and signatures in one place, built around how your trade actually works.</p><span class="go">See Field Office</span></a>
-      <div class="path" data-reveal><p class="k">For anyone with a phone</p><h3>A front desk that never closes</h3><p>Calls and messages answered after hours, and the details sent to the right person instead of a voicemail box.</p></div>
-      <div class="path" data-reveal><p class="k">For the office</p><h3>Paperwork that files itself</h3><p>Quotes, contracts, permits and photos land on the right job without anyone retyping them.</p></div>
-      <div class="path" data-reveal><p class="k">For marketing</p><h3>Posting that keeps going</h3><p>Content scheduled weeks ahead at a pace your team can actually keep up, so the account never goes quiet.</p></div>
+    <p class="eyebrow" data-reveal>After the check</p>
+    <h2 class="split" data-split>Your report comes <em>with a menu.</em></h2>
+    <p class="lede" data-reveal style="margin-top:1.2rem">Every finding points to a fix on this list. You only see the ones you need, each with a set price and its monthly care, quoted in your report. Or you fix it yourself: every finding says how.</p>
+    <div class="menu" data-reveal>
+      <div class="mcol">
+        <p class="k">Leak one</p><h3>Getting found</h3>
+        <ul>
+          <li><strong>Google profile tune-up</strong><span>Categories, services, photos and hours set the way Google reads them.</span></li>
+          <li><strong>A review engine</strong><span>Tap cards and a text after each job, so happy customers actually leave one.</span></li>
+          <li><strong>Website fixes or a new site</strong><span>Fast on a phone, a page for each service and town, one tap to call.</span></li>
+          <li><strong>Answers to the questions people search</strong><span>Short, straight pages that get you found, and named by AI search.</span></li>
+          <li><strong>Posting that keeps going</strong><span>Scheduled weeks ahead, so your Google and social accounts never go quiet.</span></li>
+        </ul>
+      </div>
+      <div class="mcol">
+        <p class="k">Leak two</p><h3>Getting answered</h3>
+        <ul>
+          <li><strong>Every lead saved and texted to you</strong><span>From the website form to your phone, so none quietly vanish.</span></li>
+          <li><strong>Missed call text-back</strong><span>Miss a call and the customer gets a text in seconds, not a voicemail.</span></li>
+          <li><strong>A voice that answers after hours</strong><span>Takes their name, number and what they need, and sends it over.</span></li>
+          <li><strong>A website helper</strong><span>Answers the common questions and takes the lead, day or night.</span></li>
+          <li><strong>The morning summary</strong><span>What came in overnight and who needs a call, before the coffee.</span></li>
+        </ul>
+      </div>
+      <div class="mcol">
+        <p class="k">Leak three</p><h3>Getting it done</h3>
+        <ul>
+          <li><strong>Two tools that finally talk</strong><span>Typed once, and it shows up everywhere it is needed.</span></li>
+          <li><strong>Paperwork that files itself</strong><span>Contracts signed by text, photos and permits land on the right job.</span></li>
+          <li><strong>An office helper</strong><span>Staff ask about any job in plain words, instead of calling the owner.</span></li>
+          <li><strong>A crew and office app</strong><span>Leads, jobs, crews, texts and signatures in one place, for the trades. <a href="/field-office">See Field Office</a></span></li>
+        </ul>
+      </div>
     </div>
 
     <div class="care" data-reveal>
       <p class="eyebrow" style="margin-bottom:.7rem">The part most people skip</p>
-      <p class="lede"><strong>Anything we leave running, we watch.</strong> Automations break quietly. A password expires, a service changes a rule, and something that worked for eight months stops without telling anybody. So every system we install comes with a monthly care plan and a nightly health check that tells us first.</p>
+      <p class="lede"><strong>Anything we leave running, we watch.</strong> Automations break quietly. A password expires, a service changes a rule, and something that worked for eight months stops without telling anybody. So every system we install comes with a monthly care plan, quoted up front next to the build, and a nightly health check that tells us first.</p>
+      <p class="lede">The $750 counts toward any build of $1,500 or more that starts within 60 days. It is never taken off the care plan, because the care plan is what keeps the fix working.</p>
     </div>
 
     <div class="qa" data-reveal>
+      <details><summary>Is this an audit, like a tax audit?</summary><p>No. Nobody looks at your books or your taxes. We look at how customers find you, how fast they get an answer, and where the hours go once they are customers.</p></details>
+      <details><summary>Can't I check this myself?</summary><p>Some of it, yes, and every finding in the report says how. The part owners cannot easily do is be their own customer: calling after hours, filling in the form, and waiting to see who answers.</p></details>
+      <details><summary>Where do you work?</summary><p>The studio is in the Irish Hills lake country of Michigan. We come on site across Lenawee, Jackson, Hillsdale, Washtenaw and Monroe counties and the Toledo area. Anywhere else, the day runs on a video call, and the found and answered checks work from anywhere.</p></details>
       <details><summary>We are not a tech company. We make things.</summary><p>Good. The businesses that gain the most are the least technical ones, because nobody has ever looked at their back office with fresh eyes. Contractors, fabricators, marinas, restaurants. If you can walk us through a job, we can find the leaks.</p></details>
       <details><summary>Are you going to tell us to replace our software?</summary><p>Almost certainly not. Ripping out a system your people already know is expensive and usually the wrong answer. Most of what we find lives in the gaps between the tools you already pay for.</p></details>
       <details><summary>Is this an AI thing?</summary><p>Some of it, where it earns its place. Most of it is more boring than that: connecting two things that should already have been connected. The goal is fewer hours, not more technology.</p></details>
-      <details><summary>Who owns what you build?</summary><p>Your information is yours, always. The automation we build on audit day is yours to keep whether or not we work together again.</p></details>
-      <details><summary>What if you find nothing?</summary><p>Then we say so, you keep the automation we built on the day, and we do not send you a quote for work that would not pay for itself.</p></details>
+      <details><summary>Who owns what you build?</summary><p>Your information is yours, always. The fix we switch on during the check is yours to keep whether or not we work together again.</p></details>
+      <details><summary>What if you find nothing?</summary><p>Then we say so, you keep the fix we switched on during the day, and we do not send you a quote for work that would not pay for itself.</p></details>
     </div>
   </div>
 </section>
@@ -552,8 +732,8 @@ footer a{color:var(--gold);text-decoration:none}
       <p class="lede" style="margin-top:1.2rem"><strong>The three questions are the useful part.</strong> Answer as roughly as you like. They tell us more about a business than an hour on a call, and they are the same three we would ask standing in your shop.</p>
       <ol class="next">
         <li><div><strong>We read it ourselves</strong>Usually the same day. Nothing on our side of this is answered by a bot.</div></li>
-        <li><div><strong>A short call</strong>A few questions about how work moves through your business, and whether the audit fits.</div></li>
-        <li><div><strong>We book the day</strong>One fixed price, credited back if you go ahead with a build.</div></li>
+        <li><div><strong>A short call</strong>A few questions about how work moves through your business, and whether the check fits.</div></li>
+        <li><div><strong>We book the day</strong>One fixed price, counted toward the build if you go ahead.</div></li>
       </ol>
     </div>
 
@@ -576,7 +756,10 @@ footer a{color:var(--gold);text-decoration:none}
         <div><label for="f-waiting">2. What sits waiting on one person?</label><textarea id="f-waiting" name="waiting" placeholder="The thing that stops moving when that person is busy or away"></textarea></div>
         <div><label for="f-inhead">3. What only works because somebody remembers it?</label><textarea id="f-inhead" name="inhead" placeholder="The step that is not written down anywhere"></textarea></div>
       </div>
-      <div><label for="f-software">What software are you already paying for? <span class="opt">(optional)</span></label><input id="f-software" name="software" placeholder="Whatever you can remember" /></div>
+      <div class="two">
+        <div><label for="f-website">Your website <span class="opt">(if you have one)</span></label><input id="f-website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" /></div>
+        <div><label for="f-software">Software you pay for <span class="opt">(optional)</span></label><input id="f-software" name="software" placeholder="Whatever you can remember" /></div>
+      </div>
       <div class="hp" aria-hidden="true"><label for="f-fax">Fax</label><input id="f-fax" name="fax" tabindex="-1" autocomplete="off" /></div>
       <button type="submit" id="submitBtn">Send it over</button>
       <p class="status" id="status" role="status" aria-live="polite"></p>
@@ -786,7 +969,7 @@ footer a{color:var(--gold);text-decoration:none}
       document.getElementById('r-hours').textContent = fmt(hours);
       document.getElementById('r-weeks').textContent = 'That is ' + (weeks < 1 ? 'most of a' : fmt(weeks)) + ' full work week' + (weeks < 1.5 ? '' : 's') + '.';
       document.getElementById('r-money').textContent = '$' + fmt(money);
-      document.getElementById('r-verdict').textContent = 'Win back a quarter of it and that is $' + fmt(money / 4) + ' a year. The audit is $750, and it is credited back if we build.';
+      document.getElementById('r-verdict').textContent = 'Win back a quarter of it and that is $' + fmt(money / 4) + ' a year. The check is $750, and it counts toward the build if we go ahead.';
       [P, H, R].forEach(fillOf);
     }
     [P, H, R].forEach(function (el) { el.addEventListener('input', calc); });

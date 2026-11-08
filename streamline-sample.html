@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sample Report: The Lost Customer Check | YetiGroove</title>
+<meta name="description" content="See what The Lost Customer Check report looks like: a one-page score, an after-hours call test, findings ranked by payoff with how to fix each one yourself, and a menu of fixes." />
+<link rel="canonical" href="https://www.yetigroove.com/streamline/sample" />
+<meta property="og:title" content="Sample report: The Lost Customer Check" />
+<meta property="og:description" content="What a small business owner gets back: the score, the after-hours test, the findings and the fixes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.yetigroove.com/streamline/sample" />
+<meta property="og:image" content="https://www.yetigroove.com/media/streamline/story/poster.jpg" />
+<link rel="icon" href="/brand/yeti-head-256.png" />
+<link rel="preload" href="/fonts/bricolage-grotesque-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<style>
+/* A report you can scan: one reading column, score first, then evidence, then what to do. Lake-water ink, traffic-light status. */
+:root{
+  --paper:#F4F7F7; --card:#FFFFFF; --ink:#10303A; --muted:#566B72; --line:#D5E0E2;
+  --lake:#1C6B7A; --lake-hover:#155663; --lake-soft:#E1EEF0; --amber:#E3A21A; --amber-soft:#FBF0D6; --amber-ink:#7A5200;
+  --good:#2E7D4F; --good-soft:#E2F2E8; --warn:#8A5800; --warn-soft:#FBEFD5; --bad:#B23A35; --bad-soft:#F8E1DF;
+  --on-lake:#FFFFFF; --on-lake-soft:#DDF1F5;
+  --display:'Bricolage Grotesque','Avenir Next','Segoe UI',sans-serif;
+  --body:'Atkinson Hyperlegible','Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme:dark;
+    --paper:#0D1C21; --card:#132830; --ink:#E6F0F1; --muted:#9DB3B8; --line:#24414A;
+    --lake:#5EC1D2; --lake-hover:#7DD0DE; --lake-soft:#173A43; --amber:#F2B83A; --amber-soft:#3A2F14; --amber-ink:#F6CF77;
+    --good:#6CCB92; --good-soft:#163A26; --warn:#F2B83A; --warn-soft:#3A2F14; --bad:#F08A84; --bad-soft:#40201E;
+    --on-lake:#06272E; --on-lake-soft:#0B3A44;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:max(28px,env(safe-area-inset-top,0px));padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:52px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(36px,6.4vw,60px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.01em}
+h3{font-size:20px;font-weight:600}
+p{margin:0;max-width:65ch}
+a{color:var(--lake)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lake)}
+.muted{color:var(--muted)}
+section{display:flex;flex-direction:column;gap:18px}
+.head{display:flex;flex-direction:column;gap:8px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--lake-soft);color:var(--lake)}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.back{font-weight:700;font-size:15px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.sample{background:var(--amber-soft);border:2px solid var(--amber);border-radius:14px;padding:14px 18px;font-size:15px;color:var(--amber-ink)}
+.sample b{color:var(--amber-ink)}
+
+.cover{display:flex;flex-direction:column;gap:16px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:15px;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:700}
+
+/* score */
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:760px){.score{grid-template-columns:1fr}}
+.sc{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;border-top-width:6px}
+.sc.bad{border-top-color:var(--bad)} .sc.warn{border-top-color:var(--amber)} .sc.good{border-top-color:var(--good)}
+.sc .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sc p{font-size:15px;color:var(--muted)}
+.totals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:760px){.totals{grid-template-columns:1fr}}
+.tot{padding:6px 0 6px 16px;border-left:4px solid var(--lake)}
+.tot .n{font-family:var(--mono);font-size:28px;font-variant-numeric:tabular-nums;line-height:1.1}
+.tot p{font-size:14px;color:var(--muted)}
+
+/* timeline */
+.timeline{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:6px 20px}
+.tl{display:grid;grid-template-columns:88px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.tl:last-child{border-bottom:none}
+.tl .t{font-family:var(--mono);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tl.them{background:linear-gradient(90deg,var(--bad-soft),transparent 70%);margin:0 -20px;padding-inline:20px}
+@media (max-width:520px){.tl{grid-template-columns:1fr auto}.tl .t{grid-column:1/-1;margin-bottom:-8px}}
+
+/* findings */
+.findings{display:flex;flex-direction:column;gap:14px;counter-reset:f}
+.finding{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:44px 1fr;gap:6px 16px;counter-increment:f}
+.finding::before{content:counter(f);grid-row:span 3;font-family:var(--display);font-weight:800;font-size:30px;line-height:1;color:var(--lake)}
+.finding .fh{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.finding .fh h3{flex:1 1 280px}
+.finding .tags{display:flex;gap:6px;flex-wrap:wrap}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.cols div{font-size:15px;display:flex;flex-direction:column;gap:4px}
+.cols .lbl{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.cols .fix{background:var(--lake-soft);border-radius:10px;padding:10px 12px}
+.cols .fix .lbl{color:var(--lake)}
+
+/* two up */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.box{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.box ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:16px}
+.box.on{border:2px solid var(--good)}
+.box.on .eyebrow{color:var(--good)}
+
+/* menu */
+.menu{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:8px 22px}
+.mi{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.mi:last-child{border-bottom:none}
+.mi b{font-size:16px}
+.mi span.why{grid-column:1;font-size:14px;color:var(--muted)}
+.mi .chip{grid-row:1/span 2;grid-column:2}
+.price-note{font-size:14px;color:var(--muted)}
+
+.cta{background:var(--lake);color:var(--on-lake);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.cta p{color:var(--on-lake-soft)}
+.cta h2{color:var(--on-lake)}
+.cta a{display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border-radius:999px;background:var(--on-lake);color:var(--lake);font-weight:700;text-decoration:none}
+.cta a:hover,.cta a:focus-visible{outline:3px solid var(--on-lake-soft);outline-offset:2px}
+footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+a:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <a class="brand" href="/">YetiGroove</a>
+  <a class="back" href="/streamline">Back to The Lost Customer Check</a>
+</div>
+
+<p class="sample"><b>This is a sample report.</b> The business is made up. The checks, the layout and the kind of findings are exactly what you get.</p>
+
+<header class="cover">
+  <span class="eyebrow">The Lost Customer Check · Report</span>
+  <h1>Sample Deck Co.</h1>
+  <div class="facts">
+    <span><b>Trade</b> Decks and docks</span>
+    <span><b>Size</b> 3 crews, 11 people</span>
+    <span><b>Area</b> Lenawee County, Michigan</span>
+    <span><b>Checked</b> October 2026</span>
+  </div>
+</header>
+
+<section aria-labelledby="s-score">
+  <div class="head"><span class="eyebrow">Page one</span><h2 id="s-score">The score</h2>
+    <p class="muted">Your three leaks at a glance. Red costs you customers this month. Amber costs you over a season. Green means leave it alone.</p></div>
+  <div class="score">
+    <div class="sc warn">
+      <div class="row"><h3>Getting found</h3><span class="chip warn">Amber</span></div>
+      <p>You show up for your own name, but not for "deck builder" in your own town. Your reviews have gone quiet.</p>
+    </div>
+    <div class="sc bad">
+      <div class="row"><h3>Getting answered</h3><span class="chip bad">Red</span></div>
+      <p>After 5 pm nobody can reach you. Your voicemail was full and your web form took 26 hours to answer.</p>
+    </div>
+    <div class="sc warn">
+      <div class="row"><h3>Getting it done</h3><span class="chip warn">Amber</span></div>
+      <p>The crews run well. The office types every job into three places, and the photos never leave the phones.</p>
+    </div>
+  </div>
+  <div class="totals">
+    <div class="tot"><span class="n">6–9</span><p>leads a month we estimate you lose after hours, from your own call log</p></div>
+    <div class="tot"><span class="n">5 hrs</span><p>a week the office spends retyping the same job</p></div>
+    <div class="tot"><span class="n">#7</span><p>your spot on the map for "deck builder Adrian MI". The top 3 get the calls.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-shop">
+  <div class="head"><span class="eyebrow">Getting answered</span><h2 id="s-shop">We became your customer</h2>
+    <p class="muted">Before we visited, we called, sent the form and messaged you the way a stranger would. We did the same to the business that ranks above you.</p></div>
+  <div class="timeline">
+    <div class="tl"><span class="t">Tue 10:12</span><span>Called your main line. Answered on the second ring, name and number taken.</span><span class="chip good">Good</span></div>
+    <div class="tl"><span class="t">Tue 19:05</span><span>Called after hours. Voicemail box full, no way to leave a message.</span><span class="chip bad">Lost</span></div>
+    <div class="tl"><span class="t">Tue 19:20</span><span>Sent your website form asking about a new deck.</span><span class="chip warn">Waiting</span></div>
+    <div class="tl"><span class="t">Tue 19:22</span><span>Messaged your Facebook page.</span><span class="chip warn">Waiting</span></div>
+    <div class="tl them"><span class="t">Tue 19:24</span><span>Sent the same form to the top-ranked competitor. They texted back in 4 minutes with a time to visit.</span><span class="chip bad">Lost to them</span></div>
+    <div class="tl"><span class="t">Wed 14:10</span><span>Facebook message answered, 19 hours later.</span><span class="chip bad">Too slow</span></div>
+    <div class="tl"><span class="t">Wed 21:40</span><span>Your web form answered by email, 26 hours later.</span><span class="chip bad">Too slow</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-find">
+  <div class="head"><span class="eyebrow">What we found</span><h2 id="s-find">Findings, biggest payoff first</h2>
+    <p class="muted">Each one says what we saw, what it costs you, and how to fix it yourself. If you would rather we did it, the fix on our menu is named too.</p></div>
+  <div class="findings">
+
+    <article class="finding">
+      <div class="fh"><h3>Nobody can reach you after 5 pm</h3><div class="tags"><span class="chip bad">Red</span><span class="pill">Answered</span></div></div>
+      <p class="muted">About 1 in 4 of your calls come in after 5 pm or on weekends. With the voicemail full, every one of them hears nothing.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>Roughly 6 to 9 leads a month. At your close rate, that is one or two decks.</div>
+        <div><span class="lbl">Fix it yourself</span>Clear the voicemail tonight. Record a greeting that says when you call back, then check it every morning at 7.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>Missed call text-back, plus a voice that answers after hours.</div>
+      </div>
+    </article>
+
+    <article class="finding">
+      <div class="fh"><h3>Web leads wait a day for an answer</h3><div class="tags"><span class="chip bad">Red</span><span class="pill">Answered</span></div></div>
+      <p class="muted">The form goes to an inbox nobody watches after hours. Your competitor answers by text in minutes.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>Most people who ask for a quote ask more than one company. The first to answer usually gets the visit.</div>
+        <div><span class="lbl">Fix it yourself</span>Forward form emails to your phone as texts, and answer with a time to visit, not a price.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>Already done. We switched this on during the check (see below).</div>
+      </div>
+    </article>
+
+    <article class="finding">
+      <div class="fh"><h3>Your reviews stopped five months ago</h3><div class="tags"><span class="chip warn">Amber</span><span class="pill">Found</span></div></div>
+      <p class="muted">11 Google reviews, newest from May. The top business in your area has 140, with new ones every week.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>Many people skip a business with fewer than 20 reviews, and an old newest review reads as "closed".</div>
+        <div><span class="lbl">Fix it yourself</span>Text every finished customer your review link the day the job wraps. Reply to every review, good or bad.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>A review engine: tap cards for the crews and an automatic text after each job.</div>
+      </div>
+    </article>
+
+    <article class="finding">
+      <div class="fh"><h3>You're 7th on the map in your own town</h3><div class="tags"><span class="chip warn">Amber</span><span class="pill">Found</span></div></div>
+      <p class="muted">Your Google profile is listed as "Contractor", has 4 photos, and no services. Your site has one page for everything.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>Most map calls go to the top three. Spots 4 and lower rarely get seen.</div>
+        <div><span class="lbl">Fix it yourself</span>Set your main category to "Deck builder", add every service, and post 20 real job photos.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>Google profile tune-up, plus a page for each service and town on your site.</div>
+      </div>
+    </article>
+
+    <article class="finding">
+      <div class="fh"><h3>Every job gets typed in three times</h3><div class="tags"><span class="chip warn">Amber</span><span class="pill">Done</span></div></div>
+      <p class="muted">The estimate sheet, then QuickBooks, then the crew calendar. Same name, address and scope, three times.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>About 5 office hours a week, and the typo that sends a crew to the wrong address.</div>
+        <div><span class="lbl">Fix it yourself</span>Pick one place where a job starts, and copy from there instead of from the estimate.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>Two tools that finally talk: typed once, it shows up in the other two.</div>
+      </div>
+    </article>
+
+    <article class="finding">
+      <div class="fh"><h3>Job photos never leave the crew's phones</h3><div class="tags"><span class="chip warn">Amber</span><span class="pill">Done</span></div></div>
+      <p class="muted">Before and after photos exist for almost every job. None of them reach the office, the website or Google.</p>
+      <div class="cols">
+        <div><span class="lbl">What it costs</span>Your best proof sits unused, and the office texts the crew lead every time a customer asks for one.</div>
+        <div><span class="lbl">Fix it yourself</span>One shared photo album per job, and a crew habit of adding to it before they leave the site.</div>
+        <div class="fix"><span class="lbl">Or we do it</span>Paperwork that files itself: photos upload from the site and land on the right job.</div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <div class="two">
+    <div class="box on">
+      <span class="eyebrow">Switched on during the check</span>
+      <h3>Every web lead now texts your phone</h3>
+      <p>The form saves each lead first, then texts it to you and your office manager. Live since 3:40 pm on the day. It is yours to keep, whatever you decide next.</p>
+    </div>
+    <div class="box">
+      <span class="eyebrow">Leave these alone</span>
+      <ul>
+        <li><b>Your scheduling app.</b> The crews know it and it works. Replacing it would cost more than it saves.</li>
+        <li><b>Paid ads.</b> Not until you have 20 or more recent reviews. Ads send people to your reviews first.</li>
+        <li><b>A new logo.</b> People recognize your trucks. That is worth more than a fresh look.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="s-menu">
+  <div class="head"><span class="eyebrow">Your menu</span><h2 id="s-menu">The fixes for your red and amber findings</h2>
+    <p class="muted">Only what this report found, in the order we would do it. In your real report every line has a set build price and its monthly care, and the $750 counts toward the build if you go ahead within 60 days.</p></div>
+  <div class="menu">
+    <div class="mi"><b>Missed call text-back</b><span class="why">Finding 1. Customers get a text in seconds instead of a full voicemail.</span><span class="chip bad">Do first</span></div>
+    <div class="mi"><b>A voice that answers after hours</b><span class="why">Finding 1. Takes name, number and the job, and sends it to you.</span><span class="chip bad">Do first</span></div>
+    <div class="mi"><b>A review engine</b><span class="why">Finding 3. Tap cards and a text after each finished job.</span><span class="chip warn">This season</span></div>
+    <div class="mi"><b>Google profile tune-up and town pages</b><span class="why">Finding 4. Right category, services, photos, and a page for each town.</span><span class="chip warn">This season</span></div>
+    <div class="mi"><b>Two tools that finally talk</b><span class="why">Finding 5. The estimate becomes the job in QuickBooks and on the calendar.</span><span class="chip warn">This season</span></div>
+    <div class="mi"><b>Photos that file themselves</b><span class="why">Finding 6. Uploaded from the site, filed on the job, ready for the website.</span><span class="chip warn">This season</span></div>
+  </div>
+  <p class="price-note">Every system we leave running comes with a monthly care plan and a nightly health check, so it keeps working after we leave.</p>
+</section>
+
+<section class="cta" aria-labelledby="s-cta">
+  <span class="eyebrow" style="color:var(--on-lake-soft)">Your turn</span>
+  <h2 id="s-cta">Want to see yours?</h2>
+  <p>$750, fixed. One day, this report about your business, and one fix running before we leave.</p>
+  <a href="/streamline#start">Book the check</a>
+</section>
+
+<footer>YetiGroove Studio · Made in lake country, Michigan · <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></footer>
+</div>
+</body>
+</html>
