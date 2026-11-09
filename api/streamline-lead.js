@@ -1,4 +1,5 @@
 import { put } from '@vercel/blob';
+import { sendToOffice, detailLines } from './_office.js';
 import { randomUUID } from 'node:crypto';
 import {
   sendEmail, sendSMS, emailShell, esc, ADMIN_EMAIL,
@@ -47,6 +48,14 @@ export default async function handler(req, res) {
   } catch (e) {
     console.error('[LEAD-PERSIST-FAILED]', leadId, String(e).slice(0, 300));
   }
+
+  // One more copy, into YetiGroove Office (never throws; the lead is already saved above).
+  await sendToOffice({
+    external_id: leadId, source: lead.source, received_at: lead.receivedAt,
+    name, email, phone, company, website, interest: 'Lost Customer Check', message,
+    details: detailLines([['Trade', trade], ['Headcount', headcount], ['Software', software],
+      ['Done twice', twice], ['Sitting and waiting', waiting], ['Only in someone\'s head', inhead]]),
+  });
 
   const row = (label, value) =>
     value

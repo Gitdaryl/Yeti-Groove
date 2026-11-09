@@ -1,4 +1,5 @@
 import { put } from '@vercel/blob';
+import { sendToOffice, detailLines } from './_office.js';
 import { randomUUID } from 'node:crypto';
 import {
   sendEmail, sendSMS, emailShell, esc, ADMIN_EMAIL, logPitchEvent,
@@ -59,6 +60,14 @@ export default async function handler(req, res) {
   } catch (e) {
     console.error('[LEAD-PERSIST-FAILED]', leadId, String(e).slice(0, 300));
   }
+
+  // One more copy, into YetiGroove Office (never throws; the lead is already saved above).
+  await sendToOffice({
+    external_id: leadId, source: lead.source, received_at: lead.receivedAt,
+    name, email, phone, company, interest: legacy ? 'Legacy film' : `Signature: ${project || 'film'}`, message,
+    details: detailLines([['Project', project], ['Location', location], ['Stage', stage], ['Size', size],
+      ['Timeline', timeline], ['Tier', tier], ['Pitch', lead.pitchSlug]]),
+  });
 
   if (pitch) {
     try { await logPitchEvent(pitch.slug, 'lead', 0); } catch { /* logged above */ }

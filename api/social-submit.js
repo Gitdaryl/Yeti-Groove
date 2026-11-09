@@ -2,6 +2,7 @@ import {
   newOrderId, saveOrder, logEvent, sendEmail, sendSMS,
   emailShell, esc, ADMIN_EMAIL,
 } from './_lib.js';
+import { sendToOffice, detailLines } from './_office.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -37,6 +38,14 @@ export default async function handler(req, res) {
   } catch (e) {
     console.error('[ORDER-PERSIST-FAILED]', orderId, String(e).slice(0, 300));
   }
+
+  // One more copy, into YetiGroove Office (never throws; the order is already saved above).
+  await sendToOffice({
+    external_id: orderId, source: order.source, received_at: order.receivedAt,
+    name: contactName, email, phone, company: businessName, website, interest: `Social order: ${postType || 'post'}`, message,
+    details: detailLines([['Post type', postType], ['Delivery week', deliveryWeek], ['Instagram', instagram], ['Facebook', facebook],
+      ['Media notes', mediaNotes], ['Script notes', scriptNotes], ['Notes', notes], ['Coupon', couponCode], ['Price', finalPrice]]),
+  });
 
   const row = (label, value) =>
     value
