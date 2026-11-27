@@ -23,7 +23,6 @@
   <link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
-  <script>document.documentElement.classList.add('js')</script>
   <link rel="preload" as="image" href="/media/hero-scrub/frame_001.webp" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,83 +48,7 @@
       font-size: 16px;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8,8,7,0.72);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      text-decoration: none;
-    }
-    .brand-icon { width: 30px; height: 30px; }
-    .brand-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
-    .nav-link {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: var(--gold); }
-    .nav-cta {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--black);
-      background: var(--gold);
-      padding: 0.5rem 1.1rem;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .nav-toggle, .nav-link.menu-only { display: none; }
-
-    /* Below 960px the links fold into a menu. Without JS they stay listed. */
-    @media (max-width: 960px) {
-      .js .nav-toggle {
-        display: inline-flex; align-items: center; justify-content: center;
-        min-width: 72px; min-height: 44px; padding: 0 1rem;
-        font: 500 0.82rem 'DM Sans', sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
-        color: var(--gold); background: transparent;
-        border: 1px solid rgba(201,165,90,0.45); border-radius: 4px; cursor: pointer;
-      }
-      .js .nav-links {
-        display: none; position: absolute; top: 100%; left: 0; right: 0;
-        flex-direction: column; align-items: stretch; gap: 0;
-        padding: 0.5rem 1.25rem 1.25rem; max-height: calc(100vh - 5rem); overflow-y: auto;
-        background: #080807; border-bottom: 1px solid var(--line);
-      }
-      .js nav.open .nav-links { display: flex; }
-      .js .nav-link { display: flex; align-items: center; min-height: 48px; font-size: 1rem; border-bottom: 1px solid var(--line); }
-      .js .nav-link.menu-only { display: flex; }
-      .js .nav-cta { margin-top: 1rem; min-height: 48px; display: flex; align-items: center; justify-content: center; }
-      html:not(.js) nav { position: absolute; flex-direction: column; gap: 0.75rem; }
-      html:not(.js) .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; }
-    }
-
-    /* ── HERO ── */
+/* ── HERO ── */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -282,7 +205,6 @@
       margin: 0 auto;
       padding: 5.5rem 2rem;
       border-bottom: 1px solid var(--line);
-      scroll-margin-top: 4.5rem;
     }
     section:last-of-type { border-bottom: none; }
 
@@ -321,7 +243,7 @@
       background: var(--black);
       box-shadow: 0 24px 80px rgba(0,0,0,0.5);
     }
-    .film-frame video { display: block; width: 100%; height: auto; }
+    .film-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; } /* reserves space so /#proof lands right */
 
     /* Custom play affordance — replaces the browser's default control bar.
        Only applied once JS runs; without it the <video controls> still works. */
@@ -680,34 +602,33 @@
     footer a { color: rgba(176,163,144,0.5); }
 
     @media (max-width: 700px) {
-      nav { padding: 0.85rem 1.25rem; }
-      .brand-name { font-size: 0.95rem; }
-      .brand-icon { width: 26px; height: 26px; }
       section { padding: 3.5rem 1.25rem; }
       .doors { grid-template-columns: 1fr; }
       .contact-inner { padding: 4.5rem 1.25rem; }
     }
   </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="#contact"><span class="ygn-full">Contact</span><span class="ygn-short">Contact</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
 
-  <!-- NAV -->
-  <nav>
-    <a class="brand" href="/">
-      <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
-      <span class="brand-name">Yeti Groove Media</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu">Menu</button>
-    <div class="nav-links" id="navMenu">
-      <a class="nav-link" href="#reel">The Work</a>
-      <a class="nav-link" href="#proof">Reviews</a>
-      <a class="nav-link" href="/streamline">Lost Customer Check</a>
-      <a class="nav-link" href="/field-office">Field Office</a>
-      <a class="nav-link" href="/questions">Questions</a>
-      <a class="nav-link menu-only" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
-      <a class="nav-cta" href="/signature">Signature Films</a>
-    </div>
-  </nav>
+
 
   <!-- HERO -->
   <div class="hero-scrub" id="heroScrub">
@@ -955,24 +876,6 @@
     // Legacy anchors: policies used to live on this page at /#privacy and /#sms-policy
     if (location.hash === '#privacy') location.replace('/privacy');
     if (location.hash === '#sms-policy') location.replace('/sms-policy');
-  </script>
-
-  <script>
-    // Mobile menu: toggle, and close on a link tap, Escape, or a tap outside.
-    (function () {
-      const btn = document.getElementById('navToggle');
-      const nav = btn && btn.closest('nav');
-      if (!nav) return;
-      function set(open) {
-        nav.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', String(open));
-        btn.textContent = open ? 'Close' : 'Menu';
-      }
-      btn.addEventListener('click', () => set(!nav.classList.contains('open')));
-      document.getElementById('navMenu').addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); } });
-      document.addEventListener('click', (e) => { if (!nav.contains(e.target)) set(false); });
-    })();
   </script>
 
   <script>

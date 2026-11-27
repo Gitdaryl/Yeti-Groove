@@ -29,36 +29,6 @@
       font-size: 16px;
     }
 
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8,8,7,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-contact {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-contact:hover { color: var(--gold); }
-
     main {
       max-width: 760px;
       margin: 0 auto;
@@ -106,17 +76,31 @@
     footer a { color: rgba(176,163,144,0.5); }
 
     @media (max-width: 640px) {
-      nav { padding: 1rem 1.25rem; }
       main { padding: 7rem 1.25rem 3.5rem; }
     }
   </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="/#contact"><span class="ygn-full">Contact</span><span class="ygn-short">Contact</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
 
-  <nav>
-    <a class="nav-logo" href="/">Yeti Groove Media</a>
-    <a class="nav-contact" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
-  </nav>
+
 
   <main>
     <p class="section-label">SMS Policy</p>

@@ -60,7 +60,7 @@
   --gutterR:max(16px,env(safe-area-inset-right));
   --tap:44px;
   --radius:10px;
-  --navH:calc(60px + env(safe-area-inset-top));
+  --navH:var(--ygn-h);
 }
 @media(min-width:430px){:root{--gutter:max(20px,env(safe-area-inset-left));--gutterR:max(20px,env(safe-area-inset-right))}}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -71,7 +71,6 @@ a{color:var(--gold)}
 
 .wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutterR)}
 .narrow{max-width:46rem}
-section{scroll-margin-top:72px}
 .band{padding:72px 0}
 @media(min-width:820px){.band{padding:112px 0}}
 .band.alt{background:var(--dark)}
@@ -88,21 +87,6 @@ h1 em,h2 em{font-style:italic;color:var(--gold)}
 p.body{color:var(--muted);margin-top:16px;max-width:40rem}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:12px;
-  padding:calc(8px + env(safe-area-inset-top)) var(--gutterR) 8px var(--gutter);
-  background:rgba(8,8,7,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:background .25s ease}
-.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;min-height:var(--tap);text-decoration:none;color:var(--cream)}
-.brand img{width:28px;height:28px}
-.brand span{font-family:var(--serif);font-weight:700;font-size:1.0625rem;color:var(--gold)}
-.brand small{font-family:var(--sans);font-size:.8125rem;color:var(--muted);font-weight:400;letter-spacing:.02em}
-.navcta{display:inline-flex;align-items:center;min-height:var(--tap);padding:0 16px;border-radius:6px;background:var(--gold);color:var(--black);
-  font-weight:700;font-size:.9375rem;text-decoration:none;white-space:nowrap}
-.navcta:active{opacity:.8}
-@media(max-width:519px){.brand small{display:none}}
-nav.on-light{background:rgba(240,237,230,.92);border-bottom-color:rgba(20,18,14,.12)}
-nav.on-light .brand span{color:var(--goldInk)}
-nav.on-light .brand small{color:var(--inkSoft)}
-nav.on-light .navcta{background:var(--ink);color:var(--cream)}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:6px;font-family:var(--sans);
@@ -192,7 +176,7 @@ html:not(.js) .beat .bcard{opacity:1}
 .fgrid{display:grid;gap:16px;margin-top:20px}
 @media(min-width:620px){.fgrid{grid-template-columns:1fr 1fr}}
 @media(min-width:1000px){.fgrid{grid-template-columns:repeat(3,1fr)}}
-.fcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--dark2);scroll-margin-top:96px;transition:border-color .3s ease,box-shadow .3s ease}
+.fcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--dark2);scroll-margin-top:24px;transition:border-color .3s ease,box-shadow .3s ease}
 .fcard.flash{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,165,90,.25)}
 .fcard .fo-anim{--scene-bg:#100e0a;aspect-ratio:16/9;background:radial-gradient(80% 90% at 15% 0%,rgba(201,165,90,.09),transparent 60%),var(--scene-bg);border-bottom:1px solid var(--line)}
 .fbody{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
@@ -352,13 +336,28 @@ footer a{display:inline-flex;align-items:center;min-height:var(--tap);padding:0 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.livetag i,.cue svg{animation:none}}
 @media(prefers-contrast:more){:root{--muted:#D6CCBB;--line:rgba(201,165,90,.4)}}
 </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
-
-<nav id="topnav" aria-label="Main">
-  <a class="brand" href="/"><img src="/brand/yeti-head-256.png" alt="" width="28" height="28" /><span>Field Office</span><small>by YetiGroove</small></a>
-  <a class="navcta" href="#demo">See the demo</a>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office" aria-current="page">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="#demo"><span class="ygn-full">See the demo</span><span class="ygn-short">Demo</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
 </nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
+
+
 
 <main>
 <header class="hero">

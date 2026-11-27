@@ -57,9 +57,6 @@ section{display:flex;flex-direction:column;gap:18px}
 .chip.warn{background:var(--warn-soft);color:var(--warn)}
 .chip.bad{background:var(--bad-soft);color:var(--bad)}
 .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--lake-soft);color:var(--lake)}
-
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 .back{font-weight:700;font-size:15px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 .sample{background:var(--amber-soft);border:2px solid var(--amber);border-radius:14px;padding:14px 18px;font-size:15px;color:var(--amber-ink)}
 .sample b{color:var(--amber-ink)}
@@ -128,14 +125,29 @@ section{display:flex;flex-direction:column;gap:18px}
 footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
 a:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:4px}
 </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
-<body>
+<body class="ygn-offset">
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline" aria-current="true">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="/streamline#start"><span class="ygn-full">Book the check</span><span class="ygn-short">Book</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
+
 <div class="wrap">
 
-<div class="topbar">
-  <a class="brand" href="/">YetiGroove</a>
-  <a class="back" href="/streamline">Back to The Lost Customer Check</a>
-</div>
 
 <p class="sample"><b>This is a sample report.</b> The business is made up. The checks, the layout and the kind of findings are exactly what you get.</p>
 

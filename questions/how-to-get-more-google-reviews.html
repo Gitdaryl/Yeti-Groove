@@ -50,10 +50,6 @@ a{color:var(--lake)}
 a:hover{color:var(--lake-hover)}
 a:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:4px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lake)}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
-.top-links{display:flex;gap:18px;flex-wrap:wrap}
-.top-links a{font-weight:700;font-size:15px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 header{display:flex;flex-direction:column;gap:16px}
 .answer{font-size:clamp(20px,2.4vw,23px);line-height:1.5;background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--lake);border-radius:14px;padding:20px 22px}
 .answer b{display:block;font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lake);margin-bottom:6px}
@@ -84,13 +80,27 @@ blockquote cite{display:block;font-style:normal;font-size:14px;color:var(--amber
 .hub span.a{color:var(--muted);font-size:16px}
 footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
 </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
-<body>
+<body class="ygn-offset">
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions" aria-current="true">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="/streamline#start"><span class="ygn-full">Book the check</span><span class="ygn-short">Book</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
 <div class="wrap">
-<div class="topbar">
-  <a class="brand" href="/">YetiGroove</a>
-  <span class="top-links"><a href="/questions">All questions</a><a href="/streamline">The Lost Customer Check</a></span>
-</div>
 <header>
   <span class="eyebrow">Getting found</span>
   <h1>How do I get more Google reviews without being pushy?</h1>

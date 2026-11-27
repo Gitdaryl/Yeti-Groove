@@ -41,8 +41,27 @@ footer{color:var(--muted);font-size:.85rem;padding:2.5rem var(--gutter) calc(2.5
 footer a{color:var(--gold);text-decoration:none}
 @media(prefers-reduced-motion:reduce){.hero img{animation:none;transform:none}}
 </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline" aria-current="true">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="/#contact"><span class="ygn-full">Contact</span><span class="ygn-short">Contact</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
+
 <section class="hero">
   <img src="/media/streamline/story/frame_110.webp" alt="The same office, tidy, at nine in the morning" />
   <div class="copy">

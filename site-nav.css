@@ -1,0 +1,101 @@
+/* The one studio nav bar. Markup is stamped into each page by tools/site_nav.py.
+   Sizes are px on purpose: /streamline scales its root font, which would resize a rem bar.
+   Everything is namespaced ygn- and sets its own type, because every page styles
+   bare `a`, `nav` and `button` its own way. Edit here, not in the pages. */
+
+:root { --ygn-h: calc(72px + env(safe-area-inset-top, 0px)); }
+:where(html) { scroll-padding-top: var(--ygn-h); }
+
+.ygn, .ygn *, .ygn *::before, .ygn *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.ygn {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+  height: var(--ygn-h);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: env(safe-area-inset-top, 0px) max(32px, env(safe-area-inset-right, 0px)) 0 max(32px, env(safe-area-inset-left, 0px));
+  background: rgba(8,8,7,0.92);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,165,90,0.16);
+  font: 400 16px/1.2 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: normal; text-transform: none; text-align: left;
+}
+
+.ygn a.ygn-brand {
+  display: flex; align-items: center; gap: 10.4px; flex: none;
+  min-height: 44px; text-decoration: none; color: #C9A55A;
+}
+.ygn .ygn-brand img { width: 30px; height: 27px; object-fit: contain; display: block; }
+.ygn .ygn-name { font: 700 17.6px/1.2 'Playfair Display', Georgia, serif; letter-spacing: 0.02em; color: #C9A55A; white-space: nowrap; }
+
+.ygn .ygn-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
+.ygn a.ygn-link {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font: 400 13.6px/1.2 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: normal; text-transform: none; white-space: nowrap;
+  color: #B5A894; text-decoration: none; transition: color 0.2s;
+}
+.ygn a.ygn-link:hover { color: #C9A55A; text-decoration: none; }
+.ygn a.ygn-link[aria-current] { color: #F0EDE6; text-decoration: underline; text-decoration-color: #C9A55A; text-decoration-thickness: 2px; text-underline-offset: 8px; }
+.ygn a.ygn-link.ygn-mail { display: none; }
+
+.ygn a.ygn-cta {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  min-height: 44px; padding: 0 17.6px; border-radius: 4px; border: 0;
+  background: #C9A55A; color: #080807;
+  font: 500 13.12px/1.2 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.ygn a.ygn-cta:hover { opacity: 0.85; color: #080807; background: #C9A55A; text-decoration: none; }
+.ygn .ygn-short { display: none; }
+.ygn a:focus-visible, .ygn button:focus-visible { outline: 2px solid #C9A55A; outline-offset: 3px; }
+
+.ygn button.ygn-toggle { display: none; }
+
+/* Pages whose content starts at the very top ask for room under the bar. */
+body.ygn-offset { padding-top: calc(var(--ygn-h) + 24px); }
+
+/* Below 1140px the links fold into a menu. The page's own button stays in the bar. */
+@media (max-width: 1139px) {
+  .ygn { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); gap: 9.6px; }
+  .ygn a.ygn-brand { margin-right: auto; }
+
+  .ygn-js .ygn button.ygn-toggle {
+    display: inline-flex; align-items: center; justify-content: center; flex: none; order: 3;
+    min-width: 68px; min-height: 44px; padding: 0 12px;
+    font: 500 12.48px/1.2 'DM Sans', 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #C9A55A; background: transparent; border: 1px solid rgba(201,165,90,0.45); border-radius: 4px; cursor: pointer;
+  }
+  .ygn-js .ygn .ygn-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; margin: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 8px 20px 20px; max-height: calc(100vh - var(--ygn-h)); overflow-y: auto;
+    background: #080807; border-bottom: 1px solid rgba(201,165,90,0.16);
+  }
+  .ygn-js .ygn.ygn-open .ygn-links { display: flex; }
+  .ygn-js .ygn a.ygn-link { display: flex; min-height: 48px; font-size: 16px; border-bottom: 1px solid rgba(201,165,90,0.16); }
+  .ygn-js .ygn a.ygn-link[aria-current] { text-underline-offset: 6px; }
+  .ygn-js .ygn a.ygn-link.ygn-mail { display: flex; }
+
+  /* Without JavaScript the links stay listed and the bar scrolls away with the page. */
+  html:not(.ygn-js) .ygn { position: relative; height: auto; flex-wrap: wrap; justify-content: center; padding-top: 12px; padding-bottom: 12px; }
+  html:not(.ygn-js) .ygn .ygn-links { order: 3; width: 100%; margin: 0; flex-wrap: wrap; justify-content: center; gap: 0 20px; }
+  html:not(.ygn-js) body.ygn-offset { padding-top: 0; }
+}
+
+@media (max-width: 560px) {
+  .ygn { padding-left: max(14.4px, env(safe-area-inset-left, 0px)); padding-right: max(14.4px, env(safe-area-inset-right, 0px)); }
+  .ygn a.ygn-brand { gap: 6.4px; }
+  .ygn .ygn-name { font-size: 15.2px; }
+  .ygn .ygn-media, .ygn .ygn-full { display: none; }
+  .ygn .ygn-short { display: inline; }
+  .ygn a.ygn-cta { padding: 0 11.2px; font-size: 12px; }
+}
+@media (max-width: 359px) { .ygn .ygn-name { display: none; } }
+
+@media (prefers-reduced-motion: reduce) { .ygn a.ygn-link, .ygn a.ygn-cta { transition: none; } }
+
+@media print {
+  .ygn { display: none; }
+  body.ygn-offset { padding-top: 0; }
+}

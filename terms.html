@@ -16,10 +16,6 @@
       --muted: #B0A390; --line: rgba(201,165,90,0.12);
     }
     body { font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; background: var(--dark); color: var(--cream); line-height: 1.7; font-size: 16px; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,7,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
-    .nav-logo { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); text-decoration: none; }
-    .nav-contact { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
-    .nav-contact:hover { color: var(--gold); }
     main { max-width: 760px; margin: 0 auto; padding: 8rem 2rem 5rem; }
     .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; opacity: 0.8; }
     h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.5rem; }
@@ -32,14 +28,29 @@
     a { color: var(--gold); text-decoration: none; }
     a:hover { text-decoration: underline; }
     footer { text-align: center; padding: 2.5rem 2rem; font-size: 0.8rem; color: rgba(176,163,144,0.5); border-top: 1px solid var(--line); }
-    @media (max-width: 640px) { nav { padding: 1rem 1.25rem; } main { padding: 7rem 1.25rem 3.5rem; } }
+    @media (max-width: 640px) { main { padding: 7rem 1.25rem 3.5rem; } }
   </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
-  <nav>
-    <a class="nav-logo" href="/">Yeti Groove Media</a>
-    <a class="nav-contact" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
-  </nav>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="/#contact"><span class="ygn-full">Contact</span><span class="ygn-short">Contact</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
+
   <main>
     <p class="label">Legal</p>
     <h1>Terms of Service</h1>

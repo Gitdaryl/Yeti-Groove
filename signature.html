@@ -52,69 +52,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(12,15,20,0.82);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      text-decoration: none;
-    }
-    .brand-icon { height: 34px; width: auto; display: block; }
-    .brand-name {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .brand-sub {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--paper);
-      letter-spacing: 0.03em;
-    }
-    .nav-right { display: flex; align-items: center; gap: 1.4rem; }
-    .nav-home {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--paper);
-      opacity: 0.75;
-      text-decoration: none;
-      transition: opacity 0.2s, color 0.2s;
-    }
-    .nav-home:hover { opacity: 1; color: var(--gold); }
-    .nav-cta {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink);
-      background: var(--gold);
-      padding: 0.55rem 1.2rem;
-      border-radius: 2px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: #d8bc7d; }
-
-    /* ── HERO ── */
+/* ── HERO ── */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -704,10 +642,6 @@
     footer a:hover { color: var(--gold); }
 
     @media (max-width: 640px) {
-      nav { padding: 0.9rem 1.1rem; }
-      .brand-name { font-size: 0.85rem; letter-spacing: 0.2em; }
-      .brand-sub { display: none; }
-      .nav-home { display: none; }
       section { padding: 3.6rem 1.2rem; }
     }
 
@@ -861,20 +795,28 @@
       line-height: 1.7;
     }
   </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature" aria-current="page">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="#inquire" data-inquire data-tier="Signature Film"><span class="ygn-full">Commission a Film</span><span class="ygn-short">Commission</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
 
-  <nav>
-    <a class="brand" href="/">
-      <img class="brand-icon" src="/brand/yeti-head-256.png" alt="" />
-      <span class="brand-name">Yeti Groove</span>
-      <span class="brand-sub">Signature Films</span>
-    </a>
-    <span class="nav-right">
-      <a class="nav-home" href="/">Studio Home</a>
-      <a class="nav-cta" href="#inquire" data-inquire data-tier="Signature Film">Commission a Film</a>
-    </span>
-  </nav>
+
 
   <!-- HERO -->
   <div class="hero-scrub" id="heroScrub">

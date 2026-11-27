@@ -76,19 +76,6 @@ p+p{margin-top:1rem}
 @media(pointer:fine){.glow.on{opacity:1}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;
-  padding:max(.6rem,env(safe-area-inset-top)) var(--gutter) .6rem;
-  background:linear-gradient(180deg,rgba(12,10,8,.88) 0%,rgba(12,10,8,.4) 65%,rgba(12,10,8,0) 100%);transition:background .25s}
-nav a{text-decoration:none;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:44px;display:inline-flex;align-items:center}
-nav .brand{font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em;color:var(--cream);text-transform:none}
-nav .links{display:flex;gap:1.6rem;align-items:center}
-nav .cta{color:var(--gold);border:1px solid rgba(201,165,90,.4);padding:0 1rem;border-radius:2px;transition:background .2s,color .2s}
-nav .cta:hover{background:var(--gold);color:var(--ink)}
-@media(max-width:640px){nav .links a:not(.cta){display:none}}
-nav.on-light{background:linear-gradient(180deg,rgba(240,237,230,.95),rgba(240,237,230,0))}
-nav.on-light .brand{color:var(--ink)}
-nav.on-light a{color:#5A5344}
-nav.on-light .cta{color:#7A5F26;border-color:rgba(20,18,14,.28)}
 
 /* HERO SCRUB */
 .scrub{position:relative;z-index:1;background:var(--black)}
@@ -398,20 +385,31 @@ footer a{color:var(--gold);text-decoration:none}
   .path:hover::before{animation:none}
 }
 </style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
 <body>
+<!-- YGNAV:start (tools/site_nav.py) -->
+<nav class="ygn" aria-label="Main">
+  <a class="ygn-brand" href="/" aria-label="Yeti Groove Media home"><img src="/brand/yeti-head-256.png" alt="" width="30" height="27" /><span class="ygn-name">Yeti Groove<span class="ygn-media"> Media</span></span></a>
+  <div class="ygn-links" id="ygnLinks">
+    <a class="ygn-link" href="/#reel">The Work</a>
+    <a class="ygn-link" href="/#proof">Reviews</a>
+    <a class="ygn-link" href="/streamline" aria-current="page">Lost Customer Check</a>
+    <a class="ygn-link" href="/field-office">Field Office</a>
+    <a class="ygn-link" href="/signature">Signature Films</a>
+    <a class="ygn-link" href="/questions">Questions</a>
+    <a class="ygn-link ygn-mail" href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a>
+  </div>
+  <a class="ygn-cta" href="#start"><span class="ygn-full">Book the check</span><span class="ygn-short">Book</span></a>
+  <button class="ygn-toggle" type="button" aria-expanded="false" aria-controls="ygnLinks">Menu</button>
+</nav>
+<script src="/site-nav.js"></script>
+<!-- YGNAV:end -->
+
 
 <canvas id="paper" aria-hidden="true"></canvas>
 <div class="glow" aria-hidden="true"></div>
 
-<nav>
-  <a class="brand" href="/">YetiGroove</a>
-  <span class="links">
-    <a href="/field-office">Field Office</a>
-    <a href="/signature">Signature</a>
-    <a class="cta" href="#start">Book the check</a>
-  </span>
-</nav>
 
 <main>
 
@@ -1116,12 +1114,6 @@ footer a{color:var(--gold);text-decoration:none}
     addEventListener('pointermove', function (e) {
       g.classList.add('on'); g.style.setProperty('--mx', e.clientX + 'px'); g.style.setProperty('--my', e.clientY + 'px');
     }, { passive: true });
-  })();
-
-  /* Nav flips to dark-on-light over the cream panel. */
-  (function () {
-    var nav = document.querySelector('nav'), light = document.getElementById('start');
-    scenes.push(function () { nav.classList.toggle('on-light', light.getBoundingClientRect().top <= 56 && light.getBoundingClientRect().bottom > 56); });
   })();
 
   kick();

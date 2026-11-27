@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from questions_data import QUESTIONS, LEAKS  # noqa: E402
+import site_nav  # noqa: E402  (the shared top bar)
 
 SITE = 'https://www.yetigroove.com'
 ORG = {'@type': 'Organization', '@id': SITE + '/#studio', 'name': 'YetiGroove Studio', 'url': SITE + '/'}
@@ -56,10 +57,6 @@ a{color:var(--lake)}
 a:hover{color:var(--lake-hover)}
 a:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:4px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lake)}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
-.top-links{display:flex;gap:18px;flex-wrap:wrap}
-.top-links a{font-weight:700;font-size:15px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 header{display:flex;flex-direction:column;gap:16px}
 .answer{font-size:clamp(20px,2.4vw,23px);line-height:1.5;background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--lake);border-radius:14px;padding:20px 22px}
 .answer b{display:block;font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lake);margin-bottom:6px}
@@ -113,13 +110,11 @@ def shell(path, title, desc, body, ld, og_type='article'):
 <link rel="preload" href="/fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/fonts/fonts.css" />
 {lds}<style>{CSS}</style>
+<link rel="stylesheet" href="/site-nav.css" />
 </head>
-<body>
+<body class="ygn-offset">
+{site_nav.render('questions', site_nav.BOOK, exact=path == 'questions')}
 <div class="wrap">
-<div class="topbar">
-  <a class="brand" href="/">YetiGroove</a>
-  <span class="top-links"><a href="/questions">All questions</a><a href="/streamline">The Lost Customer Check</a></span>
-</div>
 {body}
 <footer>YetiGroove Studio &middot; Made in lake country, Michigan &middot; <a href="mailto:daryl@yetigroove.com">daryl@yetigroove.com</a></footer>
 </div>
